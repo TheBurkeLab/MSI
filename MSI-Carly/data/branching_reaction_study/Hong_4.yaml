@@ -1,0 +1,130 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1016/j.proci.2012.06.108
+    authors:
+        - name: Zekai Hong
+          ORCID: 
+        - name: King Yiu Lam
+          ORCID:
+        - name: Ritobrata Sur
+          ORCID:
+        - name: Shengkai Wang
+          ORCID:
+        - name: David F. Davidson
+          ORCID:
+        - name: Ronald K. Hanson
+          ORCID: 
+    journal: Proceedings of the Combustion Institute
+    year: 2013
+    volume: 34
+    pages: 565-571
+    #is there a title:?
+    detail: On the rate constants of OH+HO2 and HO2+HO2
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Stanford University 
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 15.2
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 1.672
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1182
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: .001
+          units: s
+
+    composition: &comp
+        - species: H2O2
+          mole-fraction: 0.002046 
+          relative-uncertainty: .05
+        - species: H2O
+          mole-fraction: 0.001113
+          relative-uncertainty: .05
+        - species: O2
+          mole-fraction: 0.000556
+          relative-uncertainty: .05
+        - species: H
+          mole-fraction: 0.0000000060024
+          relative-uncertainty: 2.3          
+        - species: Ar
+          mole-fraction: 0.996284994
+          relative-uncertainty: .05
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 
+      targets:
+        - name: 
+          species: 
+          absolute-uncertainty: 
+          relative-uncertainty: 
+    
+  absorbance: 
+     - csvfile: 'MSI/data/test_data/hong_abs_4.csv'
+       name: abs_227nm
+       wavelength:
+         value: 227
+         unit: nm
+       absolute-uncertainty: 0
+       relative-uncertainty: .1
+       
+ 
+
+  concentration:
+    - csvfile: 'MSI/data/test_data/hong_h2o_4.csv'
+      targets:
+       - name: H2O
+         species: H2O
+         absolute-uncertainty: 0
+         relative-uncertainty: .05
+    - csvfile: 'MSI/data/test_data/hong_oh_4.csv'
+      targets:
+       - name: OH
+         species: OH
+         absolute-uncertainty: 0
+         relative-uncertainty: .05        
+             
+            
+      
+       
+
+  
+        
+    
+          
+    
+
+               

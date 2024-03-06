@@ -1,0 +1,85 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 4.2
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 4.901e-06
+    relative-uncertainty: 0.05
+    species: C2H5I
+  - mole-fraction: 0.9999951
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.677735196
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 974.985746945
+  time:
+    final-time:
+      units: s
+      value: 0.0016
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Tobias_Bentz_C2H5I_0.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: H
+      relative-uncertainty: 0.05
+      species: H
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: .
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Tobias Bentz
+  - ORCID: null
+    name: Milan Szori
+  - ORCID: null
+    name: Bela Viskolcz
+  - ORCID: null
+    name: Miatthias Olzmann
+  detail: Pyrolysis of Ethyl Iodide as hydrogen atom source kinetics mechanism in
+    the temperature range 950-1200 K
+  doi: null
+  journal: The journal of physical chemistry
+  pages: 1117-1128
+  volume: null
+  year: 225

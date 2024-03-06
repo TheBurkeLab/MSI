@@ -1,0 +1,110 @@
+file-author: 
+    name: Carly LaGrotta
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: NA
+    authors:
+        - name: E.L. Petersen
+          ORCID: 
+        - name: D.F. Davidson
+          ORCID: 
+        - name: Rohrig M. Hanson
+          ORCID:           
+    journal: AIAA/ASME/SAE/ASEE Joint Propulsion COnference and Exhibit
+    year: 1995
+    volume: NA
+    pages: NA
+    #is there a title:?
+    detail: NA
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: ignition delay
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Template intitution
+    facility: Template facility
+    inner-diameter: &diam
+        value: 14.13
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value-list: 
+            - 33.0
+        units: atm
+        relative-uncertainty: .01 
+    temperature: &temp
+        value-list:
+            - 1191.871016
+            - 1205.587932
+            - 1205.715809
+            - 1222.843777
+            - 1251.994544
+            - 1264.789207
+            - 1286.268047
+            - 1307.096272
+        units: K
+        relative-uncertainty: 0.02
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 1.0
+          units: s
+    composition: &comp
+        - species-group: 1 
+          mixture:
+            - name: H2
+              mole-fraction:
+                value-list:
+                    - 0.02
+          attributes:
+            relative-uncertainty: .05
+            type: fuel                    
+        - species-group: 2 
+          mixture:
+            - name: O2
+              mole-fraction:
+                value-list:
+                    - 0.01
+          attributes:
+            relative-uncertainty: .02
+            type: oxidizer
+        - species-group: 3
+          mixture:
+            - name: Ar
+              mole-fraction:
+                value-list:
+                    - 0.97 
+          attributes:
+            relative-uncertainty: .05
+            type: diluant             
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?
+    ignition-type:  &ign
+        target: OH
+        type: max derivative
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.000000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant volume #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  ignition-delay:
+    - csvfile: 'MSI/data/hydrogen_model/petersen_oh_0.csv'
+      targets: 
+        - name: tau 
+          observable: tau 
+          absolute-uncertainty: 0
+          relative-uncertainty: .2
+          

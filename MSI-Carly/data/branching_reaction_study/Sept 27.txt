@@ -1,0 +1,20 @@
+October 10th
+usc_mech_sept_6_branching_reactions_updated_oct_10.cti -- Full optimization 4 itterations
+Made folder for plots and dumped those plots in thre 
+
+Questions:
+Check Uncertainty (overall)
+
+Next steps ... story? 
+masten -- try and change hydrogen uncertainty 
+Srinivasan_CH3O_OH_0
+
+Srinivasan_CH3OH_OH... First profile has competing sensitivty with differnt reaction do we want that?
+
+CH3+HO2 = CH2O+H2O...don't have this reaction
+
+
+Sutherland 
+Group A  extra plots
+Reaction D fit 
+Clear List of questions for Burke 

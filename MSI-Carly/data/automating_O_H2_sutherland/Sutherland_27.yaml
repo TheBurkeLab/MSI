@@ -1,0 +1,90 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 10.0
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 1.29e-06
+    relative-uncertainty: 0.1
+    species: O
+  - mole-fraction: 0.00557
+    relative-uncertainty: 0.05
+    species: H2
+  - mole-fraction: 0.9944257120000001
+    relative-uncertainty: 0.05
+    species: He
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 0.22
+  temperature:
+    relative-uncertainty: 0.02
+    units: K
+    value: 1040.0
+  time:
+    final-time:
+      units: s
+      value: 0.05
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-12
+    units: s
+    value: 0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/automating_O_H2_sutherland/sutherland_o_27.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: O
+      relative-uncertainty: 0.05
+      species: O
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: J.W. Sutherland
+  - ORCID: null
+    name: J.V. Michael
+  - ORCID: null
+    name: A.N. Pirraglia
+  - ORCID: null
+    name: F.L. Nesbitt
+  - ORCID: null
+    name: R.B. Klemm
+  detail: Rate Constant for the reaction of O(P) by the flash photolysis-- shock tuple
+    and flash photolesis resonance fluorescence techinques 504K<T<2495
+  doi: null
+  journal: Twenty-first Symposium on Combustion
+  pages: 929-941
+  volume: 93
+  year: 1986

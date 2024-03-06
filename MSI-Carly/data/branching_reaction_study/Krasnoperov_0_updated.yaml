@@ -1,0 +1,86 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 700
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 5.449e-06
+    relative-uncertainty: 0.05
+    species: C4H10O2
+  - mole-fraction: 0.000384585
+    relative-uncertainty: 0.05
+    species: H2
+  - mole-fraction: 0.99959
+    relative-uncertainty: 0.05
+    species: He
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 0.435842331
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1046.613323664
+  time:
+    final-time:
+      units: s
+      value: 0.003
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Krasnoperov_OH_0.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: OH
+      relative-uncertainty: 0.1
+      species: OH
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: .
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Krasnoperov L.N.
+  - ORCID: null
+    name: null
+  - ORCID: null
+    name: Michael J.V.
+  detail: Shock Tube Studies Using a Novel Multipass Absorption Cell Rate Constant
+    Results ForOH+H2 andOH+C2H6
+  doi: null
+  journal: Physical Chemistry Chemistry Physics
+  pages: 5643-5648
+  volume: 108
+  year: 2004

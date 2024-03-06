@@ -1,0 +1,98 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: Tobias Bentz
+          ORCID: 
+        - name: Milan Szori
+          ORCID:  
+        - name: Bela Viskolcz
+          ORCID: 
+        - name: Miatthias Olzmann
+          ORCID:                                                   
+    journal: The journal of physical chemistry
+    year: 225
+    volume: 
+    pages: 1117-1128
+    #is there a title:?
+    detail: Pyrolysis of Ethyl Iodide as hydrogen atom source kinetics mechanism in the temperature range 950-1200 K
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    institution: Stanford University
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 4.2
+        units: cm
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 1.283
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1016
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.002
+          units: s
+
+    composition: &comp 
+        - species: C2H5I
+          mole-fraction: 0.0000027
+          relative-uncertainty: .05         
+        - species: Ar
+          mole-fraction: 0.9999973
+          relative-uncertainty: .05    
+                      
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant volume #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile:
+      targets: 
+        - name: 
+          species: 
+          absolute-uncertainty: .  
+          relative-uncertainty: 
+    
+  absorbance: 
+     - csvfile:
+       name:
+       wavelength:
+         value:
+         unit:
+       absolute-uncertainty:
+       relative-uncertainty:
+       
+ 
+
+  concentration:
+    - csvfile: 'MSI/data/branching_reaction_study/Tobias_Bentz_C2H5I_2.csv'
+      targets:
+       - name: H
+         species: H
+         absolute-uncertainty: 0.0
+         relative-uncertainty: .05            

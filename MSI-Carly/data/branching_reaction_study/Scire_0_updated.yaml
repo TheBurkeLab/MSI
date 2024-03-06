@@ -1,0 +1,130 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 10.16
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.002005678
+    relative-uncertainty: 0.05
+    species: CO
+  - mole-fraction: 0.021421844
+    relative-uncertainty: 0.05
+    species: O2
+  - mole-fraction: 0.004689179
+    relative-uncertainty: 0.05
+    species: H2O
+  - mole-fraction: 0.00084006
+    relative-uncertainty: 0.05
+    species: CH4
+  - mole-fraction: 0.971055
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 8.996655214
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 996.449843752
+  time:
+    final-time:
+      units: s
+      value: 1.5
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 0.1
+    units: s
+    value: 0.00056921
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Scire_Ch4_0.csv
+    targets:
+    - absolute-uncertainty: 80
+      name: CH4
+      relative-uncertainty: 0.25
+      species: CH4
+  - csvfile: MSI/data/branching_reaction_study/Scire_CH2O_0.csv
+    targets:
+    - absolute-uncertainty: 2
+      name: CH2O
+      relative-uncertainty: 0.25
+      species: CH2O
+  - csvfile: MSI/data/branching_reaction_study/Scire_C2H6_0.csv
+    targets:
+    - absolute-uncertainty: 1
+      name: C2H6
+      relative-uncertainty: 0.25
+      species: C2H6
+  - csvfile: MSI/data/branching_reaction_study/Scire_C2H4_0.csv
+    targets:
+    - absolute-uncertainty: 1
+      name: C2H4
+      relative-uncertainty: 0.25
+      species: C2H4
+  mole-fraction:
+  - csvfile: MSI/data/branching_reaction_study/Scire_CO2_0.csv
+    targets:
+    - absolute-uncertainty: 0.0004
+      name: CO2
+      relative-uncertainty: 0.15
+      species: CO2
+  - csvfile: MSI/data/branching_reaction_study/Scire_CO_0.csv
+    targets:
+    - absolute-uncertainty: 0.0004
+      name: CO
+      relative-uncertainty: 0.15
+      species: CO
+  - csvfile: MSI/data/branching_reaction_study/Scire_H2O_0.csv
+    targets:
+    - absolute-uncertainty: 0.0004
+      name: H2O
+      relative-uncertainty: 0.15
+      species: H2O
+  - csvfile: MSI/data/branching_reaction_study/Scire_O2_0.csv
+    targets:
+    - absolute-uncertainty: 0.002
+      name: O2
+      relative-uncertainty: 0.15
+      species: O2
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: James J. Scire
+  - ORCID: null
+    name: J.R. Richard
+  - ORCID: null
+    name: Richard A. Yetter
+  - ORCID: null
+    name: Frederick L. Dryer
+  detail: Flow reactor studies of methyl radical oxidation reactions in methane perturbed
+    moist crbon monoxide oxidation at high pressures with model sensitivity analysis
+  doi: null
+  journal: International Journal of Chemical Kinetics
+  pages: 75-100
+  volume: 33
+  year: 2001

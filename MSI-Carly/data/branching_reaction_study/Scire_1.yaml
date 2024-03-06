@@ -1,0 +1,145 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: James J. Scire
+          ORCID: 
+        - name: J.R. Richard
+          ORCID:  
+        - name: Richard A. Yetter
+          ORCID: 
+        - name: Frederick L. Dryer
+          ORCID:                                                             
+    journal: International Journal of Chemical Kinetics
+    year: 2001
+    volume: 33
+    pages: 75-100
+    #is there a title:?
+    detail: Flow reactor studies of methyl radical oxidation reactions in methane perturbed moist crbon monoxide oxidation at high pressures with model sensitivity analysis
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    institution: Stanford University
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 10.16
+        units: cm
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 7.7
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1000
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 1.5
+          units: s
+
+    composition: &comp 
+        - species: CO
+          mole-fraction: .0096
+          relative-uncertainty: .05
+        - species: O2
+          mole-fraction: .0053
+          relative-uncertainty: .05   
+        - species: H2O
+          mole-fraction: .0028
+          relative-uncertainty: .05  
+        - species: CH4
+          mole-fraction: 0.000227
+          relative-uncertainty: .05                                    
+        - species: Ar
+          mole-fraction: 0.982073
+          relative-uncertainty: .05    
+                      
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant volume #vs. constant pressure
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 'MSI/data/branching_reaction_study/Scire_CO2_1.csv'
+      targets: 
+        - name: CO2
+          species: CO2
+          absolute-uncertainty: 0.0004
+          relative-uncertainty: .15
+    - csvfile: 'MSI/data/branching_reaction_study/Scire_CO_1.csv'
+      targets: 
+        - name: CO
+          species: CO
+          absolute-uncertainty: 0.0004
+          relative-uncertainty: .15
+    - csvfile: 'MSI/data/branching_reaction_study/Scire_H2O_1.csv'
+      targets: 
+        - name: H2O
+          species: H2O
+          absolute-uncertainty: 0.0004
+          relative-uncertainty: .15
+    - csvfile: 'MSI/data/branching_reaction_study/Scire_O2_1.csv'
+      targets: 
+        - name: O2
+          species: O2
+          absolute-uncertainty: 0.002
+          relative-uncertainty: .15    
+                                 
+  absorbance: 
+     - csvfile:
+       name:
+       wavelength:
+         value:
+         unit:
+       absolute-uncertainty:
+       relative-uncertainty:
+       
+ 
+
+  concentration:
+    - csvfile: 'MSI/data/branching_reaction_study/Scire_Ch4_1.csv'
+      targets:
+       - name: CH4
+         species: CH4
+         absolute-uncertainty: 80
+         relative-uncertainty: 10000 #.15     
+    - csvfile: 'MSI/data/branching_reaction_study/Scire_CH2O_1.csv'
+      targets:
+       - name: CH2O
+         species: CH2O
+         absolute-uncertainty: 2
+         relative-uncertainty: 10000 #.15
+    - csvfile: 'MSI/data/branching_reaction_study/Scire_C2H6_1.csv'
+      targets:
+       - name: C2H6
+         species: C2H6
+         absolute-uncertainty: 1
+         relative-uncertainty: 10000 #.15
+    - csvfile: 'MSI/data/branching_reaction_study/Scire_C2H4_1.csv'
+      targets:
+       - name: C2H4
+         species: C2H4
+         absolute-uncertainty: 1
+         relative-uncertainty: 10000 #.15
+
+

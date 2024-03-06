@@ -1,0 +1,81 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 30
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.003242316
+    relative-uncertainty: 0.1
+    species: H2O2
+  - mole-fraction: 0.99674242
+    relative-uncertainty: 0.1
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.04
+    units: atm
+    value: 3.300901621
+  temperature:
+    relative-uncertainty: 0.02
+    units: K
+    value: 1027.176290757
+  time:
+    final-time:
+      units: s
+      value: 0.002
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: 0
+    csvfile: MSI/data/hydrogen_model/troe_5_abs_2_time_dependent.csv
+    name: abs_215
+    relative-uncertainty: 0.1
+    wavelength:
+      unit: nm
+      value: 215
+  concentration:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Ch.Kappel
+  - ORCID: null
+    name: K.Luther
+  - name: J. Troe
+  detail: Shock Wave study of the unimolecular dissociation of H2O2 in its fallof
+    range
+  doi: 10.1016/j.proci.2012.06.108
+  pages: 4392-4398
+  volume: 4
+  year: 2002

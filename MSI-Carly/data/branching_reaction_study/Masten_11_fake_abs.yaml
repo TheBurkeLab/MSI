@@ -1,0 +1,105 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1016/j.proci.2012.06.108
+    authors:
+        - name: Zekai Hong
+          ORCID: 
+        - name: King Yiu Lam
+          ORCID:
+        - name: Ritobrata Sur
+          ORCID:
+        - name: Shengkai Wang
+          ORCID:
+        - name: David F. Davidson
+          ORCID:
+        - name: Ronald K. Hanson
+          ORCID: 
+    journal: Proceedings of the Combustion Institute
+    year: 2013
+    volume: 34
+    pages: 565-571
+    #is there a title:?
+    detail: On the rate constants of OH+HO2 and HO2+HO2
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Stanford University 
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 1
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 0.675
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1980
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.0004
+          units: s
+
+    composition: &comp
+        - species: O2
+          mole-fraction: 0.0049299999999999995
+          relative-uncertainty: .05
+        - species: H2
+          mole-fraction: 0.05
+          relative-uncertainty: .05
+        - species: H
+          mole-fraction: 0.00000002
+          relative-uncertainty: 2.3
+        - species: Ar
+          mole-fraction: 0.9450700000000001
+          relative-uncertainty: 2.3          
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 5.0e-6
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 
+      targets:
+        - name: 
+          species: 
+          absolute-uncertainty: 
+          relative-uncertainty: 
+    
+  absorbance: 
+     - csvfile: 'MSI/data/branching_reaction_study/masten_oh_11_raw_data_figure_fake_abs.csv'
+       name: abs_157nm
+       wavelength:
+         value: 157
+         unit: nm
+       absolute-uncertainty: 0
+       relative-uncertainty: .05
+       
+  concentration:
+    - csvfile:
+      targets:
+       - name:
+         species:
+         absolute-uncertainty:
+         relative-uncertainty:

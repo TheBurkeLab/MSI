@@ -1,0 +1,100 @@
+apparatus:
+  facility: Template facility
+  inner-diameter:
+    units: cm
+    value: 14.13
+  institution: Template intitution
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - attributes:
+      relative-uncertainty: 0.05
+      type: fuel
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.020014796
+      name: H2
+    species-group: 1
+  - attributes:
+      relative-uncertainty: 0.02
+      type: oxidizer
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.010039988
+      name: O2
+    species-group: 2
+  - attributes:
+      relative-uncertainty: 0.05
+      type: diluant
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.908921603
+      name: Ar
+    species-group: 3
+  ignition-type:
+    target: OH
+    type: max derivative
+  pressure:
+    relative-uncertainty: 0.01
+    units: atm
+    value-list:
+    - 33.002929122
+  temperature:
+    relative-uncertainty: 0.02
+    units: K
+    value-list:
+    - 1179.934751422
+    - 1200.342922192
+    - 1217.518082154
+    - 1216.504807552
+    - 1248.913589123
+    - 1268.589502178
+    - 1299.093576848
+    - 1315.19048623
+  time:
+    final-time:
+      units: s
+      value: 1.0
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-12
+    units: s
+    value: -0.0
+datapoints:
+  ignition-delay:
+  - csvfile: MSI/data/hydrogen_model/petersen_oh_0.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: tau
+      observable: tau
+      relative-uncertainty: 0.2
+experiment-type: ignition delay
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: E.L. Petersen
+  - ORCID: null
+    name: D.F. Davidson
+  - ORCID: null
+    name: Rohrig M. Hanson
+  detail: NA
+  doi: NA
+  journal: AIAA/ASME/SAE/ASEE Joint Propulsion COnference and Exhibit
+  pages: NA
+  volume: NA
+  year: 1995

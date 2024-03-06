@@ -1,0 +1,129 @@
+file-author: 
+    name: Carly LaGrotta
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: doi.org/10.1016/0010-2180(73)90005-9
+    authors:
+        - name: K.A. Bhaskaran
+          ORCID: 
+        - name: M.C. Gupta
+          ORCID: 
+        - name: Th. Just
+          ORCID:           
+    journal: Combustion and Flame
+    year: 1973
+    volume: 21
+    pages: 45-48
+    #is there a title:?
+    detail: Shock tube study of the effect of unsymmetric dimethal hydrazine on the ignition characteristics of hydrogen air mixtures
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: ignition delay
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Template intitution
+    facility: Template facility
+    inner-diameter: &diam
+        value: 14.13
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value-list: 
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+            - 2.5
+        units: atm
+        relative-uncertainty: .01 
+    temperature: &temp
+        value-list:
+            - 1037.344398
+            - 1066.098081
+            - 1074.34465
+            - 1079.447323
+            - 1096.010522
+            - 1113.585746
+            - 1169.317119
+            - 1180.358829
+            - 1201.345507
+            - 1233.958539
+            - 1258.811682
+            - 1270.971022
+            - 1291.989664
+            - 1325.556734
+        units: K
+        relative-uncertainty: 0.02
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 1.0
+          units: s
+    composition: &comp
+        - species-group: 1 
+          mixture:
+            - name: H2
+              mole-fraction:
+                value-list:
+                    - 0.296
+          attributes:
+            relative-uncertainty: .05
+            type: fuel                    
+        - species-group: 2 
+          mixture:
+            - name: O2
+              mole-fraction:
+                value-list:
+                    - 0.148
+          attributes:
+            relative-uncertainty: .02
+            type: oxidizer
+        - species-group: 3
+          mixture:
+            - name: N2
+              mole-fraction:
+                value-list:
+                    - 0.556 
+          attributes:
+            relative-uncertainty: .05
+            type: diluant             
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?
+    ignition-type:  &ign
+        target: pressure
+        type: max derivative
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.000000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant volume #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  ignition-delay:
+    - csvfile: 'MSI/data/hydrogen_model/bhaskaran_temp_0.csv'
+      targets: 
+        - name: tau 
+          observable: tau 
+          absolute-uncertainty: 0
+          relative-uncertainty: .2
+          

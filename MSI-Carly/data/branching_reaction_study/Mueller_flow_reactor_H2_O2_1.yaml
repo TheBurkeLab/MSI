@@ -1,0 +1,116 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: Mark A. Mueller
+          ORCID: 
+        - name: T.J. Kim
+          ORCID:  
+        - name: R. A. Yetter
+          ORCID:  
+        - name: F. L. Dryer                                                        
+    journal: 27th US International Combustion Meeting
+    year: 1998
+    volume: 26
+    pages: 
+    #is there a title:?
+    detail: Flow reactor studies and kinetic modeling of the h2/o2 reaction
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Stanford University
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 5
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 3.44
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 933
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 1.5
+          units: s
+
+    composition: &comp 
+        - species: H2
+          mole-fraction: 0.0101
+          relative-uncertainty: .05 
+        - species: O2
+          mole-fraction: 0.0052
+          relative-uncertainty: .05 
+        - species: H
+          mole-fraction: 0.000001
+          relative-uncertainty: 2.3                         
+        - species: N2
+          mole-fraction: 0.9847
+          relative-uncertainty: .000005    
+                      
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.3
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 'MSI/data/branching_reaction_study/Mueller_flow_reactor_fig_5b_O2.csv'
+      targets: 
+        - name: O2
+          species: O2
+          absolute-uncertainty: 0.00005
+          relative-uncertainty: 0.2
+    - csvfile: 'MSI/data/branching_reaction_study/Mueller_flow_reactor_fig_5b_H2.csv'
+      targets: 
+        - name: H2
+          species: H2
+          absolute-uncertainty: 0.0001
+          relative-uncertainty: 0.2 
+    - csvfile: 'MSI/data/branching_reaction_study/Mueller_flow_reactor_fig_5b_H2O.csv'
+      targets: 
+        - name: H2O
+          species: H2O
+          absolute-uncertainty: 0.00003
+          relative-uncertainty: 0.2       
+  absorbance: 
+     - csvfile: 
+       name:
+       wavelength:
+         value:
+         unit:
+       absolute-uncertainty:
+       relative-uncertainty:
+       
+ 
+
+  concentration:
+    - csvfile:
+      targets:
+       - name:
+         species:
+         absolute-uncertainty:
+         relative-uncertainty:     

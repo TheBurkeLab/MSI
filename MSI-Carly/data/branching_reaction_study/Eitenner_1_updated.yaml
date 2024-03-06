@@ -1,0 +1,88 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 15.2
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.014994382
+    relative-uncertainty: 0.05
+    species: CH2O
+  - mole-fraction: 0.014997233
+    relative-uncertainty: 0.05
+    species: O2
+  - mole-fraction: 0.97
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.379854732
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1572.990077365
+  time:
+    final-time:
+      units: s
+      value: 0.0005
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: 0
+    csvfile: MSI/data/branching_reaction_study/Eiteneer_abs_1.csv
+    name: abs_226nm
+    relative-uncertainty: 0.4
+    wavelength:
+      unit: nm
+      value: 226
+  concentration:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: B. Eiteneer
+  - ORCID: null
+    name: C.-L. Yu
+  - ORCID: null
+    name: M. Goldenberg
+  - ORCID: null
+    name: M. Frenklach
+  detail: Determination of Rate Coefficients for Reactions of Formaldehyde Pyrolysis
+    and Oxidation in the Gas Phase
+  doi: null
+  journal: J. Phys. Chem. A
+  pages: 5196-5205
+  volume: 102
+  year: 1998

@@ -1,0 +1,94 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: Yoshiaki Hidaka
+          ORCID: 
+        - name: Takashi Taniguchi
+          ORCID:                                            
+    journal: International Journal of Chemical Kinetics
+    year: 1993
+    volume: 25
+    pages: 305-322
+    #is there a title:?
+    detail: The formaldehyde decomposition chain mechanism
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Stanford University
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 10.16 #has a gain of 10.9 so were not sure waht that means 
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 2.15
+        units: atm
+        relative-uncertainty: .40
+    temperature: &temp
+        value: 1412
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.0001
+          units: s
+
+    composition: &comp
+        - species: CH2O
+          mole-fraction: 0.04
+          relative-uncertainty: .05                                         
+        - species: Ar #should be kr 
+          mole-fraction: .96
+          relative-uncertainty: .05            
+                      
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant volume #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction: 
+    - csvfile: 'MSI/data/branching_reaction_study/Hidaka_CH2O_fig_1_0.csv'
+      targets: 
+        - name: CH2O 
+          species: CH2O
+          absolute-uncertainty: 0.0  
+          relative-uncertainty: 0.05
+    
+  absorbance: 
+     - csvfile: 
+       name:
+       wavelength:
+         value:
+         unit:
+       absolute-uncertainty:
+       relative-uncertainty:
+ 
+  concentration:
+    - csvfile: 
+      targets:
+       - name: 
+         species: 
+         absolute-uncertainty: 
+         relative-uncertainty:        

@@ -1,0 +1,108 @@
+apparatus:
+  facility: Template facility
+  inner-diameter:
+    units: cm
+    value: 14.13
+  institution: Template intitution
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - attributes:
+      relative-uncertainty: 0.05
+      type: fuel
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.010080694
+      name: H2
+    species-group: 1
+  - attributes:
+      relative-uncertainty: 0.02
+      type: oxidizer
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.019882962
+      name: O2
+    species-group: 2
+  - attributes:
+      relative-uncertainty: 0.05
+      type: diluant
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.96508992
+      name: Ar
+    species-group: 3
+  ignition-type:
+    target: OH 0.000000001 mol/cm^3
+    type: specific value
+  pressure:
+    relative-uncertainty: 0.01
+    units: atm
+    value-list:
+    - 1.000160929
+  temperature:
+    relative-uncertainty: 0.02
+    units: K
+    value-list:
+    - 1790.769487247
+    - 1815.124506751
+    - 1649.403509548
+    - 1631.484098282
+    - 1620.015867959
+    - 1608.258774491
+    - 1331.584293347
+    - 1353.432801601
+    - 1343.638837925
+    - 1357.131927951
+    - 1355.213054686
+    - 1284.133505325
+    - 1220.287088836
+    - 1198.902778832
+    - 1180.468862974
+    - 1078.499076302
+    - 1096.340441802
+  time:
+    final-time:
+      units: s
+      value: 1.0
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-12
+    units: s
+    value: -0.0
+datapoints:
+  ignition-delay:
+  - csvfile: MSI/data/hydrogen_model/schott_oh_0_data_from_OG_papers.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: tau
+      observable: tau
+      relative-uncertainty: 0.05
+experiment-type: ignition delay
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: G.L. Schott
+  - ORCID: null
+    name: J.L. Kinsey
+  detail: "Kinetic studies of hydroxyl radicals in shock waves. II. Induction times\
+    \ in the hydrogen\u2010oxygen reaction"
+  doi: 10.1063/1.1744674
+  journal: The Journal of Chemical Physics
+  pages: 1177
+  volume: 29
+  year: 1958

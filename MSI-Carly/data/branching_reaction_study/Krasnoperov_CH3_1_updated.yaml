@@ -1,0 +1,81 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 8.745
+  institution: NJIT
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 5.701e-06
+    relative-uncertainty: 0.05
+    species: CH3OH
+  - mole-fraction: 0.9999943057473661
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.170539689
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1968.62402893
+  time:
+    final-time:
+      units: s
+      value: 0.002
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: 0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: 0
+    csvfile: MSI/data/branching_reaction_study/Krasnoperov_abs_1.csv
+    name: abs_308
+    relative-uncertainty: 0.1
+    wavelength:
+      unit: nm
+      value: 308
+  concentration:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: L.N. Krasnoperov
+  - ORCID: null
+    name: J.V. Michael
+  detail: High-Temperature Shock Tube Studies Using Multipass Absorption-Rate Constant
+    Results for OH + CH3, OH + CH2, and the Dissociation of CH3OH
+  doi: 10.1021/jp04034
+  journal: Journal Physical Chemistiry A
+  pages: 8317-8323
+  volume: 108
+  year: 2004

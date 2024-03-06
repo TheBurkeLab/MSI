@@ -1,0 +1,90 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 14.13
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.013393798
+    relative-uncertainty: 0.1
+    species: H2O
+  - mole-fraction: 0.009903345
+    relative-uncertainty: 0.01
+    species: O2
+  - mole-fraction: 1.135e-06
+    relative-uncertainty: 2.303
+    species: H
+  - mole-fraction: 0.9770993
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.742456352
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1892.412679382
+  time:
+    final-time:
+      units: s
+      value: 0.001
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/test_data/hong_oh_1_time_dependent.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: OH
+      relative-uncertainty: 0.05
+      species: OH
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Zekai Hong
+  - ORCID: null
+    name: Subith S. Vasu
+  - ORCID: null
+    name: David F. Davidson
+  - name: Ronald K. Hanson
+  detail: Experimental Study of the rate of OH+HO2->H2O + O2 At high temperatures
+    using reverse reaction rates
+  doi: 10.1016/j.proci.2012.06.108
+  journal: J. Phys. Chem
+  pages: 5520-5525
+  volume: 114
+  year: 2010

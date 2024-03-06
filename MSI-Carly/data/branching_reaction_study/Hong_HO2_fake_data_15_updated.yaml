@@ -1,0 +1,102 @@
+apparatus:
+  facility: stainless steel shock tube with driver insert
+  inner-diameter:
+    units: cm
+    value: 15.2
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.003095305
+    relative-uncertainty: 0.05
+    species: H2O2
+  - mole-fraction: 0.001120405
+    relative-uncertainty: 0.2
+    species: H2O
+  - mole-fraction: 0.000555594
+    relative-uncertainty: 0.2
+    species: O2
+  - mole-fraction: 0.995212
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.635841329
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1282.128134657
+  time:
+    final-time:
+      units: s
+      value: 0.004
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: 0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: 0
+    csvfile: MSI/data/klip_optimization_with_raw_data/hong_abs_fake_data_15_no_unweighted_data_2.csv
+    name: abs_227
+    relative-uncertainty: 0.1
+    wavelength:
+      unit: nm
+      value: 227
+  concentration:
+  - csvfile: MSI/data/klip_optimization_with_raw_data/hong_h2o_fake_data_15_no_unweighted_data_2.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: H2O
+      relative-uncertainty: 0.05
+      species: H2O
+  - csvfile: MSI/data/klip_optimization_with_raw_data/hong_oh_fake_data_15_no_unweighted_data_2.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: OH
+      relative-uncertainty: 0.05
+      species: OH
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+- ORCID: null
+  name: Carly LaGrotta
+- ORCID: null
+  name: Michael P. Burke
+file-version: 2
+reference:
+  authors:
+  - ORCID: null
+    name: Zekai Hong
+  - ORCID: null
+    name: King Yiu Lam
+  - ORCID: null
+    name: Ritobrata Sur
+  - ORCID: null
+    name: Shengkai Wang
+  - ORCID: null
+    name: David F. Davidson
+  - ORCID: null
+    name: Ronald K. Hanson
+  doi: 10.1016/j.proci.2012.06.108
+  journal: Proceedings of the Combustion Institute
+  pages: 565-571
+  title: On the rate constants of OH+HO2 and HO2+HO2
+  volume: 34
+  year: 2013

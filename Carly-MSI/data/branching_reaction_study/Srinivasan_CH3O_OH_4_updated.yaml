@@ -1,0 +1,88 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 10.16
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 1.289e-06
+    relative-uncertainty: 0.05
+    species: CH3I
+  - mole-fraction: 0.051978396
+    relative-uncertainty: 0.05
+    species: O2
+  - mole-fraction: 0.9417932799
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 0.515805353
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1607.935385904
+  time:
+    final-time:
+      units: s
+      value: 0.0012
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: 0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Srinivasan_CH3O_O_4.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: OH
+      relative-uncertainty: 0.05
+      species: OH
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: N.K. Srinivasan
+  - ORCID: null
+    name: M.-C. Su
+  - ORCID: null
+    name: J.W. sutherland
+  - ORCID: null
+    name: J.W. Michael
+  detail: Reflected Shock Tube Studies of High-Temperature Rate Constants for CH3
+    + O2, H2CO +O2, and OH + O2
+  doi: null
+  journal: International Journal of Chemical Kinetics
+  pages: 7902-7914
+  volume: 109
+  year: 2005

@@ -1,0 +1,135 @@
+apparatus:
+  facility: quartz flow reactor
+  institution: Technical University of Denmark, Close CHEC Research Centre
+  kind: flow reactor
+  residence-time:
+    relative-uncertainty: 0.05
+    units: s
+    value-list:
+    - 10.97833333
+    - 10.5392
+    - 10.13384615
+    - 9.758518519
+    - 9.41
+    - 9.085517241
+    - 8.782666667
+    - 8.499354839
+    - 8.23375
+    - 7.984242424
+    - 7.749411765
+    - 7.528
+    - 7.318888889
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: isothermal
+  composition:
+  - mole-fraction: .nan
+    relative-uncertainty: 0.05
+    species: CH3OH
+  - mole-fraction: .nan
+    relative-uncertainty: 0.05
+    species: O2
+  - mole-fraction: 0.996679
+    relative-uncertainty: 0.05
+    species: AR
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: .nan
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value-list:
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+  time:
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1
+    units: s
+    value-list:
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+    - .nan
+datapoints:
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Aranda_CH3OH_2.csv
+    targets:
+    - absolute-uncertainty: 100
+      name: CH3OH
+      relative-uncertainty: 0.25
+      species: CH3OH
+  - csvfile: MSI/data/branching_reaction_study/Aranda_O2_2.csv
+    targets:
+    - absolute-uncertainty: 100
+      name: O2
+      relative-uncertainty: 0.25
+      species: O2
+  - csvfile: MSI/data/branching_reaction_study/Aranda_CO_2.csv
+    targets:
+    - absolute-uncertainty: 100
+      name: CO
+      relative-uncertainty: 0.25
+      species: CO
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Rodger E. Cornell
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: V. Aranda
+  - ORCID: null
+    name: J.M. Christensen
+  - ORCID: null
+    name: M.U. Alzueta
+  - ORCID: null
+    name: P. Glarborg
+  - ORCID: null
+    name: S. Gersen
+  - ORCID: null
+    name: Y. Gao
+  - ORCID: null
+    name: P. Marshall
+  detail: Experimental and Kinetic Modeling Study of Methanol Ignition and Oxidation
+    at high pressure
+  doi: null
+  journal: IJCK
+  pages: 284-294
+  volume: null
+  year: 2012

@@ -1,0 +1,117 @@
+file-author: 
+    name: Carly LaGrotta
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: Mark A. Mueller
+          ORCID: 
+        - name: Richard A. Yetter
+          ORCID:
+        - name: Frederick L. Dryer
+          ORCID:
+    journal: 27th US International Combustion Meeting
+    year: 1998
+    volume:
+    pages: 
+    detail: Measurment of the rate constnat for H+O2->MHO2+M using kinetic modeling of the high pressure reaction
+      
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    institution: stanford
+    facility: quartz high pressure laminor flow reactor facility (HPLFR) ~ plug flow reactor
+    inner-diameter: &diam
+        value: 10.2
+        units: cm
+
+common-properties:
+    pressure: &pres 
+        value: 10
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 800
+        units: K
+        relative-uncertainty: .01
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 3.0
+          units: s
+    composition: &comp
+        - species: H2
+          mole-fraction: 0.006
+          relative-uncertainty: .05
+        - species: O2
+          mole-fraction: 0.012
+          relative-uncertainty: .05    
+         - species: 'NO'
+          mole-fraction: 0.000035
+          relative-uncertainty: .05                
+        - species: Ar
+          mole-fraction: 0.981965
+          relative-uncertainty: .05
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: .258
+            units: s
+    assumptions: &assumptions
+        thermal-boundary: adiabatic
+        mechanical-boundary: constant pressure
+        equation-of-state: ideal gas
+        
+datapoints:
+  concentration:
+    - csvfile: 'MSI/data/branching_reaction_study/Mueller_flow_reactor_1_NO2.csv'
+      targets:
+        - name: NO2
+          species: NO2
+          absolute-uncertainty: 0 
+          relative-uncertainty: .15 
+    - csvfile: 'MSI/data/branching_reaction_study/Mueller_flow_reactor_1_NO.csv'
+      targets: 
+       - name: 'NO'
+         species: 'NO'
+         absolute-uncertainty: 0
+         relative-uncertainty: .15
+
+
+  absorbance: 
+     - csvfile: 
+       name: 
+       wavelength:
+         value: 
+         unit: 
+       absolute-uncertainty: 
+       relative-uncertainty: 
+
+
+  mole-fraction:
+    - csvfile: 'MSI/data/branching_reaction_study/Mueller_flow_reactor_1_O2.csv'
+      targets: 
+       - name: O2
+         species: O2
+         absolute-uncertainty: 0 
+         relative-uncertainty: .15 
+    - csvfile: 'MSI/data/branching_reaction_study/Mueller_flow_reactor_1_H2.csv'
+      targets: 
+       - name: H2
+         species: H2
+         absolute-uncertainty: 0
+         relative-uncertainty: .15
+    - csvfile: 'MSI/data/branching_reaction_study/Mueller_flow_reactor_1_H2O.csv'
+      targets: 
+       - name: H2O
+         species: H2O
+         absolute-uncertainty: 0
+         relative-uncertainty: .15
+
+
+
+

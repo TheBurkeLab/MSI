@@ -1,0 +1,93 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 14.13
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.029003012
+    relative-uncertainty: 0.05
+    species: H2
+  - mole-fraction: 0.000984485
+    relative-uncertainty: 0.05
+    species: O2
+  - mole-fraction: 1.0e-09
+    relative-uncertainty: 2.0
+    species: H
+  - mole-fraction: 0.9699999988
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.946403278
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1100.781810069
+  time:
+    final-time:
+      units: s
+      value: 0.0085
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: 0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/hydrogen_model/hong_h2o_7_time_dependent.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: H2O
+      relative-uncertainty: 0.05
+      species: H2O
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Zekai Hong
+  - ORCID: null
+    name: Subith S. Vasu
+  - ORCID: null
+    name: David F. Davidson
+  - ORCID: null
+    name: Ethan A. Barbour
+  - ORCID: null
+    name: Ronald K. Hanson
+  detail: A new Shock tube study of the H + O2 -> OH + O reaction rate using tunable
+    diode laser absorption of H2O near 2.5 um
+  doi: 10.1016/j.proci.2010.05.101
+  journal: Proceedings of the Combustion Institute
+  pages: 309 - 316
+  volume: 33
+  year: 2010

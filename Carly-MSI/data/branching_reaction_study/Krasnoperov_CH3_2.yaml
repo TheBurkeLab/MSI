@@ -1,0 +1,109 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1021/jp04034
+    authors:
+        - name: L.N. Krasnoperov
+          ORCID: 
+        - name: J.V. Michael
+          ORCID:         
+    journal: Journal Physical Chemistiry A
+    year: 2004
+    volume: 108
+    pages: 8317-8323
+    #is there a title:?
+    detail: High-Temperature Shock Tube Studies Using Multipass Absorption-Rate Constant Results for OH + CH3, OH + CH2, and the Dissociation of CH3OH
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: NJIT
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 8.745
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 0.6728910851196148
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 2060
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.0025
+          units: s
+
+    composition: &comp
+        - species: CH3OH
+          mole-fraction: 0.000004988088727721907
+          relative-uncertainty: .05         
+        - species: H2O
+          mole-fraction: 0.0019602020919977396
+          relative-uncertainty: .05                      
+        - species: Ar #should be Kr but don't have in file
+          mole-fraction: 0.9980348098192745
+          relative-uncertainty: .05
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 
+      targets:
+        - name: 
+          species: 
+          absolute-uncertainty: 
+          relative-uncertainty: 
+    
+  absorbance: 
+     - csvfile: 'MSI/data/branching_reaction_study/Krasnoperov_abs_2.csv'
+       name: abs_308
+       wavelength:
+         value: 308
+         unit: nm
+       absolute-uncertainty: 0
+       relative-uncertainty: 0.1
+       
+ 
+
+  concentration:
+    - csvfile: 
+      targets:
+       - name: 
+         species: 
+         absolute-uncertainty: 
+         relative-uncertainty:          
+            
+      
+       
+
+  
+        
+    
+          
+    
+
+               

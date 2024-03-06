@@ -1,0 +1,94 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 15.24
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 5.9912e-05
+    relative-uncertainty: 0.05
+    species: C4H10O2
+  - mole-fraction: 0.000274991
+    relative-uncertainty: 0.05
+    species: H2O
+  - mole-fraction: 0.999665
+    relative-uncertainty: 0.01
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 0.71025311
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1328.808999381
+  time:
+    final-time:
+      units: s
+      value: 0.0006
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: 0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Wang_CH3OH2015_0_OH.csv
+    targets:
+    - absolute-uncertainty: 3
+      name: OH
+      relative-uncertainty: 0.05
+      species: OH
+  - csvfile: MSI/data/branching_reaction_study/Wang_CH3OH2015_0_CH3.csv
+    targets:
+    - absolute-uncertainty: 3
+      name: CH3
+      relative-uncertainty: 0.05
+      species: CH3
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Jonathan Pankauski
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Shengkai Wang
+  - ORCID: null
+    name: Sijie Li
+  - ORCID: null
+    name: David M. Davidson
+  - ORCID: null
+    name: Ronald K. Hanson
+  detail: Shock Tube Measurement of the High-Temperature Rate Constant for OH + CH3
+    ? Products
+  doi: 10.1021/acs.jpca.5b05725
+  journal: Z. Phys. Chem.
+  pages: 1157-1178
+  volume: 225
+  year: 2011

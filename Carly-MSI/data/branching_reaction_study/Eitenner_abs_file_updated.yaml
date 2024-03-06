@@ -1,0 +1,19 @@
+Absorption-coefficients:
+- species: CO
+  wave-lengths:
+  - functional-form: C
+    parameter-one:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 100000
+      units: cm^2/mol^-1
+      value: 437273.75742586
+    parameter-two:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 0.0
+      units: cm^2/K*mol^-1
+      value: 0.0
+    source: Hong, but fit to equation from Kappel
+    unit: nm
+    value: 221

@@ -1,0 +1,16 @@
+#%%
+import cantera as ct
+
+gas = ct.Solution("/home/jmp/MSIFormaldehyde_CarlyOct23/MSI/data/branching_reaction_study/usc_mech_nov_16_2023_branching_reactions.cti")
+# gas1 = ct.Solution("/home/jmp/MSIFormaldehyde_CarlyOct23/MSI/data/branching_reaction_study/usc_mech_june_8_branching_reactions.cti")
+gas1 = ct.Solution("/home/jmp/MSIFormaldehyde_CarlyOct23/MSI/data/branching_reaction_study/usc_mech_nov_16_2023_branching_reactions_updated.cti")
+gas2 = ct.Solution("/home/jmp/MSIFormaldehyde_CarlyOct23/MSI/data/branching_reaction_study/usc_mech_nov_16_2023_branching_reactions_master_equation_reactions.cti")
+
+print(gas.n_reactions)
+print(gas1.n_reactions)
+print(gas2.n_reactions)
+# %%
+Rxns = []
+for i in range()
+print(gas.reaction_equations([i]))
+# %%

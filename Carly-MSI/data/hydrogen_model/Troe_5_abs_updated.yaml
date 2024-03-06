@@ -1,0 +1,37 @@
+Absorption-coefficients:
+- species: H2O2
+  wave-lengths:
+  - functional-form: A
+    parameter-one:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 0.7
+      units: mol/c,
+      value: 105678.55792079
+    parameter-two:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 0.3
+      units: cm^2/K*mol^-1
+      value: -18.90308524
+    source: Hong, but fit to equation from Kappel
+    unit: nm
+    value: 215
+- species: HO2
+  wave-lengths:
+  - functional-form: B
+    parameter-one:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 0.7
+      units: cm^2/mol^-1
+      value: 982923.4580557
+    parameter-two:
+      absolute-uncertainty:
+        units: cm^2/K*mol^-1
+        value: 0.3
+      units: cm^2/K*mol^-1
+      value: 1277.83719115
+    source: Hong, but fit to equation from Kappel
+    unit: nm
+    value: 215

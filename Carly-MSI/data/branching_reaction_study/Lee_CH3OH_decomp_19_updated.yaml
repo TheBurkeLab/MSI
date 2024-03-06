@@ -1,0 +1,84 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 10
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 1.586e-06
+    relative-uncertainty: 0.05
+    species: CH3OH
+  - mole-fraction: 0.9999985
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 2.029108634
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1942.194987538
+  time:
+    final-time:
+      units: s
+      value: 0.00045
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Lee_h_fig_3_6.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: H
+      relative-uncertainty: 0.05
+      species: H
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: .
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Pei-Fang Lee
+  - ORCID: null
+    name: Hiroyuki Matsui
+  - ORCID: null
+    name: Ding-Wei Xu
+  - ORCID: null
+    name: Niann-Shia Wang
+  detail: Thermal Decomposition and Oxidation of CH3OH
+  doi: null
+  journal: Journal of Physical Chemistry
+  pages: 525-534
+  volume: 117
+  year: 2012

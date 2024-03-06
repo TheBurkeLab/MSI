@@ -1,0 +1,82 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 4.2
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 5.59e-07
+    relative-uncertainty: 0.05
+    species: C2H5I
+  - mole-fraction: 0.9999937305
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 0.236076779
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1172.327138516
+  time:
+    final-time:
+      units: s
+      value: 0.0004
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: 0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Kumaran_C2H5I_0.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: H
+      relative-uncertainty: 0.05
+      species: H
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: .
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: S.S. Kumaran
+  - ORCID: null
+    name: M.-C. Su
+  - ORCID: null
+    name: K.P. Lim
+  detail: Thermal decomposition c2h5I
+  doi: null
+  journal: The combustion institute
+  pages: 605-611
+  volume: null
+  year: 1996

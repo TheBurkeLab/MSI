@@ -1,0 +1,85 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 810
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.006183717
+    relative-uncertainty: 0.05
+    species: CH2O
+  - mole-fraction: 0.9954
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.770478501
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1261.566204612
+  time:
+    final-time:
+      units: s
+      value: 4.5e-05
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/gernot_friedrichs_hco_2002_2.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: HCO
+      relative-uncertainty: 0.05
+      species: HCO
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Gernot Friedrichs
+  - ORCID: null
+    name: J.T. Herbob
+  - ORCID: null
+    name: David F. Davidson
+  - ORCID: null
+    name: Ronald K. Hanson
+  detail: Quantitative selection of HCO behind shock waves--Thermal decomposition
+    of HCO
+  doi: null
+  journal: International Journal of Chemical Kinetics
+  pages: 5778-5788
+  volume: 36
+  year: 2002

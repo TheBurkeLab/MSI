@@ -1,0 +1,37 @@
+Absorption-coefficients:
+  - species: CH2O
+    wave-lengths: 
+      - value: 174
+        unit: nm
+        functional-form: A
+        source: From Friedrichs Paper
+        parameter-one:
+          value: 10000000
+          units: 'cm^2/mol^-1'
+          absolute-uncertainty: 
+            value: .7
+            units: 'cm^2/mol^-1'
+        parameter-two:
+          value: -3556.1
+          units: 'cm^2/K*mol^-1'
+          absolute-uncertainty:
+            value: .7
+            units: 'cm^2/mol^-1'
+  - species: CO
+    wave-lengths: 
+      - value: 174
+        unit: nm
+        functional-form: A
+        source: From Friedrichs Paper
+        parameter-one:
+          value: 211676
+          units: 'cm^2/mol^-1'
+          absolute-uncertainty:
+            value: .7
+            units: 'cm^2/mol^-1'
+        parameter-two:
+          value: 227.06
+          units: 'cm^2/K*mol^-1'
+          absolute-uncertainty:
+            value: .7
+            units: 'cm^2/K*mol^-1'

@@ -1,0 +1,103 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: Gernot Friedrichs
+          ORCID: 
+        - name: John T. Herbobon
+          ORCID:  
+        - name: David F. Davidson
+          ORCID:     
+        - name: Ronald K. Hanson
+          ORCID:                                    
+    journal: Physical Chemistry Chemistry Physics 
+    year: 2002
+    volume: 4
+    pages: 5778-5788
+    #is there a title:?
+    detail: Quantitative detection of HCO behind shock waves- The thermal deconposition of HCO
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Stanford University
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 15.24
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 0.0858623
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 295
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.0002
+          units: s
+
+    composition: &comp
+        - species: HCO
+          mole-fraction: 0.000024
+          relative-uncertainty: .05 
+        - species: H
+          mole-fraction: 0.000001
+          relative-uncertainty: .05           
+        - species: Ar
+          mole-fraction: 0.999976
+          relative-uncertainty: .05         
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile:
+      targets: 
+        - name: 
+          species: 
+          absolute-uncertainty:
+          relative-uncertainty: 
+    
+  absorbance: 
+     - csvfile: 
+       name: 
+       wavelength:
+         value: 
+         unit: 
+       absolute-uncertainty: 
+       relative-uncertainty: 
+       
+ 
+
+  concentration:
+    - csvfile: 'MSI/data/branching_reaction_study/Friedrichs_HCO_0.csv'
+      targets:
+       - name: HCO
+         species: HCO
+         absolute-uncertainty: 0.05
+         relative-uncertainty: 0         
+            

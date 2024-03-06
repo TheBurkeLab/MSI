@@ -1,0 +1,113 @@
+file-author: 
+    name: Carly LaGrotta
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1016/j.proci.2012.06.108
+    authors:
+        - name: Matthew A. Oehlschlaeger
+          ORCID: 
+        - name: David F. Davidson
+          ORCID:
+        - name: Ronald K. Hanson
+          ORCID:
+    journal: J. Quantitative Spectroscopy and Radiative Transer
+    year: 2005
+    volume: 92
+    pages: 393-402
+    #is there a title:?
+    detail: High-temperature UV absorption of methyl radicals behind shock waves
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Stanford University 
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 14.13
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: .902
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1927
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.0005
+          units: s
+
+    composition: &comp
+        - species: CH3I
+          mole-fraction: 0.0004
+          relative-uncertainty: .05    
+        - species: Ar
+          mole-fraction: 0.9996
+          relative-uncertainty: .05
+
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.00001
+              #0.000001
+              #0.000002
+              #.0000000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 
+      targets:
+        - name: 
+          species: 
+          absolute-uncertainty: 
+          relative-uncertainty: 
+    
+  absorbance: 
+     - csvfile: 
+       name: 
+       wavelength:
+         value: 
+         unit: 
+       absolute-uncertainty: 
+       relative-uncertainty: 
+       
+ #'MSI/data/time_shift_testing/hong_h2o_0_time_dependent_remove_early_data.csv'
+  concentration:
+    - csvfile: 'MSI/data/automating_methyl_oehlschlaeger/oehlschlaeger_ch3_1.csv'
+      targets:
+       - name: CH3
+         species: CH3
+         absolute-uncertainty: 0
+         relative-uncertainty: .05
+     
+             
+            
+      
+       
+
+  
+        
+    
+          
+    
+
+               

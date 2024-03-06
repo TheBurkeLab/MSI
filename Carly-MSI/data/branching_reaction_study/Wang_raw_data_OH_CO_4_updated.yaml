@@ -1,0 +1,95 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 15.24
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.000500035
+    relative-uncertainty: 0.05
+    species: CH2O
+  - mole-fraction: 0.000500249
+    relative-uncertainty: 0.05
+    species: O2
+  - mole-fraction: 3.824e-06
+    relative-uncertainty: 2.3
+    species: H
+  - mole-fraction: 0.9989985
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.500213097
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1629.368984115
+  time:
+    final-time:
+      units: s
+      value: 0.003
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: 0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/Wang_raw_data_OH_4_trimmed_rows.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: OH
+      relative-uncertainty: 0.05
+      species: OH
+  - csvfile: MSI/data/branching_reaction_study/Wang_raw_data_CO_4_trimmed_rows.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: CO
+      relative-uncertainty: 0.05
+      species: CO
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: .
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Shengkai Wang
+  - ORCID: null
+    name: David F. Davidson
+  - ORCID: null
+    name: Ronald K. Hanson
+  detail: Shock Tube and Laser Absorption study of CH2O Oxidation via Simultanious
+    Measurments of OH and CO
+  doi: null
+  journal: Physical Chemistry Chemistry Physics
+  pages: 8561-8568
+  volume: 121
+  year: 2017

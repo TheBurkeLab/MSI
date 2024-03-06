@@ -1,0 +1,120 @@
+apparatus:
+  facility: German Aerospace Center (DLR)
+  inner-diameter:
+    units: cm
+    value: 14.13
+  institution: German Aerospace Center (DLR)
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - attributes:
+      relative-uncertainty: 0.05
+      type: fuel
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.008103594
+      name: H2
+    species-group: 1
+  - attributes:
+      relative-uncertainty: 0.02
+      type: oxidizer
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.040323665
+      name: O2
+    species-group: 2
+  - attributes:
+      relative-uncertainty: 0.05
+      type: diluant
+    mixture:
+    - mole-fraction:
+        value-list:
+        - 0.932276188
+      name: Ar
+    species-group: 3
+  ignition-type:
+    target: OH
+    type: max value
+  pressure:
+    relative-uncertainty: 0.01
+    units: atm
+    value-list:
+    - 1.010061373
+    - 0.990012361
+    - 0.940003335
+  temperature:
+    relative-uncertainty: 0.02
+    units: K
+    value-list:
+    - 934.243208401
+    - 971.979987161
+    - 1022.230679387
+  time:
+    final-time:
+      units: s
+      value: 1.0
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-12
+    units: s
+    value: -0.0
+datapoints:
+  ignition-delay:
+  - csvfile: MSI/data/hydrogen_model/keromnes_oh_0_test.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: tau
+      observable: tau
+      relative-uncertainty: 0.05
+experiment-type: ignition delay
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Alan Keromnes
+  - ORCID: null
+    name: Wayne K. Metcalfe
+  - ORCID: null
+    name: Karl A. Haufer
+  - ORCID: null
+    name: Nicole Donhoe
+  - ORCID: null
+    name: Apurba K. Das
+  - ORCID: null
+    name: Chin-Jen Sung
+  - ORCID: null
+    name: Jurgen Herzler
+  - ORCID: null
+    name: Clemens Naumann
+  - ORCID: null
+    name: Peter Griebel
+  - ORCID: null
+    name: Olivier Mathieu
+  - ORCID: null
+    name: Michael C. Krejci
+  - ORCID: null
+    name: Eric L. Petersen
+  - ORCID: null
+    name: William J. Pitz
+  - ORCID: null
+    name: Henry J. Curran
+  detail: An experimental and detailed chemical kinetic modeling study of hydrogen
+    and syngas mixture oxidation at elevated pressures
+  doi: http://dx.doi.org/10.1016/j.combustflame.2013.01.001
+  journal: Proceedings of the Combustion Institute
+  pages: 995-1011
+  volume: 160
+  year: 2013

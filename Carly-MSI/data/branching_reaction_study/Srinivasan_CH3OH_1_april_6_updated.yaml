@@ -1,0 +1,83 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 10.2
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 2.4258e-05
+    relative-uncertainty: 0.05
+    species: CH3OH
+  - mole-fraction: 0.9999760927
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 0.481881074
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1678.411383317
+  time:
+    final-time:
+      units: s
+      value: 0.0015
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: MSI/data/branching_reaction_study/srinivasan_oh_fig1_low_temp_0.csv
+    targets:
+    - absolute-uncertainty: 4.0e-14
+      name: OH
+      relative-uncertainty: 0.05
+      species: OH
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: .
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: N.K. Srinivasan
+  - ORCID: null
+    name: M.C. Su
+  - ORCID: null
+    name: J.V. Michael
+  detail: High-Temperature Measurments of the reactions of OH with a series of keytones--
+    Acetone, 2-butanone, 3-pentanone, 2-Pentanone
+  doi: null
+  journal: The Journal of Physical Chemistry
+  pages: 3951-3958
+  volume: 111
+  year: 2007

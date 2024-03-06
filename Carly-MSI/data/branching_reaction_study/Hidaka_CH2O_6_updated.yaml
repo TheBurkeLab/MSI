@@ -1,0 +1,80 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 10.16
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.009862896
+    relative-uncertainty: 0.05
+    species: CH2O
+  - mole-fraction: 0.99
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.4
+    units: atm
+    value: 2.891500975
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value: 1445.130707009
+  time:
+    final-time:
+      units: s
+      value: 0.0006
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 1.0e-10
+    units: s
+    value: -0.0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+  mole-fraction:
+  - csvfile: MSI/data/branching_reaction_study/Hidaka_CH2O_fig_1_7.csv
+    targets:
+    - absolute-uncertainty: 0.00011
+      name: CH2O
+      relative-uncertainty: 0.05
+      species: CH2O
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Yoshiaki Hidaka
+  - ORCID: null
+    name: Takashi Taniguchi
+  detail: The formaldehyde decomposition chain mechanism
+  doi: null
+  journal: International Journal of Chemical Kinetics
+  pages: 305-322
+  volume: 25
+  year: 1993

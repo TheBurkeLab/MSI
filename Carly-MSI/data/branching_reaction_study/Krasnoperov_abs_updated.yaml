@@ -1,0 +1,37 @@
+Absorption-coefficients:
+- species: OH
+  wave-lengths:
+  - functional-form: A
+    parameter-one:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 0.9
+      units: cm^2/mol^-1
+      value: 36523643.92053722
+    parameter-two:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 0.9
+      units: cm^2/K*mol^-1
+      value: -5428.43252404
+    source: Equation From Paper
+    unit: nm
+    value: 308
+- species: CH3COCH3
+  wave-lengths:
+  - functional-form: C
+    parameter-one:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 0.9
+      units: cm^2/mol^-1
+      value: 8986.316
+    parameter-two:
+      absolute-uncertainty:
+        units: cm^2/mol^-1
+        value: 0.0
+      units: cm^2/K*mol^-1
+      value: 0.0
+    source: Equation From Paper
+    unit: nm
+    value: 308

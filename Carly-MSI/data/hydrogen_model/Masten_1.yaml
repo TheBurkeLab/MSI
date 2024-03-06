@@ -1,0 +1,116 @@
+file-author: 
+    name: Carly LaGrotta
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 0022-3654/90/2094-7119S02.50/0
+    authors:
+        - name: David A. Masten
+          ORCID: 
+        - name: Ronald. K Hanson
+          ORCID:
+        - name: Craig T. Bowman
+          ORCID:
+    journal: Journal of Physical Chemistry
+    year: 1990
+    volume: 94
+    pages: 7119 - 7128
+    #is there a title:?
+    detail: Shock Tube Study of the Reaction H + O2 --> OH + O Using OH Laser Absorption
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Stanford University 
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 15.24
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 0.675
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1980
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.00025
+          units: s
+
+    composition: &comp
+        - species: H2
+          mole-fraction: 0.05
+          relative-uncertainty: .05
+        - species: O2
+          mole-fraction: 0.00493
+          relative-uncertainty: .05         
+        - species: Ar
+          mole-fraction: 0.94507
+          relative-uncertainty: .05
+
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000001
+              #0.0000000001
+            # had to be more tahan 5 percnt
+              #0.00001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 
+      targets:
+        - name: 
+          species: 
+          absolute-uncertainty: 
+          relative-uncertainty: 
+    
+  absorbance: 
+     - csvfile: 
+       name: 
+       wavelength:
+         value: 
+         unit: 
+       absolute-uncertainty: 
+       relative-uncertainty: 
+       
+ 
+  concentration:
+    - csvfile: 'MSI/data/hydrogen_model/masten_oh_1.csv'
+      targets:
+       - name: OH
+         species: OH
+         absolute-uncertainty: 0
+         relative-uncertainty: .05
+     
+             
+            
+      
+       
+
+  
+        
+    
+          
+    
+
+               

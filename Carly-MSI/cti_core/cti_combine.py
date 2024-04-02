@@ -8,7 +8,7 @@ Created on Thu Aug 03 14:32:24 2017
 writes them to internal memory.  It then reads an input from a portion of the code dealing with master equation simulation 
 and adds those reactions to create a complete internal mechanism
 """
-#hi Padraig
+
 import numpy as np
 import cantera as ct
 from .. import simulations

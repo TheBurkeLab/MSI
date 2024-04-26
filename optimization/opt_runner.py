@@ -1,15 +1,15 @@
 import sys, os
-import MSI_Dev.simulations as sim
+import MSI.simulations as sim
 import re
-import MSI_Dev.cti_core.cti_processor as pr
-import MSI_Dev.optimization.matrix_loader as ml
-import MSI_Dev.simulations.absorbance.curve_superimpose as csp
-import MSI_Dev.simulations.yaml_parser as yp
-import MSI_Dev.simulations.instruments.shock_tube as st
-import MSI_Dev.simulations.instruments.jsr_steadystate as jsr
-import MSI_Dev.simulations.instruments.flames as fl
-import MSI_Dev.simulations.instruments.ignition_delay as ig
-import MSI_Dev.simulations.instruments.flow_reactor as fr
+import MSI.cti_core.cti_processor as pr
+import MSI.optimization.matrix_loader as ml
+import MSI.simulations.absorbance.curve_superimpose as csp
+import MSI.simulations.yaml_parser as yp
+import MSI.simulations.instruments.shock_tube as st
+import MSI.simulations.instruments.jsr_steadystate as jsr
+import MSI.simulations.instruments.flames as fl
+import MSI.simulations.instruments.ignition_delay as ig
+import MSI.simulations.instruments.flow_reactor as fr
 import pandas as pd
 import numpy as np
 

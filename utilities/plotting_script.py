@@ -14,12 +14,12 @@ from mpl_toolkits.mplot3d import Axes3D
 from scipy.stats import norm
 import matplotlib.mlab as mlab
 import matplotlib.cm as cm
-import MSI.master_equation.master_equation as meq 
+import MSI_Dev.master_equation.master_equation as meq 
 import re
 import os
-import MSI.simulations.instruments.ignition_delay as ig
-import MSI.cti_core.cti_processor as pr
-import MSI.simulations.instruments.jsr_steadystate as jsr
+import MSI_Dev.simulations.instruments.ignition_delay as ig
+import MSI_Dev.cti_core.cti_processor as pr
+import MSI_Dev.simulations.instruments.jsr_steadystate as jsr
 import glob
 from pypdf import PdfMerger
 import natsort

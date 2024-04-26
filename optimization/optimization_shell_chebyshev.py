@@ -80,23 +80,33 @@ class MSI_optimization_chebyshev(object):
             self.chebyshev_fit_nominal_parameters_dict = chebyshev_fit_nominal_parameters_dict
             self.chebyshev_sensitivities = chebyshev_sensitivities
             self.T_P_min_max_dict=T_P_min_max_dict
+            
+            Art=text2art("MSI",font='varsity')
+            print('\n')
+            print(Art)
+            print('\n')
+            print('--------------------------------------------------------------------------')
+            print('Initializing Optimization Shell with Theory')
+            print('--------------------------------------------------------------------------')
+                    
         else:
-            self.master_equation_reactions = [],
-            self.chebyshev_sensitivities = {},
-            self.master_reaction_equation_cti_name = '',
-            self.master_index = [],            
+            self.master_equation_reactions = []
+            self.chebyshev_sensitivities = {}
+            self.master_reaction_equation_cti_name = ''
+            self.master_index = []    
             # self.master_equation_flag=False
             self.theory_parameters_df = None
             self.master_equation_uncertainty_df=None
-            self.T_P_min_max_dict={},
+            self.T_P_min_max_dict={}
+            
+            Art=text2art("MSI",font='varsity')
+            print('\n')
+            print(Art)
+            print('\n')
+            print('--------------------------------------------------------------------------')
+            print('Initializing Optimization Shell')
+            print('--------------------------------------------------------------------------')            
 
-        Art=text2art("MSI",font='varsity')
-        print('\n')
-        print(Art)
-        print('\n')
-        print('--------------------------------------------------------------------------')
-        print('Initializing Optimization Shell with Theory')
-        print('--------------------------------------------------------------------------')
                 
     # call all of leis functions where we do the molecular paramter stuff and turn a flag on 
     

@@ -95,7 +95,7 @@ class MSI_optimization_chebyshev(object):
         print(Art)
         print('\n')
         print('--------------------------------------------------------------------------')
-        print('Initializing Optimization Shell with Theory yay')
+        print('Initializing Optimization Shell with Theory')
         print('--------------------------------------------------------------------------')
                 
     # call all of leis functions where we do the molecular paramter stuff and turn a flag on 

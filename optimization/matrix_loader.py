@@ -1542,12 +1542,15 @@ class OptMatrix(object):
         pert_coef = {} #build a dict matching pert_coef to their experiment and wavelength.             
                #length of the dict gives padding information
         abs_experiment_numbers = []
+        abs_species_numbers = []
         for ii, exp in enumerate(exp_dict_list):
             if 'perturbed_coef' not in exp.keys():
                 continue
             perturbed_for_exp = exp['perturbed_coef']
-            abs_experiment_numbers.append(ii)
+            
             for x in perturbed_for_exp:
+                abs_experiment_numbers.append(ii)
+                abs_species_numbers.append(x[0][0])
                 if x[0][2] not in pert_coef.keys():
                     pert_coef[x[0][2]] = [x[1]]
                 else:
@@ -1575,8 +1578,8 @@ class OptMatrix(object):
                 Y = np.vstack((Y,temp_array))
                 
         for x in range(num_ind_pert_coef):
-            Y_data_Frame.append('Absorption'+' experiment'+str(abs_experiment_numbers[x]))
-            active_parameters.append('Absorption'+' experiment'+str(abs_experiment_numbers[x]))
+            Y_data_Frame.append('Absorption '+abs_species_numbers[x]+' experiment'+str(abs_experiment_numbers[x]))
+            active_parameters.append('Absorption '+abs_species_numbers[x]+' experiment'+str(abs_experiment_numbers[x]))
         
         
         Y_data_Frame = pd.DataFrame({'parameter': Y_data_Frame,'value': Y.reshape((Y.shape[0],))})  

@@ -661,10 +661,10 @@ class MSI_optimization_chebyshev(object):
                 self.convergence_sorted = convergence.loc[convergence.abs().sum(axis=1).sort_values(ascending=False).index]
                 self.convergence_sorted.to_csv(os.path.join(self.matrix_path,'convergence.csv'))
                     
-            self.physical_parameters_df = self.matrix_builder_instance.get_physical_parameters_df(self.experiment_dictonaries,
-                                                                                             self.optimized_physical_parameters,
-                                                                                             self.optimized_absorption_parameters,
-                                                                                             self.list_of_parsed_yamls_original)       
+            # self.physical_parameters_df = self.matrix_builder_instance.get_physical_parameters_df(self.experiment_dictonaries,
+            #                                                                                  self.optimized_physical_parameters,
+            #                                                                                  self.optimized_absorption_parameters,
+            #                                                                                  self.list_of_parsed_yamls_original)       
             
             self.mainloop.update()
                      

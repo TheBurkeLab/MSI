@@ -864,21 +864,20 @@ class Plotting(object):
                                 temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
                                 temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)
                                 
-                                concentration_sig_original = np.true_divide(1,high_error_original,self.exp_dict_list_original[i]['simulation'].pressureAndTemperatureToExperiment[observable_counter]['temperature'].to_numpy())*high_error_original,self.exp_dict_list_original[i]['simulation'].pressureAndTemperatureToExperiment[observable_counter]['pressure'].to_numpy()
-                        
-                                concentration_sig_original *= (1/(8.314e6))*high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().to_numpy()                                
+                                # concentration_sig_original = np.true_divide(1,high_error_original,self.exp_dict_list_original[i]['simulation'].pressureAndTemperatureToExperiment[observable_counter]['temperature'].to_numpy())*high_error_original,self.exp_dict_list_original[i]['simulation'].pressureAndTemperatureToExperiment[observable_counter]['pressure'].to_numpy()
+                                # concentration_sig_original *= (1/(8.314e6))*high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().to_numpy()                                
                                 
-                                high_error_original = np.exp(sigmas_original[i][observable_counter])
-                                high_error_original = np.multiply(high_error_original,concentration_sig_original)
-                                low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                                low_error_original = np.multiply(low_error_original,concentration_sig_original)
+                                # high_error_original = np.exp(sigmas_original[i][observable_counter])
+                                # high_error_original = np.multiply(high_error_original,concentration_sig_original)
+                                # low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                                # low_error_original = np.multiply(low_error_original,concentration_sig_original)
                                                             
 
                                 temp_original_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
                                 temp_original_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
                                 
-                                temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                                temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)                                                                              
+                                # temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
+                                # temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)                                                                              
                         
                         plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation'].temperature))
                         plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))

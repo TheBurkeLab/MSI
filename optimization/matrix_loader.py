@@ -261,55 +261,72 @@ class OptMatrix(object):
             return total_uncertainty,un_weighted_uncertainty
         #tab, start working here tomorrow with how we want to read in csv file     
         for i,exp_dic in enumerate(exp_dict_list):
-            counter = 0
+            mole_fraction_observable_counter = 0
+            concentration_observable_counter = 0
+            flame_speed_observable_counter = 0
+            ignition_delay_observable_counter = 0
+            counter = 0            
+
             #print(exp_dic)
             for j,observable in enumerate(exp_dic['mole_fraction_observables']+
                                            exp_dic['concentration_observables']+
                                            exp_dic['flame_speed_observables']+
                                            exp_dic['ignition_delay_observables']):
 
+
+                #print(observable,counter)
                 if observable == None:
                     pass
                 else:
                     if observable in exp_dic['mole_fraction_observables']:
-                        ## add ppm statment here ? check if it exists? and add concentration statment below just for parcing 
-                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['mole_fraction_relative_uncertainty'][counter],
-                            exp_dic['uncertainty']['mole_fraction_absolute_uncertainty'][counter],
+                        
+                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['mole_fraction_relative_uncertainty'][mole_fraction_observable_counter],
+                            exp_dic['uncertainty']['mole_fraction_absolute_uncertainty'][mole_fraction_observable_counter],
                             exp_dic['experimental_data'][counter][observable].values,exp_dic['experimental_data'][counter])
+                        
+                        
                         total_uncertainty = total_uncertainty.reshape((total_uncertainty.shape[0],1))
                         un_weighted_uncertainty = un_weighted_uncertainty.reshape((un_weighted_uncertainty.shape[0], 1))
+                        mole_fraction_observable_counter +=1
+
+
                     elif observable in exp_dic['concentration_observables'] and '_ppm' in exp_dic['experimental_data'][counter].columns[1]:
-                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['concentration_relative_uncertainty'][counter],
-                             exp_dic['uncertainty']['concentration_absolute_uncertainty'][counter],
+
+                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['concentration_relative_uncertainty'][concentration_observable_counter],
+                             exp_dic['uncertainty']['concentration_absolute_uncertainty'][concentration_observable_counter],
                              exp_dic['experimental_data'][counter][observable+'_ppm'].values,exp_dic['experimental_data'][counter])
                        
                         total_uncertainty = total_uncertainty.reshape((total_uncertainty.shape[0], 1))
                         un_weighted_uncertainty = un_weighted_uncertainty.reshape((un_weighted_uncertainty.shape[0], 1))
-                    
+                        concentration_observable_counter +=1
+
                     elif observable in exp_dic['concentration_observables'] and '_mol/cm^3' in exp_dic['experimental_data'][counter].columns[1]:
                          
-                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['concentration_relative_uncertainty'][counter],
-                              exp_dic['uncertainty']['concentration_absolute_uncertainty'][counter],
+                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['concentration_relative_uncertainty'][concentration_observable_counter],
+                              exp_dic['uncertainty']['concentration_absolute_uncertainty'][concentration_observable_counter],
                               exp_dic['experimental_data'][counter][observable+'_mol/cm^3'].values,exp_dic['experimental_data'][counter])
                         total_uncertainty = total_uncertainty.reshape((total_uncertainty.shape[0],1))
                         un_weighted_uncertainty = un_weighted_uncertainty.reshape((un_weighted_uncertainty.shape[0], 1))               
+                        concentration_observable_counter +=1
 
                     elif observable in exp_dic['flame_speed_observables'] and '_cm/s' in exp_dic['experimental_data'][counter].columns[1]:
-                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['flame_speed_relative_uncertainty'][counter], 
-                                                                                     exp_dic['uncertainty']['flame_speed_absolute_uncertainty'][counter], 
+                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['flame_speed_relative_uncertainty'][flame_speed_observable_counter], 
+                                                                                     exp_dic['uncertainty']['flame_speed_absolute_uncertainty'][flame_speed_observable_counter], 
                                                                                      exp_dic['experimental_data'][counter][observable+'_cm/s'].values,exp_dic['experimental_data'][counter])
                        
                         total_uncertainty = total_uncertainty.reshape((total_uncertainty.shape[0],1))
-                        un_weighted_uncertainty = un_weighted_uncertainty.reshape((un_weighted_uncertainty.shape[0], 1))        
+                        un_weighted_uncertainty = un_weighted_uncertainty.reshape((un_weighted_uncertainty.shape[0], 1))    
+                        flame_speed_observable_counter +=1 
+
                     elif observable in exp_dic['ignition_delay_observables'] and '_s'in exp_dic['experimental_data'][counter].columns[1]:
                         
-                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['ignition_delay_relative_uncertainty'][counter], 
-                                                                                     exp_dic['uncertainty']['ignition_delay_absolute_uncertainty'][counter], 
+                        total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp_dic['uncertainty']['ignition_delay_relative_uncertainty'][ignition_delay_observable_counter], 
+                                                                                     exp_dic['uncertainty']['ignition_delay_absolute_uncertainty'][ignition_delay_observable_counter], 
                                                                                      exp_dic['experimental_data'][counter][observable+'_s'].values,exp_dic['experimental_data'][counter])
                         total_uncertainty = total_uncertainty.reshape((total_uncertainty.shape[0],1))
 
                         un_weighted_uncertainty = un_weighted_uncertainty.reshape((un_weighted_uncertainty.shape[0], 1))               
-
+                        ignition_delay_observable_counter +=1
                     else: 
                         raise Exception('We Do Not Have This Unit Installed, Please Use Mole Fraction, ppm, mol/cm^3 or cm/s')               
 

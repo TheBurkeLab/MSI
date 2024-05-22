@@ -86,7 +86,7 @@ class MSI_optimization_chebyshev(object):
             print(Art)
             print('\n')
             print('--------------------------------------------------------------------------')
-            print('Initializing Optimization Shell with Theory - Jon')
+            print('Initializing Optimization Shell with Theory')
             print('--------------------------------------------------------------------------')
                     
         else:

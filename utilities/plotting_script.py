@@ -2542,7 +2542,7 @@ class Plotting(object):
         init_temperature_list = []
         for exp in self.exp_dict_list_original:
             init_temperature_list.append(exp['simulation'].temperature)
-        tottal_times = []
+        total_times = []
         temperature_list_full_simulation = []
         for i,exp in enumerate(self.exp_dict_list_optimized):
             single_exp_dict = []
@@ -2577,7 +2577,7 @@ class Plotting(object):
                     #print(interploated_temp.shape, exp['absorbance_experimental_data'][k]['time'].shape )
   
 
-            tottal_times.append(single_exp_dict)
+            total_times.append(single_exp_dict)
             temperature_list_full_simulation.append(temp_list_single_experiment)
             
             
@@ -2611,7 +2611,7 @@ class Plotting(object):
                     single_experiment_temperature_values_list.append(intial_temp)
                     
                     
-                    time_values = tottal_times[x][y].values
+                    time_values = total_times[x][y].values
                     time_values = time_values.reshape((time_values.shape[0],1))
                     single_experiment_time_values_list.append(time_values)
                     
@@ -2692,7 +2692,6 @@ class Plotting(object):
 
         return 
 
-#working here 
     def plotting_histograms_of_individual_observables(self,experiments_want_to_plot_data_from,bins='auto',directory_to_save_images='',csv=''):
         s_shape = self.S_matrix.shape[1]
         if self.k_target_value_S_matrix.any():
@@ -2708,7 +2707,7 @@ class Plotting(object):
         #plotting_Y Histagrams 
         #obserervable_list = []
         
-        observables_tottal = []
+        observables_total = []
         for i,exp in enumerate(self.exp_dict_list_optimized):
             observable_counter=0
             single_experiment = []
@@ -2733,9 +2732,9 @@ class Plotting(object):
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
-            observables_tottal.append(single_experiment)
+            observables_total.append(single_experiment)
         
-        observables_flatten = [item for sublist in observables_tottal for item in sublist]
+        observables_flatten = [item for sublist in observables_total for item in sublist]
         from collections import OrderedDict
         observables_unique = list(OrderedDict.fromkeys(observables_flatten))
         
@@ -2751,7 +2750,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from:
                         temp = self.Y_matrix[start:stop,:]
@@ -2881,7 +2880,7 @@ class Plotting(object):
         #edit this part 
         #obserervable_list = []
         
-        observables_tottal = []
+        observables_total = []
         
         for i,exp in enumerate(self.exp_dict_list_optimized):
             observable_counter=0
@@ -2907,8 +2906,8 @@ class Plotting(object):
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
-            observables_tottal.append(single_experiment)
-        observables_flatten = [item for sublist in observables_tottal for item in sublist]
+            observables_total.append(single_experiment)
+        observables_flatten = [item for sublist in observables_total for item in sublist]
         from collections import OrderedDict
         observables_unique = list(OrderedDict.fromkeys(observables_flatten))
         
@@ -2930,7 +2929,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from:
                         temp = self.Y_matrix[start:stop,:]
@@ -2951,7 +2950,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from_2:
 
@@ -3100,7 +3099,7 @@ class Plotting(object):
         #plotting_Y Histagrams 
         #obserervable_list = []
         
-        observables_tottal = []
+        observables_total = []
         for i,exp in enumerate(self.exp_dict_list_optimized):
             observable_counter=0
             single_experiment = []
@@ -3125,9 +3124,9 @@ class Plotting(object):
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
-            observables_tottal.append(single_experiment)
+            observables_total.append(single_experiment)
         
-        observables_flatten = [item for sublist in observables_tottal for item in sublist]
+        observables_flatten = [item for sublist in observables_total for item in sublist]
         from collections import OrderedDict
         observables_unique = list(OrderedDict.fromkeys(observables_flatten))
         
@@ -3148,7 +3147,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from:
                         temp = self.Y_matrix[start:stop,:]
@@ -3169,7 +3168,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from_2:
                         temp = self.Y_matrix[start:stop,:]
@@ -3228,7 +3227,7 @@ class Plotting(object):
     def plotting_T_and_time_full_simulation_individual_observables(self,experiments_want_to_plot_data_from,bins='auto',directory_to_save_images=''):
 #working_here
 
-        observables_tottal = []
+        observables_total = []
         for i,exp in enumerate(self.exp_dict_list_optimized):
             observable_counter=0
             single_experiment = []
@@ -3253,9 +3252,9 @@ class Plotting(object):
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
-            observables_tottal.append(single_experiment)
+            observables_total.append(single_experiment)
         
-        observables_flatten = [item for sublist in observables_tottal for item in sublist]
+        observables_flatten = [item for sublist in observables_total for item in sublist]
         from collections import OrderedDict
         observables_unique = list(OrderedDict.fromkeys(observables_flatten))
         
@@ -3271,7 +3270,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from:
                         temp = self.Y_matrix[start:stop,:]
@@ -3399,7 +3398,7 @@ class Plotting(object):
                                                                              directory_to_save_images='',csv='',experiments_want_to_plot_data_from_2=[]):
 #working_here
 
-        observables_tottal = []
+        observables_total = []
         for i,exp in enumerate(self.exp_dict_list_optimized):
             observable_counter=0
             single_experiment = []
@@ -3424,9 +3423,9 @@ class Plotting(object):
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
-            observables_tottal.append(single_experiment)
+            observables_total.append(single_experiment)
         
-        observables_flatten = [item for sublist in observables_tottal for item in sublist]
+        observables_flatten = [item for sublist in observables_total for item in sublist]
         from collections import OrderedDict
         observables_unique = list(OrderedDict.fromkeys(observables_flatten))
         
@@ -3442,7 +3441,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from:
                         temp = self.Y_matrix[start:stop,:]
@@ -3500,7 +3499,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from_2:
                         temp = self.Y_matrix[start:stop,:]
@@ -3640,7 +3639,7 @@ class Plotting(object):
                                                                              directory_to_save_images='',csv='',experiments_want_to_plot_data_from_2=[]):
 #working_here
 
-        observables_tottal = []
+        observables_total = []
         for i,exp in enumerate(self.exp_dict_list_optimized):
             observable_counter=0
             single_experiment = []
@@ -3665,9 +3664,9 @@ class Plotting(object):
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
-            observables_tottal.append(single_experiment)
+            observables_total.append(single_experiment)
         
-        observables_flatten = [item for sublist in observables_tottal for item in sublist]
+        observables_flatten = [item for sublist in observables_total for item in sublist]
         from collections import OrderedDict
         observables_unique = list(OrderedDict.fromkeys(observables_flatten))
         
@@ -3684,7 +3683,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from:
                         temp = self.Y_matrix[start:stop,:]
@@ -3745,7 +3744,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from_2:
                         temp = self.Y_matrix[start:stop,:]
@@ -4907,7 +4906,7 @@ class Plotting(object):
         #edit this part 
         #obserervable_list = []
         
-        observables_tottal = []
+        observables_total = []
         
         for i,exp in enumerate(self.exp_dict_list_original):
             observable_counter=0
@@ -4933,8 +4932,8 @@ class Plotting(object):
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
-            observables_tottal.append(single_experiment)
-        observables_flatten = [item for sublist in observables_tottal for item in sublist]
+            observables_total.append(single_experiment)
+        observables_flatten = [item for sublist in observables_total for item in sublist]
         from collections import OrderedDict
         observables_unique = list(OrderedDict.fromkeys(observables_flatten))
         
@@ -4956,7 +4955,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from:
                         temp = MSI_instance_two.Y_matrix[start:stop,:]
@@ -4977,7 +4976,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from_2:
                         #print(x)
@@ -5154,9 +5153,8 @@ class Plotting(object):
     def plotting_T_and_time_full_simulation_individual_observables_for_hong_data(self,MSI_instance_one,MSI_instance_two,experiments_want_to_plot_data_from,
                                                                              bins='auto',
                                                                              directory_to_save_images='',csv='',experiments_want_to_plot_data_from_2=[]):
-#working_here
 
-        observables_tottal = []
+        observables_total = []
         for i,exp in enumerate(self.exp_dict_list_original):
             observable_counter=0
             single_experiment = []
@@ -5181,9 +5179,9 @@ class Plotting(object):
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
-            observables_tottal.append(single_experiment)
+            observables_total.append(single_experiment)
         
-        observables_flatten = [item for sublist in observables_tottal for item in sublist]
+        observables_flatten = [item for sublist in observables_total for item in sublist]
         from collections import OrderedDict
         observables_unique = list(OrderedDict.fromkeys(observables_flatten))
         
@@ -5200,7 +5198,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from:
                         temp = MSI_instance_one.Y_matrix[start:stop,:]
@@ -5261,7 +5259,7 @@ class Plotting(object):
             stop = 0 
             for x in range(len(self.simulation_lengths_of_experimental_data)):
                 for y in range(len(self.simulation_lengths_of_experimental_data[x])):
-                    current_observable = observables_tottal[x][y]
+                    current_observable = observables_total[x][y]
                     stop = self.simulation_lengths_of_experimental_data[x][y] + start
                     if x in experiments_want_to_plot_data_from_2:
                         temp = MSI_instance_two.Y_matrix[start:stop,:]
@@ -5876,7 +5874,7 @@ class Plotting(object):
                     else:
                         gas.TPX = temperature,pressure*101325,{'Ar':.99}                    
                     
-                    tottal_k = []    
+                    total_k = []    
                     original_rc_dict = {}
                     for reaction in rate_constant_list:
                         reaction_number_in_cti = reactions_in_cti_file.index(reaction)
@@ -5890,11 +5888,11 @@ class Plotting(object):
                         elif coeff_sum==3:
                             k = k*1000000
                         original_rc_dict[reaction] = k
-                        tottal_k.append(k)
+                        total_k.append(k)
                         
                                 
                                     #check and make sure we are subtracting in the correct order 
-                    k_summation=sum(tottal_k)    
+                    k_summation=sum(total_k)    
                     
                     weighting_factor_dict = {}
                     for reaction in rate_constant_list:
@@ -5921,7 +5919,7 @@ class Plotting(object):
                     # else:
                     #     gas.TPX = temperature,pressure*101325,{'Ar':.99}
                     
-                    tottal_k_numerator = []    
+                    total_k_numerator = []    
                     original_rc_dict = {}
                     for reaction in numerator_rate_constant_list:
                         reaction_number_in_cti = reactions_in_cti_file.index(reaction)
@@ -5935,17 +5933,17 @@ class Plotting(object):
                         elif coeff_sum==3:
                             k = k*1000000
                         original_rc_dict[reaction] = k
-                        tottal_k_numerator.append(k)
+                        total_k_numerator.append(k)
                         
                                 
                                     #check and make sure we are subtracting in the correct order 
-                    k_summation_numerator=sum(tottal_k_numerator)    
+                    k_summation_numerator=sum(total_k_numerator)    
                     
                     weighting_factor_dict_numerator = {}
                     for reaction in numerator_rate_constant_list:
                         weighting_factor_dict_numerator[reaction] = original_rc_dict[reaction] / k_summation_numerator
     
-                    tottal_k_denominator = []    
+                    total_k_denominator = []    
                     original_rc_dict = {}
                     for reaction in denominator_rate_constant_list:
                         reaction_number_in_cti = reactions_in_cti_file.index(reaction)
@@ -5959,11 +5957,11 @@ class Plotting(object):
                         elif coeff_sum==3:
                             k = k*1000000
                         original_rc_dict[reaction] = k
-                        tottal_k_denominator.append(k)
+                        total_k_denominator.append(k)
                         
                                 
                                     #check and make sure we are subtracting in the correct order 
-                    k_summation_denominator=sum(tottal_k_denominator)    
+                    k_summation_denominator=sum(total_k_denominator)    
                     
                     weighting_factor_dict_denominator = {}
                     for reaction in denominator_rate_constant_list:
@@ -6758,8 +6756,11 @@ class Plotting(object):
                     idx = []
                     for frac_reaction in [numerator, denominator]:
                         if '[*]' in frac_reaction:
+                            jdx = []
                             reactions_in_cti_file_with_these_reactants = []
-                            reaction_number_in_cti_file_with_these_reactants = []     
+                            reaction_number_in_cti_file_with_these_reactants = []  
+                            reactions_in_cti_file_with_these_products = []
+                            reaction_number_in_cti_file_with_these_products = []   
                             reactants_in_target_reactions = frac_reaction.split('<=>')[0].rstrip()
                             reverse_reactants_in_target_reaction=None
                             if len(reactants_in_target_reactions.split('+'))>1:
@@ -6778,6 +6779,14 @@ class Plotting(object):
                                         gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                                            
                                             reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
                                             reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)  
+                                    elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                                            
+                                            reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)
                             elif reverse_reactants_in_target_reaction ==None:
                                 for reaction_number_in_cti_file in range(gas.n_reactions):
                                     if (gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
@@ -6785,9 +6794,18 @@ class Plotting(object):
                                         gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
                                         gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'): 
                                             reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file) 
-                            idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                    elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'): 
+                                            reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file) 
+                            jdx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                            jdx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products)))
+                            idx.append(jdx)
                         elif '[+]' in frac_reaction:
+                            jdx = []
                             reactions_in_cti_file_with_these_reactants = []
                             reaction_number_in_cti_file_with_these_reactants = []    
                             list_of_reactions = frac_reaction.split('[+]')
@@ -6799,14 +6817,21 @@ class Plotting(object):
                             for reac in list_of_reactions_cleaned:
                                 reaction_number_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism.index(reac))
                                 reactions_in_cti_file_with_these_reactants.append(reac)
-                            idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                            if frac_reaction == denominator:
+                                jdx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                                idx.append(jdx)
+                            else:
+                                idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
                         else:
                             idx.append(reaction_list_from_mechanism.index(frac_reaction))              
 
                 else:
                     if '[*]' in reaction:
+                        idx = []
                         reactions_in_cti_file_with_these_reactants = []
-                        reaction_number_in_cti_file_with_these_reactants = []     
+                        reaction_number_in_cti_file_with_these_reactants = [] 
+                        reactions_in_cti_file_with_these_products = []
+                        reaction_number_in_cti_file_with_these_products = []    
                         reactants_in_target_reactions = reaction.split('<=>')[0].rstrip()
                         reverse_reactants_in_target_reaction=None
                         if len(reactants_in_target_reactions.split('+'))>1:
@@ -6824,7 +6849,15 @@ class Plotting(object):
                                     gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
                                     gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                                            
                                         reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)  
+                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):
+                                        reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)
                         elif reverse_reactants_in_target_reaction ==None:
                             for reaction_number_in_cti_file in range(gas.n_reactions):
                                 if (gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
@@ -6833,7 +6866,14 @@ class Plotting(object):
                                     gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'): 
                                         reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
                                         reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file) 
-                        idx = tuple(sorted(reaction_number_in_cti_file_with_these_reactants))
+                                elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or  
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):
+                                        reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)                            
+                        idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                        idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products)))
                     elif '[+]' in reaction:
                         reactions_in_cti_file_with_these_reactants = []
                         reaction_number_in_cti_file_with_these_reactants = []
@@ -6849,7 +6889,7 @@ class Plotting(object):
                         idx = tuple(sorted(reaction_number_in_cti_file_with_these_reactants))
                     else:
                         idx = reaction_list_from_mechanism.index(reaction)
-
+#Obama
                 target_value_ks[unique_reactions.index(idx)].append(parsed_csv['k'][i])
                 target_value_temps[unique_reactions.index(idx)].append(parsed_csv['temperature'][i])
                         
@@ -6857,7 +6897,7 @@ class Plotting(object):
                     target_value_refs[unique_reactions.index(idx)].append(parsed_csv['ref'][i])
                 else: 
                     target_value_refs[unique_reactions.index(idx)].append(np.nan)       
-                    
+       
 
             return target_value_temps, target_value_ks, target_value_refs
         
@@ -6866,18 +6906,15 @@ class Plotting(object):
                                                               initial_temperature=300,
                                                               final_temperature=3000,
                                                               pressure=1,
-                                                            #   conditions = {'H2':2,'O2':1,'N2':4}):
                                                               conditions = {'Ar':1}):
             Temp = []
             k = []
-            #START HERE NOT DONE YET
-            if type(reaction_number) == list:
-                
-                if type(reaction_number[0]) == tuple:
-                    k_num_tottal=[]
+            if type(reaction_number) == list: #Total Rates & Ratios
+                if type(reaction_number[1]) == tuple: #Total Rates
+                    k_total = []
                     for i,sub_number in enumerate(reaction_number[0]):
-                        k_num_temp=[]
-                        for temperature in np.arange(initial_temperature,final_temperature,1):
+                        k_temp=[]
+                        for temperature in np.arange(initial_temperature,final_temperature+1,1):
                             gas.TPX = temperature,pressure*101325,conditions
                             coeff_sum = sum(gas.reaction(sub_number).reactants.values())
                             rc = gas.forward_rate_constants[sub_number]
@@ -6887,56 +6924,185 @@ class Plotting(object):
                                 rc = rc*1000
                             elif coeff_sum==3:
                                 rc = rc*1000000
-                            k_num_temp.append(rc)
-                            if i ==0:
-                                Temp.append(temperature)
-                        k_num_temp = np.array(k_num_temp)
-                        k_num_tottal.append(k_num_temp)  
-                    k_num = list(sum(k_num_tottal))
-                else:
-                    k_num = []
-                    for temperature in np.arange(initial_temperature,final_temperature,1):
-                        Temp.append(temperature)
-                        gas.TPX = temperature,pressure*101325,conditions
-                        k_num.append(gas.forward_rate_constants[reaction_number[0]])
-                    
-                if type(reaction_number[1]) == tuple:
-                    k_den_tottal=[]
+                            k_temp.append(rc)
+                            if i == 0:
+                               Temp.append(temperature)
+                        k_temp = np.array(k_temp)
+                        k_total.append(k_temp)
                     for i,sub_number in enumerate(reaction_number[1]):
-                        k_den_temp=[]
-                        for temperature in np.arange(initial_temperature,final_temperature,1):
+                        k_temp=[]
+                        for temperature in np.arange(initial_temperature,final_temperature+1,1):
                             gas.TPX = temperature,pressure*101325,conditions
-                            coeff_sum = sum(gas.reaction(sub_number).reactants.values())
-                            rc = gas.forward_rate_constants[sub_number]
+                            coeff_sum = sum(gas.reaction(sub_number).products.values())
+                            rc = gas.reverse_rate_constants[sub_number]
                             if coeff_sum==1:
                                 rc = rc
                             elif coeff_sum==2:
                                 rc = rc*1000
                             elif coeff_sum==3:
                                 rc = rc*1000000
-                            k_den_temp.append(rc)
-                            # if i ==0:
-                            #     Temp.append(temperature)
-                        k_den_temp = np.array(k_den_temp)
-                        k_den_tottal.append(k_den_temp)  
-                    k_den = list(sum(k_den_tottal))
-                else:
-                    k_den = []
-                    for temperature in np.arange(initial_temperature,final_temperature,1):
-                        # Temp.append(temperature)
-                        gas.TPX = temperature,pressure*101325,conditions
-                        k_den.append(gas.forward_rate_constants[reaction_number[1]])                    
+                            k_temp.append(rc)
+                        k_temp = np.array(k_temp)
+                        k_total.append(k_temp)                    
+                    k = list(sum(k_total))
+                
+                elif type(reaction_number[1]) == list: #Ratio over a sum
                     
-                              
-                
-                k = np.divide(k_num,k_den)
+                    if len(reaction_number[1]) == 1: #Ratio over partial sum
+                        
+                        if type(reaction_number[0]) == tuple: #Partial sum over partial sum
+                            k_num_total = []
+                            for i,sub_number in enumerate(reaction_number[0]):
+                                k_num_temp=[]
+                                for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                                    gas.TPX = temperature,pressure*101325,conditions
+                                    coeff_sum = sum(gas.reaction(sub_number).reactants.values())
+                                    rc = gas.forward_rate_constants[sub_number]
+                                    if coeff_sum==1:
+                                        rc = rc
+                                    elif coeff_sum==2:
+                                        rc = rc*1000
+                                    elif coeff_sum==3:
+                                        rc = rc*1000000
+                                    k_num_temp.append(rc)
+                                    if i ==0:
+                                        Temp.append(temperature)
+                                k_num_temp = np.array(k_num_temp)
+                                k_num_total.append(k_num_temp)
+                            k_num = list(sum(k_num_total))
+                        
+                        else:   #Single rate over partial sum
+                            k_num = []
+                            for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                                Temp.append(temperature)
+                                gas.TPX = temperature,pressure*101325,conditions
+                                k_num.append(gas.forward_rate_constants[reaction_number[0]])
+                        
+                        k_den_total = []
+                        for i,sub_number in enumerate(reaction_number[1][0]):
+                            k_den_temp=[]
+                            for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                                gas.TPX = temperature,pressure*101325,conditions
+                                coeff_sum = sum(gas.reaction(sub_number).reactants.values())
+                                rc = gas.forward_rate_constants[sub_number]
+                                if coeff_sum==1:
+                                    rc = rc
+                                elif coeff_sum==2:
+                                    rc = rc*1000
+                                elif coeff_sum==3:
+                                    rc = rc*1000000
+                                k_den_temp.append(rc)
+                            k_den_temp = np.array(k_den_temp)
+                            k_den_total.append(k_den_temp)
+                        k_den = list(sum(k_den_total))
+
+                    else:   #Ratio over a total sum
+                        if type(reaction_number[0]) == tuple: #Partial sum over total sum
+                            k_num_total = []
+                            for i,sub_number in enumerate(reaction_number[0]):
+                                k_num_temp=[]
+                                for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                                    gas.TPX = temperature,pressure*101325,conditions
+                                    coeff_sum = sum(gas.reaction(sub_number).reactants.values())
+                                    rc = gas.forward_rate_constants[sub_number]
+                                    if coeff_sum==1:
+                                        rc = rc
+                                    elif coeff_sum==2:
+                                        rc = rc*1000
+                                    elif coeff_sum==3:
+                                        rc = rc*1000000
+                                    k_num_temp.append(rc)
+                                    if i ==0:
+                                        Temp.append(temperature)
+                                k_num_temp = np.array(k_num_temp)
+                                k_num_total.append(k_num_temp)
+                            k_num = list(sum(k_num_total))
+                        
+                        else:   #Single rate over total sum
+                            k_num = []
+                            for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                                Temp.append(temperature)
+                                gas.TPX = temperature,pressure*101325,conditions
+                                k_num.append(gas.forward_rate_constants[reaction_number[0]])
+                        
+                        k_den_total = []
+                        for i, sub_number in enumerate(reaction_number[1][0]):
+                            k_den_temp=[]
+                            for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                                gas.TPX = temperature,pressure*101325,conditions
+                                coeff_sum = sum(gas.reaction(sub_number).reactants.values())
+                                rc = gas.forward_rate_constants[sub_number]
+                                if coeff_sum==1:
+                                    rc = rc
+                                elif coeff_sum==2:
+                                    rc = rc*1000
+                                elif coeff_sum==3:
+                                    rc = rc*1000000
+                                k_den_temp.append(rc)
+                            k_den_temp = np.array(k_den_temp)
+                            k_den_total.append(k_den_temp)
+                        for i, sub_number in enumerate(reaction_number[1][1]):
+                            k_den_temp=[]
+                            for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                                gas.TPX = temperature,pressure*101325,conditions
+                                coeff_sum = sum(gas.reaction(sub_number).products.values())
+                                rc = gas.reverse_rate_constants[sub_number]
+                                if coeff_sum==1:
+                                    rc = rc
+                                elif coeff_sum==2:
+                                    rc = rc*1000
+                                elif coeff_sum==3:
+                                    rc = rc*1000000
+                                k_den_temp.append(rc)
+                            k_den_temp = np.array(k_den_temp)
+                            k_den_total.append(k_den_temp)
+                        k_den = list(sum(k_den_total))
+                    
+                    k = np.divide(k_num,k_den)
+
+                else:   #Ratio over a single rate
+                    
+                    if type(reaction_number[0]) == tuple: #Partial sum over single rate
+                        k_num_total = []
+                        for i,sub_number in enumerate(reaction_number[0]):
+                            k_num_temp=[]
+                            for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                                gas.TPX = temperature,pressure*101325,conditions
+                                coeff_sum = sum(gas.reaction(sub_number).reactants.values())
+                                rc = gas.forward_rate_constants[sub_number]
+                                if coeff_sum==1:
+                                    rc = rc
+                                elif coeff_sum==2:
+                                    rc = rc*1000
+                                elif coeff_sum==3:
+                                    rc = rc*1000000
+                                k_num_temp.append(rc)
+                                if i ==0:
+                                    Temp.append(temperature)
+                            k_num_temp = np.array(k_num_temp)
+                            k_num_total.append(k_num_temp)
+                        k_num = list(sum(k_num_total))
+                    
+                    else:   #Single rate over single rate 
+                        k_num = []
+                        for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                            Temp.append(temperature)
+                            gas.TPX = temperature,pressure*101325,conditions
+                            k_num.append(gas.forward_rate_constants[reaction_number[0]])
+                    
+                    k_den = []
+                    for temperature in np.arange(initial_temperature,final_temperature+1,1):
+                        gas.TPX = temperature,pressure*101325,conditions
+                        k_den.append(gas.forward_rate_constants[reaction_number[1]])    
+                    
+                    k = np.divide(k_num,k_den)    
             
-            elif type(reaction_number) == tuple:
+            elif type(reaction_number) == tuple: #Partial Sums
                 
-                k_tottal=[]
+                k_total=[]
                 for i,sub_number in enumerate(reaction_number):
                     k_temp=[]
-                    for temperature in np.arange(initial_temperature,final_temperature,1):
+                    for temperature in np.arange(initial_temperature,final_temperature+1,1):
                         gas.TPX = temperature,pressure*101325,conditions
    
                         coeff_sum = sum(gas.reaction(sub_number).reactants.values())
@@ -6954,12 +7120,10 @@ class Plotting(object):
                         if i ==0:
                             Temp.append(temperature)
                     k_temp = np.array(k_temp)
-                    k_tottal.append(k_temp)
-                
-                k = list(sum(k_tottal))
-                # k = list(k)
-            else:
-                for temperature in np.arange(initial_temperature,final_temperature,1):
+                    k_total.append(k_temp)                
+                k = list(sum(k_total))
+            else:   #Single Rate
+                for temperature in np.arange(initial_temperature,final_temperature+1,1):
                     gas.TPX = temperature,pressure*101325,conditions
                     Temp.append(temperature)
                     coeff_sum = sum(gas.reaction(reaction_number).reactants.values())
@@ -6998,10 +7162,11 @@ class Plotting(object):
                     indx = []
                     for frac_reaction in [numerator, denominator]:
                         if '[*]' in frac_reaction:
+                            idx = []
                             reactions_in_cti_file_with_these_reactants = []
                             reaction_number_in_cti_file_with_these_reactants = []
-                                            
-                            #might be a more comprehensive way to do this 
+                            reactions_in_cti_file_with_these_products = []
+                            reaction_number_in_cti_file_with_these_products = []
                             reactants_in_target_reactions = frac_reaction.split('<=>')[0].rstrip()
                             reverse_reactants_in_target_reaction=None
                             if len(reactants_in_target_reactions.split('+'))>1:
@@ -7018,40 +7183,51 @@ class Plotting(object):
                                         gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or 
                                         gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
                                         gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                                     
-                            
                                             reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
                                             reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
-                                            
+                                    elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)'  or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                                     
+                                            reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)         
                             elif reverse_reactants_in_target_reaction == None:
                                 for reaction_number_in_cti_file in range(gas.n_reactions):
                                     if  (gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
                                         gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
                                         gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)'  or 
                                         gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'): 
-                            
                                             reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
                                             reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)    
-                                            
-                            indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
-                            # sigma_list_for_target_ks[unique_reactions.index(indx)].append(sigma_k)
+                                    elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)'  or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'): 
+                                            reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)
+                            idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))                
+                            idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products)))
+                            indx.append(idx)
                         elif '[+]' in frac_reaction:
+                            idx = []
                             reactions_in_cti_file_with_these_reactants = []
                             reaction_number_in_cti_file_with_these_reactants = []
-                            
                             list_of_reactions = frac_reaction.split('[+]')
                             list_of_reactions_cleaned=[]
-                            
                             for reac in list_of_reactions:
                                 reac = reac.rstrip()
                                 reac = reac.lstrip()
                                 list_of_reactions_cleaned.append(reac)
-                            
                             for reac in list_of_reactions_cleaned:
                                 reaction_number_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism.index(reac))
                                 reactions_in_cti_file_with_these_reactants.append(reac)
-                                
-                            indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
-                            # sigma_list_for_target_ks[unique_reactions.index(indx)].append(sigma_k)      
+                            if frac_reaction == denominator:
+                                idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                                indx.append(idx)
+                            else:    
+                                indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))     
                         else:
                             indx.append(reaction_list_from_mechanism.index(frac_reaction))
 
@@ -7060,11 +7236,11 @@ class Plotting(object):
                 else: 
                            
                     if '[*]' in k_target_values_parsed_csv['Reaction'][row]:
-                        
+                        indx = []
                         reactions_in_cti_file_with_these_reactants = []
                         reaction_number_in_cti_file_with_these_reactants = []
-                                        
-                        #might be a more comprehensive way to do this 
+                        reactions_in_cti_file_with_these_products = []
+                        reaction_number_in_cti_file_with_these_products = []
                         reactants_in_target_reactions = k_target_values_parsed_csv['Reaction'][row].split('<=>')[0].rstrip()
                         reverse_reactants_in_target_reaction=None
                         if len(reactants_in_target_reactions.split('+'))>1:
@@ -7081,68 +7257,66 @@ class Plotting(object):
                                     gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or 
                                     gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
                                     gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                                     
-                        
                                         reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
                                         reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
-                                        
+                                elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)'  or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                                     
+                                        reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)        
                         elif reverse_reactants_in_target_reaction == None:
                             for reaction_number_in_cti_file in range(gas.n_reactions):
                                 if  (gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
                                     gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
                                     gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)'  or 
                                     gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'): 
-                        
                                         reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)    
-                                        
-                        indx = tuple(sorted(reaction_number_in_cti_file_with_these_reactants))
+                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)'  or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'): 
+                                        reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)                  
+                        indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                        indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products)))                       
                         sigma_list_for_target_ks[unique_reactions.index(indx)].append(sigma_k)
-                    
-                    
                     elif '[+]' in k_target_values_parsed_csv['Reaction'][row]:
-                    
                         reactions_in_cti_file_with_these_reactants = []
                         reaction_number_in_cti_file_with_these_reactants = []
-                        
                         list_of_reactions = self.rate_constant_plots_df['Reaction'][row].split('[+]')
                         list_of_reactions_cleaned=[]
-                        
                         for reac in list_of_reactions:
                             reac = reac.rstrip()
                             reac = reac.lstrip()
                             list_of_reactions_cleaned.append(reac)
-                        
                         for reac in list_of_reactions_cleaned:
                             reaction_number_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism.index(reac))
-                            reactions_in_cti_file_with_these_reactants.append(reac)
-                            
+                            reactions_in_cti_file_with_these_reactants.append(reac)    
                         indx = tuple(sorted(reaction_number_in_cti_file_with_these_reactants))
-                        sigma_list_for_target_ks[unique_reactions.index(indx)].append(sigma_k)                        
-                            
-                        
+                        sigma_list_for_target_ks[unique_reactions.index(indx)].append(sigma_k)                            
                     else:       
                         indx = reaction_list_from_mechanism.index(k_target_values_parsed_csv['Reaction'][row])
                         sigma_list_for_target_ks[unique_reactions.index(indx)].append(sigma_k)
                 
             return sigma_list_for_target_ks
-        
+#Trump         
         def calculating_target_value_ks_from_cantera_for_sigmas(k_target_values_parsed_csv,gas,unique_reactions):
-            #start fixing here!!!
             target_value_ks = [[] for reaction in range(len(unique_reactions))]
-            
             
             target_reactions = k_target_values_parsed_csv['Reaction']
             target_temp = k_target_values_parsed_csv['temperature']
             target_press = k_target_values_parsed_csv['pressure']
             reactions_in_cti_file = gas.reaction_equations()
-            #print(reactions_in_cti_file)
 
             for i,reaction in enumerate(target_reactions): 
                 if '[/]' in reaction:
                     numerator = reaction.split('[/]')[0].rstrip().lstrip()
                     denominator = reaction.split('[/]')[1].rstrip().lstrip()
                     indx = []
-
                     for frac_reaction in [numerator, denominator]:
                         if "[*]" in frac_reaction:
                             if target_press[i] == 0:
@@ -7150,18 +7324,12 @@ class Plotting(object):
                             else:
                                 pressure = target_press[i]
                             pressure = 1
-                            # gas.TPX = target_temp[i],pressure*101325,{'H2O2':0.003094,'O2':0.000556,'H2O':0.001113,'Ar':0.995237}
                             gas.TPX = target_temp[i],pressure*101325,{'Ar':1}
-                            
-                            
-                            #this is a temporary fix stub and come back here
-                            # pressure=1
-                            # gas.TPX = target_temp[i],pressure*101325,{'H2O':.013,'O2':.0099,'H':.0000007,'Ar':.9770993}
-                            
                             reactions_in_cti_file_with_these_reactants = []
                             reaction_number_in_cti_file_with_these_reactants = []
-                                            
-                            #might be a more comprehensive way to do this 
+                            reactions_in_cti_file_with_these_products = []
+                            reaction_number_in_cti_file_with_these_products = []
+                            idx = []
                             reactants_in_target_reactions = frac_reaction.split('<=>')[0].rstrip()
                             reverse_reactants_in_target_reaction=None
                             if len(reactants_in_target_reactions.split('+'))>1:
@@ -7169,8 +7337,7 @@ class Plotting(object):
                                 temp = reverse_reactants_in_target_reaction[1] + ' '+ '+' +' '+ reverse_reactants_in_target_reaction[0]
                                 temp = temp.lstrip()
                                 temp = temp.rstrip()
-                                reverse_reactants_in_target_reaction = temp
-                                    
+                                reverse_reactants_in_target_reaction = temp      
                             if reverse_reactants_in_target_reaction !=None:
                                 for reaction_number_in_cti_file in range(gas.n_reactions):
                                     if (gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
@@ -7180,7 +7347,15 @@ class Plotting(object):
                                         gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
                                         gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                        
                                             reactions_in_cti_file_with_these_reactants.append(reactions_in_cti_file[reaction_number_in_cti_file])                    
-                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)  
+                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                    elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or                  
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                        
+                                            reactions_in_cti_file_with_these_products.append(reactions_in_cti_file[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)  
                             elif reverse_reactants_in_target_reaction ==None:
                                 for reaction_number_in_cti_file in range(gas.n_reactions):
                                     if (gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
@@ -7188,10 +7363,15 @@ class Plotting(object):
                                         gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or                 
                                         gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):                        
                                             reactions_in_cti_file_with_these_reactants.append(reactions_in_cti_file[reaction_number_in_cti_file])                    
-                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)                          
-
-                            tottal_k = []
-                            #print(reactions_in_cti_file_with_these_reactants)
+                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                    elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or                  
+                                        gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):                        
+                                            reactions_in_cti_file_with_these_products.append(reactions_in_cti_file[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)
+                                                       
+                            total_k = []
                             for rnum, secondary_reaction in enumerate(reactions_in_cti_file_with_these_reactants):
                                 reaction_number_in_cti = reactions_in_cti_file.index(secondary_reaction)
                                 coeff_sum = sum(gas.reaction(reaction_number_in_cti).reactants.values())
@@ -7204,15 +7384,18 @@ class Plotting(object):
                                 elif coeff_sum==3:
                                     k = k*1000000
 
-                                tottal_k.append(k)
+                                total_k.append(k)
                             
-                            k = sum(tottal_k)
-                            indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
-                            # target_value_ks[unique_reactions.index(indx)].append(k)
+                            k = sum(total_k)
+                            idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                            idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products)))
+                            indx.append(idx)
+
                         elif '[+]' in frac_reaction: 
+                            idx = []
+                            total_k=[]
                             reactions_in_cti_file_with_these_reactants = []
-                            reaction_number_in_cti_file_with_these_reactants = []
-                            
+                            reaction_number_in_cti_file_with_these_reactants = []                            
                             if target_press[i] == 0:
                                 pressure = 1e-9
                             else:
@@ -7220,18 +7403,13 @@ class Plotting(object):
                             #this is a temporary fix need to figure out how to pass this in 
                             pressure=1
                             # gas.TPX = target_temp[i],pressure*101325,{'H2O2':0.003094,'O2':0.000556,'H2O':0.001113,'Ar':0.995237}
-                            gas.TPX = target_temp[i],pressure*101325,{'Ar':1}
-                            
+                            gas.TPX = target_temp[i],pressure*101325,{'Ar':1}                            
                             list_of_reactions = frac_reaction.split('[+]')
-                            list_of_reactions_cleaned=[]
-                            
-                            
+                            list_of_reactions_cleaned=[]                            
                             for reac in list_of_reactions:
                                 reac = reac.rstrip()
                                 reac = reac.lstrip()
                                 list_of_reactions_cleaned.append(reac)
-                            
-                            tottal_k=[]    
                             for reac in list_of_reactions_cleaned:
                                 reaction_number_in_cti = reactions_in_cti_file.index(reac)
                                 reactions_in_cti_file_with_these_reactants.append(reac)
@@ -7246,10 +7424,14 @@ class Plotting(object):
                                 elif coeff_sum==3:
                                     k = k*1000000
 
-                                tottal_k.append(k)                        
+                                total_k.append(k)                        
                                                 
-                            k = sum(tottal_k)
-                            indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                            k = sum(total_k)
+                            if frac_reaction == denominator:
+                                idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                                indx.append(idx)
+                            else:
+                                indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
                             # target_value_ks[unique_reactions.index(indx)].append(k)        
                         else:
                             if target_press[i] == 0:
@@ -7280,23 +7462,17 @@ class Plotting(object):
                 else:
                                                         
                     if "[*]" in reaction:
+                        indx = []
                         if target_press[i] == 0:
                             pressure = 1e-9
                         else:
                             pressure = target_press[i]
                         pressure = 1
-                        # gas.TPX = target_temp[i],pressure*101325,{'H2O2':0.003094,'O2':0.000556,'H2O':0.001113,'Ar':0.995237}
                         gas.TPX = target_temp[i],pressure*101325,{'Ar':1}
-                        
-                        
-                        #this is a temporary fix stub and come back here
-                        # pressure=1
-                        # gas.TPX = target_temp[i],pressure*101325,{'H2O':.013,'O2':.0099,'H':.0000007,'Ar':.9770993}
-                        
                         reactions_in_cti_file_with_these_reactants = []
                         reaction_number_in_cti_file_with_these_reactants = []
-                                        
-                        #might be a more comprehensive way to do this 
+                        reactions_in_cti_file_with_these_products = []
+                        reaction_number_in_cti_file_with_these_products = []
                         reactants_in_target_reactions = reaction.split('<=>')[0].rstrip()
                         reverse_reactants_in_target_reaction=None
                         if len(reactants_in_target_reactions.split('+'))>1:
@@ -7315,7 +7491,15 @@ class Plotting(object):
                                     gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
                                     gas.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                        
                                         reactions_in_cti_file_with_these_reactants.append(reactions_in_cti_file[reaction_number_in_cti_file])                    
-                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)  
+                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or                  
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                        
+                                        reactions_in_cti_file_with_these_products.append(reactions_in_cti_file[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)          
                         elif reverse_reactants_in_target_reaction ==None:
                             for reaction_number_in_cti_file in range(gas.n_reactions):
                                 if (gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
@@ -7323,14 +7507,19 @@ class Plotting(object):
                                     gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or                 
                                     gas.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):                        
                                         reactions_in_cti_file_with_these_reactants.append(reactions_in_cti_file[reaction_number_in_cti_file])                    
-                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)                          
-
-                        tottal_k = []
-                        #print(reactions_in_cti_file_with_these_reactants)
+                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                elif(gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or                 
+                                    gas.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):                        
+                                        reactions_in_cti_file_with_these_products.append(reactions_in_cti_file[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)                                  
+                        indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                        indx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products)))
+                        total_k = []
                         for rnum, secondary_reaction in enumerate(reactions_in_cti_file_with_these_reactants):
                             reaction_number_in_cti = reactions_in_cti_file.index(secondary_reaction)
                             coeff_sum = sum(gas.reaction(reaction_number_in_cti).reactants.values())
-        
                             k = gas.forward_rate_constants[reaction_number_in_cti]
                             if coeff_sum==1:
                                 k=k
@@ -7338,28 +7527,30 @@ class Plotting(object):
                                 k = k*1000
                             elif coeff_sum==3:
                                 k = k*1000000
-
-                            tottal_k.append(k)
-                        
-                        k = sum(tottal_k)
-                        indx = tuple(sorted(reaction_number_in_cti_file_with_these_reactants))
+                            total_k.append(k)
+                        for rnum, secondary_reaction in enumerate(reactions_in_cti_file_with_these_products):
+                            reaction_number_in_cti = reactions_in_cti_file.index(secondary_reaction)
+                            coeff_sum = sum(gas.reaction(reaction_number_in_cti).products.values())
+                            k = gas.reverse_rate_constants[reaction_number_in_cti]
+                            if coeff_sum==1:
+                                k=k
+                            elif coeff_sum==2:
+                                k = k*1000
+                            elif coeff_sum==3:
+                                k = k*1000000
+                            total_k.append(k)                       
+                        k = sum(total_k)
                         target_value_ks[unique_reactions.index(indx)].append(k)
                         
-                    elif '[+]' in reaction: 
-                        
-
+                    elif '[+]' in reaction:
                         reactions_in_cti_file_with_these_reactants = []
                         reaction_number_in_cti_file_with_these_reactants = []
-                        
                         if target_press[i] == 0:
                             pressure = 1e-9
                         else:
-                            pressure = target_press[i]
-                        #this is a temporary fix need to figure out how to pass this in 
+                            pressure = target_press[i] 
                         pressure=1
-                        # gas.TPX = target_temp[i],pressure*101325,{'H2O2':0.003094,'O2':0.000556,'H2O':0.001113,'Ar':0.995237}
                         gas.TPX = target_temp[i],pressure*101325,{'Ar':1}
-                        
                         list_of_reactions = reaction.split('[+]')
                         list_of_reactions_cleaned=[]
                         
@@ -7369,7 +7560,7 @@ class Plotting(object):
                             reac = reac.lstrip()
                             list_of_reactions_cleaned.append(reac)
                         
-                        tottal_k=[]    
+                        total_k=[]    
                         for reac in list_of_reactions_cleaned:
                             reaction_number_in_cti = reactions_in_cti_file.index(reac)
                             reactions_in_cti_file_with_these_reactants.append(reac)
@@ -7384,9 +7575,9 @@ class Plotting(object):
                             elif coeff_sum==3:
                                 k = k*1000000
 
-                            tottal_k.append(k)                        
+                            total_k.append(k)                        
                                             
-                        k = sum(tottal_k)
+                        k = sum(total_k)
                         indx = tuple(sorted(reaction_number_in_cti_file_with_these_reactants))
                         target_value_ks[unique_reactions.index(indx)].append(k)                    
                         
@@ -7417,7 +7608,7 @@ class Plotting(object):
 
 
             return target_value_ks
-    
+#Pence     
     
         if bool(self.rate_constant_plots_csv):
 
@@ -7442,10 +7633,7 @@ class Plotting(object):
                                                                  self.S_matrix,
                                                                  master_equation_reaction_list = self.master_equation_reactions,
                                                                  master_equation_sensitivites=self.cheby_sensitivity_dict)
-            
-
-#paste here
-            
+                        
             unique_reactions_optimized=[]
             unique_reactions_original = []
             
@@ -7457,8 +7645,7 @@ class Plotting(object):
             else:
                 k_target_value_csv = pd.DataFrame(columns=['Reaction','temperature','pressure','M','k','ln_unc_k','W','ref'])
         #edit here to skip plotting ?
-        
-        
+
             for row in range(self.rate_constant_plots_df.shape[0]):
                 if '[/]' in self.rate_constant_plots_df['Reaction'][row]:                    
                     numerator = self.rate_constant_plots_df['Reaction'][row].split('[/]')[0].rstrip().lstrip()
@@ -7467,10 +7654,16 @@ class Plotting(object):
                     unique_fraction_reaction_original = []
                     for frac_reaction in [numerator, denominator]:
                         if "[*]" in frac_reaction:
+                            idx = []
+                            Idx = []
                             reactions_in_cti_file_with_these_reactants = []
                             reaction_number_in_cti_file_with_these_reactants = []
                             reactions_in_cti_file_with_these_reactants_original = []
-                            reaction_number_in_cti_file_with_these_reactants_original = []                    
+                            reaction_number_in_cti_file_with_these_reactants_original = []
+                            reactions_in_cti_file_with_these_products = []
+                            reaction_number_in_cti_file_with_these_products = []
+                            reactions_in_cti_file_with_these_products_original = []
+                            reaction_number_in_cti_file_with_these_products_original = []                    
                             reactants_in_target_reactions = frac_reaction.split('<=>')[0].rstrip()
                             reverse_reactants_in_target_reaction=None
                             if len(reactants_in_target_reactions.split('+'))>1:
@@ -7488,7 +7681,15 @@ class Plotting(object):
                                         gas_optimized.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' + M' or 
                                         gas_optimized.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction +   ' + M'):    
                                             reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)                    
+                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                    elif(gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas_optimized.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' (+M)' or 
+                                        gas_optimized.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction +   ' (+M)' or 
+                                        gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' + M' or 
+                                        gas_optimized.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction +   ' + M'):    
+                                            reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)                            
                                 for reaction_number_in_cti_file in range(gas_original.n_reactions):
                                     if (gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
                                         gas_original.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
@@ -7497,7 +7698,15 @@ class Plotting(object):
                                         gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
                                         gas_original.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                               
                                             reactions_in_cti_file_with_these_reactants_original.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                            reaction_number_in_cti_file_with_these_reactants_original.append(reaction_number_in_cti_file) 
+                                            reaction_number_in_cti_file_with_these_reactants_original.append(reaction_number_in_cti_file)
+                                    elif(gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas_original.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                        gas_original.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or 
+                                        gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
+                                        gas_original.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                               
+                                            reactions_in_cti_file_with_these_products_original.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products_original.append(reaction_number_in_cti_file) 
                             elif  reverse_reactants_in_target_reaction ==None:
                                 for reaction_number_in_cti_file in range(gas_optimized.n_reactions):
                                     if (gas_optimized.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
@@ -7505,17 +7714,35 @@ class Plotting(object):
                                         gas_optimized.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' (+M)' or 
                                         gas_optimized.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' + M'):
                                             reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)                    
+                                            reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)
+                                    elif(gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas_optimized.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' (+M)' or 
+                                        gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' + M'):
+                                            reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)                    
                                 for reaction_number_in_cti_file in range(gas_original.n_reactions):
                                     if (gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
                                         gas_original.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
                                         gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
                                         gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):
                                             reactions_in_cti_file_with_these_reactants_original.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                            reaction_number_in_cti_file_with_these_reactants_original.append(reaction_number_in_cti_file)                     
-                            unique_fraction_reaction_optimized.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
-                            unique_fraction_reaction_original.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants_original)))
+                                            reaction_number_in_cti_file_with_these_reactants_original.append(reaction_number_in_cti_file)
+                                    elif(gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                        gas_original.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                        gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                        gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):
+                                            reactions_in_cti_file_with_these_products_original.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                            reaction_number_in_cti_file_with_these_products_original.append(reaction_number_in_cti_file)                      
+                            idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                            Idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants_original)))
+                            idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products)))
+                            Idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products_original)))
+                            unique_fraction_reaction_optimized.append(idx)
+                            unique_fraction_reaction_original.append(Idx)
                         elif "[+]" in frac_reaction:
+                            idx = []
+                            Idx = []
                             reactions_in_cti_file_with_these_reactants = []
                             reaction_number_in_cti_file_with_these_reactants = []
                             reactions_in_cti_file_with_these_reactants_original = []
@@ -7531,8 +7758,14 @@ class Plotting(object):
                                 reactions_in_cti_file_with_these_reactants.append(reac)                    
                                 reaction_number_in_cti_file_with_these_reactants_original.append(reaction_list_from_mechanism_original.index(reac))
                                 reactions_in_cti_file_with_these_reactants_original.append(reac)
-                            unique_fraction_reaction_optimized.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
-                            unique_fraction_reaction_original.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants_original)))    
+                            if frac_reaction == denominator:
+                                idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                                unique_fraction_reaction_optimized.append(idx)
+                                Idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants_original)))
+                                unique_fraction_reaction_original.append(Idx)
+                            else:   
+                                unique_fraction_reaction_optimized.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                                unique_fraction_reaction_original.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants_original)))    
                         else:
                             unique_fraction_reaction_optimized.append(reaction_list_from_mechanism.index(frac_reaction))
                             unique_fraction_reaction_original.append(reaction_list_from_mechanism_original.index(frac_reaction)) 
@@ -7542,10 +7775,16 @@ class Plotting(object):
 
                 else:                    
                     if "[*]" in self.rate_constant_plots_df['Reaction'][row]:
+                        idx = []
+                        Idx = []
                         reactions_in_cti_file_with_these_reactants = []
                         reaction_number_in_cti_file_with_these_reactants = []
                         reactions_in_cti_file_with_these_reactants_original = []
-                        reaction_number_in_cti_file_with_these_reactants_original = []                    
+                        reaction_number_in_cti_file_with_these_reactants_original = []
+                        reactions_in_cti_file_with_these_products = []
+                        reaction_number_in_cti_file_with_these_products = []
+                        reactions_in_cti_file_with_these_products_original = []
+                        reaction_number_in_cti_file_with_these_products_original = []                    
                         reactants_in_target_reactions = self.rate_constant_plots_df['Reaction'][row].split('<=>')[0].rstrip()
                         reverse_reactants_in_target_reaction=None
                         if len(reactants_in_target_reactions.split('+'))>1:
@@ -7563,7 +7802,15 @@ class Plotting(object):
                                     gas_optimized.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' + M' or 
                                     gas_optimized.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction +   ' + M'):    
                                         reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)                    
+                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file) 
+                                elif(gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas_optimized.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' (+M)' or 
+                                    gas_optimized.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction +   ' (+M)' or 
+                                    gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' + M' or 
+                                    gas_optimized.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction +   ' + M'):    
+                                        reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)                    
                             for reaction_number_in_cti_file in range(gas_original.n_reactions):
                                 if (gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
                                     gas_original.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
@@ -7572,7 +7819,15 @@ class Plotting(object):
                                     gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
                                     gas_original.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                               
                                         reactions_in_cti_file_with_these_reactants_original.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                        reaction_number_in_cti_file_with_these_reactants_original.append(reaction_number_in_cti_file) 
+                                        reaction_number_in_cti_file_with_these_reactants_original.append(reaction_number_in_cti_file)
+                                elif(gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas_original.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                    gas_original.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' (+M)' or 
+                                    gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M' or 
+                                    gas_original.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction + ' + M'):                               
+                                        reactions_in_cti_file_with_these_products_original.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products_original.append(reaction_number_in_cti_file)         
                         elif  reverse_reactants_in_target_reaction ==None:
                             for reaction_number_in_cti_file in range(gas_optimized.n_reactions):
                                 if (gas_optimized.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
@@ -7580,17 +7835,32 @@ class Plotting(object):
                                     gas_optimized.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' (+M)' or 
                                     gas_optimized.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' + M'):
                                         reactions_in_cti_file_with_these_reactants.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file)                    
+                                        reaction_number_in_cti_file_with_these_reactants.append(reaction_number_in_cti_file) 
+                                elif(gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas_optimized.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' (+M)' or 
+                                    gas_optimized.products(reaction_number_in_cti_file) == reactants_in_target_reactions +  ' + M'):
+                                        reactions_in_cti_file_with_these_products.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products.append(reaction_number_in_cti_file)                            
                             for reaction_number_in_cti_file in range(gas_original.n_reactions):
                                 if (gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions or 
                                     gas_original.reactants(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
                                     gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
                                     gas_original.reactants(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):
                                         reactions_in_cti_file_with_these_reactants_original.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
-                                        reaction_number_in_cti_file_with_these_reactants_original.append(reaction_number_in_cti_file)                     
-                        unique_reactions_optimized.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
-                        unique_reactions_original.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants_original)))
-                        
+                                        reaction_number_in_cti_file_with_these_reactants_original.append(reaction_number_in_cti_file) 
+                                elif(gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions or 
+                                    gas_original.products(reaction_number_in_cti_file) == reverse_reactants_in_target_reaction or 
+                                    gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' (+M)' or 
+                                    gas_original.products(reaction_number_in_cti_file) == reactants_in_target_reactions + ' + M'):
+                                        reactions_in_cti_file_with_these_products_original.append(reaction_list_from_mechanism[reaction_number_in_cti_file])                    
+                                        reaction_number_in_cti_file_with_these_products_original.append(reaction_number_in_cti_file)
+                        idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants)))
+                        Idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_reactants_original)))
+                        idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products)))
+                        Idx.append(tuple(sorted(reaction_number_in_cti_file_with_these_products_original)))
+                        unique_reactions_optimized.append(idx)
+                        unique_reactions_original.append(Idx)                       
                     elif "[+]" in self.rate_constant_plots_df['Reaction'][row]:
                         reactions_in_cti_file_with_these_reactants = []
                         reaction_number_in_cti_file_with_these_reactants = []
@@ -7612,11 +7882,9 @@ class Plotting(object):
                     else:
                         unique_reactions_optimized.append(reaction_list_from_mechanism.index(self.rate_constant_plots_df['Reaction'][row]))
                         unique_reactions_original.append(reaction_list_from_mechanism_original.index(self.rate_constant_plots_df['Reaction'][row]))
-
-         
+#Biden          
             unique_reactions_optimized = unique_list(unique_reactions_optimized)
             unique_reactions_original = unique_list(unique_reactions_original)
-            
             
             sigma_list_for_target_ks_optimized = calculate_sigmas_for_rate_constants(S_matrix_k_target_values_extra,self.rate_constant_plots_df,unique_reactions_optimized,gas_optimized,self.covariance)
           
@@ -7911,60 +8179,104 @@ class Plotting(object):
                 original_rate_constant_df = pd.DataFrame()
                 
                 if type(reaction)==list:
-
-                    numerator = reaction[0]
-                    denominator = reaction[1]
-
-                    new_list =[]
-                    for frac_reaction in [numerator, denominator]:
-                        if type(frac_reaction) == tuple:
-                            new_tuple =[]
-                            for sub_number in frac_reaction:
-                                new_tuple.append(reaction_list_from_mechanism_original.index(reaction_list_from_mechanism[sub_number]))
+                    if type(reaction[1]) == tuple: # Total Rate
+                        new_list = []
+                        for sub_number in reaction:
+                            new_tuple = []
+                            for bub_number in sub_number:
+                                new_tuple.append(reaction_list_from_mechanism_original.index(reaction_list_from_mechanism[bub_number]))
                             new_tuple = tuple(sorted(new_tuple))
                             new_list.append(new_tuple)
-                        else:
-                            new_list.append(reaction_list_from_mechanism_original.index(reaction_list_from_mechanism[frac_reaction]))
-                            
-                    Temp_optimized,k_optimized = rate_constant_over_temperature_range_from_cantera(reaction,
-                                                                    gas_optimized,
-                                                                    initial_temperature=initial_temperature,
-                                                                    final_temperature=final_temperature,
-                                                                    pressure=1,
-                                                                    #   conditions={'H2O2':0.003094,'O2':0.000556,'H2O':0.001113,'Ar':0.995237})
-                                                                    conditions={'Ar':1})  
-                    
-                    Temp_original,k_original = rate_constant_over_temperature_range_from_cantera(new_list,
-                                                                          gas_original,
-                                                                          initial_temperature=initial_temperature,
-                                                                          final_temperature=final_temperature,
-                                                                          pressure=1,
-                                                                        #   conditions={'H2O2':0.003094,'O2':0.000556,'H2O':0.001113,'Ar':0.995237}) 
-                                                                          conditions={'Ar':1})    
-                      
-                    # high_error_optimized = np.exp(sigma_list_for_target_ks_optimized[unique_reactions_optimized.index(new_list)])
-                    # high_error_optimized = np.multiply(high_error_optimized,target_value_ks_calculated_with_cantera_optimized[unique_reactions_optimized.index(new_list)])
-                    # low_error_optimized = np.exp(np.array(sigma_list_for_target_ks_optimized[unique_reactions_optimized.index(new_list)])*-1)
-                    # low_error_optimized = np.multiply(low_error_optimized,target_value_ks_calculated_with_cantera_optimized[unique_reactions_optimized.index(new_list)]) 
-                    # a, b = zip(*sorted(zip(target_value_temps_optimized[unique_reactions_optimized.index(new_list)],high_error_optimized)))    
-                    # aa, bb = zip(*sorted(zip(target_value_temps_optimized[unique_reactions_optimized.index(new_list)],low_error_optimized)))    
-                    
-                    high_error_optimized = np.exp(np.array(sigma_list_for_target_ks_optimized[i]))
-                    high_error_optimized = np.multiply(high_error_optimized,target_value_ks_calculated_with_cantera_optimized[i])
-                    low_error_optimized = np.exp(np.array(sigma_list_for_target_ks_optimized[i])*-1)
-                    low_error_optimized = np.multiply(low_error_optimized,target_value_ks_calculated_with_cantera_optimized[i])      
-                    a, b = zip(*sorted(zip(target_value_temps_optimized[i],high_error_optimized)))
-                    aa, bb = zip(*sorted(zip(target_value_temps_optimized[i],low_error_optimized)))                                        
+                        Temp_optimized,k_optimized = rate_constant_over_temperature_range_from_cantera(reaction,
+                                                                        gas_optimized,
+                                                                        initial_temperature=initial_temperature,
+                                                                        final_temperature=final_temperature,
+                                                                        pressure=1, 
+                                                                        conditions={'Ar':1})  
+                        
+                        Temp_original,k_original = rate_constant_over_temperature_range_from_cantera(new_list,
+                                                                            gas_original,
+                                                                            initial_temperature=initial_temperature,
+                                                                            final_temperature=final_temperature,
+                                                                            pressure=1,
+                                                                            conditions={'Ar':1}) 
+                        
+                        high_error_optimized = np.exp(np.array(sigma_list_for_target_ks_optimized[i]))
+                        high_error_optimized = np.multiply(high_error_optimized,target_value_ks_calculated_with_cantera_optimized[i])
+                        low_error_optimized = np.exp(np.array(sigma_list_for_target_ks_optimized[i])*-1)
+                        low_error_optimized = np.multiply(low_error_optimized,target_value_ks_calculated_with_cantera_optimized[i])      
+                        a, b = zip(*sorted(zip(target_value_temps_optimized[i],high_error_optimized)))
+                        aa, bb = zip(*sorted(zip(target_value_temps_optimized[i],low_error_optimized)))                                        
 
-                    high_error_original = np.exp(sigma_list_for_target_ks_original[unique_reactions_original.index(new_list)])
-                    high_error_original = np.multiply(high_error_original,target_value_ks_calculated_with_cantera_original[unique_reactions_original.index(new_list)])
-                    low_error_original = np.exp(np.array(sigma_list_for_target_ks_original[unique_reactions_original.index(new_list)])*-1)
-                    low_error_original = np.multiply(low_error_original,target_value_ks_calculated_with_cantera_original[unique_reactions_original.index(new_list)]) 
-                    c, d = zip(*sorted(zip(target_value_temps_original[unique_reactions_original.index(new_list)],high_error_original)))    
-                    cc, dd = zip(*sorted(zip(target_value_temps_original[unique_reactions_original.index(new_list)],low_error_original)))                      
+                        high_error_original = np.exp(sigma_list_for_target_ks_original[unique_reactions_original.index(new_list)])
+                        high_error_original = np.multiply(high_error_original,target_value_ks_calculated_with_cantera_original[unique_reactions_original.index(new_list)])
+                        low_error_original = np.exp(np.array(sigma_list_for_target_ks_original[unique_reactions_original.index(new_list)])*-1)
+                        low_error_original = np.multiply(low_error_original,target_value_ks_calculated_with_cantera_original[unique_reactions_original.index(new_list)]) 
+                        c, d = zip(*sorted(zip(target_value_temps_original[unique_reactions_original.index(new_list)],high_error_original)))    
+                        cc, dd = zip(*sorted(zip(target_value_temps_original[unique_reactions_original.index(new_list)],low_error_original)))                      
 
+                    else: #Ratio of rates
+                        numerator = reaction[0]
+                        denominator = reaction[1]
 
-                elif type(reaction)==tuple:
+                        new_list =[]
+                        for frac_reaction in [numerator, denominator]:
+                            if type(frac_reaction) == tuple:
+                                new_tuple =[]
+                                for sub_number in frac_reaction:
+                                    new_tuple.append(reaction_list_from_mechanism_original.index(reaction_list_from_mechanism[sub_number]))
+                                new_tuple = tuple(sorted(new_tuple))
+                                new_list.append(new_tuple)
+                            elif type(frac_reaction) == list:
+                                nu_list = []
+                                for denom in range(len(frac_reaction)):
+                                    new_tuple = []
+                                    for nom in range(len(frac_reaction[denom])):
+                                        new_tuple.append(reaction_list_from_mechanism_original.index(reaction_list_from_mechanism[frac_reaction[denom][nom]]))
+                                    new_tuple = tuple(sorted(new_tuple))
+                                    nu_list.append(new_tuple)
+                                new_list.append(nu_list)
+                            else:
+                                new_list.append(reaction_list_from_mechanism_original.index(reaction_list_from_mechanism[frac_reaction]))
+                                
+                        Temp_optimized,k_optimized = rate_constant_over_temperature_range_from_cantera(reaction,
+                                                                        gas_optimized,
+                                                                        initial_temperature=initial_temperature,
+                                                                        final_temperature=final_temperature,
+                                                                        pressure=1,
+                                                                        #   conditions={'H2O2':0.003094,'O2':0.000556,'H2O':0.001113,'Ar':0.995237})
+                                                                        conditions={'Ar':1})  
+                        
+                        Temp_original,k_original = rate_constant_over_temperature_range_from_cantera(new_list,
+                                                                            gas_original,
+                                                                            initial_temperature=initial_temperature,
+                                                                            final_temperature=final_temperature,
+                                                                            pressure=1,
+                                                                            #   conditions={'H2O2':0.003094,'O2':0.000556,'H2O':0.001113,'Ar':0.995237}) 
+                                                                            conditions={'Ar':1})    
+                        
+                        # high_error_optimized = np.exp(sigma_list_for_target_ks_optimized[unique_reactions_optimized.index(new_list)])
+                        # high_error_optimized = np.multiply(high_error_optimized,target_value_ks_calculated_with_cantera_optimized[unique_reactions_optimized.index(new_list)])
+                        # low_error_optimized = np.exp(np.array(sigma_list_for_target_ks_optimized[unique_reactions_optimized.index(new_list)])*-1)
+                        # low_error_optimized = np.multiply(low_error_optimized,target_value_ks_calculated_with_cantera_optimized[unique_reactions_optimized.index(new_list)]) 
+                        # a, b = zip(*sorted(zip(target_value_temps_optimized[unique_reactions_optimized.index(new_list)],high_error_optimized)))    
+                        # aa, bb = zip(*sorted(zip(target_value_temps_optimized[unique_reactions_optimized.index(new_list)],low_error_optimized)))    
+                        
+                        high_error_optimized = np.exp(np.array(sigma_list_for_target_ks_optimized[i]))
+                        high_error_optimized = np.multiply(high_error_optimized,target_value_ks_calculated_with_cantera_optimized[i])
+                        low_error_optimized = np.exp(np.array(sigma_list_for_target_ks_optimized[i])*-1)
+                        low_error_optimized = np.multiply(low_error_optimized,target_value_ks_calculated_with_cantera_optimized[i])      
+                        a, b = zip(*sorted(zip(target_value_temps_optimized[i],high_error_optimized)))
+                        aa, bb = zip(*sorted(zip(target_value_temps_optimized[i],low_error_optimized)))                                        
+
+                        high_error_original = np.exp(sigma_list_for_target_ks_original[unique_reactions_original.index(new_list)])
+                        high_error_original = np.multiply(high_error_original,target_value_ks_calculated_with_cantera_original[unique_reactions_original.index(new_list)])
+                        low_error_original = np.exp(np.array(sigma_list_for_target_ks_original[unique_reactions_original.index(new_list)])*-1)
+                        low_error_original = np.multiply(low_error_original,target_value_ks_calculated_with_cantera_original[unique_reactions_original.index(new_list)]) 
+                        c, d = zip(*sorted(zip(target_value_temps_original[unique_reactions_original.index(new_list)],high_error_original)))    
+                        cc, dd = zip(*sorted(zip(target_value_temps_original[unique_reactions_original.index(new_list)],low_error_original)))                      
+
+                elif type(reaction)==tuple: # Partial Sum of Rates
                     new_tuple =[]
                     for sub_number in reaction:
                         new_tuple.append(reaction_list_from_mechanism_original.index(reaction_list_from_mechanism[sub_number]))
@@ -8079,7 +8391,10 @@ class Plotting(object):
                 elif max(b) > 1e+100:
                     pass
                 elif type(reaction)==list:
-                    pass
+                    if type(reaction[1]) == tuple:
+                        plt.semilogy(a,b,'b--')
+                    else:
+                        pass
                 else:
                     plt.semilogy(a,b,'b--')   
                             
@@ -8092,7 +8407,10 @@ class Plotting(object):
                 elif max(bb) > 1e+100:
                     pass      
                 elif type(reaction)==list:
-                    pass                          
+                    if type(reaction[1]) == tuple:
+                        plt.semilogy(aa,bb,'b--')
+                    else:
+                        pass                          
                 else:                         
                     plt.semilogy(aa,bb,'b--')                
                 
@@ -8169,41 +8487,67 @@ class Plotting(object):
                 plt.xlabel('Temperature [K]',fontsize=15)
                 plt.ylabel(r'k',fontsize=15)
                 plt.tick_params(which='both',direction='in')
-                if type(reaction) == list:
-                    
-                    numerator = reaction[0]
-                    denominator = reaction[1]
-
-                    reactants = []
-                    for frac_reaction in [numerator, denominator]:
-
-                        if type(frac_reaction)==tuple:
-                            if len(frac_reaction) == 2:
-                                reactants.append(reaction_list_from_mechanism[frac_reaction[0]].rstrip().lstrip() + ' [+] ' + reaction_list_from_mechanism[frac_reaction[1]].rstrip().lstrip())
-                            else:
-                                ttl_reaction_string=[]
+                if type(reaction) == list: #Total Rates & Ratios of Rates
+                    if type(reaction[1]) == tuple: #Total Rates
+                        reactants = []
+                        reactants.append(reaction_list_from_mechanism[reaction[0][0]].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]')
+                        plt.title(reactants[0])
+                        print(reactants[0])
+                        plt.legend(ncol=2)
+                        if temperature_range_to_plot_over is not None:
+                            plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
+                            plt.ylim(low_value_axis,high_value_axis)
+                        if self.pdf == True:
+                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                          
+                        if self.png == True:
+                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                                 
+                        if self.svg == True:
+                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)
+                    else: #Ratio of rates
+                        numerator = reaction[0]
+                        denominator = reaction[1]
+                        reactants = []
+                        for frac_reaction in [numerator, denominator]:
+                            if type(frac_reaction) == list: #denominator is a sum (total or partial)
+                                if len(frac_reaction) == 2: #denominator is a total sum
+                                    reactants.append(reaction_list_from_mechanism[frac_reaction[0][0]].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]')
+                                else:   #denominator is a partial sum  
+                                    name =  '' 
+                                    reax = []
+                                    for sub_number in frac_reaction[0]:
+                                        reax.append(reaction_list_from_mechanism[sub_number].rstrip().lstrip())
+                                    for q,sub_number in enumerate(reax):
+                                        if q == 0:
+                                            name = name + sub_number
+                                        else:
+                                            name = name + ' [+] ' + sub_number
+                                    reactants.append(name)
+                            elif type(frac_reaction) == tuple:  #numerator is sum
+                                name =  '' 
+                                reax = []
                                 for sub_number in frac_reaction:
-                                    ttl_reaction_string.append(reaction_list_from_mechanism[sub_number])
-                                reactants.append(ttl_reaction_string[0].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]' )
-                        else:
-                            reactants.append(reaction_list_from_mechanism[frac_reaction])
-
-                    plt.title(reactants[0] + ' [/] ' + reactants[1])
-                    print(reactants[0] + ' [/] ' + reactants[1])
-                    plt.legend(ncol=2)
-                    if temperature_range_to_plot_over is not None:
-                        plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
-                        plt.ylim(low_value_axis,high_value_axis)
-
-                    if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                          
-                    if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                                 
-                    if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)       
-
-                elif type(reaction)==tuple:
-                    
+                                    reax.append(reaction_list_from_mechanism[sub_number].rstrip().lstrip())
+                                for q,sub_number in enumerate(reax):
+                                    if q == 0:
+                                        name = name + sub_number
+                                    else:
+                                        name = name + ' [+] ' + sub_number
+                                reactants.append(name)
+                            else: #numerator or denominator is a single rate
+                                reactants.append(reaction_list_from_mechanism[frac_reaction])
+                        plt.title(reactants[0] + ' [/] ' + reactants[1])
+                        print(reactants[0] + ' [/] ' + reactants[1])
+                        plt.legend(ncol=2)
+                        if temperature_range_to_plot_over is not None:
+                            plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
+                            plt.ylim(low_value_axis,high_value_axis)
+                        if self.pdf == True:
+                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                          
+                        if self.png == True:
+                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                                 
+                        if self.svg == True:
+                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)            
+                elif type(reaction)==tuple: #Partial sum of rates w/ old total rate functionality
                     if len(reaction) == 2:
                         reactants = reaction_list_from_mechanism[reaction[0]].rstrip().lstrip() + ' [+] ' + reaction_list_from_mechanism[reaction[1]].rstrip().lstrip()
                     else:
@@ -8217,17 +8561,13 @@ class Plotting(object):
                     if temperature_range_to_plot_over is not None:
                         plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
                         plt.ylim(low_value_axis,high_value_axis)
-
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                                   
+                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)       
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)
-                                  
+                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)            
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                                                      
-                        
-                else:
+                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                                                              
+                else: #Single Rates
                     if temperature_range_to_plot_over is not None:
                         plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
                         plt.ylim(low_value_axis,high_value_axis)
@@ -8320,31 +8660,44 @@ class Plotting(object):
         reaction_equations_list = gas.reaction_equations()
         for reaction_number in self.unique_reactions_original:
 
-            if type(reaction_number) == list:
+            if type(reaction_number) == list: #Total rate or Ratio
+                if type(reaction_number[1]) == tuple: #Total rate
+                    list_of_reaction_strings.append(reaction_equations_list[reaction_number[0][0]].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]')
+                else:   #Ratio of rates
+                    numerator = reaction_number[0]
+                    denominator = reaction_number[1]
+                    temp_list = []
+                    for frac_reaction in [numerator, denominator]:
+                        if type (frac_reaction) == list: # denominator is a sum (total or partial)
+                            if len(frac_reaction) == 2: # denominator is a total sum
+                                temp_list.append(reaction_equations_list[frac_reaction[0][0]].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]')
+                            else:   #denominator is a partial sum
+                                name = ''
+                                reax = []
+                                for sub_number in frac_reaction[0]:
+                                    reax.append(reaction_equations_list[sub_number].rstrip().lstrip())
+                                for q,sub_number in enumerate(reax):
+                                    if q == 0:
+                                        name = name + sub_number
+                                    else:
+                                        name = name + ' [+] ' + sub_number
+                                temp_list.append(name)
+                        elif type(frac_reaction) == tuple: # numerator is a partial sum of rates
+                            temp_tuple = []
+                            if len(frac_reaction) == 2:
+                                total_reaction_string = reaction_equations_list[frac_reaction[0]].rstrip().lstrip() + ' [+] ' + reaction_equations_list[frac_reaction[1]].rstrip().lstrip()
+                            else:
+                                for sub_reaction in frac_reaction:
+                                    temp_tuple.append(reaction_equations_list[sub_reaction])
+                                total_reaction_string = temp_tuple[0].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]' 
 
-                numerator = reaction_number[0]
-                denominator = reaction_number[1]
-                
-                temp_list = []
-                for frac_reaction in [numerator, denominator]:
+                            temp_list.append(total_reaction_string)
+                        else:   #numerator or denominator is a single rate
+                            temp_list.append(reaction_equations_list[frac_reaction])
 
-                    if type(frac_reaction) == tuple:
-                        temp_tuple = []
-                        if len(frac_reaction) == 2:
-                            total_reaction_string = reaction_equations_list[frac_reaction[0]].rstrip().lstrip() + ' [+] ' + reaction_equations_list[frac_reaction[1]].rstrip().lstrip()
-                        else:
-                            for sub_reaction in frac_reaction:
-                                temp_tuple.append(reaction_equations_list[sub_reaction])
-                            total_reaction_string = temp_tuple[0].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]' 
-
-                        temp_list.append(total_reaction_string)
-                    else:
-                        temp_list.append(reaction_equations_list[frac_reaction])
-
-
-                list_of_reaction_strings.append(temp_list[0] + ' [/] ' + temp_list[1])            
+                    list_of_reaction_strings.append(temp_list[0] + ' [/] ' + temp_list[1])            
             
-            elif type(reaction_number) == tuple:
+            elif type(reaction_number) == tuple: #Sum of rates w/ old totaL rate functionality
                 temp_tuple = []
 
                 if len(reaction_number) == 2:
@@ -8356,7 +8709,7 @@ class Plotting(object):
 
                 list_of_reaction_strings.append(total_reaction_string)
                 
-            else:
+            else: #Single Rate
                 
                 list_of_reaction_strings.append(reaction_equations_list[reaction_number])
         
@@ -8568,31 +8921,42 @@ class Plotting(object):
         reaction_equations_list = gas.reaction_equations()
         for reaction_number in self.unique_reactions_original:
 
-            if type(reaction_number) == list:
+            if type(reaction_number) == list: # Total sum or ratio of rates
+                if type(reaction_number[1]) == tuple: #Total rate
+                    list_of_reaction_strings.append(reaction_equations_list[reaction_number[0][0]].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]')
+                else:   #Ratio of rates
+                    numerator = reaction_number[0]
+                    denominator = reaction_number[1]
+                    temp_list = []
+                    for frac_reaction in [numerator, denominator]:
+                        if type (frac_reaction) == list: # denominator is a sum (total or partial)
+                            if len(frac_reaction) == 2: # denominator is a total sum
+                                temp_list.append(reaction_equations_list[frac_reaction[0][0]].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]')
+                            else:   #denominator is a partial sum
+                                name = ''
+                                reax = []
+                                for sub_number in frac_reaction[0]:
+                                    reax.append(reaction_equations_list[sub_number].rstrip().lstrip())
+                                for q,sub_number in enumerate(reax):
+                                    if q == 0:
+                                        name = name + sub_number
+                                    else:
+                                        name = name + ' [+] ' + sub_number
+                                temp_list.append(name)
+                        elif type(frac_reaction) == tuple: # numerator is a partial sum of rates
+                            temp_tuple = []
+                            if len(frac_reaction) == 2:
+                                total_reaction_string = reaction_equations_list[frac_reaction[0]].rstrip().lstrip() + ' [+] ' + reaction_equations_list[frac_reaction[1]].rstrip().lstrip()
+                            else:
+                                for sub_reaction in frac_reaction:
+                                    temp_tuple.append(reaction_equations_list[sub_reaction])
+                                total_reaction_string = temp_tuple[0].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]' 
 
-                numerator = reaction_number[0]
-                denominator = reaction_number[1]
-                
-                temp_list = []
-                for frac_reaction in [numerator, denominator]:
-
-                    if type(frac_reaction) == tuple:
-                        temp_tuple = []
-                        if len(frac_reaction) == 2:
-                            total_reaction_string = reaction_equations_list[frac_reaction[0]].rstrip().lstrip() + ' [+] ' + reaction_equations_list[frac_reaction[1]].rstrip().lstrip()
-                        else:
-                            for sub_reaction in frac_reaction:
-                                temp_tuple.append(reaction_equations_list[sub_reaction])
-                            total_reaction_string = temp_tuple[0].split('<=>')[0].rstrip().lstrip().replace(' (+M)','') + ' <=> [*]' 
-
-                        temp_list.append(total_reaction_string)
-                    else:
-                        temp_list.append(reaction_equations_list[frac_reaction])
-
-
-                list_of_reaction_strings.append(temp_list[0] + ' [/] ' + temp_list[1])            
-            
-            elif type(reaction_number) == tuple:
+                            temp_list.append(total_reaction_string)
+                        else: # numerator or denominator is a single rate
+                            temp_list.append(reaction_equations_list[frac_reaction])
+                    list_of_reaction_strings.append(temp_list[0] + ' [/] ' + temp_list[1])            
+            elif type(reaction_number) == tuple: # Partial sum of rate w/ old total rate functionality
                 temp_tuple = []
 
                 if len(reaction_number) == 2:
@@ -8604,7 +8968,7 @@ class Plotting(object):
 
                 list_of_reaction_strings.append(total_reaction_string)
                 
-            else:
+            else: # Single Rate
                 
                 list_of_reaction_strings.append(reaction_equations_list[reaction_number])
         

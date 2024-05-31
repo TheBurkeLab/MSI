@@ -18,6 +18,7 @@ import os
 import matplotlib.pyplot as plt
 from art import *
 import enlighten
+from pathlib import Path
 
 class MSI_optimization_chebyshev(object):
         
@@ -308,7 +309,8 @@ class MSI_optimization_chebyshev(object):
         self.zdf = zdf
         self.sigma = sigma
         
-        yaml_names = [yaml_file[0][5:-5] for yaml_file in self.yaml_file_list]
+        # yaml_names = [yaml_file[0][5:-5] for yaml_file in self.yaml_file_list]
+        yaml_names = [Path(yaml_file[0]).stem for yaml_file in self.yaml_file_list]
         new_active_parameters = []
         for parameter in active_parameters:
             if 'experiment' in parameter:
@@ -433,7 +435,8 @@ class MSI_optimization_chebyshev(object):
                                                                                                                                           self.experiment_dictonaries,
                                                                                                                                           self.experiment_dict_uncertainty_original,                                                                                                                         loop_counter=loop_counter)
         # self.target_parameters = list(self.Ydf['parameter'])
-        yaml_names = [yaml_file[0][5:-5] for yaml_file in self.yaml_file_list]
+        # yaml_names = [yaml_file[0][5:-5] for yaml_file in self.yaml_file_list]
+        yaml_names = [Path(yaml_file[0]).stem for yaml_file in self.yaml_file_list]
         new_target_parameters = []
         for parameter in list(self.Ydf['parameter']):
             if 'experiment' in parameter:

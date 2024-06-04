@@ -3,3 +3,4 @@
 pkg=cantera
 mkdir "ext\\$pkg"
 pip install $pkg --target="C:\\Users\\pjsin\\Documents\\MSI\\ext\\$pkg"
+

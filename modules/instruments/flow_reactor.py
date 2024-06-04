@@ -1,15 +1,21 @@
-import cantera as ct
-from ... import simulation as sim
-from ...cti_core import cti_processor as ctp
+import sys
+
+# from ... import simulation as sim
+import simulation as sim
+# from ...cti_core import cti_processor as ctp
+import cti_processor as ctp
 import pandas as pd
 import numpy as np
-import time
+# import time
 import copy
-import re
-import MSI.simulations.instruments.shock_tube as st
-import time
-from multiprocessing import Pool
-from multiprocessing.dummy import Pool as ThreadPool
+# import re
+# import MSI.simulations.instruments.shock_tube as st
+import instruments.shock_tube as st
+# import time
+# from multiprocessing import Pool
+# from multiprocessing.dummy import Pool as ThreadPool
+sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")
+import cantera as ct
 
 class flow_reactor(sim.Simulation):
     

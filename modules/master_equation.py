@@ -7,7 +7,7 @@ Created on Mon Sep 17 11:56:22 2018
 """
 import numpy as np
 import copy
-import pandas as pd
+# import pandas as pd
 import re
 
 class Master_Equation(object):

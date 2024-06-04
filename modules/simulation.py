@@ -1,4 +1,5 @@
-from ..cti_core import cti_processor as ctp
+# from ..cti_core import cti_processor as ctp
+import cti_processor as ctp
 import copy
 
 class Simulation(object):

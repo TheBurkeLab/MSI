@@ -9,10 +9,16 @@ writes them to internal memory.  It then reads an input from a portion of the co
 and adds those reactions to create a complete internal mechanism
 """
 
+# import numpy as np
+# import cantera as ct
+# from .. import simulations
+# from . import soln2cti_py3 as ctiw
 import numpy as np
+import soln2cti_py3 as ctiw
+
+import sys
+sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")
 import cantera as ct
-from .. import simulations
-from . import soln2cti_py3 as ctiw
 
 
 def cti_write2(x={},original_cti='',master_rxns='',master_index=[],MP={},working_directory='',file_name=''):

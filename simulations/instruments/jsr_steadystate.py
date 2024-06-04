@@ -5,25 +5,14 @@ Created on Fri Nov  9 15:33:46 2018
 @author: Mark Barbet
 """
 
-# import cantera as ct
-# from ... import simulation as sim
-# from ...cti_core import cti_processor as ctp
-# import pandas as pd
-# import numpy as np
-# import time
-# import copy
-# import re
-import simulation as sim
-import inputs.cti_processor as ctp
+import cantera as ct
+from .. import simulation as sim
+from ...cti_core import cti_processor as ctp
 import pandas as pd
 import numpy as np
 import time
 import copy
 import re
-
-import sys
-sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")
-import cantera as ct
 
 class JSR_steadystate(sim.Simulation):
     

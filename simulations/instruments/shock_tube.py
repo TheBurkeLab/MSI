@@ -1,22 +1,11 @@
-# import itertools
-# import numpy as np
-# import cantera as ct
-# import pandas as pd
-# import re
-# import pickle
-# from ... import simulation as sim
-# from ...cti_core import cti_processor as ctp
-
 import itertools
 import numpy as np
+import cantera as ct
 import pandas as pd
 import re
 import pickle
-import simulation as sim
-import inputs.cti_processor as ctp
-import sys
-sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")
-import cantera as ct
+from .. import simulation as sim
+from ...cti_core import cti_processor as ctp
 
 class shockTube(sim.Simulation):
     

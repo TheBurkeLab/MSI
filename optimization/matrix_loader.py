@@ -1,16 +1,11 @@
-
-
 import numpy as np
 import pandas as pd
-import master_equation as meq
+from ..master_equation import master_equation as meq
 #import MSI.master_equation.master_equation as meq 
 import copy
 import re
-import math
-import sys
-sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")
 import cantera as ct
-
+import math
 
 class OptMatrix(object):
     def __init__(self):

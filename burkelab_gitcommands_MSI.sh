@@ -26,12 +26,12 @@
 # # git log $branchName
 # git log $branchName --pretty=format:"%h - %an, %ar : %s"
 
-# Delete a branch both locally and remotely:
-# 1.	Delete the local branch: 
-branchName=new_branch_name
-git branch -d $branchName # (if the branch has unmerged changes, you may need to force delet it using ‘-D’ instead of ‘-d’)
-# 2.	Delete the remote branch: 
-git push origin --delete $branchName
+# # Delete a branch both locally and remotely:
+# # 1.	Delete the local branch: 
+# branchName=new_branch_name
+# git branch -d $branchName # (if the branch has unmerged changes, you may need to force delet it using ‘-D’ instead of ‘-d’)
+# # 2.	Delete the remote branch: 
+# git push origin --delete $branchName
 
 # # Rename a branch both locally and remotely:
 # old_branch_name=psingal_MSI
@@ -57,13 +57,16 @@ git push origin --delete $branchName
 # # 3.	Force push the changes to the remote repository: 
 # git push origin your_local_branch –force
 
-# # Copy a subdirectory from a previous commit on a different branch to the current version:
-# # 1.	Check out the target branch: 
-# git checkout burkelab
+# Copy a subdirectory from a previous commit on a different branch to the current version:
+commit=8cc3e504be3b85378b8a92b0b0f6c0e244cd3d56
+path="C:\\Users\\pjsin\\Documents\\MSI\\optimization"
+# 1.	Check out the target branch: 
+git checkout psingalMSI
 # # 2.	Create a temporary directory to copy the subdirectory from the commit: 
 # mkdir temp_directory
-# # 3.	Check out the subdirectory from the specific commit to the temporary directory: 
-# git checkout b41d530c125e9bb1318d70d6f6fe7e0e38042ddb -- C:\\Users\\pjsin\\Documents\\cantera\\burkelab_SimScripts
+# cd temp_directory
+# 3.	Check out the subdirectory from the specific commit to the temporary directory: 
+git checkout $commit -- $path
 # # 4.	Move the subdirectory to the desired location in your current branch: 
 # mv temp_directory/burkelab_SimScripts path/to/desired/location
 # # 5.	Add the subdirectory to the staging area: 
@@ -79,3 +82,15 @@ git push origin --delete $branchName
 
 # # Conda command to install boost:
 # conda install boost-cpp 
+
+commit=8cc3e504be3b85378b8a92b0b0f6c0e244cd3d56
+path="C:\\Users\\pjsin\\Documents\\MSI\\cti_core"
+git checkout $commit -- $path
+path="C:\\Users\\pjsin\\Documents\\MSI\\master_equation"
+git checkout $commit -- $path
+path="C:\\Users\\pjsin\\Documents\\MSI\\optimization"
+git checkout $commit -- $path
+path="C:\\Users\\pjsin\\Documents\\MSI\\simulations"
+git checkout $commit -- $path
+path="C:\\Users\\pjsin\\Documents\\MSI\\utilities"
+git checkout $commit -- $path

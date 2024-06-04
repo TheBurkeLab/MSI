@@ -1,8 +1,6 @@
-import simulations as sim
+from ... import simulations as sim
 import numpy as np
 import pandas as pd
-import sys
-sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")
 import cantera as ct
 
 class Absorb:

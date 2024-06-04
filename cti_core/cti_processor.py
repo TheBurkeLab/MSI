@@ -1,10 +1,6 @@
-import soln2cti_py3
 import re
-import sys
-sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")
 import cantera as ct
-# from . import soln2cti_py3
-
+from ..utilities import soln2cti_py3
 #class holding different methods of processing cti files
 
 class Processor(object): #handles one optimization but may add support for multiple later

@@ -12,8 +12,8 @@ from joblib import Parallel, delayed
 
 #from . import shock_tube as st
 
-import MSI.simulations.instruments.shock_tube as st
-import MSI.simulations.instruments.RCM as rcmsim
+import simulations.instruments.shock_tube as st
+import simulations.instruments.RCM as rcmsim
 
 
 import time

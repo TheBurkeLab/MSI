@@ -6,7 +6,7 @@ import numpy as np
 import time
 import copy
 import re
-import MSI.simulations.instruments.shock_tube as st
+import simulations.instruments.shock_tube as st
 import time
 from multiprocessing import Pool
 from multiprocessing.dummy import Pool as ThreadPool

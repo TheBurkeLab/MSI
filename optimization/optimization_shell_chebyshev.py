@@ -1,15 +1,15 @@
 import sys
 sys.path.append('.') #get rid of this at some point with central test script or when package is built
 
-import MSI.simulations.instruments.shock_tube as st
-import MSI.cti_core.cti_processor as pr
-import MSI.optimization.matrix_loader as ml
-import MSI.optimization.opt_runner as opt
-import MSI.simulations.absorbance.curve_superimpose as csp
-import MSI.simulations.yaml_parser as yp
+import simulations.instruments.shock_tube as st
+import cti_core.cti_processor as pr
+import optimization.matrix_loader as ml
+import optimization.opt_runner as opt
+import simulations.absorbance.curve_superimpose as csp
+import simulations.yaml_parser as yp
 # import MSI.master_equation.master_equation_six_parameter_fit as mespf
-import MSI.master_equation.master_equation as mecheb
-import MSI.cti_core.cti_combine as ctic
+import master_equation.master_equation as mecheb
+import cti_core.cti_combine as ctic
 import copy
 import cantera as ct
 import numpy as np

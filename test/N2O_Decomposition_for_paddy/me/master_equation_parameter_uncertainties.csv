@@ -1,0 +1,21 @@
+N2O + O <=> 2 NO,Uncertainty,N2O + O <=> N2 + O2,Uncertainty
+P1_SymmetryFactor_1,1.00E-06,P1_SymmetryFactor_1,1.00E-06
+W2_Energy_1,4,W2_Energy_1,4
+B4_Energy_1,4,B4_Energy_1,4
+W1_Frequencies_1,0.135,W1_Frequencies_1,0.135
+P2_SymmetryFactor_1,1.00E-06,P2_SymmetryFactor_1,1.00E-06
+B5_ImaginaryFrequency_1,0.18,B5_ImaginaryFrequency_1,0.18
+W1_Energy_1,4,W1_Energy_1,4
+B4_ImaginaryFrequency_1,0.18,B4_ImaginaryFrequency_1,0.18
+B5_Frequencies_1,0.135,B5_Frequencies_1,0.135
+P2_Energy_1,4,P2_Energy_1,4
+B4_Frequencies_1,0.135,B4_Frequencies_1,0.135
+P2_Frequencies_1,0.135,P2_Frequencies_1,0.135
+B4_SymmetryFactor_1,1.00E-06,B4_SymmetryFactor_1,1.00E-06
+P1_Frequencies_1,0.135,P1_Frequencies_1,0.135
+W1_SymmetryFactor_1,1.00E-06,W1_SymmetryFactor_1,1.00E-06
+B5_SymmetryFactor_1,1.00E-06,B5_SymmetryFactor_1,1.00E-06
+B5_Energy_1,4,B5_Energy_1,4
+W2_Frequencies_1,0.135,W2_Frequencies_1,0.135
+W2_SymmetryFactor_1,1.00E-06,W2_SymmetryFactor_1,1.00E-06
+P1_Energy_1,4,P1_Energy_1,4

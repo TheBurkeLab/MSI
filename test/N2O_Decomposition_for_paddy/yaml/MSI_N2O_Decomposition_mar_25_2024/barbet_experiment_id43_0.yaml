@@ -1,0 +1,88 @@
+apparatus:
+  facility: Computer Simulated
+  kind: JSR
+  reactor-volume:
+    units: m^3
+    value: 8.5e-05
+  residence-time:
+    relative-uncertainty: 0.05049935542359786
+    units: s
+    value: 0.45
+  volume: 8.5e-05
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: isothermal
+  composition:
+  - mole-fraction: 3.9536e-05
+    relative-uncertainty: 0.034763357
+    species: NO2
+  - mole-fraction: 0.799960464
+    relative-uncertainty: 0.002817894
+    species: He
+  - mole-fraction: 0.2
+    relative-uncertainty: 0.00811561
+    species: N2O
+  pressure:
+    relative-uncertainty: 0.01
+    units: atm
+    value: 1.02069
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value-list:
+    - 1050.0
+datapoints:
+  concentration:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+  mole-fraction:
+  - csvfile: data/experiment_id43_NO_0.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: 'NO'
+      relative-uncertainty: 0.05
+      species: 'NO'
+  - csvfile: data/experiment_id43_O2_0.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: O2
+      relative-uncertainty: 0.05
+      species: O2
+  - csvfile: data/experiment_id43_N2_0.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: N2
+      relative-uncertainty: 0.05
+      species: N2
+  - csvfile: data/experiment_id43_N2O_0.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: N2O
+      relative-uncertainty: 0.05
+      species: N2O
+  - csvfile: data/experiment_id43_NO2_0.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: NO2
+      relative-uncertainty: 0.05
+      species: NO2
+experiment-type: Species profile
+file-author:
+  name: 'Burke Lab JSR post-processing: Mark Barbet'
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Mark Barbet
+  detail: N2O decomposition
+  doi: 10.1021/jp211434f
+  journal: Journal of Physical Chemistry
+  pages: 6142-6158
+  volume: 116
+  year: 2020

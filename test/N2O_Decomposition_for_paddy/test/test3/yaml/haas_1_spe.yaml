@@ -1,0 +1,101 @@
+file-author: 
+    name: Joe Lee
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: Francis M. Haas
+          ORCID: 
+        - name: Fahd E. Alam
+          ORCID:
+        - name: Jeffrey S. Santner
+          ORCID:
+        - name: Tanvir I. Farouk
+          ORCID:
+        - name: Frederick L. Dryer
+          ORCID:
+    journal: 11th US National Combustion Meeting
+    year: 2019
+    volume:
+    pages: 
+    detail: Brancing ratio of N2O + O --> Products determined from flow reactor experiments at intermediate temperatures
+      
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    institution: idk
+    facility: quartz high pressure laminor flow reactor facility (HPLFR) ~ plug flow reactor
+    inner-diameter: &diam
+        value: 1
+        units: cm
+
+common-properties:
+    pressure: &pres 
+        value: 4.0
+        units: atm
+        relative-uncertainty: 0.02 
+    temperature: &temp
+        value: 979.0
+        units: K
+        relative-uncertainty: 0.01
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 25
+          units: s
+    composition: &comp
+        - species: N2O
+          mole-fraction: 0.010020
+          relative-uncertainty: .05
+        - species: Ar
+          mole-fraction: 0.98998
+          relative-uncertainty: .05
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 10
+            units: s
+    assumptions: &assumptions
+        thermal-boundary: adiabatic
+        mechanical-boundary: constant pressure
+        equation-of-state: ideal gas
+        
+datapoints:
+  concentration:
+    - csvfile:
+      targets:
+        - name:
+          species:
+          absolute-uncertainty:
+          relative-uncertainty:
+  absorbance: 
+     - csvfile: 
+       name: 
+       wavelength:
+         value: 
+         unit: 
+       absolute-uncertainty: 
+       relative-uncertainty: 
+  mole-fraction:
+    - csvfile: 'data/haas_1_spe_N2O_data.csv'
+      targets:
+        - name: N2O
+          species: N2O
+          absolute-uncertainty: 0.000100
+          relative-uncertainty: 0.05
+    - csvfile: 'data/haas_1_spe_N2_data.csv'
+      targets:
+        - name: N2
+          species: N2
+          absolute-uncertainty: 0.000010
+          relative-uncertainty: 0.05
+    - csvfile: 'data/haas_1_spe_NO_data.csv'
+      targets:
+        - name: 'NO'
+          species: 'NO'
+          absolute-uncertainty: 0.000003
+          relative-uncertainty: 0.05

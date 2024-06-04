@@ -1,0 +1,1478 @@
+,value
+A H + O2 <=> O + OH,1.95E-19
+A H2 + O <=> H + OH,-7.55E-17
+A H2 + O <=> H + OH,-9.97E-16
+A H2 + OH <=> H + H2O,2.74E-15
+A 2 OH <=> H2O + O,3.72E-16
+A 2 OH <=> H2O + O,2.75E-16
+A H2 + M <=> 2 H + M,4.73E-16
+A AR + H2 <=> AR + 2 H,-2.23E-16
+A H + O + M <=> OH + M,8.82E-16
+A 2 O + M <=> O2 + M,1.29E-15
+A H2O + M <=> H + OH + M,-1.12E-16
+A 2 H2O <=> H + H2O + OH,1.20E-15
+A H + O2 (+M) <=> HO2 (+M),4.94E-16
+A H + HO2 <=> H2 + O2,8.23E-16
+A H + HO2 <=> 2 OH,-1.34E-16
+A H + HO2 <=> H2O + O,4.15E-16
+A HO2 + O <=> O2 + OH,-2.39E-15
+A HO2 + OH <=> H2O + O2,-1.48E-15
+A HO2 + OH <=> H2O + O2,-9.79E-16
+A 2 HO2 <=> H2O2 + O2,-2.10E-16
+A 2 HO2 <=> H2O2 + O2,-8.16E-16
+A H2O2 (+M) <=> 2 OH (+M),6.45E-16
+A H + H2O2 <=> H2O + OH,-8.11E-16
+A H + H2O2 <=> H2 + HO2,2.52E-15
+A H2O2 + O <=> HO2 + OH,-1.63E-15
+A H2O2 + OH <=> H2O + HO2,9.23E-16
+A H2O2 + OH <=> H2O + HO2,7.13E-16
+A H + NH2 (+M) <=> NH3 (+M),-2.08E-15
+A H + NH3 <=> H2 + NH2,1.88E-15
+A NH3 + O <=> NH2 + OH,1.20E-15
+A NH3 + OH <=> H2O + NH2,1.67E-16
+A HO2 + NH3 <=> H2O2 + NH2,-4.74E-16
+A H2 + NH <=> H + NH2,1.00E-15
+A NH2 + O <=> H + HNO,9.37E-16
+A NH2 + O <=> NH + OH,5.58E-17
+A NH2 + O <=> NH + OH,2.46E-15
+A NH2 + OH <=> H2O + NH,-1.34E-15
+A HO2 + NH2 <=> NH3 + O2,7.37E-17
+A HO2 + NH2 <=> H2NO + OH,-1.14E-15
+A HO2 + NH2 <=> H2O + HNO,9.46E-16
+A HO2 + NH2 <=> H2O + HNO,2.94E-15
+A HO2 + NH2 <=> H2O + HON,1.49E-15
+A NH2 + O2 <=> H2NO + O,-6.56E-16
+A NH2 + O2 <=> HNO + OH,-2.04E-15
+A 2 NH2 <=> NH + NH3,5.55E-16
+A NH + NH2 <=> N + NH3,2.19E-15
+A N + NH2 <=> 2 H + N2,1.12E-15
+A HNO + NH2 <=> NH3 + NO,4.95E-16
+A NH2 + NO <=> H2O + N2,9.25E-16
+A NH2 + NO <=> NNH + OH,-9.62E-16
+A HONO + NH2 <=> NH3 + NO2,9.71E-17
+A NH2 + NO2 <=> H2NO + NO,1.47E-15
+A NH2 + NO2 <=> H2O + N2O,1.08E-15
+A H + NH <=> H2 + N,1.75E-15
+A NH + O <=> H + NO,4.15E-16
+A NH + OH <=> H + HNO,1.01E-15
+A NH + OH <=> H2O + N,-3.65E-15
+A NH + O2 <=> HNO + O,-3.06E-16
+A NH + O2 <=> NO + OH,5.79E-16
+A 2 NH <=> N + NH2,1.14E-15
+A N + NH <=> H + N2,-5.87E-18
+A NH + NO <=> H + N2O,-2.75E-16
+A NH + NO <=> N2 + OH,-3.01E-16
+A HONO + NH <=> NH2 + NO2,-3.64E-16
+A NH + NO2 <=> N2O + OH,2.50E-15
+A NH + NO2 <=> HNO + NO,1.53E-15
+A N + OH <=> H + NO,6.59E-16
+A N + O2 <=> NO + O,-1.80E-16
+A N + NO <=> N2 + O,1.52E-16
+A NNH <=> H + N2,-1.30E-15
+A H + NNH <=> H2 + N2,-7.35E-16
+A NNH + O <=> H + N2O,-1.69E-15
+A NNH + O <=> N2 + OH,-9.29E-18
+A NNH + O <=> NH + NO,9.39E-18
+A NNH + OH <=> H2O + N2,-8.43E-17
+A NNH + O2 <=> HO2 + N2,1.39E-15
+A NH + NNH <=> N2 + NH2,1.13E-15
+A NH2 + NNH <=> N2 + NH3,6.21E-16
+A NNH + NO <=> HNO + N2,9.31E-16
+A NH2OH (+M) <=> NH2 + OH (+M),1.38E-16
+A H + NH2OH <=> H2 + HNOH,2.57E-15
+A H + NH2OH <=> H2 + H2NO,-8.53E-16
+A NH2OH + O <=> HNOH + OH,1.32E-15
+A NH2OH + O <=> H2NO + OH,-3.67E-16
+A NH2OH + OH <=> H2O + HNOH,3.67E-16
+A NH2OH + OH <=> H2NO + H2O,6.31E-16
+A NH2 + NH2OH <=> HNOH + NH3,-1.14E-16
+A NH2 + NH2OH <=> H2NO + NH3,2.68E-16
+A NH + NH2OH <=> HNOH + NH2,1.74E-15
+A NH + NH2OH <=> H2NO + NH2,-3.19E-16
+A HO2 + NH2OH <=> H2O2 + HNOH,7.48E-16
+A HO2 + NH2OH <=> H2NO + H2O2,3.35E-16
+A H2NO + M <=> H + HNO + M,3.96E-16
+A H2NO + M <=> HNOH + M,4.29E-17
+A H + H2NO <=> H2 + HNO,-4.04E-17
+A H + H2NO <=> NH2 + OH,-1.30E-15
+A H2NO + O <=> HNO + OH,1.01E-15
+A H2NO + OH <=> H2O + HNO,8.67E-16
+A H2NO + HO2 <=> H2O2 + HNO,1.27E-15
+A H2NO + O2 <=> HNO + HO2,3.60E-15
+A H2NO + NH2 <=> HNO + NH3,-2.18E-15
+A H2NO + NO <=> 2 HNO,-7.50E-16
+A H2NO + NO2 <=> HNO + HONO,2.60E-15
+A HNOH + M <=> H + HNO + M,6.72E-17
+A H + HNOH <=> NH2 + OH,1.55E-15
+A H + HNOH <=> H2 + HNO,8.00E-16
+A HNOH + O <=> HNO + OH,1.67E-15
+A HNOH + O <=> HNO + OH,-4.07E-16
+A HNOH + OH <=> H2O + HNO,-7.14E-16
+A HNOH + HO2 <=> H2O2 + HNO,-5.97E-16
+A HNOH + HO2 <=> NH2OH + O2,-2.15E-15
+A HNOH + O2 <=> HNO + HO2,-4.47E-16
+A HNOH + NH2 <=> HNO + NH3,-7.69E-16
+A HNOH + NO2 <=> HNO + HONO,-1.07E-15
+A H + NO (+M) <=> HNO (+M),1.48E-15
+A H + HNO <=> H2 + NO,-3.24E-16
+A HNO + O <=> NO + OH,8.23E-16
+A HNO + OH <=> H2O + NO,1.04E-16
+A HNO + HO2 <=> HNO2 + OH,8.46E-16
+A HNO + O2 <=> HO2 + NO,-8.99E-16
+A 2 HNO <=> H2O + N2O,1.51E-17
+A HNO + NO2 <=> HONO + NO,1.16E-15
+A HO2 + NO <=> NO2 + OH,-4.92E-16
+A NO + O (+M) <=> NO2 (+M),-4.514745162
+A H + NO2 <=> NO + OH,1.57E-15
+A NO2 + O <=> NO + O2,0.828711117
+A HO2 + NO2 <=> HONO + O2,3.70E-16
+A HO2 + NO2 <=> HNO2 + O2,-1.76E-15
+A 2 NO2 <=> 2 NO + O2,1.53E-15
+A 2 NO2 <=> NO + NO3,-1.35E-16
+A NO + OH (+M) <=> HONO (+M),1.29E-15
+A H2 + NO2 <=> H + HONO,-3.83E-16
+A H2 + NO2 <=> H + HONO,-2.75E-16
+A H + HONO <=> HNO + OH,-2.87E-16
+A H + HONO <=> H2O + NO,-4.55E-16
+A HONO + O <=> NO2 + OH,2.36E-16
+A HONO + OH <=> H2O + NO2,3.39E-16
+A HONO + NO2 <=> HONO2 + NO,3.50E-16
+A 2 HONO <=> H2O + NO + NO2,4.91E-16
+A HNO2 (+M) <=> HONO (+M),-2.06E-15
+A H2 + NO2 <=> H + HNO2,-3.30E-15
+A HNO2 + O <=> NO2 + OH,-3.13E-16
+A HNO2 + OH <=> H2O + NO2,-2.75E-16
+A NO2 + O (+M) <=> NO3 (+M),3.03E-15
+A H + NO3 <=> NO2 + OH,1.96E-16
+A NO3 + O <=> NO2 + O2,2.60E-15
+A NO3 + OH <=> HO2 + NO2,-1.18E-16
+A HO2 + NO3 <=> NO2 + O2 + OH,-1.04E-15
+A NO2 + NO3 <=> NO + NO2 + O2,-7.45E-16
+A NO2 + OH (+M) <=> HONO2 (+M),-5.88E-17
+A H + HONO2 <=> H2 + NO3,5.60E-16
+A H + HONO2 <=> H2O + NO2,2.91E-16
+A H + HONO2 <=> HONO + OH,5.87E-16
+A HONO2 + OH <=> H2O + NO3,-2.01E-15
+A N2O (+M) <=> N2 + O (+M),5.304914312
+A H + N2O <=> N2 + OH,8.59E-16
+A N2O + OH <=> HO2 + N2,7.07E-16
+A N2O + OH <=> HNO + NO,-1.87E-18
+A N2O + NO <=> N2 + NO2,-8.83E-16
+A 2 NH2 <=> H2 + N2H2,-1.70E-15
+A 2 NH2 <=> H2 + H2NN,1.21E-16
+A NH + NH2 <=> H + N2H2,-7.67E-16
+A HNOH + NH2 <=> N2H3 + OH,1.13E-15
+A HNOH + NH2 <=> H2NN + H2O,-1.45E-15
+A 2 NH2 (+M) <=> N2H4 (+M),-1.09E-15
+A N2H4 <=> H2 + H2NN,3.02E-16
+A H + N2H4 <=> H2 + N2H3,-6.86E-17
+A H + N2H4 <=> NH2 + NH3,-2.86E-15
+A N2H4 + O <=> N2H3 + OH,-1.54E-15
+A N2H4 + O <=> H2O + N2H2,1.79E-15
+A N2H4 + OH <=> H2O + N2H3,-2.50E-15
+A N2H4 + NH2 <=> N2H3 + NH3,-1.61E-15
+A N2H4 + NO <=> HNO + N2H3,1.10E-15
+A N2H4 + NO2 <=> HONO + N2H3,-5.13E-16
+A N2H4 + NO2 <=> HNO2 + N2H3,-1.76E-15
+A H + N2H2 <=> N2H3,6.68E-16
+A H + N2H3 <=> H2 + N2H2,6.97E-16
+A N2H3 + O <=> N2H2 + OH,-1.83E-15
+A N2H3 + O <=> HNO + NH2,-6.94E-16
+A N2H3 + O => H + NH2 + NO,6.78E-16
+A N2H3 + OH <=> H2O + N2H2,1.15E-15
+A N2H3 + OH <=> H2NN + H2O,5.41E-16
+A N2H3 + OH <=> HNO + NH3,-9.91E-16
+A HO2 + N2H3 <=> H2O2 + N2H2,1.09E-15
+A HO2 + N2H3 <=> N2H4 + O2,-1.85E-15
+A N2H3 + NH2 <=> N2H2 + NH3,-5.98E-16
+A N2H3 + NH2 <=> H2NN + NH3,1.09E-15
+A N2H3 + NH <=> N2H2 + NH2,-4.44E-16
+A N2H2 + M <=> H + NNH + M,-1.64E-16
+A H + N2H2 <=> H2 + NNH,4.94E-16
+A N2H2 + O <=> NNH + OH,9.26E-16
+A N2H2 + O <=> NH2 + NO,-5.87E-16
+A N2H2 + OH <=> H2O + NNH,-1.96E-15
+A N2H2 + NH2 <=> NH3 + NNH,4.61E-16
+A N2H2 + NH <=> NH2 + NNH,2.34E-15
+A N2H2 + NO <=> N2O + NH2,1.48E-15
+A H2NN <=> H + NNH,1.49E-15
+A H2NN <=> H2 + N2,-2.37E-16
+A H2NN <=> N2H2,-2.66E-16
+A H + H2NN <=> H2 + NNH,-7.12E-16
+A H + H2NN <=> H + N2H2,8.66E-16
+A H2NN + O <=> NNH + OH,6.64E-16
+A H2NN + O <=> NH2 + NO,-1.28E-17
+A H2NN + OH <=> H2O + NNH,3.59E-16
+A H2NN + OH => H + NH2 + NO,1.39E-15
+A H2NN + HO2 => NH2 + NO + OH,-8.30E-16
+A H2NN + HO2 <=> H2O2 + NNH,9.53E-16
+A H2NN + O2 <=> NH2 + NO2,-5.92E-17
+A H2NN + NH2 <=> NH3 + NNH,9.73E-16
+n H + O2 <=> O + OH,2.27E-16
+n H2 + O <=> H + OH,1.22E-16
+n H2 + O <=> H + OH,-3.02E-15
+n H2 + OH <=> H + H2O,1.24E-15
+n 2 OH <=> H2O + O,6.48E-16
+n 2 OH <=> H2O + O,-4.24E-17
+n H2 + M <=> 2 H + M,1.46E-15
+n AR + H2 <=> AR + 2 H,-5.29E-17
+n H + O + M <=> OH + M,5.38E-17
+n 2 O + M <=> O2 + M,1.16E-15
+n H2O + M <=> H + OH + M,-2.50E-16
+n 2 H2O <=> H + H2O + OH,-1.24E-15
+n H + O2 (+M) <=> HO2 (+M),-8.86E-17
+n H + HO2 <=> H2 + O2,7.70E-16
+n H + HO2 <=> 2 OH,9.92E-16
+n H + HO2 <=> H2O + O,9.58E-16
+n HO2 + O <=> O2 + OH,-8.52E-16
+n HO2 + OH <=> H2O + O2,1.09E-15
+n HO2 + OH <=> H2O + O2,1.17E-15
+n 2 HO2 <=> H2O2 + O2,-5.25E-16
+n 2 HO2 <=> H2O2 + O2,-1.26E-15
+n H2O2 (+M) <=> 2 OH (+M),4.66E-16
+n H + H2O2 <=> H2O + OH,6.81E-16
+n H + H2O2 <=> H2 + HO2,-1.15E-16
+n H2O2 + O <=> HO2 + OH,1.39E-15
+n H2O2 + OH <=> H2O + HO2,1.45E-16
+n H2O2 + OH <=> H2O + HO2,-1.12E-15
+n H + NH2 (+M) <=> NH3 (+M),3.75E-15
+n H + NH3 <=> H2 + NH2,-2.28E-16
+n NH3 + O <=> NH2 + OH,1.14E-15
+n NH3 + OH <=> H2O + NH2,-5.50E-17
+n HO2 + NH3 <=> H2O2 + NH2,-2.36E-18
+n H2 + NH <=> H + NH2,-2.08E-15
+n NH2 + O <=> H + HNO,-1.18E-15
+n NH2 + O <=> NH + OH,-2.31E-15
+n NH2 + O <=> NH + OH,-3.39E-16
+n NH2 + OH <=> H2O + NH,9.67E-16
+n HO2 + NH2 <=> NH3 + O2,3.76E-16
+n HO2 + NH2 <=> H2NO + OH,5.70E-16
+n HO2 + NH2 <=> H2O + HNO,-1.93E-16
+n HO2 + NH2 <=> H2O + HNO,-1.24E-15
+n HO2 + NH2 <=> H2O + HON,5.33E-16
+n NH2 + O2 <=> H2NO + O,1.24E-15
+n NH2 + O2 <=> HNO + OH,1.52E-15
+n 2 NH2 <=> NH + NH3,-2.72E-16
+n NH + NH2 <=> N + NH3,-9.98E-16
+n N + NH2 <=> 2 H + N2,1.01E-15
+n HNO + NH2 <=> NH3 + NO,-1.50E-15
+n NH2 + NO <=> H2O + N2,3.39E-15
+n NH2 + NO <=> NNH + OH,7.60E-16
+n HONO + NH2 <=> NH3 + NO2,-6.58E-16
+n NH2 + NO2 <=> H2NO + NO,-1.27E-15
+n NH2 + NO2 <=> H2O + N2O,1.96E-15
+n H + NH <=> H2 + N,-1.43E-16
+n NH + O <=> H + NO,-3.77E-17
+n NH + OH <=> H + HNO,8.38E-16
+n NH + OH <=> H2O + N,-3.39E-16
+n NH + O2 <=> HNO + O,9.05E-16
+n NH + O2 <=> NO + OH,-5.10E-16
+n 2 NH <=> N + NH2,3.26E-15
+n N + NH <=> H + N2,-1.42E-15
+n NH + NO <=> H + N2O,6.00E-16
+n NH + NO <=> N2 + OH,-5.09E-16
+n HONO + NH <=> NH2 + NO2,1.19E-15
+n NH + NO2 <=> N2O + OH,5.87E-16
+n NH + NO2 <=> HNO + NO,-1.94E-15
+n N + OH <=> H + NO,-1.14E-15
+n N + O2 <=> NO + O,1.85E-15
+n N + NO <=> N2 + O,-1.37E-15
+n NNH <=> H + N2,8.79E-16
+n H + NNH <=> H2 + N2,3.50E-16
+n NNH + O <=> H + N2O,2.65E-15
+n NNH + O <=> N2 + OH,1.62E-15
+n NNH + O <=> NH + NO,5.42E-16
+n NNH + OH <=> H2O + N2,2.36E-15
+n NNH + O2 <=> HO2 + N2,-1.45E-15
+n NH + NNH <=> N2 + NH2,-2.22E-15
+n NH2 + NNH <=> N2 + NH3,-5.56E-16
+n NNH + NO <=> HNO + N2,4.05E-16
+n NH2OH (+M) <=> NH2 + OH (+M),-1.08E-15
+n H + NH2OH <=> H2 + HNOH,1.14E-15
+n H + NH2OH <=> H2 + H2NO,1.34E-15
+n NH2OH + O <=> HNOH + OH,6.06E-16
+n NH2OH + O <=> H2NO + OH,5.89E-16
+n NH2OH + OH <=> H2O + HNOH,8.45E-16
+n NH2OH + OH <=> H2NO + H2O,5.35E-16
+n NH2 + NH2OH <=> HNOH + NH3,-4.99E-16
+n NH2 + NH2OH <=> H2NO + NH3,1.79E-15
+n NH + NH2OH <=> HNOH + NH2,2.90E-15
+n NH + NH2OH <=> H2NO + NH2,-1.72E-15
+n HO2 + NH2OH <=> H2O2 + HNOH,1.13E-15
+n HO2 + NH2OH <=> H2NO + H2O2,4.03E-18
+n H2NO + M <=> H + HNO + M,6.55E-16
+n H2NO + M <=> HNOH + M,-4.65E-16
+n H + H2NO <=> H2 + HNO,-6.36E-16
+n H + H2NO <=> NH2 + OH,-1.69E-15
+n H2NO + O <=> HNO + OH,-1.08E-16
+n H2NO + OH <=> H2O + HNO,-7.29E-16
+n H2NO + HO2 <=> H2O2 + HNO,-6.77E-16
+n H2NO + O2 <=> HNO + HO2,2.14E-15
+n H2NO + NH2 <=> HNO + NH3,3.97E-16
+n H2NO + NO <=> 2 HNO,3.41E-16
+n H2NO + NO2 <=> HNO + HONO,2.21E-15
+n HNOH + M <=> H + HNO + M,-2.58E-16
+n H + HNOH <=> NH2 + OH,3.26E-16
+n H + HNOH <=> H2 + HNO,9.68E-16
+n HNOH + O <=> HNO + OH,-3.74E-16
+n HNOH + O <=> HNO + OH,6.50E-16
+n HNOH + OH <=> H2O + HNO,-3.11E-16
+n HNOH + HO2 <=> H2O2 + HNO,-1.03E-15
+n HNOH + HO2 <=> NH2OH + O2,1.25E-15
+n HNOH + O2 <=> HNO + HO2,3.12E-15
+n HNOH + NH2 <=> HNO + NH3,-8.47E-16
+n HNOH + NO2 <=> HNO + HONO,4.20E-16
+n H + NO (+M) <=> HNO (+M),-3.14E-16
+n H + HNO <=> H2 + NO,1.86E-15
+n HNO + O <=> NO + OH,-4.58E-16
+n HNO + OH <=> H2O + NO,1.22E-15
+n HNO + HO2 <=> HNO2 + OH,-4.07E-15
+n HNO + O2 <=> HO2 + NO,2.13E-15
+n 2 HNO <=> H2O + N2O,-1.04E-15
+n HNO + NO2 <=> HONO + NO,-2.99E-15
+n HO2 + NO <=> NO2 + OH,4.93E-16
+n NO + O (+M) <=> NO2 (+M),0.642718492
+n H + NO2 <=> NO + OH,3.69E-16
+n NO2 + O <=> NO + O2,1.26E-17
+n HO2 + NO2 <=> HONO + O2,3.99E-15
+n HO2 + NO2 <=> HNO2 + O2,2.71E-15
+n 2 NO2 <=> 2 NO + O2,-2.32E-15
+n 2 NO2 <=> NO + NO3,3.52E-16
+n NO + OH (+M) <=> HONO (+M),-2.02E-17
+n H2 + NO2 <=> H + HONO,3.67E-16
+n H2 + NO2 <=> H + HONO,-1.60E-15
+n H + HONO <=> HNO + OH,-1.85E-17
+n H + HONO <=> H2O + NO,-1.88E-16
+n HONO + O <=> NO2 + OH,9.38E-16
+n HONO + OH <=> H2O + NO2,2.89E-15
+n HONO + NO2 <=> HONO2 + NO,1.12E-15
+n 2 HONO <=> H2O + NO + NO2,1.19E-15
+n HNO2 (+M) <=> HONO (+M),-1.64E-15
+n H2 + NO2 <=> H + HNO2,-3.10E-15
+n HNO2 + O <=> NO2 + OH,1.17E-15
+n HNO2 + OH <=> H2O + NO2,-4.01E-16
+n NO2 + O (+M) <=> NO3 (+M),-9.95E-16
+n H + NO3 <=> NO2 + OH,1.16E-15
+n NO3 + O <=> NO2 + O2,1.03E-15
+n NO3 + OH <=> HO2 + NO2,2.26E-15
+n HO2 + NO3 <=> NO2 + O2 + OH,2.39E-15
+n NO2 + NO3 <=> NO + NO2 + O2,-4.08E-16
+n NO2 + OH (+M) <=> HONO2 (+M),-2.62E-15
+n H + HONO2 <=> H2 + NO3,1.16E-15
+n H + HONO2 <=> H2O + NO2,2.05E-15
+n H + HONO2 <=> HONO + OH,2.83E-15
+n HONO2 + OH <=> H2O + NO3,2.47E-15
+n N2O (+M) <=> N2 + O (+M),-0.583948122
+n H + N2O <=> N2 + OH,-3.18E-15
+n N2O + OH <=> HO2 + N2,4.06E-15
+n N2O + OH <=> HNO + NO,-3.57E-16
+n N2O + NO <=> N2 + NO2,-2.22E-15
+n 2 NH2 <=> H2 + N2H2,-2.87E-15
+n 2 NH2 <=> H2 + H2NN,1.24E-15
+n NH + NH2 <=> H + N2H2,-6.40E-16
+n HNOH + NH2 <=> N2H3 + OH,-1.47E-15
+n HNOH + NH2 <=> H2NN + H2O,-9.35E-16
+n 2 NH2 (+M) <=> N2H4 (+M),-2.55E-15
+n N2H4 <=> H2 + H2NN,-1.94E-15
+n H + N2H4 <=> H2 + N2H3,-1.84E-15
+n H + N2H4 <=> NH2 + NH3,-1.59E-15
+n N2H4 + O <=> N2H3 + OH,1.53E-15
+n N2H4 + O <=> H2O + N2H2,-1.78E-16
+n N2H4 + OH <=> H2O + N2H3,-1.95E-15
+n N2H4 + NH2 <=> N2H3 + NH3,-3.88E-16
+n N2H4 + NO <=> HNO + N2H3,1.74E-15
+n N2H4 + NO2 <=> HONO + N2H3,7.13E-16
+n N2H4 + NO2 <=> HNO2 + N2H3,1.07E-15
+n H + N2H2 <=> N2H3,2.05E-15
+n H + N2H3 <=> H2 + N2H2,1.97E-16
+n N2H3 + O <=> N2H2 + OH,5.74E-16
+n N2H3 + O <=> HNO + NH2,-6.98E-16
+n N2H3 + O => H + NH2 + NO,-1.65E-16
+n N2H3 + OH <=> H2O + N2H2,-2.05E-15
+n N2H3 + OH <=> H2NN + H2O,7.84E-16
+n N2H3 + OH <=> HNO + NH3,7.99E-16
+n HO2 + N2H3 <=> H2O2 + N2H2,-9.09E-16
+n HO2 + N2H3 <=> N2H4 + O2,-4.71E-15
+n N2H3 + NH2 <=> N2H2 + NH3,-1.42E-15
+n N2H3 + NH2 <=> H2NN + NH3,-1.16E-15
+n N2H3 + NH <=> N2H2 + NH2,-6.06E-16
+n N2H2 + M <=> H + NNH + M,-1.97E-15
+n H + N2H2 <=> H2 + NNH,1.75E-15
+n N2H2 + O <=> NNH + OH,1.00E-15
+n N2H2 + O <=> NH2 + NO,-1.42E-15
+n N2H2 + OH <=> H2O + NNH,-2.77E-16
+n N2H2 + NH2 <=> NH3 + NNH,-5.30E-16
+n N2H2 + NH <=> NH2 + NNH,2.13E-16
+n N2H2 + NO <=> N2O + NH2,-6.12E-16
+n H2NN <=> H + NNH,-6.22E-16
+n H2NN <=> H2 + N2,9.03E-16
+n H2NN <=> N2H2,7.97E-16
+n H + H2NN <=> H2 + NNH,7.36E-16
+n H + H2NN <=> H + N2H2,-9.81E-16
+n H2NN + O <=> NNH + OH,6.38E-16
+n H2NN + O <=> NH2 + NO,2.22E-15
+n H2NN + OH <=> H2O + NNH,-1.58E-15
+n H2NN + OH => H + NH2 + NO,2.44E-15
+n H2NN + HO2 => NH2 + NO + OH,1.43E-15
+n H2NN + HO2 <=> H2O2 + NNH,-2.05E-15
+n H2NN + O2 <=> NH2 + NO2,1.38E-15
+n H2NN + NH2 <=> NH3 + NNH,3.58E-15
+Ea H + O2 <=> O + OH,1.65E-16
+Ea H2 + O <=> H + OH,2.27E-15
+Ea H2 + O <=> H + OH,-7.38E-16
+Ea H2 + OH <=> H + H2O,-3.66E-15
+Ea 2 OH <=> H2O + O,-4.70E-16
+Ea 2 OH <=> H2O + O,4.49E-16
+Ea H2 + M <=> 2 H + M,-3.93E-16
+Ea AR + H2 <=> AR + 2 H,1.52E-16
+Ea H + O + M <=> OH + M,4.16E-16
+Ea 2 O + M <=> O2 + M,-2.03E-16
+Ea H2O + M <=> H + OH + M,4.73E-16
+Ea 2 H2O <=> H + H2O + OH,5.07E-16
+Ea H + O2 (+M) <=> HO2 (+M),1.19E-15
+Ea H + HO2 <=> H2 + O2,1.02E-16
+Ea H + HO2 <=> 2 OH,8.48E-16
+Ea H + HO2 <=> H2O + O,-1.08E-15
+Ea HO2 + O <=> O2 + OH,-9.82E-16
+Ea HO2 + OH <=> H2O + O2,1.08E-16
+Ea HO2 + OH <=> H2O + O2,-1.13E-16
+Ea 2 HO2 <=> H2O2 + O2,-1.43E-15
+Ea 2 HO2 <=> H2O2 + O2,-1.10E-15
+Ea H2O2 (+M) <=> 2 OH (+M),-1.04E-15
+Ea H + H2O2 <=> H2O + OH,1.09E-15
+Ea H + H2O2 <=> H2 + HO2,-1.75E-15
+Ea H2O2 + O <=> HO2 + OH,1.07E-15
+Ea H2O2 + OH <=> H2O + HO2,1.56E-15
+Ea H2O2 + OH <=> H2O + HO2,1.17E-15
+Ea H + NH2 (+M) <=> NH3 (+M),3.28E-15
+Ea H + NH3 <=> H2 + NH2,1.92E-16
+Ea NH3 + O <=> NH2 + OH,-8.87E-16
+Ea NH3 + OH <=> H2O + NH2,-8.47E-16
+Ea HO2 + NH3 <=> H2O2 + NH2,-2.95E-15
+Ea H2 + NH <=> H + NH2,-7.10E-16
+Ea NH2 + O <=> H + HNO,1.57E-15
+Ea NH2 + O <=> NH + OH,7.64E-16
+Ea NH2 + O <=> NH + OH,-2.39E-15
+Ea NH2 + OH <=> H2O + NH,1.86E-15
+Ea HO2 + NH2 <=> NH3 + O2,3.99E-16
+Ea HO2 + NH2 <=> H2NO + OH,-8.30E-16
+Ea HO2 + NH2 <=> H2O + HNO,-1.12E-15
+Ea HO2 + NH2 <=> H2O + HNO,1.21E-15
+Ea HO2 + NH2 <=> H2O + HON,-3.81E-15
+Ea NH2 + O2 <=> H2NO + O,-1.25E-15
+Ea NH2 + O2 <=> HNO + OH,-1.72E-16
+Ea 2 NH2 <=> NH + NH3,5.20E-16
+Ea NH + NH2 <=> N + NH3,2.43E-15
+Ea N + NH2 <=> 2 H + N2,-6.83E-16
+Ea HNO + NH2 <=> NH3 + NO,-1.30E-15
+Ea NH2 + NO <=> H2O + N2,2.37E-16
+Ea NH2 + NO <=> NNH + OH,5.91E-16
+Ea HONO + NH2 <=> NH3 + NO2,1.52E-15
+Ea NH2 + NO2 <=> H2NO + NO,1.59E-16
+Ea NH2 + NO2 <=> H2O + N2O,-1.48E-16
+Ea H + NH <=> H2 + N,9.32E-16
+Ea NH + O <=> H + NO,1.51E-15
+Ea NH + OH <=> H + HNO,1.18E-15
+Ea NH + OH <=> H2O + N,1.00E-15
+Ea NH + O2 <=> HNO + O,-6.58E-16
+Ea NH + O2 <=> NO + OH,7.24E-16
+Ea 2 NH <=> N + NH2,9.44E-16
+Ea N + NH <=> H + N2,-2.92E-16
+Ea NH + NO <=> H + N2O,6.01E-16
+Ea NH + NO <=> N2 + OH,-1.85E-15
+Ea HONO + NH <=> NH2 + NO2,-2.12E-16
+Ea NH + NO2 <=> N2O + OH,6.49E-16
+Ea NH + NO2 <=> HNO + NO,3.27E-15
+Ea N + OH <=> H + NO,-5.38E-18
+Ea N + O2 <=> NO + O,-1.30E-15
+Ea N + NO <=> N2 + O,1.07E-16
+Ea NNH <=> H + N2,7.35E-16
+Ea H + NNH <=> H2 + N2,-1.56E-15
+Ea NNH + O <=> H + N2O,4.83E-16
+Ea NNH + O <=> N2 + OH,-1.41E-15
+Ea NNH + O <=> NH + NO,1.24E-15
+Ea NNH + OH <=> H2O + N2,-2.40E-16
+Ea NNH + O2 <=> HO2 + N2,-1.70E-15
+Ea NH + NNH <=> N2 + NH2,-7.70E-16
+Ea NH2 + NNH <=> N2 + NH3,-2.03E-15
+Ea NNH + NO <=> HNO + N2,2.64E-16
+Ea NH2OH (+M) <=> NH2 + OH (+M),8.72E-16
+Ea H + NH2OH <=> H2 + HNOH,-1.64E-15
+Ea H + NH2OH <=> H2 + H2NO,-3.28E-16
+Ea NH2OH + O <=> HNOH + OH,-4.34E-16
+Ea NH2OH + O <=> H2NO + OH,-3.21E-15
+Ea NH2OH + OH <=> H2O + HNOH,1.90E-15
+Ea NH2OH + OH <=> H2NO + H2O,-1.28E-15
+Ea NH2 + NH2OH <=> HNOH + NH3,5.87E-16
+Ea NH2 + NH2OH <=> H2NO + NH3,-6.27E-16
+Ea NH + NH2OH <=> HNOH + NH2,3.94E-16
+Ea NH + NH2OH <=> H2NO + NH2,-2.35E-16
+Ea HO2 + NH2OH <=> H2O2 + HNOH,1.33E-15
+Ea HO2 + NH2OH <=> H2NO + H2O2,3.22E-16
+Ea H2NO + M <=> H + HNO + M,1.84E-15
+Ea H2NO + M <=> HNOH + M,5.83E-17
+Ea H + H2NO <=> H2 + HNO,-2.57E-16
+Ea H + H2NO <=> NH2 + OH,2.53E-15
+Ea H2NO + O <=> HNO + OH,7.90E-16
+Ea H2NO + OH <=> H2O + HNO,9.72E-16
+Ea H2NO + HO2 <=> H2O2 + HNO,-1.83E-15
+Ea H2NO + O2 <=> HNO + HO2,2.30E-15
+Ea H2NO + NH2 <=> HNO + NH3,-1.26E-15
+Ea H2NO + NO <=> 2 HNO,2.94E-15
+Ea H2NO + NO2 <=> HNO + HONO,-8.61E-16
+Ea HNOH + M <=> H + HNO + M,5.14E-16
+Ea H + HNOH <=> NH2 + OH,-4.85E-16
+Ea H + HNOH <=> H2 + HNO,-4.13E-15
+Ea HNOH + O <=> HNO + OH,1.18E-15
+Ea HNOH + O <=> HNO + OH,2.07E-15
+Ea HNOH + OH <=> H2O + HNO,-1.33E-15
+Ea HNOH + HO2 <=> H2O2 + HNO,2.38E-16
+Ea HNOH + HO2 <=> NH2OH + O2,-3.92E-16
+Ea HNOH + O2 <=> HNO + HO2,-1.75E-16
+Ea HNOH + NH2 <=> HNO + NH3,-1.25E-15
+Ea HNOH + NO2 <=> HNO + HONO,-7.23E-16
+Ea H + NO (+M) <=> HNO (+M),-9.74E-16
+Ea H + HNO <=> H2 + NO,-1.12E-15
+Ea HNO + O <=> NO + OH,-1.29E-15
+Ea HNO + OH <=> H2O + NO,6.00E-16
+Ea HNO + HO2 <=> HNO2 + OH,-1.24E-15
+Ea HNO + O2 <=> HO2 + NO,-2.78E-15
+Ea 2 HNO <=> H2O + N2O,-1.09E-17
+Ea HNO + NO2 <=> HONO + NO,-1.40E-16
+Ea HO2 + NO <=> NO2 + OH,-3.20E-15
+Ea NO + O (+M) <=> NO2 (+M),-331.8342601
+Ea H + NO2 <=> NO + OH,-3.61E-16
+Ea NO2 + O <=> NO + O2,279.1627078
+Ea HO2 + NO2 <=> HONO + O2,2.68E-15
+Ea HO2 + NO2 <=> HNO2 + O2,5.04E-16
+Ea 2 NO2 <=> 2 NO + O2,7.27E-15
+Ea 2 NO2 <=> NO + NO3,1.50E-15
+Ea NO + OH (+M) <=> HONO (+M),-1.70E-15
+Ea H2 + NO2 <=> H + HONO,-1.15E-15
+Ea H2 + NO2 <=> H + HONO,-2.77E-15
+Ea H + HONO <=> HNO + OH,-2.25E-15
+Ea H + HONO <=> H2O + NO,-2.64E-16
+Ea HONO + O <=> NO2 + OH,1.95E-16
+Ea HONO + OH <=> H2O + NO2,-2.48E-15
+Ea HONO + NO2 <=> HONO2 + NO,-1.41E-16
+Ea 2 HONO <=> H2O + NO + NO2,4.77E-15
+Ea HNO2 (+M) <=> HONO (+M),-9.89E-16
+Ea H2 + NO2 <=> H + HNO2,6.88E-16
+Ea HNO2 + O <=> NO2 + OH,-1.77E-15
+Ea HNO2 + OH <=> H2O + NO2,-4.88E-15
+Ea NO2 + O (+M) <=> NO3 (+M),2.66E-15
+Ea H + NO3 <=> NO2 + OH,2.13E-15
+Ea NO3 + O <=> NO2 + O2,-1.92E-15
+Ea NO3 + OH <=> HO2 + NO2,-1.77E-15
+Ea HO2 + NO3 <=> NO2 + O2 + OH,3.00E-16
+Ea NO2 + NO3 <=> NO + NO2 + O2,-5.72E-15
+Ea NO2 + OH (+M) <=> HONO2 (+M),2.19E-15
+Ea H + HONO2 <=> H2 + NO3,8.23E-16
+Ea H + HONO2 <=> H2O + NO2,5.81E-16
+Ea H + HONO2 <=> HONO + OH,1.78E-14
+Ea HONO2 + OH <=> H2O + NO3,9.72E-16
+Ea N2O (+M) <=> N2 + O (+M),1330.53734
+Ea H + N2O <=> N2 + OH,2.08E-15
+Ea N2O + OH <=> HO2 + N2,1.64E-15
+Ea N2O + OH <=> HNO + NO,-4.96E-15
+Ea N2O + NO <=> N2 + NO2,-7.92E-16
+Ea 2 NH2 <=> H2 + N2H2,-1.00E-15
+Ea 2 NH2 <=> H2 + H2NN,-1.43E-15
+Ea NH + NH2 <=> H + N2H2,1.36E-15
+Ea HNOH + NH2 <=> N2H3 + OH,1.23E-15
+Ea HNOH + NH2 <=> H2NN + H2O,-2.50E-15
+Ea 2 NH2 (+M) <=> N2H4 (+M),-1.92E-16
+Ea N2H4 <=> H2 + H2NN,2.76E-15
+Ea H + N2H4 <=> H2 + N2H3,3.15E-16
+Ea H + N2H4 <=> NH2 + NH3,5.29E-16
+Ea N2H4 + O <=> N2H3 + OH,-7.40E-16
+Ea N2H4 + O <=> H2O + N2H2,-1.78E-15
+Ea N2H4 + OH <=> H2O + N2H3,-1.22E-15
+Ea N2H4 + NH2 <=> N2H3 + NH3,-4.52E-16
+Ea N2H4 + NO <=> HNO + N2H3,1.24E-16
+Ea N2H4 + NO2 <=> HONO + N2H3,1.72E-15
+Ea N2H4 + NO2 <=> HNO2 + N2H3,-1.33E-15
+Ea H + N2H2 <=> N2H3,2.85E-16
+Ea H + N2H3 <=> H2 + N2H2,-4.57E-15
+Ea N2H3 + O <=> N2H2 + OH,-1.46E-15
+Ea N2H3 + O <=> HNO + NH2,2.18E-15
+Ea N2H3 + O => H + NH2 + NO,-4.20E-16
+Ea N2H3 + OH <=> H2O + N2H2,2.76E-15
+Ea N2H3 + OH <=> H2NN + H2O,2.25E-15
+Ea N2H3 + OH <=> HNO + NH3,1.17E-15
+Ea HO2 + N2H3 <=> H2O2 + N2H2,-7.70E-16
+Ea HO2 + N2H3 <=> N2H4 + O2,-1.18E-15
+Ea N2H3 + NH2 <=> N2H2 + NH3,-1.17E-15
+Ea N2H3 + NH2 <=> H2NN + NH3,-1.64E-15
+Ea N2H3 + NH <=> N2H2 + NH2,1.47E-15
+Ea N2H2 + M <=> H + NNH + M,-1.75E-15
+Ea H + N2H2 <=> H2 + NNH,2.02E-15
+Ea N2H2 + O <=> NNH + OH,2.54E-15
+Ea N2H2 + O <=> NH2 + NO,7.62E-16
+Ea N2H2 + OH <=> H2O + NNH,-1.60E-15
+Ea N2H2 + NH2 <=> NH3 + NNH,-2.48E-15
+Ea N2H2 + NH <=> NH2 + NNH,1.31E-16
+Ea N2H2 + NO <=> N2O + NH2,-1.78E-15
+Ea H2NN <=> H + NNH,1.13E-15
+Ea H2NN <=> H2 + N2,3.67E-16
+Ea H2NN <=> N2H2,-1.75E-15
+Ea H + H2NN <=> H2 + NNH,-1.43E-15
+Ea H + H2NN <=> H + N2H2,1.04E-15
+Ea H2NN + O <=> NNH + OH,1.87E-16
+Ea H2NN + O <=> NH2 + NO,2.09E-15
+Ea H2NN + OH <=> H2O + NNH,3.88E-16
+Ea H2NN + OH => H + NH2 + NO,1.85E-15
+Ea H2NN + HO2 => NH2 + NO + OH,-1.38E-15
+Ea H2NN + HO2 <=> H2O2 + NNH,2.24E-15
+Ea H2NN + O2 <=> NH2 + NO2,6.31E-16
+Ea H2NN + NH2 <=> NH3 + NNH,2.27E-15
+P1_SymmetryFactor_1 N2O + O <=> 2 NO,0.00E+00
+W2_Energy_1 N2O + O <=> 2 NO,0.00E+00
+B4_Energy_1 N2O + O <=> 2 NO,0.00E+00
+W1_Frequencies_1 N2O + O <=> 2 NO,0.00E+00
+P2_SymmetryFactor_1 N2O + O <=> 2 NO,0.00E+00
+B5_ImaginaryFrequency_1 N2O + O <=> 2 NO,0.00E+00
+W1_Energy_1 N2O + O <=> 2 NO,0.00E+00
+B4_ImaginaryFrequency_1 N2O + O <=> 2 NO,0.00E+00
+B5_Frequencies_1 N2O + O <=> 2 NO,0.00E+00
+P2_Energy_1 N2O + O <=> 2 NO,0.00E+00
+B4_Frequencies_1 N2O + O <=> 2 NO,0.00E+00
+P2_Frequencies_1 N2O + O <=> 2 NO,0.00E+00
+B4_SymmetryFactor_1 N2O + O <=> 2 NO,0.00E+00
+P1_Frequencies_1 N2O + O <=> 2 NO,0.00E+00
+W1_SymmetryFactor_1 N2O + O <=> 2 NO,0.00E+00
+B5_SymmetryFactor_1 N2O + O <=> 2 NO,0.00E+00
+B5_Energy_1 N2O + O <=> 2 NO,0.00E+00
+W2_Frequencies_1 N2O + O <=> 2 NO,0.00E+00
+W2_SymmetryFactor_1 N2O + O <=> 2 NO,0.00E+00
+P1_Energy_1 N2O + O <=> 2 NO,0.00E+00
+P1_SymmetryFactor_1 N2O + O <=> N2 + O2,1.53E-15
+W2_Energy_1 N2O + O <=> N2 + O2,-7.96E-17
+B4_Energy_1 N2O + O <=> N2 + O2,-1.904325253
+W1_Frequencies_1 N2O + O <=> N2 + O2,1.03E-15
+P2_SymmetryFactor_1 N2O + O <=> N2 + O2,2.18E-15
+B5_ImaginaryFrequency_1 N2O + O <=> N2 + O2,-0.000440111
+W1_Energy_1 N2O + O <=> N2 + O2,2.89E-15
+B4_ImaginaryFrequency_1 N2O + O <=> N2 + O2,-0.002461134
+B5_Frequencies_1 N2O + O <=> N2 + O2,-0.003522155
+P2_Energy_1 N2O + O <=> N2 + O2,-1.90E-15
+B4_Frequencies_1 N2O + O <=> N2 + O2,-0.070292962
+P2_Frequencies_1 N2O + O <=> N2 + O2,5.92E-16
+B4_SymmetryFactor_1 N2O + O <=> N2 + O2,-1.02E-16
+P1_Frequencies_1 N2O + O <=> N2 + O2,1.43E-15
+W1_SymmetryFactor_1 N2O + O <=> N2 + O2,-1.26E-15
+B5_SymmetryFactor_1 N2O + O <=> N2 + O2,2.29E-15
+B5_Energy_1 N2O + O <=> N2 + O2,-0.084963248
+W2_Frequencies_1 N2O + O <=> N2 + O2,-2.19E-15
+W2_SymmetryFactor_1 N2O + O <=> N2 + O2,3.39E-16
+P1_Energy_1 N2O + O <=> N2 + O2,-4.79E-17
+Temperature allen_1_spe_1,0.000302195
+Pressure allen_1_spe_1,-0.001242018
+X_N2O allen_1_spe_1,0.002073768
+X_H2O allen_1_spe_1,0.00015844
+X_N2 allen_1_spe_1,-6.08E-10
+TimeShift allen_1_spe_1,-0.071926457
+Temperature allen_1_spe_2,-0.000131388
+Pressure allen_1_spe_2,0.000135143
+X_N2O allen_1_spe_2,-0.001336069
+X_H2O allen_1_spe_2,0.000966269
+X_N2 allen_1_spe_2,5.16E-10
+TimeShift allen_1_spe_2,0.000382726
+Temperature_1050.549580102 barbet_experiment_id1_0,0.00053436
+Pressure barbet_experiment_id1_0,-3.19E-06
+X_N2O barbet_experiment_id1_0,-1.66E-05
+X_NO2 barbet_experiment_id1_0,9.28E-07
+ResidenceTime barbet_experiment_id1_0,2.39E-05
+Temperature_1050.281834664 barbet_experiment_id1_1,0.000276591
+Pressure barbet_experiment_id1_1,4.89E-08
+X_N2O barbet_experiment_id1_1,2.38E-07
+X_NO2 barbet_experiment_id1_1,2.17E-07
+ResidenceTime barbet_experiment_id1_1,5.84E-06
+Temperature_1103.533340756 barbet_experiment_id2_0,0.003210468
+Pressure barbet_experiment_id2_0,5.29E-05
+X_N2O barbet_experiment_id2_0,3.78E-05
+X_NO barbet_experiment_id2_0,6.84E-05
+ResidenceTime barbet_experiment_id2_0,-1.86E-05
+Temperature_1102.642494333 barbet_experiment_id2_1,0.002403112
+Pressure barbet_experiment_id2_1,-2.21E-06
+X_N2O barbet_experiment_id2_1,-8.06E-06
+X_NO barbet_experiment_id2_1,4.88E-06
+ResidenceTime barbet_experiment_id2_1,8.97E-06
+Temperature_1042.508074388 barbet_experiment_id3_0,-0.007147111
+Pressure barbet_experiment_id3_0,-4.41E-05
+X_N2O barbet_experiment_id3_0,6.24E-06
+ResidenceTime barbet_experiment_id3_0,-0.000567247
+Temperature_1049.088187955 barbet_experiment_id3_1,-0.000859813
+Pressure barbet_experiment_id3_1,4.24E-08
+X_N2O barbet_experiment_id3_1,-7.59E-07
+ResidenceTime barbet_experiment_id3_1,-1.74E-05
+Temperature_1048.683427073 barbet_experiment_id4_0,-0.001242515
+Pressure barbet_experiment_id4_0,-9.76E-06
+X_N2O barbet_experiment_id4_0,2.69E-06
+X_NO2 barbet_experiment_id4_0,-3.00E-05
+X_NO barbet_experiment_id4_0,3.04E-06
+ResidenceTime barbet_experiment_id4_0,-7.10E-05
+Temperature_1050.210668026 barbet_experiment_id4_1,0.000208783
+Pressure barbet_experiment_id4_1,3.14E-08
+X_N2O barbet_experiment_id4_1,-1.13E-07
+X_NO2 barbet_experiment_id4_1,2.08E-07
+X_NO barbet_experiment_id4_1,1.62E-07
+ResidenceTime barbet_experiment_id4_1,4.48E-06
+Temperature_1049.881999781 barbet_experiment_id5_0,-0.000100177
+Pressure barbet_experiment_id5_0,-6.50E-06
+X_N2O barbet_experiment_id5_0,2.47E-06
+X_NO barbet_experiment_id5_0,2.57E-06
+ResidenceTime barbet_experiment_id5_0,-7.20E-05
+Temperature_1049.562276441 barbet_experiment_id5_1,-0.000408121
+Pressure barbet_experiment_id5_1,1.56E-08
+X_N2O barbet_experiment_id5_1,1.80E-07
+X_NO barbet_experiment_id5_1,-3.61E-07
+ResidenceTime barbet_experiment_id5_1,-8.32E-06
+Temperature_1101.273114307 barbet_experiment_id6_0,0.001159677
+Pressure barbet_experiment_id6_0,1.84E-06
+X_N2O barbet_experiment_id6_0,2.28E-05
+X_NO2 barbet_experiment_id6_0,2.17E-05
+X_NO barbet_experiment_id6_0,4.90E-05
+ResidenceTime barbet_experiment_id6_0,-5.24E-05
+Temperature_1102.114785434 barbet_experiment_id6_1,0.001924076
+Pressure barbet_experiment_id6_1,-8.76E-07
+X_N2O barbet_experiment_id6_1,1.91E-07
+X_NO2 barbet_experiment_id6_1,-1.33E-06
+X_NO barbet_experiment_id6_1,1.74E-05
+ResidenceTime barbet_experiment_id6_1,2.83E-05
+Temperature_1052.216384546 barbet_experiment_id7_0,0.002119758
+Pressure barbet_experiment_id7_0,1.22E-06
+X_N2O barbet_experiment_id7_0,-3.32E-06
+X_NO2 barbet_experiment_id7_0,-2.44E-05
+X_NO barbet_experiment_id7_0,3.09E-06
+ResidenceTime barbet_experiment_id7_0,8.56E-05
+Temperature_1050.102832807 barbet_experiment_id7_1,0.000106134
+Pressure barbet_experiment_id7_1,2.02E-08
+X_N2O barbet_experiment_id7_1,-5.83E-08
+X_NO2 barbet_experiment_id7_1,1.22E-07
+X_NO barbet_experiment_id7_1,8.23E-08
+ResidenceTime barbet_experiment_id7_1,2.37E-06
+Temperature_1050.705254342 barbet_experiment_id8_0,0.000683535
+Pressure barbet_experiment_id8_0,1.76E-06
+X_N2O barbet_experiment_id8_0,1.63E-05
+X_NO2 barbet_experiment_id8_0,3.85E-06
+ResidenceTime barbet_experiment_id8_0,-1.73E-05
+Temperature_1049.71323904 barbet_experiment_id8_1,-0.000264312
+Pressure barbet_experiment_id8_1,5.54E-09
+X_N2O barbet_experiment_id8_1,1.64E-06
+X_NO2 barbet_experiment_id8_1,-2.46E-07
+ResidenceTime barbet_experiment_id8_1,-5.36E-06
+Temperature_1101.177071236 barbet_experiment_id9_0,0.001071441
+Pressure barbet_experiment_id9_0,-6.26E-06
+X_N2O barbet_experiment_id9_0,1.42E-05
+X_NO2 barbet_experiment_id9_0,7.27E-06
+X_NO barbet_experiment_id9_0,2.14E-05
+ResidenceTime barbet_experiment_id9_0,-4.00E-05
+Temperature_1101.788263321 barbet_experiment_id9_1,0.001627765
+Pressure barbet_experiment_id9_1,-7.39E-07
+X_N2O barbet_experiment_id9_1,1.85E-07
+X_NO2 barbet_experiment_id9_1,-6.31E-07
+X_NO barbet_experiment_id9_1,1.47E-05
+ResidenceTime barbet_experiment_id9_1,2.40E-05
+Temperature_1049.204140648 barbet_experiment_id10_0,-0.000745887
+Pressure barbet_experiment_id10_0,-4.01E-06
+X_N2O barbet_experiment_id10_0,1.51E-06
+X_NO barbet_experiment_id10_0,1.69E-06
+ResidenceTime barbet_experiment_id10_0,-6.01E-05
+Temperature_1049.414917862 barbet_experiment_id10_1,-0.000548529
+Pressure barbet_experiment_id10_1,2.11E-08
+X_N2O barbet_experiment_id10_1,2.31E-07
+X_NO barbet_experiment_id10_1,-4.82E-07
+ResidenceTime barbet_experiment_id10_1,-1.10E-05
+Temperature_1048.531059511 barbet_experiment_id11_0,-0.001387794
+Pressure barbet_experiment_id11_0,-2.64E-06
+X_N2O barbet_experiment_id11_0,-6.46E-07
+X_NO2 barbet_experiment_id11_0,5.48E-06
+ResidenceTime barbet_experiment_id11_0,-8.13E-05
+Temperature_1050.17885405 barbet_experiment_id11_1,0.000178432
+Pressure barbet_experiment_id11_1,2.97E-08
+X_N2O barbet_experiment_id11_1,1.60E-07
+X_NO2 barbet_experiment_id11_1,1.40E-07
+ResidenceTime barbet_experiment_id11_1,3.78E-06
+Temperature_1103.991733603 barbet_experiment_id12_0,0.003624289
+Pressure barbet_experiment_id12_0,4.66E-05
+X_N2O barbet_experiment_id12_0,9.04E-05
+ResidenceTime barbet_experiment_id12_0,-2.69E-05
+Temperature_1103.620917069 barbet_experiment_id12_1,0.003290335
+Pressure barbet_experiment_id12_1,-3.08E-06
+X_N2O barbet_experiment_id12_1,7.12E-06
+ResidenceTime barbet_experiment_id12_1,1.08E-05
+Temperature_1050.209573358 barbet_experiment_id13_0,0.00021174
+Pressure barbet_experiment_id13_0,2.29E-06
+X_N2O barbet_experiment_id13_0,2.64E-06
+ResidenceTime barbet_experiment_id13_0,-2.45E-06
+Temperature_1049.51182788 barbet_experiment_id13_1,-0.000456163
+Pressure barbet_experiment_id13_1,1.34E-08
+X_N2O barbet_experiment_id13_1,-4.07E-07
+ResidenceTime barbet_experiment_id13_1,-9.26E-06
+Temperature_1050.949457809 barbet_experiment_id14_0,0.000915594
+Pressure barbet_experiment_id14_0,-6.44E-06
+X_N2O barbet_experiment_id14_0,-1.16E-05
+X_NO2 barbet_experiment_id14_0,2.73E-06
+ResidenceTime barbet_experiment_id14_0,-9.97E-06
+Temperature_1050.188739176 barbet_experiment_id14_1,0.000188082
+Pressure barbet_experiment_id14_1,8.42E-09
+X_N2O barbet_experiment_id14_1,1.35E-07
+X_NO2 barbet_experiment_id14_1,1.45E-07
+ResidenceTime barbet_experiment_id14_1,3.98E-06
+Temperature_1049.854878862 barbet_experiment_id15_0,-0.000126007
+Pressure barbet_experiment_id15_0,-4.98E-08
+X_N2O barbet_experiment_id15_0,1.33E-06
+X_NO2 barbet_experiment_id15_0,5.84E-06
+ResidenceTime barbet_experiment_id15_0,-6.46E-05
+Temperature_1049.693646103 barbet_experiment_id15_1,-0.000282959
+Pressure barbet_experiment_id15_1,5.84E-09
+X_N2O barbet_experiment_id15_1,6.90E-08
+X_NO2 barbet_experiment_id15_1,-2.46E-07
+ResidenceTime barbet_experiment_id15_1,-5.78E-06
+Temperature_1050.305377535 barbet_experiment_id16_0,0.000302933
+Pressure barbet_experiment_id16_0,-2.52E-06
+X_N2O barbet_experiment_id16_0,1.04E-06
+X_NO2 barbet_experiment_id16_0,4.90E-06
+ResidenceTime barbet_experiment_id16_0,-5.04E-05
+Temperature_1048.939223189 barbet_experiment_id16_1,-0.001001847
+Pressure barbet_experiment_id16_1,2.38E-08
+X_N2O barbet_experiment_id16_1,2.79E-07
+X_NO2 barbet_experiment_id16_1,-8.70E-07
+ResidenceTime barbet_experiment_id16_1,-2.05E-05
+Temperature_1101.407273359 barbet_experiment_id17_0,0.00128142
+Pressure barbet_experiment_id17_0,-2.96E-06
+X_N2O barbet_experiment_id17_0,2.07E-05
+X_NO2 barbet_experiment_id17_0,5.04E-06
+ResidenceTime barbet_experiment_id17_0,-4.80E-05
+Temperature_1102.353009761 barbet_experiment_id17_1,0.002140017
+Pressure barbet_experiment_id17_1,-8.41E-07
+X_N2O barbet_experiment_id17_1,1.90E-06
+X_NO2 barbet_experiment_id17_1,2.42E-05
+ResidenceTime barbet_experiment_id17_1,3.39E-05
+Temperature_1046.31585538 barbet_experiment_id18_0,-0.003502439
+Pressure barbet_experiment_id18_0,-4.94E-06
+X_N2O barbet_experiment_id18_0,-3.99E-06
+X_NO2 barbet_experiment_id18_0,-3.28E-06
+ResidenceTime barbet_experiment_id18_0,-8.81E-05
+Temperature_1047.337108082 barbet_experiment_id18_1,-0.002530848
+Pressure barbet_experiment_id18_1,-4.01E-07
+X_N2O barbet_experiment_id18_1,-4.08E-06
+X_NO2 barbet_experiment_id18_1,-4.48E-06
+ResidenceTime barbet_experiment_id18_1,-5.77E-05
+Temperature_1099.804524941 barbet_experiment_id19_0,-0.000174547
+Pressure barbet_experiment_id19_0,-1.16E-05
+X_N2O barbet_experiment_id19_0,1.62E-05
+X_NO barbet_experiment_id19_0,3.36E-06
+ResidenceTime barbet_experiment_id19_0,-0.000113033
+Temperature_1101.897814894 barbet_experiment_id19_1,0.001727545
+Pressure barbet_experiment_id19_1,-8.20E-07
+X_N2O barbet_experiment_id19_1,-1.79E-06
+X_NO barbet_experiment_id19_1,1.59E-05
+ResidenceTime barbet_experiment_id19_1,2.60E-05
+Temperature_1047.362532503 barbet_experiment_id20_0,-0.002502593
+Pressure barbet_experiment_id20_0,-3.53E-06
+X_N2O barbet_experiment_id20_0,-1.51E-06
+ResidenceTime barbet_experiment_id20_0,-5.90E-05
+Temperature_1046.744761452 barbet_experiment_id20_1,-0.003095978
+Pressure barbet_experiment_id20_1,-3.21E-09
+X_N2O barbet_experiment_id20_1,-6.08E-06
+ResidenceTime barbet_experiment_id20_1,-6.64E-05
+Temperature_1047.157650538 barbet_experiment_id21_0,-0.002698394
+Pressure barbet_experiment_id21_0,-1.06E-05
+X_N2O barbet_experiment_id21_0,6.72E-06
+X_NO2 barbet_experiment_id21_0,-2.14E-05
+X_NO barbet_experiment_id21_0,1.88E-06
+ResidenceTime barbet_experiment_id21_0,-0.000109825
+Temperature_1048.584780983 barbet_experiment_id21_1,-0.001340505
+Pressure barbet_experiment_id21_1,-2.01E-07
+X_N2O barbet_experiment_id21_1,4.53E-07
+X_NO2 barbet_experiment_id21_1,-2.15E-06
+X_NO barbet_experiment_id21_1,-2.37E-06
+ResidenceTime barbet_experiment_id21_1,-3.02E-05
+Temperature_1047.734797731 barbet_experiment_id22_0,-0.002147026
+Pressure barbet_experiment_id22_0,-3.51E-06
+X_N2O barbet_experiment_id22_0,2.99E-06
+X_NO barbet_experiment_id22_0,4.57E-08
+ResidenceTime barbet_experiment_id22_0,-4.73E-05
+Temperature_1046.404559695 barbet_experiment_id22_1,-0.003421022
+Pressure barbet_experiment_id22_1,-5.44E-09
+X_N2O barbet_experiment_id22_1,7.63E-07
+X_NO barbet_experiment_id22_1,-6.70E-06
+ResidenceTime barbet_experiment_id22_1,-7.32E-05
+Temperature_1101.996485812 barbet_experiment_id23_0,0.001815981
+Pressure barbet_experiment_id23_0,-1.12E-05
+X_N2O barbet_experiment_id23_0,1.30E-05
+X_NO2 barbet_experiment_id23_0,1.37E-05
+X_NO barbet_experiment_id23_0,-0.001234611
+ResidenceTime barbet_experiment_id23_0,-5.96E-05
+Temperature_1101.834623779 barbet_experiment_id23_1,0.001669821
+Pressure barbet_experiment_id23_1,-4.81E-07
+X_N2O barbet_experiment_id23_1,1.99E-06
+X_NO2 barbet_experiment_id23_1,4.07E-06
+X_NO barbet_experiment_id23_1,9.01E-05
+ResidenceTime barbet_experiment_id23_1,3.15E-05
+Temperature_1047.70210521 barbet_experiment_id24_0,-0.002178632
+Pressure barbet_experiment_id24_0,-7.17E-06
+X_N2O barbet_experiment_id24_0,3.79E-06
+X_NO2 barbet_experiment_id24_0,-8.00E-06
+X_NO barbet_experiment_id24_0,1.98E-06
+ResidenceTime barbet_experiment_id24_0,-7.10E-05
+Temperature_1048.282739269 barbet_experiment_id24_1,-0.001628566
+Pressure barbet_experiment_id24_1,-2.48E-07
+X_N2O barbet_experiment_id24_1,3.77E-07
+X_NO2 barbet_experiment_id24_1,-2.59E-06
+X_NO barbet_experiment_id24_1,-2.87E-06
+ResidenceTime barbet_experiment_id24_1,-3.68E-05
+Temperature_1046.177664832 barbet_experiment_id25_0,-0.003634199
+Pressure barbet_experiment_id25_0,-7.89E-06
+X_N2O barbet_experiment_id25_0,4.35E-07
+X_NO2 barbet_experiment_id25_0,7.25E-07
+ResidenceTime barbet_experiment_id25_0,-0.000113475
+Temperature_1047.410095513 barbet_experiment_id25_1,-0.002460651
+Pressure barbet_experiment_id25_1,-1.44E-08
+X_N2O barbet_experiment_id25_1,2.25E-07
+X_NO2 barbet_experiment_id25_1,-4.80E-06
+ResidenceTime barbet_experiment_id25_1,-5.28E-05
+Temperature_1102.136958173 barbet_experiment_id26_0,0.001943456
+Pressure barbet_experiment_id26_0,-1.12E-05
+X_N2O barbet_experiment_id26_0,1.32E-05
+X_NO2 barbet_experiment_id26_0,1.15E-05
+X_NO barbet_experiment_id26_0,-0.001225204
+ResidenceTime barbet_experiment_id26_0,-5.88E-05
+Temperature_1101.99893188 barbet_experiment_id26_1,0.001818877
+Pressure barbet_experiment_id26_1,-5.21E-07
+X_N2O barbet_experiment_id26_1,2.22E-06
+X_NO2 barbet_experiment_id26_1,4.77E-06
+X_NO barbet_experiment_id26_1,9.78E-05
+ResidenceTime barbet_experiment_id26_1,3.42E-05
+Temperature_1046.649629915 barbet_experiment_id27_0,-0.003183352
+Pressure barbet_experiment_id27_0,-3.66E-06
+X_N2O barbet_experiment_id27_0,2.85E-06
+X_NO barbet_experiment_id27_0,-1.13E-06
+ResidenceTime barbet_experiment_id27_0,-6.72E-05
+Temperature_1047.027077198 barbet_experiment_id27_1,-0.002826377
+Pressure barbet_experiment_id27_1,-1.10E-08
+X_N2O barbet_experiment_id27_1,4.72E-07
+X_NO barbet_experiment_id27_1,-5.51E-06
+ResidenceTime barbet_experiment_id27_1,-6.01E-05
+Temperature_1047.722739782 barbet_experiment_id28_0,-0.002159006
+Pressure barbet_experiment_id28_0,-8.94E-06
+X_N2O barbet_experiment_id28_0,-1.26E-06
+X_NO2 barbet_experiment_id28_0,1.92E-06
+ResidenceTime barbet_experiment_id28_0,-9.37E-05
+Temperature_1048.837015473 barbet_experiment_id28_1,-0.001099929
+Pressure barbet_experiment_id28_1,-1.59E-07
+X_N2O barbet_experiment_id28_1,-1.70E-06
+X_NO2 barbet_experiment_id28_1,-1.94E-06
+ResidenceTime barbet_experiment_id28_1,-2.47E-05
+Temperature_1100.078755 barbet_experiment_id29_0,7.48E-05
+Pressure barbet_experiment_id29_0,-1.26E-05
+X_N2O barbet_experiment_id29_0,1.59E-05
+ResidenceTime barbet_experiment_id29_0,-0.000122904
+Temperature_1101.330404464 barbet_experiment_id29_1,0.001211447
+Pressure barbet_experiment_id29_1,-5.50E-07
+X_N2O barbet_experiment_id29_1,1.12E-05
+ResidenceTime barbet_experiment_id29_1,1.84E-05
+Temperature_1046.524325409 barbet_experiment_id30_0,-0.003302979
+Pressure barbet_experiment_id30_0,-8.04E-06
+X_N2O barbet_experiment_id30_0,1.78E-06
+ResidenceTime barbet_experiment_id30_0,-0.000110257
+Temperature_1046.517507726 barbet_experiment_id30_1,-0.003313102
+Pressure barbet_experiment_id30_1,-1.17E-08
+X_N2O barbet_experiment_id30_1,-6.49E-06
+ResidenceTime barbet_experiment_id30_1,-7.09E-05
+Temperature_1047.233925621 barbet_experiment_id31_0,-0.002625549
+Pressure barbet_experiment_id31_0,-8.78E-06
+X_N2O barbet_experiment_id31_0,6.28E-06
+X_NO2 barbet_experiment_id31_0,1.51E-06
+ResidenceTime barbet_experiment_id31_0,-9.82E-05
+Temperature_1047.720730507 barbet_experiment_id31_1,-0.002164598
+Pressure barbet_experiment_id31_1,-2.66E-07
+X_N2O barbet_experiment_id31_1,-2.90E-06
+X_NO2 barbet_experiment_id31_1,-3.88E-06
+ResidenceTime barbet_experiment_id31_1,-4.83E-05
+Temperature_1047.628614906 barbet_experiment_id32_0,-0.00224849
+Pressure barbet_experiment_id32_0,-4.36E-06
+X_N2O barbet_experiment_id32_0,5.71E-07
+X_NO2 barbet_experiment_id32_0,5.10E-07
+ResidenceTime barbet_experiment_id32_0,-6.11E-05
+Temperature_1046.746126514 barbet_experiment_id32_1,-0.00309471
+Pressure barbet_experiment_id32_1,-2.16E-08
+X_N2O barbet_experiment_id32_1,3.23E-07
+X_NO2 barbet_experiment_id32_1,-6.00E-06
+ResidenceTime barbet_experiment_id32_1,-6.59E-05
+Temperature_1048.092217791 barbet_experiment_id33_0,-0.001806313
+Pressure barbet_experiment_id33_0,-3.85E-06
+X_N2O barbet_experiment_id33_0,9.00E-07
+X_NO2 barbet_experiment_id33_0,5.27E-07
+ResidenceTime barbet_experiment_id33_0,-5.36E-05
+Temperature_1047.397520705 barbet_experiment_id33_1,-0.002472671
+Pressure barbet_experiment_id33_1,-1.66E-08
+X_N2O barbet_experiment_id33_1,2.16E-07
+X_NO2 barbet_experiment_id33_1,-4.77E-06
+ResidenceTime barbet_experiment_id33_1,-5.25E-05
+Temperature_1102.789980881 barbet_experiment_id34_0,0.00253568
+Pressure barbet_experiment_id34_0,-1.33E-05
+X_N2O barbet_experiment_id34_0,1.91E-05
+X_NO2 barbet_experiment_id34_0,-0.001695752
+ResidenceTime barbet_experiment_id34_0,-6.84E-05
+Temperature_1101.909276507 barbet_experiment_id34_1,0.001737469
+Pressure barbet_experiment_id34_1,-4.12E-07
+X_N2O barbet_experiment_id34_1,5.84E-06
+X_NO2 barbet_experiment_id34_1,0.000121723
+ResidenceTime barbet_experiment_id34_1,3.39E-05
+Temperature_1051.1952319 barbet_experiment_id35_0,0.001149305
+Pressure barbet_experiment_id35_0,-1.48E-06
+X_N2O barbet_experiment_id35_0,-3.26E-05
+X_NO2 barbet_experiment_id35_0,1.99E-06
+ResidenceTime barbet_experiment_id35_0,5.44E-05
+Temperature_1050.281844457 barbet_experiment_id35_1,0.000276586
+Pressure barbet_experiment_id35_1,2.66E-08
+X_N2O barbet_experiment_id35_1,2.65E-07
+X_NO2 barbet_experiment_id35_1,2.17E-07
+ResidenceTime barbet_experiment_id35_1,5.93E-06
+Temperature_1049.818106607 barbet_experiment_id36_0,-0.000161279
+Pressure barbet_experiment_id36_0,-6.42E-06
+X_N2O barbet_experiment_id36_0,-1.66E-05
+X_NO2 barbet_experiment_id36_0,3.98E-06
+ResidenceTime barbet_experiment_id36_0,-3.23E-05
+Temperature_1050.213867339 barbet_experiment_id36_1,0.000211937
+Pressure barbet_experiment_id36_1,1.85E-08
+X_N2O barbet_experiment_id36_1,1.81E-07
+X_NO2 barbet_experiment_id36_1,1.65E-07
+ResidenceTime barbet_experiment_id36_1,4.51E-06
+Temperature_1049.560764607 barbet_experiment_id37_0,-0.000406378
+Pressure barbet_experiment_id37_0,-4.55E-06
+X_N2O barbet_experiment_id37_0,-5.44E-06
+X_NO2 barbet_experiment_id37_0,4.09E-06
+ResidenceTime barbet_experiment_id37_0,-5.36E-05
+Temperature_1050.41105044 barbet_experiment_id37_1,0.000399751
+Pressure barbet_experiment_id37_1,2.73E-08
+X_N2O barbet_experiment_id37_1,2.50E-07
+X_NO2 barbet_experiment_id37_1,3.08E-07
+ResidenceTime barbet_experiment_id37_1,8.43E-06
+Temperature_1050.049341166 barbet_experiment_id38_0,5.90E-05
+Pressure barbet_experiment_id38_0,-2.48E-06
+X_N2O barbet_experiment_id38_0,-2.75E-07
+X_NO2 barbet_experiment_id38_0,3.75E-06
+ResidenceTime barbet_experiment_id38_0,-3.43E-05
+Temperature_1050.064823411 barbet_experiment_id38_1,7.02E-05
+Pressure barbet_experiment_id38_1,3.57E-09
+X_N2O barbet_experiment_id38_1,4.23E-08
+X_NO2 barbet_experiment_id38_1,5.43E-08
+ResidenceTime barbet_experiment_id38_1,1.47E-06
+Temperature_1050.717858576 barbet_experiment_id39_0,0.000695293
+Pressure barbet_experiment_id39_0,-1.83E-06
+X_N2O barbet_experiment_id39_0,2.98E-06
+X_NO2 barbet_experiment_id39_0,2.83E-06
+ResidenceTime barbet_experiment_id39_0,-3.52E-06
+Temperature_1050.453461437 barbet_experiment_id39_1,0.00044031
+Pressure barbet_experiment_id39_1,1.55E-08
+X_N2O barbet_experiment_id39_1,1.50E-07
+X_NO2 barbet_experiment_id39_1,3.45E-07
+ResidenceTime barbet_experiment_id39_1,9.19E-06
+Temperature_1050.681901396 barbet_experiment_id40_0,0.000661105
+Pressure barbet_experiment_id40_0,-2.18E-06
+X_N2O barbet_experiment_id40_0,-2.00E-06
+X_NO2 barbet_experiment_id40_0,3.63E-06
+ResidenceTime barbet_experiment_id40_0,-8.23E-06
+Temperature_1050.305750338 barbet_experiment_id40_1,0.000299724
+Pressure barbet_experiment_id40_1,5.62E-09
+X_N2O barbet_experiment_id40_1,4.45E-08
+X_NO2 barbet_experiment_id40_1,2.39E-07
+ResidenceTime barbet_experiment_id40_1,6.22E-06
+Temperature_1050.617257771 barbet_experiment_id41_0,0.000599649
+Pressure barbet_experiment_id41_0,-1.58E-06
+X_N2O barbet_experiment_id41_0,7.03E-07
+X_NO2 barbet_experiment_id41_0,2.90E-06
+ResidenceTime barbet_experiment_id41_0,-3.02E-06
+Temperature_1050.087246869 barbet_experiment_id41_1,9.17E-05
+Pressure barbet_experiment_id41_1,-6.12E-10
+X_N2O barbet_experiment_id41_1,1.00E-08
+X_NO2 barbet_experiment_id41_1,7.50E-08
+ResidenceTime barbet_experiment_id41_1,1.88E-06
+Temperature_1050.480930233 barbet_experiment_id42_0,0.000469932
+Pressure barbet_experiment_id42_0,-1.74E-06
+X_N2O barbet_experiment_id42_0,6.53E-07
+X_NO2 barbet_experiment_id42_0,3.09E-06
+ResidenceTime barbet_experiment_id42_0,-1.40E-05
+Temperature_1049.882643337 barbet_experiment_id42_1,-0.000102994
+Pressure barbet_experiment_id42_1,7.31E-10
+X_N2O barbet_experiment_id42_1,7.34E-09
+X_NO2 barbet_experiment_id42_1,-8.74E-08
+ResidenceTime barbet_experiment_id42_1,-2.09E-06
+Temperature_1050.334378732 barbet_experiment_id43_0,0.000330486
+Pressure barbet_experiment_id43_0,-3.93E-08
+X_N2O barbet_experiment_id43_0,-7.55E-07
+X_NO2 barbet_experiment_id43_0,2.33E-06
+ResidenceTime barbet_experiment_id43_0,3.94E-06
+Temperature_1050.013824216 barbet_experiment_id43_1,2.19E-05
+Pressure barbet_experiment_id43_1,2.33E-09
+X_N2O barbet_experiment_id43_1,-1.15E-08
+X_NO2 barbet_experiment_id43_1,1.97E-08
+ResidenceTime barbet_experiment_id43_1,4.48E-07
+Temperature_1050.375940557 barbet_experiment_id44_0,0.000370141
+Pressure barbet_experiment_id44_0,-1.95E-06
+X_N2O barbet_experiment_id44_0,3.24E-06
+ResidenceTime barbet_experiment_id44_0,-3.05E-05
+Temperature_1049.749408314 barbet_experiment_id44_1,-0.000229834
+Pressure barbet_experiment_id44_1,1.11E-08
+X_N2O barbet_experiment_id44_1,-2.03E-07
+ResidenceTime barbet_experiment_id44_1,-4.64E-06
+Temperature davidson_2_spe_1,0.001538148
+Pressure davidson_2_spe_1,0.000696555
+X_N2O davidson_2_spe_1,0.000390427
+TimeShift davidson_2_spe_1,-2.09E-06
+Temperature davidson_2_spe_2,0.019200055
+Pressure davidson_2_spe_2,0.001977981
+X_N2O davidson_2_spe_2,0.000538592
+TimeShift davidson_2_spe_2,-1.47E-06
+Temperature_1009.229933145 glarborg_1_H2O_set1_unc01_res005,-6.60E-08
+Temperature_1035.074974357 glarborg_1_H2O_set1_unc01_res005,-2.45E-08
+Temperature_1059.211839633 glarborg_1_H2O_set1_unc01_res005,-1.52E-07
+Temperature_1085.057006484 glarborg_1_H2O_set1_unc01_res005,8.87E-09
+Temperature_1109.761870268 glarborg_1_H2O_set1_unc01_res005,-1.20E-07
+Temperature_1134.844121053 glarborg_1_H2O_set1_unc01_res005,9.87E-07
+Temperature_1160.304411705 glarborg_1_H2O_set1_unc01_res005,3.52E-07
+Temperature_1188.22870033 glarborg_1_H2O_set1_unc01_res005,-1.12E-06
+Temperature_1212.163597867 glarborg_1_H2O_set1_unc01_res005,4.49E-06
+Temperature_1236.275478144 glarborg_1_H2O_set1_unc01_res005,3.44E-06
+Temperature_1260.425754783 glarborg_1_H2O_set1_unc01_res005,4.54E-05
+Temperature_1284.981472092 glarborg_1_H2O_set1_unc01_res005,0.000112168
+Temperature_1305.53668924 glarborg_1_H2O_set1_unc01_res005,0.000323135
+Temperature_1322.425290529 glarborg_1_H2O_set1_unc01_res005,0.000633375
+Temperature_1348.264738714 glarborg_1_H2O_set1_unc01_res005,0.00067115
+Pressure glarborg_1_H2O_set1_unc01_res005,0.000206146
+X_N2O glarborg_1_H2O_set1_unc01_res005,-0.000164175
+X_H2O glarborg_1_H2O_set1_unc01_res005,0.00629038
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,8.52E-21
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,1.87E-21
+TimeShift_-0.0 glarborg_1_H2O_set1_unc01_res005,4.07E-20
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,2.89E-19
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,-5.25E-18
+TimeShift_-0.0 glarborg_1_H2O_set1_unc01_res005,7.31E-19
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,6.89E-18
+TimeShift_-0.0 glarborg_1_H2O_set1_unc01_res005,-7.40E-17
+TimeShift_-0.0 glarborg_1_H2O_set1_unc01_res005,4.56E-18
+TimeShift_-0.0 glarborg_1_H2O_set1_unc01_res005,-7.96E-17
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,1.14E-16
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,-3.04E-17
+TimeShift_-0.0 glarborg_1_H2O_set1_unc01_res005,-7.29E-16
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,1.92E-17
+TimeShift_0.0 glarborg_1_H2O_set1_unc01_res005,6.65E-16
+ResidenceTime0.223536726 glarborg_1_H2O_set1_unc01_res005,-1.32E-07
+ResidenceTime0.217955212 glarborg_1_H2O_set1_unc01_res005,-4.16E-08
+ResidenceTime0.212988471 glarborg_1_H2O_set1_unc01_res005,-2.30E-07
+ResidenceTime0.207915347 glarborg_1_H2O_set1_unc01_res005,8.83E-09
+ResidenceTime0.203286785 glarborg_1_H2O_set1_unc01_res005,-2.26E-07
+ResidenceTime0.198794373 glarborg_1_H2O_set1_unc01_res005,1.79E-06
+ResidenceTime0.194431925 glarborg_1_H2O_set1_unc01_res005,6.21E-07
+ResidenceTime0.189861771 glarborg_1_H2O_set1_unc01_res005,-2.47E-06
+ResidenceTime0.186116668 glarborg_1_H2O_set1_unc01_res005,1.21E-05
+ResidenceTime0.182484249 glarborg_1_H2O_set1_unc01_res005,-6.11E-08
+ResidenceTime0.179016938 glarborg_1_H2O_set1_unc01_res005,0.000117546
+ResidenceTime0.175626736 glarborg_1_H2O_set1_unc01_res005,0.0002239
+ResidenceTime0.172991479 glarborg_1_H2O_set1_unc01_res005,0.000754145
+ResidenceTime0.171037899 glarborg_1_H2O_set1_unc01_res005,0.001973755
+ResidenceTime0.167450028 glarborg_1_H2O_set1_unc01_res005,0.000195273
+Temperature_1090.889295546 glarborg_1_H2O_set2_unc01_res005,2.67E-07
+Temperature_1115.404757873 glarborg_1_H2O_set2_unc01_res005,6.70E-07
+Temperature_1140.678410105 glarborg_1_H2O_set2_unc01_res005,3.86E-06
+Temperature_1165.765080319 glarborg_1_H2O_set2_unc01_res005,6.87E-06
+Temperature_1194.082052158 glarborg_1_H2O_set2_unc01_res005,1.42E-05
+Temperature_1218.983294234 glarborg_1_H2O_set2_unc01_res005,2.87E-05
+Temperature_1242.945198533 glarborg_1_H2O_set2_unc01_res005,5.66E-05
+Temperature_1266.543629836 glarborg_1_H2O_set2_unc01_res005,0.000103301
+Temperature_1290.574236526 glarborg_1_H2O_set2_unc01_res005,0.000198253
+Temperature_1314.414844308 glarborg_1_H2O_set2_unc01_res005,0.000291595
+Temperature_1339.630428985 glarborg_1_H2O_set2_unc01_res005,0.00028285
+Temperature_1356.748165724 glarborg_1_H2O_set2_unc01_res005,0.000607276
+Temperature_1384.770780476 glarborg_1_H2O_set2_unc01_res005,0.000430966
+Pressure glarborg_1_H2O_set2_unc01_res005,0.000369953
+X_N2O glarborg_1_H2O_set2_unc01_res005,-0.000331498
+X_H2O glarborg_1_H2O_set2_unc01_res005,0.026907353
+TimeShift_0.0 glarborg_1_H2O_set2_unc01_res005,1.12E-19
+TimeShift_-0.0 glarborg_1_H2O_set2_unc01_res005,-1.63E-19
+TimeShift_-0.0 glarborg_1_H2O_set2_unc01_res005,5.88E-18
+TimeShift_0.0 glarborg_1_H2O_set2_unc01_res005,8.70E-18
+TimeShift_-0.0 glarborg_1_H2O_set2_unc01_res005,-5.26E-18
+TimeShift_0.0 glarborg_1_H2O_set2_unc01_res005,5.74E-17
+TimeShift_-0.0 glarborg_1_H2O_set2_unc01_res005,-7.26E-18
+TimeShift_0.0 glarborg_1_H2O_set2_unc01_res005,-3.80E-16
+TimeShift_0.0 glarborg_1_H2O_set2_unc01_res005,2.32E-16
+TimeShift_-0.0 glarborg_1_H2O_set2_unc01_res005,-2.56E-16
+TimeShift_-0.0 glarborg_1_H2O_set2_unc01_res005,-1.02E-16
+TimeShift_-0.0 glarborg_1_H2O_set2_unc01_res005,-4.71E-17
+TimeShift_0.0 glarborg_1_H2O_set2_unc01_res005,1.71E-15
+ResidenceTime0.172703255 glarborg_1_H2O_set2_unc01_res005,4.34E-07
+ResidenceTime0.168907617 glarborg_1_H2O_set2_unc01_res005,1.22E-06
+ResidenceTime0.165166688 glarborg_1_H2O_set2_unc01_res005,7.45E-06
+ResidenceTime0.161614071 glarborg_1_H2O_set2_unc01_res005,1.39E-05
+ResidenceTime0.157785024 glarborg_1_H2O_set2_unc01_res005,3.04E-05
+ResidenceTime0.154570072 glarborg_1_H2O_set2_unc01_res005,6.85E-05
+ResidenceTime0.15160317 glarborg_1_H2O_set2_unc01_res005,0.000120706
+ResidenceTime0.14879615 glarborg_1_H2O_set2_unc01_res005,0.000199336
+ResidenceTime0.146073934 glarborg_1_H2O_set2_unc01_res005,0.000463321
+ResidenceTime0.143481354 glarborg_1_H2O_set2_unc01_res005,0.000720889
+ResidenceTime0.140767541 glarborg_1_H2O_set2_unc01_res005,0.000644576
+ResidenceTime0.139140636 glarborg_1_H2O_set2_unc01_res005,0.001364215
+ResidenceTime0.136240901 glarborg_1_H2O_set2_unc01_res005,0.00096482
+Temperature_1013.857785 glarborg_1_H2O_set3_unc01_res005,-2.96E-15
+Temperature_1042.436699 glarborg_1_H2O_set3_unc01_res005,-6.89E-15
+Temperature_1061.593194 glarborg_1_H2O_set3_unc01_res005,6.02E-15
+Temperature_1087.743395 glarborg_1_H2O_set3_unc01_res005,-9.93E-15
+Temperature_1111.45939 glarborg_1_H2O_set3_unc01_res005,4.72E-15
+Temperature_1137.60204 glarborg_1_H2O_set3_unc01_res005,-1.54E-15
+Temperature_1162.220737 glarborg_1_H2O_set3_unc01_res005,5.32E-15
+Temperature_1190.479759 glarborg_1_H2O_set3_unc01_res005,1.29E-15
+Temperature_1215.383339 glarborg_1_H2O_set3_unc01_res005,-4.94E-15
+Temperature_1238.449939 glarborg_1_H2O_set3_unc01_res005,6.99E-15
+Temperature_1262.103466 glarborg_1_H2O_set3_unc01_res005,-3.26E-15
+Temperature_1286.352845 glarborg_1_H2O_set3_unc01_res005,-6.04E-15
+Temperature_1307.241978 glarborg_1_H2O_set3_unc01_res005,2.55E-15
+Temperature_1327.220858 glarborg_1_H2O_set3_unc01_res005,2.41E-15
+Temperature_1348.416153 glarborg_1_H2O_set3_unc01_res005,-1.16E-14
+Temperature_1368.714926 glarborg_1_H2O_set3_unc01_res005,7.21E-15
+Pressure glarborg_1_H2O_set3_unc01_res005,-2.06E-14
+X_N2O glarborg_1_H2O_set3_unc01_res005,1.99E-14
+X_H2O glarborg_1_H2O_set3_unc01_res005,-9.86E-11
+TimeShift_0.0 glarborg_1_H2O_set3_unc01_res005,3.75E-23
+TimeShift_0.0 glarborg_1_H2O_set3_unc01_res005,1.17E-21
+TimeShift_0.0 glarborg_1_H2O_set3_unc01_res005,1.37E-22
+TimeShift_0.0 glarborg_1_H2O_set3_unc01_res005,1.11E-21
+TimeShift_-0.0 glarborg_1_H2O_set3_unc01_res005,-5.66E-22
+TimeShift_-0.0 glarborg_1_H2O_set3_unc01_res005,8.57E-25
+TimeShift_0.0 glarborg_1_H2O_set3_unc01_res005,1.90E-22
+TimeShift_-0.0 glarborg_1_H2O_set3_unc01_res005,-1.33E-22
+TimeShift_0.0 glarborg_1_H2O_set3_unc01_res005,7.34E-22
+TimeShift_-0.0 glarborg_1_H2O_set3_unc01_res005,-5.49E-23
+TimeShift_-0.0 glarborg_1_H2O_set3_unc01_res005,-9.20E-22
+TimeShift_-0.0 glarborg_1_H2O_set3_unc01_res005,-1.60E-22
+TimeShift_0.0 glarborg_1_H2O_set3_unc01_res005,1.33E-21
+TimeShift_-0.0 glarborg_1_H2O_set3_unc01_res005,-2.06E-22
+TimeShift_0.0 glarborg_1_H2O_set3_unc01_res005,7.68E-23
+TimeShift_-0.0 glarborg_1_H2O_set3_unc01_res005,-4.34E-22
+ResidenceTime0.189375673 glarborg_1_H2O_set3_unc01_res005,-1.52E-15
+ResidenceTime0.184183846 glarborg_1_H2O_set3_unc01_res005,-4.91E-15
+ResidenceTime0.18086024 glarborg_1_H2O_set3_unc01_res005,9.81E-15
+ResidenceTime0.176512219 glarborg_1_H2O_set3_unc01_res005,-2.16E-15
+ResidenceTime0.172745853 glarborg_1_H2O_set3_unc01_res005,5.56E-16
+ResidenceTime0.168776069 glarborg_1_H2O_set3_unc01_res005,-3.55E-15
+ResidenceTime0.165200976 glarborg_1_H2O_set3_unc01_res005,1.44E-16
+ResidenceTime0.161279517 glarborg_1_H2O_set3_unc01_res005,1.01E-15
+ResidenceTime0.157974849 glarborg_1_H2O_set3_unc01_res005,1.34E-15
+ResidenceTime0.155032508 glarborg_1_H2O_set3_unc01_res005,4.19E-16
+ResidenceTime0.152126989 glarborg_1_H2O_set3_unc01_res005,4.87E-15
+ResidenceTime0.149259203 glarborg_1_H2O_set3_unc01_res005,2.91E-15
+ResidenceTime0.146874108 glarborg_1_H2O_set3_unc01_res005,2.08E-15
+ResidenceTime0.144663188 glarborg_1_H2O_set3_unc01_res005,6.12E-16
+ResidenceTime0.142389276 glarborg_1_H2O_set3_unc01_res005,-4.57E-15
+ResidenceTime0.140277567 glarborg_1_H2O_set3_unc01_res005,-2.32E-15
+Temperature_1020.593976 glarborg_1_O2_set4_unc01_res005,2.44E-15
+Temperature_1043.174306 glarborg_1_O2_set4_unc01_res005,4.29E-16
+Temperature_1066.951622 glarborg_1_O2_set4_unc01_res005,-4.16E-16
+Temperature_1091.933601 glarborg_1_O2_set4_unc01_res005,-7.89E-16
+Temperature_1116.916032 glarborg_1_O2_set4_unc01_res005,-9.97E-17
+Temperature_1140.696961 glarborg_1_O2_set4_unc01_res005,2.91E-16
+Temperature_1166.579841 glarborg_1_O2_set4_unc01_res005,4.40E-16
+Temperature_1193.665127 glarborg_1_O2_set4_unc01_res005,5.28E-16
+Temperature_1218.335212 glarborg_1_O2_set4_unc01_res005,-7.26E-16
+Temperature_1241.794762 glarborg_1_O2_set4_unc01_res005,2.59E-17
+Temperature_1264.642721 glarborg_1_O2_set4_unc01_res005,3.17E-16
+Temperature_1289.891424 glarborg_1_O2_set4_unc01_res005,7.95E-17
+Temperature_1313.922817 glarborg_1_O2_set4_unc01_res005,-2.27E-16
+Temperature_1339.148484 glarborg_1_O2_set4_unc01_res005,-5.62E-16
+Temperature_1362.56693 glarborg_1_O2_set4_unc01_res005,4.80E-16
+Temperature_1385.384626 glarborg_1_O2_set4_unc01_res005,-6.47E-16
+Pressure glarborg_1_O2_set4_unc01_res005,-1.13E-14
+X_N2O glarborg_1_O2_set4_unc01_res005,-2.65E-15
+X_H2O glarborg_1_O2_set4_unc01_res005,5.44E-12
+X_O2 glarborg_1_O2_set4_unc01_res005,1.88E-14
+TimeShift_-0.0 glarborg_1_O2_set4_unc01_res005,-2.33E-22
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,3.49E-23
+TimeShift_-0.0 glarborg_1_O2_set4_unc01_res005,-2.24E-23
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,6.94E-23
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,3.93E-23
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,7.75E-23
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,2.04E-23
+TimeShift_-0.0 glarborg_1_O2_set4_unc01_res005,-6.07E-23
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,3.00E-23
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,6.45E-23
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,1.06E-22
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,2.12E-22
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,3.51E-23
+TimeShift_0.0 glarborg_1_O2_set4_unc01_res005,6.55E-23
+TimeShift_-0.0 glarborg_1_O2_set4_unc01_res005,-6.22E-23
+TimeShift_-0.0 glarborg_1_O2_set4_unc01_res005,-6.30E-23
+ResidenceTime0.185774171 glarborg_1_O2_set4_unc01_res005,6.56E-16
+ResidenceTime0.181752943 glarborg_1_O2_set4_unc01_res005,1.13E-15
+ResidenceTime0.177702528 glarborg_1_O2_set4_unc01_res005,3.39E-16
+ResidenceTime0.173636932 glarborg_1_O2_set4_unc01_res005,-1.04E-16
+ResidenceTime0.169753137 glarborg_1_O2_set4_unc01_res005,-1.22E-16
+ResidenceTime0.166214171 glarborg_1_O2_set4_unc01_res005,-7.03E-16
+ResidenceTime0.162526381 glarborg_1_O2_set4_unc01_res005,-2.91E-16
+ResidenceTime0.158838518 glarborg_1_O2_set4_unc01_res005,-2.86E-15
+ResidenceTime0.155622195 glarborg_1_O2_set4_unc01_res005,7.87E-16
+ResidenceTime0.152682235 glarborg_1_O2_set4_unc01_res005,2.03E-15
+ResidenceTime0.149923767 glarborg_1_O2_set4_unc01_res005,5.93E-17
+ResidenceTime0.146989116 glarborg_1_O2_set4_unc01_res005,-2.39E-15
+ResidenceTime0.144300714 glarborg_1_O2_set4_unc01_res005,3.12E-15
+ResidenceTime0.141582507 glarborg_1_O2_set4_unc01_res005,-1.74E-15
+ResidenceTime0.139149128 glarborg_1_O2_set4_unc01_res005,-4.77E-16
+ResidenceTime0.1368573 glarborg_1_O2_set4_unc01_res005,-7.17E-16
+Temperature haas_1_spe,-4.26E-06
+Pressure haas_1_spe,0.001401494
+X_N2O haas_1_spe,-0.002193415
+TimeShift haas_1_spe,-7.068720293
+Temperature_998.226628206 johnsson_1_spe_Ar_unc03_res005,-6.53E-09
+Temperature_1150.989943303 johnsson_1_spe_Ar_unc03_res005,6.42E-07
+Temperature_1201.639491429 johnsson_1_spe_Ar_unc03_res005,3.10E-05
+Temperature_1250.00567456 johnsson_1_spe_Ar_unc03_res005,0.000119566
+Temperature_1295.708528127 johnsson_1_spe_Ar_unc03_res005,0.000375371
+Temperature_1349.561199827 johnsson_1_spe_Ar_unc03_res005,0.000522189
+Pressure johnsson_1_spe_Ar_unc03_res005,0.00012066
+X_N2O johnsson_1_spe_Ar_unc03_res005,-0.000425594
+X_H2O johnsson_1_spe_Ar_unc03_res005,0.04299518
+TimeShift_-0.0 johnsson_1_spe_Ar_unc03_res005,-8.10E-23
+TimeShift_-0.0 johnsson_1_spe_Ar_unc03_res005,-4.43E-17
+TimeShift_-0.0 johnsson_1_spe_Ar_unc03_res005,-1.07E-16
+TimeShift_0.0 johnsson_1_spe_Ar_unc03_res005,-1.14E-16
+TimeShift_-0.0 johnsson_1_spe_Ar_unc03_res005,-1.27E-15
+TimeShift_-0.0 johnsson_1_spe_Ar_unc03_res005,-1.97E-15
+ResidenceTime0.176709147 johnsson_1_spe_Ar_unc03_res005,1.84E-10
+ResidenceTime0.153258698 johnsson_1_spe_Ar_unc03_res005,8.68E-07
+ResidenceTime0.146816589 johnsson_1_spe_Ar_unc03_res005,8.66E-05
+ResidenceTime0.141168139 johnsson_1_spe_Ar_unc03_res005,0.000236726
+ResidenceTime0.136350928 johnsson_1_spe_Ar_unc03_res005,0.00108361
+ResidenceTime0.130933735 johnsson_1_spe_Ar_unc03_res005,0.001161892
+Temperature_998.240526932 johnsson_1_spe_He_unc03_res005,-1.39E-07
+Temperature_1101.176580345 johnsson_1_spe_He_unc03_res005,1.50E-05
+Temperature_1151.848915527 johnsson_1_spe_He_unc03_res005,6.97E-05
+Temperature_1199.646235769 johnsson_1_spe_He_unc03_res005,0.000202629
+Temperature_1249.894840659 johnsson_1_spe_He_unc03_res005,0.000603868
+Temperature_1299.116075087 johnsson_1_spe_He_unc03_res005,0.000954971
+Temperature_1349.712938351 johnsson_1_spe_He_unc03_res005,0.000814466
+Pressure johnsson_1_spe_He_unc03_res005,0.000433838
+X_N2O johnsson_1_spe_He_unc03_res005,-0.000767531
+X_H2O johnsson_1_spe_He_unc03_res005,0.099295763
+TimeShift_-0.0 johnsson_1_spe_He_unc03_res005,1.25E-21
+TimeShift_0.0 johnsson_1_spe_He_unc03_res005,8.90E-18
+TimeShift_-0.0 johnsson_1_spe_He_unc03_res005,-8.11E-17
+TimeShift_0.0 johnsson_1_spe_He_unc03_res005,4.51E-18
+TimeShift_0.0 johnsson_1_spe_He_unc03_res005,8.36E-16
+TimeShift_0.0 johnsson_1_spe_He_unc03_res005,-5.27E-17
+TimeShift_0.0 johnsson_1_spe_He_unc03_res005,-2.87E-17
+ResidenceTime0.171902436 johnsson_1_spe_He_unc03_res005,8.89E-09
+ResidenceTime0.155841582 johnsson_1_spe_He_unc03_res005,3.83E-05
+ResidenceTime0.149010456 johnsson_1_spe_He_unc03_res005,0.00015123
+ResidenceTime0.143127295 johnsson_1_spe_He_unc03_res005,0.00036613
+ResidenceTime0.137541924 johnsson_1_spe_He_unc03_res005,0.001231538
+ResidenceTime0.132494559 johnsson_1_spe_He_unc03_res005,0.002164704
+ResidenceTime0.12738328 johnsson_1_spe_He_unc03_res005,0.001041513
+Temperature_1003.66400274 johnsson_1_spe_N2_unc03_res005,2.85E-08
+Temperature_1102.905213646 johnsson_1_spe_N2_unc03_res005,1.46E-05
+Temperature_1154.103931491 johnsson_1_spe_N2_unc03_res005,1.18E-05
+Temperature_1201.673473764 johnsson_1_spe_N2_unc03_res005,-5.70E-05
+Temperature_1251.215826151 johnsson_1_spe_N2_unc03_res005,-0.000691906
+Temperature_1296.035814587 johnsson_1_spe_N2_unc03_res005,-0.001356631
+Temperature_1346.34924303 johnsson_1_spe_N2_unc03_res005,-0.001263072
+Pressure johnsson_1_spe_N2_unc03_res005,-0.000426442
+X_N2O johnsson_1_spe_N2_unc03_res005,0.000205746
+X_H2O johnsson_1_spe_N2_unc03_res005,-0.152489862
+X_N2 johnsson_1_spe_N2_unc03_res005,1.51E-05
+TimeShift_-0.0 johnsson_1_spe_N2_unc03_res005,-1.54E-20
+TimeShift_0.0 johnsson_1_spe_N2_unc03_res005,1.26E-17
+TimeShift_0.0 johnsson_1_spe_N2_unc03_res005,5.25E-17
+TimeShift_-0.0 johnsson_1_spe_N2_unc03_res005,-1.18E-16
+TimeShift_-0.0 johnsson_1_spe_N2_unc03_res005,9.17E-16
+TimeShift_-0.0 johnsson_1_spe_N2_unc03_res005,-6.33E-16
+TimeShift_-0.0 johnsson_1_spe_N2_unc03_res005,-1.77E-15
+ResidenceTime0.211615542 johnsson_1_spe_N2_unc03_res005,7.34E-08
+ResidenceTime0.192585553 johnsson_1_spe_N2_unc03_res005,2.14E-05
+ResidenceTime0.184043561 johnsson_1_spe_N2_unc03_res005,2.15E-05
+ResidenceTime0.176727533 johnsson_1_spe_N2_unc03_res005,-9.02E-05
+ResidenceTime0.169408817 johnsson_1_spe_N2_unc03_res005,-0.001347676
+ResidenceTime0.163319684 johnsson_1_spe_N2_unc03_res005,-0.002178574
+ResidenceTime0.157160985 johnsson_1_spe_N2_unc03_res005,-0.002537133
+Temperature mulvihill_2_spe_1,-0.000443821
+Pressure mulvihill_2_spe_1,-8.73E-05
+X_N2O mulvihill_2_spe_1,0.008677228
+TimeShift mulvihill_2_spe_1,5.51E-10
+Temperature mulvihill_2_spe_2,-0.000700422
+Pressure mulvihill_2_spe_2,-0.00014155
+X_N2O mulvihill_2_spe_2,0.01196457
+TimeShift mulvihill_2_spe_2,8.89E-10
+Temperature mulvihill_2_spe_3,-0.001283724
+Pressure mulvihill_2_spe_3,-0.000273881
+X_N2O mulvihill_2_spe_3,0.012905394
+TimeShift mulvihill_2_spe_3,1.71E-09
+Temperature mulvihill_2_spe_4,-0.002138661
+Pressure mulvihill_2_spe_4,-0.000472912
+X_N2O mulvihill_2_spe_4,0.014260679
+TimeShift mulvihill_2_spe_4,2.93E-09
+Temperature mulvihill_2_spe_5,-0.001758672
+Pressure mulvihill_2_spe_5,-0.000394744
+X_N2O mulvihill_2_spe_5,0.010107729
+TimeShift mulvihill_2_spe_5,2.42E-09
+Temperature mulvihill_2_spe_6,-0.002644942
+Pressure mulvihill_2_spe_6,-0.000610173
+X_N2O mulvihill_2_spe_6,0.012253984
+TimeShift mulvihill_2_spe_6,3.75E-09
+Temperature mulvihill_2_spe_7,-0.004124636
+Pressure mulvihill_2_spe_7,-0.000984331
+X_N2O mulvihill_2_spe_7,0.008384401
+TimeShift mulvihill_2_spe_7,6.00E-09
+Temperature mulvihill_2_spe_8,-0.004162989
+Pressure mulvihill_2_spe_8,-0.001040829
+X_N2O mulvihill_2_spe_8,0.007151664
+TimeShift mulvihill_2_spe_8,6.40E-09
+Temperature mulvihill_2_spe_9,-0.002487805
+Pressure mulvihill_2_spe_9,-0.000655002
+X_N2O mulvihill_2_spe_9,0.002747457
+TimeShift mulvihill_2_spe_9,4.07E-09
+Temperature mulvihill_2_spe_10,-0.001664953
+Pressure mulvihill_2_spe_10,-0.00045335
+X_N2O mulvihill_2_spe_10,0.001906458
+TimeShift mulvihill_2_spe_10,2.83E-09
+Temperature mulvihill_2_spe_11,-0.000293028
+Pressure mulvihill_2_spe_11,-8.35E-05
+X_N2O mulvihill_2_spe_11,-1.36E-05
+TimeShift mulvihill_2_spe_11,5.31E-10
+Temperature mulvihill_2_spe_12,-0.002134726
+Pressure mulvihill_2_spe_12,-0.00062942
+X_N2O mulvihill_2_spe_12,0.002375919
+TimeShift mulvihill_2_spe_12,4.01E-09
+Temperature mulvihill_2_spe_13,-0.002227494
+Pressure mulvihill_2_spe_13,-0.000688875
+X_N2O mulvihill_2_spe_13,0.004553044
+TimeShift mulvihill_2_spe_13,4.43E-09
+Temperature mulvihill_2_spe_14,-0.000872645
+Pressure mulvihill_2_spe_14,-0.000284498
+X_N2O mulvihill_2_spe_14,0.001448267
+TimeShift mulvihill_2_spe_14,1.83E-09
+Temperature mulvihill_2_spe_15,-0.001020029
+Pressure mulvihill_2_spe_15,-0.000357233
+X_N2O mulvihill_2_spe_15,0.001754488
+TimeShift mulvihill_2_spe_15,2.31E-09
+Temperature pham_1_spe_N2O_1,-0.012683294
+Pressure pham_1_spe_N2O_1,-0.000341644
+X_N2O pham_1_spe_N2O_1,-0.000151245
+TimeShift pham_1_spe_N2O_1,-1.15E-18
+Temperature pham_1_spe_NO_2,-0.004284662
+Pressure pham_1_spe_NO_2,0.000288633
+X_N2O pham_1_spe_NO_2,-0.000581984
+TimeShift pham_1_spe_NO_2,2.16E-21
+Temperature ross_1_exp_1,-0.001026768
+Pressure ross_1_exp_1,-8.11E-05
+X_N2O ross_1_exp_1,-6.28E-05
+TimeShift ross_1_exp_1,-1.44E-20
+Temperature ross_1_exp_2,-0.014038222
+Pressure ross_1_exp_2,-0.000260679
+X_N2O ross_1_exp_2,-0.000132991
+TimeShift ross_1_exp_2,-3.32E-09
+Temperature ross_1_exp_3,0.012991553
+Pressure ross_1_exp_3,0.000191644
+X_N2O ross_1_exp_3,9.79E-05
+TimeShift ross_1_exp_3,2.45E-09
+Absorption ross_1_exp_1,-0.060960069

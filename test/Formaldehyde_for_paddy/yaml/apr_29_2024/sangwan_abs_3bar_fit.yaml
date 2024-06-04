@@ -1,0 +1,19 @@
+Absorption-coefficients:
+  - species: CH3
+    wave-lengths: 
+      - value: 216
+        unit: nm
+        functional-form: A
+        source: Hong, but fit to equation from Kappel
+        parameter-one:
+          value: 26500000
+          units: 'mol/c,'
+          absolute-uncertainty: 
+            value: .7
+            units: 'cm^2/mol^-1'
+        parameter-two:
+          value: -21158
+          units: 'cm^2/K*mol^-1'
+          absolute-uncertainty:
+            value: .7
+            units: 'cm^2/mol^-1'

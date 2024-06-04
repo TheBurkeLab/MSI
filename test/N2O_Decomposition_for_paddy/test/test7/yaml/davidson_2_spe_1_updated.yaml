@@ -1,0 +1,84 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 14.3
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.023399969
+    relative-uncertainty: 0.01
+    species: N2O
+  - mole-fraction: 0.9766
+    relative-uncertainty: 0.01
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.669999673
+  temperature:
+    relative-uncertainty: 0.02
+    units: K
+    value: 2268.000408036
+  time:
+    final-time:
+      units: s
+      value: 0.0015
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: s
+      value: 1.0e-05
+    units: s
+    value: 4.0e-09
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: nm
+      value: null
+  concentration:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+  mole-fraction:
+  - csvfile: data/davidson_2_spe_1_data.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: O2
+      relative-uncertainty: 0.05
+      species: O2
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Joe Lee
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: D.F. Davidson
+  - ORCID: null
+    name: M.D. DiRosa
+  - ORCID: null
+    name: A.Y. Chang
+  - ORCID: null
+    name: R.K. Hanson
+  detail: Shock tube measurements of the major product channels of N2O + O
+  doi: 10.1007/978-3-642-77648-9
+  journal: 18th International Symposium on Shock Waves
+  pages: 813-818
+  volume: 18
+  year: 1991

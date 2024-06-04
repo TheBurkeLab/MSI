@@ -1,0 +1,106 @@
+file-author: 
+    name: Joe Lee
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: https://doi.org/10.1002/kin.550270906
+    authors:
+        - name: Mark T. Allen
+          ORCID: 
+        - name: Richard A. Yetter
+          ORCID:
+        - name: Frederick L. Dryer
+          ORCID:
+    journal: International Journal of Chemical Kinetics
+    year: 1995
+    volume: 27 
+    pages: 883-909
+    detail: The Decomposition of Nitrous Oxide at 1.5 < P < 10.5 Atm and 1103 < T < 1173 K
+    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    institution: Princeton University
+    facility: plug flow reactor
+    inner-diameter: &diam
+        value: 2.54
+        units: cm
+
+common-properties:
+    pressure: &pres 
+        value: 6
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1123
+        units: K
+        relative-uncertainty: .00267
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 1
+          units: s
+    composition: &comp
+        - species: N2O
+          mole-fraction: 0.00964
+          relative-uncertainty: .03
+        - species: H2O
+          mole-fraction: 0.000560
+          relative-uncertainty: .10
+        - species: N2
+          mole-fraction: 0.9898
+          relative-uncertainty: .000001
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.4
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic
+        mechanical-boundary: constant pressure
+        equation-of-state: ideal gas
+        
+datapoints:
+  mole-fraction:
+    - csvfile: 'data/allen_1_spe_2_N2O_data.csv'
+      targets:
+        - name: N2O
+          species: N2O
+          absolute-uncertainty: 0.001
+          relative-uncertainty: 0.03
+    - csvfile: 'data/allen_1_spe_2_O2_data.csv'
+      targets:
+        - name: O2
+          species: O2
+          absolute-uncertainty: 0.0001
+          relative-uncertainty: 0.06
+    - csvfile: 'data/allen_1_spe_2_NO_data.csv'
+      targets:
+        - name: 'NO'
+          species: 'NO'
+          absolute-uncertainty: 0.00001
+          relative-uncertainty: 0.04
+    - csvfile: 'data/allen_1_spe_2_NO2_data.csv'
+      targets:
+        - name: NO2
+          species: NO2
+          absolute-uncertainty: 0.000001
+          relative-uncertainty: 0.04
+  absorbance: 
+     - csvfile: 
+       name: 
+       wavelength:
+         value: 
+         unit: 
+       absolute-uncertainty: 
+       relative-uncertainty: 
+  concentration:
+    - csvfile: 
+      targets:
+       - name: 
+         species: 
+         absolute-uncertainty:
+         relative-uncertainty:

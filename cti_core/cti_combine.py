@@ -12,7 +12,7 @@ and adds those reactions to create a complete internal mechanism
 import numpy as np
 import cantera as ct
 from .. import simulations
-from ..utilities import soln2cti_py3 as ctiw
+from ..test import soln2cti_py3 as ctiw
 
 
 def cti_write2(x={},original_cti='',master_rxns='',master_index=[],MP={},working_directory='',file_name=''):

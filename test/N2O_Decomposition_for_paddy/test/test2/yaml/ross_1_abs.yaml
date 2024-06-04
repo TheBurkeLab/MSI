@@ -1,0 +1,19 @@
+Absorption-coefficients:
+  - species: O
+    wave-lengths: 
+      - value: 130
+        unit: nm
+        functional-form: C
+        source: Ross
+        parameter-one:
+          value: 3661215946.84385
+          units: 'cm^2/mol^-1'
+          absolute-uncertainty: 
+            value: 0.5
+            units: 'cm^2/mol^-1'
+        parameter-two: 
+          value: 0
+          units: 'cm^2/K*mol^-1'
+          absolute-uncertainty:
+            value: 0
+            units: 'cm^2/mol^-1'             

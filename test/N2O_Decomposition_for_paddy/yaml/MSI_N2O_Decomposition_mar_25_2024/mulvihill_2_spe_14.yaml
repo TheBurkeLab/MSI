@@ -1,0 +1,95 @@
+file-author: 
+    name: Joe Lee
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1016/j.combustflame.2020.10.040
+    authors:
+        - name: Clayton R. Mulvihill
+          ORCID: 
+        - name: Suaiman A. Alturaifi
+          ORCID:
+        - name: Eric L. Petersen
+          ORCID:        
+    journal: Combustion and Flame        
+    year: 2021
+    volume: 224
+    pages: 6-13
+    #is there a title:?
+    detail: A shock-tube study of the N2O + M = N2 + O + M (M = Ar) rate constant using N 2 O laser absorption near 4.6 μm 
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Texas A&M
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 7.62
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 1.14
+        units: atm
+        relative-uncertainty: .04 
+    temperature: &temp
+        value: 2326
+        units: K
+        relative-uncertainty: .02
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.00075
+          units: s
+
+    composition: &comp
+        - species: N2O
+          mole-fraction: 0.002
+          relative-uncertainty: .1
+        - species: Ar
+          mole-fraction: 0.998
+          relative-uncertainty: .1
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.00001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction: 
+    - csvfile: 'data/mulvihill_2_spe_14_data.csv'
+      targets:
+        - name: N2O
+          species: N2O
+          absolute-uncertainty: 0.0002
+          relative-uncertainty: 0.05
+    
+  absorbance: 
+     - csvfile:
+       name:
+       wavelength: 
+         value:
+         unit: nm 
+       absolute-uncertainty:
+       relative-uncertainty:
+       
+  concentration:
+    - csvfile: 
+      targets:
+       - name: 
+         species: 
+         absolute-uncertainty: 
+         relative-uncertainty:

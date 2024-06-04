@@ -837,7 +837,8 @@ class Plotting(object):
                             plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,concentration_original,'r',label= r"$\it{A}$ $\it{priori}$ model")
                             plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_mol/cm^3'],'o',color='black',label='Experimental Data') 
                             plt.xlabel('Time [ms]')
-                            plt.ylabel(r'$\frac{mol}{cm^3}$'+''+observable_ylabel_transformed)
+                            # plt.ylabel(r'$\frac{mol}{cm^3}$'+''+observable_ylabel_transformed)
+                            plt.ylabel(observable_ylabel_transformed) # PSINGAL
                             # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
                             
                             temp_optimized_df_for_species['time'] = pd.Series(exp['simulation'].timeHistories[0]['time']*1e3)
@@ -1689,7 +1690,8 @@ class Plotting(object):
                     if 'Absorbance' in observable_ylabel:
                         plt.ylabel(observable_ylabel)
                     else:   
-                        plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \sigma_j$')
+                        # plt.ylabel(r'$\frac{\partial( \rm$'+observable_ylabel_transformed+r'$)}{\partial(\rm x_j)} \rm \sigma_j$')
+                        plt.ylabel(observable_ylabel) # TEMPORARY CHANGE
                     plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
                     UWSA_df[observables_list_for_legend[top_columns] +' '+str(sigma_list[top_columns])] = pd.Series(sensitivities[plot_number][:,c])   
                 UWSA_df.to_csv(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
@@ -1795,7 +1797,8 @@ class Plotting(object):
                     if 'Absorbance' in observable_ylabel:
                         plt.ylabel(observable_ylabel)
                     else:   
-                        plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \Delta x_j$')
+                        # plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \Delta x_j$')
+                        plt.ylabel(observable_ylabel) # TEMPORARY CHANGE
                     plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
                     if top_columns.split('_')[0] == 'k':
                         X_A = X[top_columns_index][0]
@@ -8759,7 +8762,8 @@ class Plotting(object):
                 print(str(list_of_reaction_strings[i]))
                 plt.title(str(list_of_reaction_strings[i]))
             plt.xlabel('Temperature [K]')
-            plt.ylabel(r'$\frac{\partial(\rm k)}{\partial(\rm x_j)} \rm \sigma_j$')
+            # plt.ylabel(r'$\frac{\partial(\rm k)}{\partial(\rm x_j)} \rm \sigma_j$')
+            plt.ylabel("TEMPORARY PLACEHOLDER") #CHANGE ADDED -PSINGAL
             # plt.ylabel(r'$\frac{\partial(k)}{\partial('+str(list_of_experiment_observables[plot_number])+')} \sigma_j$')
             plt.tick_params(direction='in')
             # plt.xticks(fontsize= 10)
@@ -9038,7 +9042,8 @@ class Plotting(object):
                 print(str(list_of_reaction_strings[i]))
                 plt.title(str(list_of_reaction_strings[i]))
             plt.xlabel('Temperature [K]')
-            plt.ylabel(r'$\frac{\partial(\rm k)}{\partial(\rm x_j)} \rm \Delta x_j$')
+            # plt.ylabel(r'$\frac{\partial(\rm k)}{\partial(\rm x_j)} \rm \Delta x_j$')
+            plt.ylabel("PLACEHOLDER") #PSINGAL
             # plt.ylabel(r'$\frac{\partial(k)}{\partial('+str(list_of_experiment_observables[plot_number])+')} \sigma_j$')
             plt.tick_params(direction='in')
             # plt.xticks(fontsize= 10)

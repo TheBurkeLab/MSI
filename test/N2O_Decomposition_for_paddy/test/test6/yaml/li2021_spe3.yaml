@@ -1,0 +1,97 @@
+file-author: 
+    name: Joe Lee
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1039/d0cp05131d
+    authors:
+        - name: Yan Li
+          ORCID: 
+        - name: Sandra Javoy
+          ORCID:
+        - name: Remy Mevel
+          ORCID:
+        - name: Xuefei Xu
+          ORCID:
+    journal: Phys. Chem. Chem. Phys.
+    year: 2021
+    volume: 23
+    pages: 585
+    #is there a title:?
+    detail: A chemically consistent rate constant for the reaction of nitrogen dioxide with the oxygen atom
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Institut de Combustion, A´erothermique, R´eactivit´e et Environnement
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 7.8
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 3.19763
+        units: atm
+        relative-uncertainty: 0.02
+    temperature: &temp
+        value: 1564
+        units: K
+        relative-uncertainty: 0.02
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.0022
+          units: s
+
+    composition: &comp
+        - species: NO2
+          mole-fraction: 0.000020
+          relative-uncertainty: 0.02
+        - species: Ar
+          mole-fraction: 0.999980
+          relative-uncertainty: 0.02
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value:  0.000010
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant volume #vs. constant pressure
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction: 
+    - csvfile: 'data/li2021_spe3.csv'
+      targets:
+        - name: 'O'
+          species: 'O'
+          absolute-uncertainty: 1e-7
+          relative-uncertainty: 0.05
+    
+  absorbance: 
+     - csvfile:
+       name: 
+       wavelength: 
+         value:
+         unit: 
+       absolute-uncertainty: 
+       relative-uncertainty: 
+       
+  concentration:
+    - csvfile: 
+      targets:
+       - name: 
+         species: 
+         absolute-uncertainty: 
+         relative-uncertainty:

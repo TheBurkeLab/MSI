@@ -1,0 +1,130 @@
+file-author: 
+    name: Joe Lee
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1016/0010-2180(94)90045-0
+    authors:
+        - name: Peter Glarborg
+          ORCID: 
+        - name: Jan E. Johnsson
+          ORCID:
+        - name: Kim Dam-Johansen
+          ORCID:
+        - name: 
+    journal: Combustion and Flame
+    year: 1994
+    volume: 99
+    pages: 523-532
+    #is there a title:?
+    detail: Kinetics of Homogeneous Nitrous Oxide Decomposition
+      
+experiment-type: species profile
+apparatus:
+    kind: flow reactor
+    #how to identify this?
+    institution: Technical University of Denmark
+    facility: quartz flow reactor
+    inner-diameter: &diam
+        value: 0.9
+        units: cm
+    residence-time: &restime
+        value-list: 
+          - 0.172703181
+          - 0.168907409
+          - 0.165165507
+          - 0.161611725
+          - 0.157780355
+          - 0.154559505
+          - 0.151584151
+          - 0.148766752
+          - 0.146010405
+          - 0.14337594
+          - 0.140675646
+          - 0.138946558
+          - 0.136110154
+
+        units: s
+        relative-uncertainty: 0.15
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 1.05
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value-list: 
+          - 1090.889
+          - 1115.404
+          - 1140.674
+          - 1165.757
+          - 1194.065
+          - 1218.948
+          - 1242.874
+          - 1266.412
+          - 1290.319
+          - 1314.028
+          - 1339.251
+          - 1355.917
+          - 1384.173
+        units: K
+        relative-uncertainty: 0.01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+
+    composition: &comp
+        - species: N2O
+          mole-fraction: 0.000201
+          relative-uncertainty: 0.02
+        - species: H2O
+          mole-fraction: 0.01
+          relative-uncertainty: 1
+        - species: Ar
+          mole-fraction: 0.989799
+          relative-uncertainty: 0.02        
+
+    time-shift: &timeshift
+        value-list: 
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+        units: s
+        absolute-uncertainty:
+            value: 0.000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: isothermal #vs. adiabatic
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 
+      targets:
+        - name: 
+          species:   
+          absolute-uncertainty: 
+          relative-uncertainty: 
+       
+ #'MSI/data/time_shift_testing/hong_h2o_0_time_dependent_remove_early_data.csv'
+  concentration:
+    - csvfile: 'data/glarborg_1_H2O_set2_data.csv'
+      targets:
+       - name: N2O
+         species: N2O  
+         absolute-uncertainty: 10
+         relative-uncertainty: 0.05

@@ -1,0 +1,67 @@
+apparatus:
+  facility: Computer Simulated
+  kind: JSR
+  reactor-volume:
+    units: m^3
+    value: 8.5e-05
+  residence-time:
+    relative-uncertainty: 0.050652676765710454
+    units: s
+    value: 1.5
+  volume: 8.5e-05
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant pressure
+    thermal-boundary: isothermal
+  composition:
+  - mole-fraction: 0.00025
+    relative-uncertainty: 0.024439242
+    species: 'NO'
+  - mole-fraction: 0.931373233
+    relative-uncertainty: 0.008105915
+    species: He
+  - mole-fraction: 0.000180202
+    relative-uncertainty: 0.027022288
+    species: NO2
+  - mole-fraction: 0.068196565
+    relative-uncertainty: 0.024256741
+    species: N2O
+  pressure:
+    relative-uncertainty: 0.01
+    units: atm
+    value: 1.02069
+  temperature:
+    relative-uncertainty: 0.01
+    units: K
+    value-list:
+    - 1100.0
+datapoints:
+  concentration:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+  mole-fraction:
+  - csvfile: data/experiment_id6_NO_1.csv
+    targets:
+    - absolute-uncertainty: 0.0
+      name: 'NO'
+      relative-uncertainty: 0.05
+      species: 'NO'
+experiment-type: Species profile
+file-author:
+  name: 'Burke Lab JSR post-processing: Mark Barbet'
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: Mark Barbet
+  detail: N2O decomposition
+  doi: 10.1021/jp211434f
+  journal: Journal of Physical Chemistry
+  pages: 6142-6158
+  volume: 116
+  year: 2020

@@ -1,0 +1,51 @@
+Reaction,Tmin,Tmax
+2 OH <=> H2O + O,300,3000
+HO2 + OH <=> [*],300,3000
+2 HO2 <=> H2O2 + O2,300,3000
+H2O2 + OH <=> H2O + HO2,300,3000
+CH3 + HO2 <=> CH3O + OH,300,3000
+CH3 + HO2 <=> CH4 + O2,300,3000
+CH4 + OH <=> CH3 + H2O,300,3000
+2 OH (+M) <=> H2O2 (+M),300,3000
+H + HO2 <=> [*],300,3000
+H + HO2 <=> 2 OH [/] H + HO2 <=> [*],300,3000
+H + HO2 <=> H2 + O2,300,3000
+H + HO2 <=> 2 OH,300,3000
+H2 + OH <=> H + H2O,300,3000
+H + O2 <=> O + OH,300,3000
+CH2O <=> H + HCO,300,3000
+CH2O + O2 <=> HCO + HO2,300,3000
+HCO + O2 <=> CO + HO2,300,3000
+HCO <=> CO + H,300,3000
+CH3 + OH <=> [*],300,3000
+2 CH3 <=> [*],300,3000
+CO + OH <=> CO2 + H,300,3000
+C2H6 <=> 2 CH3,300,3000
+CH4 + O <=> CH3 + OH,300,3000
+CH2O + H <=> H2 + HCO-exc,300,3000
+CH2O + OH <=> H2O + HCO-exc2,300,3000
+CH2O <=> CO + H2,300,3000
+H + HCO <=> CO + H2,300,3000
+H + O2 (+M) <=> HO2 (+M),300,3000
+H + HO2 <=> H2O + O,300,3000
+CH3COCH3 + OH <=> CH2CO + CH3 + H2O,300,3000
+CH4 + OX <=> [*],300,3000
+2 CH3 <=> C2H5 + H,300,3000
+2 CH3 <=> C2H4 + H2,300,3000
+H + NO2 <=> NO + OH,300,3000
+CH2O + H (+M) <=> CH3O (+M),300,3000
+CH3 + OH <=> CH2 + H2O,300,3000
+CH3OH <=> CH3 + OH,300,3000
+CH3 + O2 <=> CH3O + O,300,3000
+CH3 + O2 <=> CH2O + OH,300,3000
+CH3OH <=> CH3O + H,300,3000
+HOCO <=> CO + OH,300,3000
+CH2O + O <=> HCO + OH,300,3000
+HOCO <=> CO2 + H,300,3000
+H + HO2 <=> H2O + O [+] H + HO2 <=> H2O + OX [/] H + HO2 <=> [*],300,3000
+H2 + O <=> H + OH,300,3000
+CH4plusO1Dabs => CH3 + OH [+] CH4 + OX <=> CH3 + OH [+] CH4 + OX <=> CH2OH + H [+] CH4 + OX <=> CH2O + H2,300,3000
+CH4plusO1Dabs => CH3 + OH [+] CH4 + OX <=> CH3 + OH [/] CH4plusO1Dabs => CH3 + OH [+] CH4 + OX <=> CH3 + OH [+] CH4 + OX <=> CH2OH + H [+] CH4 + OX <=> CH2O + H2,300,3000
+CH4 + OX <=> CH2OH + H [/] CH4plusO1Dabs => CH3 + OH [+] CH4 + OX <=> CH3 + OH [+] CH4 + OX <=> CH2OH + H [+] CH4 + OX <=> CH2O + H2,300,3000
+CH4 + OX <=> CH2O + H2 [/] CH4plusO1Dabs => CH3 + OH [+] CH4 + OX <=> CH3 + OH [+] CH4 + OX <=> CH2OH + H [+] CH4 + OX <=> CH2O + H2,300,3000
+H + HO2 <=> 2 OH (/) H + HO2 <=> [*],300,3000

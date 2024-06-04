@@ -1,0 +1,97 @@
+file-author: 
+    name: Joe Lee
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1007/978-3-642-77648-9
+    authors:
+        - name: D.F. Davidson
+          ORCID: 
+        - name: M.D. DiRosa
+          ORCID: 
+        - name: A.Y. Chang
+          ORCID: 
+        - name: R.K. Hanson
+          ORCID:     
+    journal: 18th International Symposium on Shock Waves
+    year: 1991
+    volume: 18
+    pages: 813-818
+    #is there a title:?
+    detail: Shock tube measurements of the major product channels of N2O + O
+      
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Stanford University
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 14.3
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 1.67
+        units: atm
+        relative-uncertainty: 0.02 
+    temperature: &temp
+        value: 2268
+        units: K
+        relative-uncertainty: 0.02
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.001500
+          units: s
+
+    composition: &comp
+        - species: N2O
+          mole-fraction: 0.0234
+          relative-uncertainty: .01
+        - species: Ar
+          mole-fraction: 0.9766
+          relative-uncertainty: .01
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value:  0.00001
+            units: s
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant volume #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction: 
+    - csvfile: 'data/davidson_2_spe_1_data.csv'
+      targets:
+        - name: O2
+          species: O2
+          absolute-uncertainty: 0
+          relative-uncertainty: 0.05
+    
+  absorbance: 
+     - csvfile:
+       name:
+       wavelength: 
+         value:
+         unit: nm 
+       absolute-uncertainty:
+       relative-uncertainty:
+       
+  concentration:
+    - csvfile: 
+      targets:
+       - name: 
+         species: 
+         absolute-uncertainty: 
+         relative-uncertainty:

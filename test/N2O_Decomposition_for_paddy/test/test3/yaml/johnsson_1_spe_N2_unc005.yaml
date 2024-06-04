@@ -1,0 +1,125 @@
+file-author: 
+    name: Rodger E. Cornell
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: https://doi.org/10.1016/S0082-0784(06)80109-8
+    authors:
+        - name: JAN E. JOHNSSON
+          ORCID: 
+        - name: PETER GLARBORG
+          ORCID:
+        - name: KIM DAM-JOHANSEN
+          ORCID:
+        - name: 
+    journal: Twenty-Fourth Symposium (International) on Combustion
+    year: 1992
+    volume: 
+    pages: 917-923
+    #is there a title:?
+    detail: THERMAL DISSOCIATION OF NITROUS OXIDE AT MEDIUM TEMPERATURES, Figure 1
+      
+experiment-type: species profile 
+apparatus:
+    kind: flow reactor
+
+    institution: Technical University of Denmark, Close CHEC Research Centre 
+    facility: quartz flow reactor
+#   inner-diameter: &diam
+#       value: 0.51
+#       units: cm
+    residence-time: &restime
+        value-list: 
+#       *res time was calculated
+          - 0.21161551744506654
+          - 0.19258120033182918
+          - 0.18403939645212358
+          - 0.1767435991375472
+          - 0.16963880218168612
+          - 0.16366208285313846
+          - 0.15755999183763789      
+        units: s
+        relative-uncertainty: 0.15
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 1.0
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value-list: 
+          - 1003.663958
+          - 1102.88889
+          - 1154.089841
+          - 1201.741253
+          - 1252.084827
+          - 1297.820394
+          - 1348.095378
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+
+    composition: &comp
+        - species: N2O
+          mole-fraction: 0.000195
+          relative-uncertainty: 0.02
+        - species: H2O
+          mole-fraction: 0.000030
+          relative-uncertainty: 0.05
+        - species: N2
+          mole-fraction: 0.999775
+          relative-uncertainty: 0.0001000      
+
+    time-shift: &timeshift
+        value-list: 
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0          
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000010
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: isothermal #vs. adiabatic
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 
+      targets:
+        - name: 
+          species: 
+          absolute-uncertainty: 
+          relative-uncertainty: 
+       
+ #'MSI/data/time_shift_testing/hong_h2o_0_time_dependent_remove_early_data.csv'
+  concentration:
+    - csvfile: 'data/johnsson_1_spe_N2_data.csv'
+      targets:
+       - name: N2O
+         species: N2O
+         absolute-uncertainty: 10
+         relative-uncertainty: .05
+     
+             
+            
+      
+       
+
+  
+        
+    
+          
+    
+
+               

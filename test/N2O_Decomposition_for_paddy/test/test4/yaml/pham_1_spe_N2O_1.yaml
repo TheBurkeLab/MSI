@@ -1,0 +1,96 @@
+file-author: 
+    name: Joe Lee
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi:
+    authors:
+        - name: Ti Jo Tsay
+          ORCID: 
+        - name: M.C. Lin
+          ORCID:
+    journal:
+    year: 1991
+    volume: 
+    pages: 
+    #is there a title:?
+    detail: Application of Fourier Transform Infrared Spectrometry to Studies of Gas-Phase Kinetics Thermal Decomposition Reactions of Nitrous Oxide and Diketene
+      
+experiment-type: species profile
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Emory University
+    facility: quartz flow reactor
+    inner-diameter: &diam
+        value: 2.5
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 1.05263
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 998
+        units: K
+        relative-uncertainty: .02
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 3000
+          units: s
+          
+    composition: &comp
+        - species: N2O
+          mole-fraction: 0.0024
+          relative-uncertainty: 0.02
+        - species: Ar
+          mole-fraction: 0.9976
+          relative-uncertainty: 0.02   
+
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value:  0.00000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: isothermal #vs. adiabatic
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile: 'data/pham_1_spe_N2O_1_data.csv'
+      targets:
+        - name: N2O
+          species: N2O
+          absolute-uncertainty: 0.0001
+          relative-uncertainty: 0.05
+       
+ #'MSI/data/time_shift_testing/hong_h2o_0_time_dependent_remove_early_data.csv'
+  concentration:
+    - csvfile:
+      targets:
+       - name: 
+         species: 
+         absolute-uncertainty: 
+         relative-uncertainty: 
+     
+             
+            
+      
+       
+
+  
+        
+    
+          
+    
+
+               

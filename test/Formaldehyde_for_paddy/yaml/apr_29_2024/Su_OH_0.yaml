@@ -1,0 +1,113 @@
+file-author: 
+    name: Carly LaGrotta # can one have multiple authors here too?
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: C.-C. Su 
+          ORCID: 
+        - name: S.S. Kumaran
+          ORCID:   
+        - name: K.P. Lim
+          ORCID:  
+        - name: J.V. Michael
+          ORCID:  
+        - name: A.F Wagner
+          ORCID:    
+        - name: L.B. Harding
+          ORCID:       
+        - name: D.C. Fang
+          ORCID:                                                                              
+    journal: J. Phys. Chem
+    year: 2001
+    volume: 106
+    pages: 8261-8270
+    #is there a title:?
+    detail: Rate constants 1100 <T < 2000 K for H + NO2 = OH + NO using two shock tube techniques
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    institution: Stanford University
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 2.29
+        units: cm
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 0.5
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1313
+        units: K
+        relative-uncertainty: .01
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.0004
+          units: s
+
+    composition: &comp 
+        - species: C2H5I
+          mole-fraction: 0.000009258321274
+          relative-uncertainty: .05   
+        - species: NO2
+          mole-fraction: 0.00001725
+          relative-uncertainty: .05                 
+        - species: Ar
+          mole-fraction: 0.9999734917
+          relative-uncertainty: .05    
+                      
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: 0.0000000001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal adiabatic
+        mechanical-boundary: constant volume #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction:
+    - csvfile:
+      targets: 
+        - name: 
+          species: 
+          absolute-uncertainty:
+          relative-uncertainty: 
+    
+  absorbance: 
+     - csvfile:
+       name:
+       wavelength:
+         value:
+         unit:
+       absolute-uncertainty:
+       relative-uncertainty: 
+       
+ 
+
+  concentration:
+    - csvfile: 'data/su_oh_0.csv'
+      targets:
+       - name: OH
+         species: OH
+         absolute-uncertainty: 0.0
+         relative-uncertainty: 0.05
+
+
+
+
+
+

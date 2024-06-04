@@ -1,0 +1,97 @@
+file-author: 
+    name: Joe Lee
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 10.1021/jp962416y
+    authors:
+        - name: Stuart K. Ross
+          ORCID: 
+        - name: James W. Sutherland
+          ORCID:
+        - name: Szu-Cherng Kuo
+          ORCID:
+        - name: R. Bruce Klemm
+          ORCID:
+    journal: The Journal of Physical Chemistry A
+    year: 1997
+    volume: 101
+    pages: 1104-1116
+    #is there a title:?
+    detail: Rate Constants for the Thermal Dissociation of N2O and the O(3P) + N2O Reaction 
+    
+# is this how we should sort speciation vs. not speciation? in experiment type    
+experiment-type: species profile
+apparatus:
+    kind: shock tube
+    #how to identify this?
+    institution: Brookhaven National Laboratory
+    facility: stainless steel shock tube
+    inner-diameter: &diam
+        value: 6.02
+        units: cm
+
+#common-properties:
+common-properties:
+    pressure: &pres 
+        value: 0.625870477899953
+        units: atm
+        relative-uncertainty: .02
+    temperature: &temp
+        value: 1557
+        units: K
+        relative-uncertainty: .05
+        #where should we put this?
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.0028
+          units: s
+
+    composition: &comp
+        - species: N2O
+          mole-fraction: 0.0002625
+          relative-uncertainty: .02
+        - species: Ar
+          mole-fraction: 0.9997375
+          relative-uncertainty: .02
+          #figure out how to evaluate this 
+          #can balance be specified here instead of a value?     
+    time-shift: &timeshift
+        value: 0.0018
+        units: s
+        absolute-uncertainty:
+            value:  0.0001
+            units: ms
+    assumptions: &assumptions
+        thermal-boundary: adiabatic #vs. isothermal
+        mechanical-boundary: constant pressure #vs. constant volume
+        equation-of-state: ideal gas
+        
+datapoints: #is it necessary to include the temperature: *temp stuff for each item even though it's common?
+  mole-fraction: 
+    - csvfile: 
+      targets:
+        - name:
+          species:
+          absolute-uncertainty:
+          relative-uncertainty:
+    
+  absorbance: 
+     - csvfile: 'data/ross_1_abs_2_data.csv'
+       name: abs_130
+       wavelength: 
+         value: 130
+         unit: nm 
+       absolute-uncertainty: 0.03
+       relative-uncertainty: 0.05
+       
+  concentration:
+    - csvfile: 
+      targets:
+       - name: 
+         species: 
+         absolute-uncertainty: 
+         relative-uncertainty:

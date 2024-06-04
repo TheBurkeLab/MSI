@@ -1,0 +1,91 @@
+H2O2 + OH <=> H2O + HO2,Uncertainty,2 HO2 <=> H2O2 + O2,Uncertainty,2 HO2 => HOOOOH,Uncertainty,HO2 + OH <=> H2O + O2,Uncertainty,2 OH <=> H2O + O,Uncertainty,CH3 + HO2 <=> CH4 + O2,Uncertainty,CH3 + HO2 <=> CH3O + OH,Uncertainty,H + HO2 <=> 2 OH,Uncertainty,H + HO2 <=> H2 + O2,Uncertainty,CH2O <=> CO + H2,Uncertainty,CH2O + O2 <=> HCO + HO2,Uncertainty,HCO <=> CO + H,Uncertainty,CH4 + OX <=> CH2* + H2O,Uncertainty,CH4 + OX <=> CH3 + OH,Uncertainty,2 CH3 <=> C2H5 + H,Uncertainty,C2H5 + H <=> C2H4 + H2,Uncertainty,CH2O + H <=> H2 + HCO-exc,Uncertainty,CH2O + OH <=> H2O + HCO-exc2,Uncertainty,H + NO2 <=> NO + OH,Uncertainty,HCO + O2 <=> CO + HO2,Uncertainty,CO + OH <=> CO2 + H,Uncertainty
+B1_Energy,3,B1_Frequency,0.045,B4_Energy_1,0.4,B1_Nej_Scale,0.7,B1_energy,3,Energy,1,VRC-TST,0.262,W2_Frequencies_1,0.1,B1 frequency,0.1,W2_Frequencies_1,0.1,P1_SymmetryFactor_1,1.00E-06,B1_Frequencies_1,0.1,B1_Energy_1,2,B1_Frequencies_1,0.1,B1_Frequencies_1,0.1,P1_SymmetryFactor_1,1.00E-06,B1_Frequencies_1,0.1,B1_Frequencies_1,0.1,B1_Frequencies_1,0.1,P1 energy sensitivity,3,W2_Frequencies_1,0.1
+B1_Frequency,0.1,B1_Energy,2.00E-01,W2b_Frequencies_1,0.225,B2_Energy,2,B2_energy,3.00E+00,Frequency,0.1,Energy,1,W2_Energy_1,2.00E+00,B1 energy,1.1,B1_Frequencies_1,0.1,B1_Frequencies_1,0.1,B1_Energy_1,0.5,B4_Energy_1,2,B1_Energy_1,2,B1_Energy_1,2,B2_Frequencies_1,0.1,B1_Energy_1,0.5,B1_Energy_1,0.5,B1_Energy_1,1.1,P1 frequency sensitivity,0.26,W2_Energy_1,2
+B1_Hinder_Rotor,0.1,W1a_Frequencies,1.35E-01,colrel_Sigmas,1.10E+00,B2_frequency,0.1,B_frequencies,0.1,Energy,1,,,W1_Frequencies_1,0.1,B1 Symmetry Factor,1.00E-06,B4_Energy_1,0.2,B1_HinderRotor_1,0.26,W1_Frequencies_1,0.1,W1_Frequencies_1,0.1,P7_Frequencies_1,0.1,W1_Frequencies_1,0.1,B2_Energy_1,2,W1_Frequencies_1,0.1,P1_Energy_1,5.00E-01,B4_Energy_1,1.1,P1 symmetry factor sensitivity,1.00E-06,W1_Frequencies_1,0.1
+B1_imaginary,0.18,W1a_Energy,0.2,B7_Frequencies_1,0.045,B2_hinderROtor,0.41,B_imagainary,0.18,,,,,B5_Energy_1,2,B1 imaginary,0.18,B1_Energy_1,0.2,B1_ImaginaryFrequency_1,0.18,colrel_PowerOne,2.00E-01,colrel_Sigmas,0.262364264,R_Energy_1,2.00E+00,B3_Frequencies_1,0.1,P1_Frequencies_1,0.1,P2_Frequencies_1,0.1,colrel_Epsilons,1.00E-10,W1_Frequencies_1,0.1,w0_energy_pertubred_trans,3.00E+00,P2_Frequencies_1,0.1
+B1_symmetry_factor,1.00E-06,W1b_SymmetryFactor,1.61E+00,B9_Frequencies_1,2.25E-01,B2_Imaginary,0.18,B_symmetry,1.00E-06,,,,,B1_Energy_1,2,,,B2_Frequencies_1,0.1,P1_Frequencies_1,0.1,colrel_FactorOne,1.1,B8_Frequencies_1,0.1,R_SymmetryFactor_1,1.00E-06,B2_Frequencies_1,0.1,B2_SymmetryFactor_1,1.00E-06,colrel_Epsilons,1.00E-10,B0_SymmetryFactor_1,1.00E-06,B3_Frequencies_1,0.1,w0_frequency_perturb Trans,0.26,B1_Frequencies_1,1.00E-01
+,,W1a_SymmetryFactor,1.61E+00,B3_SymmetryFactor_1,1.00E-06,B2_symmetryFactor,1.00E-06,,,,,,,W1_Energy_1,2.00E+00,,,B15_ImaginaryFrequency_1,0.18,B1_Energy_1,3,P0_Energy_1,5.00E-01,B3_SymmetryFactor_1,1.00E-06,P7_SymmetryFactor_1,1.00E-06,B1_SymmetryFactor_1,6.93E-01,P1_Energy_1,2.00E+00,B2_Energy_1,0.5,W0_Frequencies_1,1.00E-01,R1_Frequencies_1,0.1,w0 symmetry factor trans ,1.00E-06,B1_Energy_1,2
+,,B1_SymmetryFactor,6.93E-01,B5_SymmetryFactor_1,6.93E-01,B3_Energy,2,,,,,,,W3_SymmetryFactor_1,1.00E-06,,,B6t_Energy_1,0.2,B1_SymmetryFactor_1,1.00E-06,B1_SymmetryFactor_1,1.00E-06,P6_SymmetryFactor_1,1.00E-06,B1_ImaginaryFrequency_1,1.80E-01,colrel_Sigmas,2.62E-01,,,B2_SymmetryFactor_1,1.00E-06,W0_Energy_1,5.00E-01,B2_Frequencies_1,0.1,B1 Nej scale trans ,7.00E-01,B3_Frequencies_1,1.00E-01
+,,colrel_sigmas,1.10E+00,B4_Frequencies_1,4.50E-02,B3_frequency,0.1,,,,,,,B6_Energy_1,2.00E+00,,,W5c_Energy_1,0.2,P1_Energy_1,3,P0_Frequencies_1,5.00E-01,B5_SymmetryFactor_1,1.00E-06,P7_Energy_1,2.00E+00,P2_SymmetryFactor_1,1.00E-06,,,colrel_PowerOne,0.2,colrel_PowerOne,2.00E-01,B4_SymmetryFactor_1,1.00E-06,B2 frequency perurbed trans ,2.60E-01,B2_SymmetryFactor_1,1.00E-06
+,,W1b_Energy,2.00E-01,P4_SymmetryFactor_1,1.00E-06,B3_hinderROtor,0.41,,,,,,,B5_Frequencies_1,1.00E-01,,,W0_SymmetryFactor_1,1.00E-06,,,W1_Energy_1,5.00E-01,B4_Frequencies_1,1.00E-01,R_Frequencies_1,1.00E-01,B3_SymmetryFactor_1,1.00E-06,,,colrel_FactorOne,1.10E+00,colrel_FactorOne,1.10E+00,B1_SymmetryFactor_1,1.00E-06,energy perturbed trans ,3.00E+00,colrel_PowerOne,1.00E-01
+,,P2_Symmetry_Factor,1.00E-06,B7_SymmetryFactor_1,6.93E-01,B3_Imaginary,0.18,,,,,,,B1_NejScale_1,7.00E-01,,,B13_Frequencies_1,0.1,,,colrel_Epsilons,1.00E-10,P4_SymmetryFactor_1,1.00E-06,B1_SymmetryFactor_1,1.00E-06,P3_Energy_1,2.00E+00,,,B2_ImaginaryFrequency_1,0.18,P1_SymmetryFactor_1,1.00E-06,colrel_Sigmas,0.26,symmetry factor perturbed trans ,1.00E-06,colrel_FactorOne,1.10E+00
+,,B2_Imaginary_Frequency,1.80E-01,W2a_Frequencies_1,2.25E-01,B3_symmetry,1.00E-06,,,,,,,B6_Frequencies_1,1.00E-01,,,B2_SymmetryFactor_1,6.93E-01,,,P0_SymmetryFactor_1,1.00E-06,B8_SymmetryFactor_1,1.00E-06,,,P1_Frequencies_1,1.00E-01,,,W1_Energy_1,5.00E-01,P0_SymmetryFactor_1,1.00E-06,W3_SymmetryFactor_1,1.00E-06,,,P2_Energy_1,2.00E+00
+,,P1_Frequencies,4.50E-02,W2b_Energy_1,1.00E+00,W1_energy,1.00E-06,,,,,,,B6_SymmetryFactor_1,1.00E-06,,,B10_Energy_1,0.2,,,B1_ImaginaryFrequency_1,1.80E-01,P1_SymmetryFactor_1,1.00E-06,,,B2_SymmetryFactor_1,6.93E-01,,,P2_Energy_1,5.00E-01,W0_SymmetryFactor_1,1.00E-06,B3_SymmetryFactor_1,1.00E-06,,,B2_Frequencies_1,1.00E-01
+,,P1_SymmetryFactor,1.00E-06,B3_ImaginaryFrequency_1,1.80E-01,W1_frequency,0.01,,,,,,,W3_Energy_1,2.00E+00,,,B11_Energy_1,2.00E-01,,,W1_SymmetryFactor_1,1.00E-06,colrel_Epsilons,1.00E-10,,,W1_Energy_1,2.00E+00,,,B2_Frequencies_1,1.00E-01,B1_SymmetryFactor_1,1.00E-06,W3_Energy_1,1.10E+00,,,B3_ImaginaryFrequency_1,1.80E-01
+,,P2_Frequencies,4.50E-02,P1_SymmetryFactor_1,1.00E-06,w1_symmetry_factor,1.00E-06,,,,,,,W1_SymmetryFactor_1,1.00E-06,,,W4_SymmetryFactor_1,1.00E-06,,,colrel_Sigmas,2.60E-01,B3_Energy_1,2,,,W1_HinderRotor_1,1.00E-01,,,P1_SymmetryFactor_1,1.00E-06,P1_Frequencies_1,1.00E-01,P1_Frequencies_1,1.00E-01,,,W3_Frequencies_1,1.00E-01
+,,B8_Frequencies,1.35E-01,B6_SymmetryFactor_1,1.00E-06,,,,,,,,,W3_Frequencies_1,1.00E-01,,,B10_SymmetryFactor_1,1.00E-06,,,,,P7_SymmetryFactor_1,1.00E-06,,,P2_Frequencies_1,1.00E-01,,,P1_Frequencies_1,1.00E-01,B0_Frequencies_1,1.00E-01,B2_SymmetryFactor_1,1.00E-06,,,W2_SymmetryFactor_1,1.00E-06
+,,colrelPowerOne,2.00E-01,colrel_Epsilons,1.00E-10,,,,,,,,,B5_SymmetryFactor_1,1.00E-06,,,B11_Frequencies_1,1.00E-01,,,,,B7_Energy_1,2,,,P3_SymmetryFactor_1,1.00E-06,,,W1_SymmetryFactor_1,1.00E-06,P0_Frequencies_1,1.00E-01,B4_Frequencies_1,1.00E-01,,,colrel_Sigmas,2.60E-01
+,,corelFactorOne,1.10E+00,B3_Energy_1,2.00E+00,,,,,,,,,W2_SymmetryFactor_1,1.00E-06,,,B2_Energy_1,2.00E-01,,,,,B2_Energy_1,2,,,W1_SymmetryFactor_1,1.00E-06,,,P1_Energy_1,5.00E-01,P0_Energy_1,5.00E-01,W1_SymmetryFactor_1,1.00E-06,,,P1_SymmetryFactor_1,1.00E-06
+,,B8_SymmetryFactor,1.61E+00,B7_Energy_2,1.00E+00,,,,,,,,,B2_Energy_1,2.00E+00,,,B15_Energy_1,2.00E-01,,,,,R_SymmetryFactor_1,1.00E-06,,,colrel_PowerOne,2.00E-01,,,P2_SymmetryFactor_1,1.00E-06,B0_Energy_1,5.00E-01,colrel_PowerOne,2.00E-01,,,P2_SymmetryFactor_1,1.00E-06
+,,P2_Energy,2.00E-01,B9_Energy_1,1.00E+00,,,,,,,,,B2_NejScale_1,7.00E-01,,,B15_Frequencies_1,1.098612289,,,,,P4_Energy_1,2.00E+00,,,colrel_FactorOne,1.10E+00,,,B1_SymmetryFactor_1,1.00E-06,colrel_Sigmas,2.60E-01,colrel_FactorOne,1.10E+00,,,B1_SymmetryFactor_1,1.00E-06
+,,W1b_Frequencies,1.35E-01,P4_Energy_1,2.00E+00,,,,,,,,,B3_Energy_1,2.00E+00,,,W1_Energy_1,2.00E-01,,,,,P3_Frequencies_1,0.1,,,P2_Energy_1,2.00E+00,,,colrel_Sigmas,2.60E-01,,,R1_Energy_1,1.10E+00,,,W1_Energy_1,2.00E+00
+,,B8_Energy,2.00E-01,P3_Frequencies_1,4.50E-02,,,,,,,,,B3_NejScale_1,7.00E-01,,,B6c_SymmetryFactor_1,0.693147181,,,,,B3_Frequencies_1,0.1,,,B3_ImaginaryFrequency_1,1.80E-01,,,,,,,W3_Frequencies_1,1.00E-01,,,W3_SymmetryFactor_1,1.00E-06
+,,colrel_Epsilons,1.00E-10,B9_SymmetryFactor_1,1.61E+00,,,,,,,,,B4_Energy_1,2.00E+00,,,B1_SymmetryFactor_1,0.693147181,,,,,B6_Energy_1,2,,,B2_HinderRotor_1,1.00E-01,,,,,,,P1_SymmetryFactor_1,1.00E-06,,,B3_Energy_1,2.00E+00
+,,B2_Energy,2.00E-01,B3_Frequencies_1,4.50E-02,,,,,,,,,B4_NejScale_1,7.00E-01,,,W0_Energy_1,0.2,,,,,P7_Frequencies_1,0.1,,,P1_SymmetryFactor_1,1.00E-06,,,,,,,colrel_Epsilons,1.00E-10,,,B2_ImaginaryFrequency_1,1.80E-01
+,,P1_Energy,2.00E-01,B6_Energy_1,2.00E+00,,,,,,,,,B7_NejScale_1,7.00E-01,,,B9_SymmetryFactor_1,1.00E-06,,,,,B4_SymmetryFactor_1,1.00E-06,,,colrel_Epsilons,1.00E-10,,,,,,,B2_Energy_1,1.10E+00,,,colrel_Epsilons,1.00E-10
+,,Multi_rotor_potentail,7.00E-02,B6_Frequencies_1,4.50E-02,,,,,,,,,B7_Energy_1,2.00E+00,,,B14_Frequencies_1,0.1,,,,,P5_Frequencies_1,0.1,,,B3_Energy_1,2.00E+00,,,,,,,B3_Energy_1,1.10E+00,,,B3_SymmetryFactor_1,1.00E-06
+,,multi_rotor_frequencies,4.50E-02,B4_SymmetryFactor_1,6.93E-01,,,,,,,,,,,,,W0_Frequencies_1,0.1,,,,,R_Energy_1,2.00E+00,,,B2_Energy_1,2.00E+00,,,,,,,R1_SymmetryFactor_1,1.00E-06,,,W3_Energy_1,2.00E+00
+,,,,P5_Frequencies_1,4.50E-02,,,,,,,,,,,,,B4_SymmetryFactor_1,0.693147181,,,,,P2_SymmetryFactor_1,6.93E-01,,,P3_Frequencies_1,1.00E-01,,,,,,,W1_Energy_1,1.10E+00,,,P1_Frequencies_1,1.00E-01
+,,,,W3_Energy_1,4.00E-01,,,,,,,,,,,,,W4_Energy_1,0.2,,,,,B5_Frequencies_1,0.1,,,P1_Energy_1,2.00E+00,,,,,,,B1_ImaginaryFrequency_1,1.80E-01,,,W1_SymmetryFactor_1,1.00E-06
+,,,,W3_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,P2_SymmetryFactor_1,0.2,,,,,P6_Energy_1,2.00E+00,,,,,,,,,,,P1_Energy_1,1.10E+00,,,B2_Energy_1,2.00E+00
+,,,,B5_Frequencies_1,7.50E-02,,,,,,,,,,,,,B4_Frequencies_1,1.00E-06,,,,,P3_Energy_1,2.00E+00,,,,,,,,,,,,,,,P1_Energy_1,2.00E+00
+,,,,P3_Energy_1,2.00E-01,,,,,,,,,,,,,W1_SymmetryFactor_1,0.1,,,,,P1_Frequencies_1,0.1,,,,,,,,,,,,,,,,
+,,,,P1_Frequencies_1,7.50E-02,,,,,,,,,,,,,B12_SymmetryFactor_1,1.00E-06,,,,,W1_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,,,,
+,,,,W2a_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,W5t_Energy_1,1.00E-06,,,,,W1_Energy_1,2.00E+00,,,,,,,,,,,,,,,,
+,,,,P5_SymmetryFactor_1,6.93E-01,,,,,,,,,,,,,B6t_SymmetryFactor_1,2.00E-01,,,,,R_Frequencies_1,0.1,,,,,,,,,,,,,,,,
+,,,,P3_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,P2_Frequencies_1,1.00E-06,,,,,P5_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,,,,
+,,,,colrel_PowerOne,2.00E-01,,,,,,,,,,,,,B14_Energy_1,1.00E-01,,,,,P2_Frequencies_1,0.1,,,,,,,,,,,,,,,,
+,,,,colrel_FactorOne,1.10E+00,,,,,,,,,,,,,colrel_PowerOne,2.00E-01,,,,,P3_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,,,,
+,,,,P4_Frequencies_1,7.50E-02,,,,,,,,,,,,,colrel_FactorOne,0.2,,,,,colrel_PowerOne,0.2,,,,,,,,,,,,,,,,
+,,,,W3_Frequencies_1,4.50E-02,,,,,,,,,,,,,B11_SymmetryFactor_1,0.26,,,,,colrel_FactorOne,1.10E+00,,,,,,,,,,,,,,,,
+,,,,P5_Energy_1,4.00E-01,,,,,,,,,,,,,P2_Energy_1,1.00E-06,,,,,P7_Energy_1,2.00E+00,,,,,,,,,,,,,,,,
+,,,,B5_Energy_1,1.00E+00,,,,,,,,,,,,,W3_Frequencies_1,2.00E-01,,,,,P2_Energy_1,2.00E+00,,,,,,,,,,,,,,,,
+,,,,W2b_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,B12_Frequencies_1,1.00E-01,,,,,P4_Frequencies_1,0.1,,,,,,,,,,,,,,,,
+,,,,B6_ImaginaryFrequency_1,1.80E-01,,,,,,,,,,,,,B7_Frequencies_1,1.00E-01,,,,,B5_Energy_1,2,,,,,,,,,,,,,,,,
+,,,,W2a_Energy_1,1.00E+00,,,,,,,,,,,,,B8_Energy_1,1.00E-01,,,,,B8_Energy_1,2,,,,,,,,,,,,,,,,
+,,,,P1_Energy_1,2.00E-01,,,,,,,,,,,,,B9_Energy_1,2.00E-01,,,,,P6_Frequencies_1,0.1,,,,,,,,,,,,,,,,
+,,,,B7_perturb_hinder_rotor_1,7.00E-02,,,,,,,,,,,,,W5c_SymmetryFactor_1,2.00E-01,,,,,P5_Energy_1,2.00E+00,,,,,,,,,,,,,,,,
+,,,,B7_perturb_hinder_rotor_2,7.00E-02,,,,,,,,,,,,,B6t_ImaginaryFrequency_1,1.00E-06,,,,,P1_Energy_1,2.00E+00,,,,,,,,,,,,,,,,
+,,,,W3_perturb_hinder_rotor_1,7.00E-02,,,,,,,,,,,,,B3_Energy_1,1.80E-01,,,,,correction_factor,1.5,,,,,,,,,,,,,,,,
+,,,,W3_perturb_hinder_rotor_2,7.00E-02,,,,,,,,,,,,,B14_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,W3_perturb_hinder_rotor_3,7.00E-02,,,,,,,,,,,,,W2_Energy_1,2.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,P5_perturb_hinder_rotor_1,7.00E-02,,,,,,,,,,,,,W1_Frequencies_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,B7_perturb_energy_1,4.00E-01,,,,,,,,,,,,,B15_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,B7_perturb_symmetry_factor_2,6.93E-01,,,,,,,,,,,,,colrel_Sigmas,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,B7_perturb_frequencies_2,7.50E-02,,,,,,,,,,,,,W5t_SymmetryFactor_1,1.098612289,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B8_Frequencies_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,W4_Frequencies_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B9_Frequencies_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B3_SymmetryFactor_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B5_SymmetryFactor_1,0.693147181,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B3_Frequencies_1,0.693147181,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B8_SymmetryFactor_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,P1_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B6c_Energy_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,colrel_Epsilons,2.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B14_ImaginaryFrequency_1,2.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B7_Energy_1,1.00E-10,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,colrel_FactorTwo,0.18,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,W5c_Frequencies_1,2.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B13_ImaginaryFrequency_1,1.098612289,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B12_ImaginaryFrequency_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,W2_SymmetryFactor_1,1.80E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,W3_SymmetryFactor_1,1.80E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B5_Frequencies_1,0.2,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,W5t_Frequencies_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,W3_Energy_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,P1_Frequencies_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B13_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,colrel_PowerTwo,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B7_SymmetryFactor_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B5_Energy_1,2.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B12_Energy_1,1.00E-06,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B10_Frequencies_1,2.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B6c_Frequencies_1,2.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B6t_Frequencies_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,B13_Energy_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,P1_Energy_1,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,P_86,0.693147181,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,P_87,2.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,P_88,1.00E-01,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,P_89,2.00E-01,,,,,,,,,,,,,,,,,,,,,,

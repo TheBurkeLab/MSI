@@ -1,0 +1,101 @@
+file-author: 
+    name: Carly LaGrotta
+    ORCID: 
+file-version: (1, 0)
+reference:
+    doi: 
+    authors:
+        - name: Rishav Choudhary
+          ORCID: 
+        - name: Julian J. Girard
+          ORCID:
+        - name: Yuzhe Peng
+          ORCID:
+        - name: Jiankun Shao
+          ORCID:
+        - name: David F. Davidson
+          ORCID:
+        - name: Ronald K. Hanson
+          ORCID:            
+    journal: Combustion and Flame
+    year: 2019
+    volume:
+    pages: 
+    detail: Measurment of the reaction rate of H+O2+M->HO2+M at high temperature with a sensitivty OH absorption diagnostic
+      
+experiment-type: species profile 
+apparatus:
+    kind: shock tube
+    institution: stanford
+    facility: quartz high pressure laminor flow reactor facility (HPLFR) ~ plug flow reactor
+    inner-diameter: &diam
+        value: 5
+        units: cm
+
+common-properties:
+    pressure: &pres 
+        value: 12.4
+        units: atm
+        relative-uncertainty: .02 
+    temperature: &temp
+        value: 1853
+        units: K
+        relative-uncertainty: .01
+    time: &time
+        initial-time: &initialtime
+          value: 0
+          units: s
+        final-time: &finaltime
+          value: 0.001
+          units: s
+    composition: &comp
+        - species: H2
+          mole-fraction: .001
+          relative-uncertainty: .05
+        - species: O2
+          mole-fraction: 0.02
+          relative-uncertainty: .05                 
+        - species: Ar
+          mole-fraction: 0.979
+          relative-uncertainty: .05
+    time-shift: &timeshift
+        value: 0
+        units: s
+        absolute-uncertainty:
+            value: .000000001
+            units: s
+    assumptions: &assumptions
+        thermal-boundary: adiabatic
+        mechanical-boundary: constant pressure
+        equation-of-state: ideal gas
+        
+datapoints:
+  concentration:
+    - csvfile: 'data/rishav_choudhary_OH_1.csv'
+      targets:
+        - name: OH
+          species: OH
+          absolute-uncertainty: 4 
+          relative-uncertainty: .05 
+
+  absorbance: 
+     - csvfile: 
+       name: 
+       wavelength:
+         value: 
+         unit: 
+       absolute-uncertainty: 
+       relative-uncertainty: 
+
+
+  mole-fraction:
+    - csvfile:
+      targets: 
+       - name:
+         species:
+         absolute-uncertainty:
+         relative-uncertainty:
+
+
+
+

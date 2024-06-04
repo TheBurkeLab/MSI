@@ -1,0 +1,90 @@
+apparatus:
+  facility: stainless steel shock tube
+  inner-diameter:
+    units: cm
+    value: 14.13
+  institution: Stanford University
+  kind: shock tube
+common-properties:
+  assumptions:
+    equation-of-state: ideal gas
+    mechanical-boundary: constant volume
+    thermal-boundary: adiabatic
+  composition:
+  - mole-fraction: 0.001
+    relative-uncertainty: 0.05
+    species: O2
+  - mole-fraction: 0.009
+    relative-uncertainty: 0.05
+    species: H2
+  - mole-fraction: 0.000000155
+    relative-uncertainty: 2.3
+    species: H
+  - mole-fraction: 0.98999965
+    relative-uncertainty: 0.05
+    species: Ar
+  pressure:
+    relative-uncertainty: 0.02
+    units: atm
+    value: 1.89
+  temperature:
+    relative-uncertainty: 0.035
+    units: K
+    value: 1410
+  time:
+    final-time:
+      units: s
+      value: 0.008
+    initial-time:
+      units: s
+      value: 0
+  time-shift:
+    absolute-uncertainty:
+      units: ms
+      value: 5.0e-5
+    units: s
+    value: 0
+datapoints:
+  absorbance:
+  - absolute-uncertainty: null
+    csvfile: null
+    name: null
+    relative-uncertainty: null
+    wavelength:
+      unit: null
+      value: null
+  concentration:
+  - csvfile: data/H2011-1410K_hong_raw_data.csv
+    targets:
+    - absolute-uncertainty: 0
+      name: H2O
+      relative-uncertainty: 0.05
+      species: H2O
+  mole-fraction:
+  - csvfile: null
+    targets:
+    - absolute-uncertainty: null
+      name: null
+      relative-uncertainty: null
+      species: null
+experiment-type: species profile
+file-author:
+  ORCID: null
+  name: Carly LaGrotta
+file-version: (1, 0)
+reference:
+  authors:
+  - ORCID: null
+    name: A.N. Pirraglia
+  - ORCID: null
+    name: J.V. Michael
+  - ORCID: null
+    name: J.W. Sutherland
+  - name: R.B. Klemm
+  detail: A flash photolysis shock tube kinetic study of the H atom reaction with
+    O2
+  doi: 10.1016/j.proci.2012.06.108
+  journal: J. Phys. Chem
+  pages: 282-291
+  volume: 93
+  year: 1989

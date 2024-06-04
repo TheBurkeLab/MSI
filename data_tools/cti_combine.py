@@ -14,7 +14,7 @@ and adds those reactions to create a complete internal mechanism
 # from .. import simulations
 # from . import soln2cti_py3 as ctiw
 import numpy as np
-import soln2cti_py3 as ctiw
+import data_processing.soln2cti_py3 as ctiw
 
 import sys
 sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")

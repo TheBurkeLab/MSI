@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import re
 import simulation as sim
-import cti_processor as ctp
+import inputs.cti_processor as ctp
 import sys
 sys.path.append(r"C:\Users\pjsin\Documents\MSI\ext")
 import cantera as ct

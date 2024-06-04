@@ -14,7 +14,7 @@ Created on Fri Nov  9 15:33:46 2018
 # import re
 # import scipy.optimize 
 import simulation as sim
-import cti_processor as ctp
+import inputs.cti_processor as ctp
 import pandas as pd
 import numpy as np
 import copy

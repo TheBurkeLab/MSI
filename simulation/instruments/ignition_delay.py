@@ -10,7 +10,7 @@
 # from joblib import Parallel, delayed
 
 import simulation as sim
-import cti_processor as ctp
+import inputs.cti_processor as ctp
 import pandas as pd
 import numpy as np
 import time

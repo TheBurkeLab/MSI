@@ -14,7 +14,7 @@ Created on Fri Nov  9 15:33:46 2018
 # import copy
 # import re
 import simulation as sim
-import cti_processor as ctp
+import inputs.cti_processor as ctp
 import pandas as pd
 import numpy as np
 import time

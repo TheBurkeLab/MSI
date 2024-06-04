@@ -3,7 +3,7 @@ import sys
 # from ... import simulation as sim
 import simulation as sim
 # from ...cti_core import cti_processor as ctp
-import cti_processor as ctp
+import inputs.cti_processor as ctp
 import pandas as pd
 import numpy as np
 # import time

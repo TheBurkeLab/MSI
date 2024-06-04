@@ -1,11 +1,9 @@
-import sys, os
-sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import cantera as ct
+import ext.cantera.cantera as ct
 import copy
 from textwrap import wrap
 import scipy.stats as stats
@@ -23,10 +21,10 @@ import simulations.instruments.ignition_delay as ig
 import cti_core.cti_processor as pr
 import simulations.instruments.jsr_steadystate as jsr
 import glob
-from pypdf import PdfMerger
-import natsort
-import shutil
-import enlighten
+from ext.pypdf.pypdf import PdfMerger
+import ext.natsort.natsort as natsort
+# import shutil
+import ext.enlighten.enlighten as enlighten
 
 class Plotting(object):
     def __init__(self,

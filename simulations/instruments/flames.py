@@ -6,7 +6,7 @@ Created on Fri Nov  9 15:33:46 2018
 """
 import sys, os
 sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
-import cantera as ct
+import ext.cantera.cantera as ct
 from .. import simulation as sim
 from ...cti_core import cti_processor as ctp
 import pandas as pd

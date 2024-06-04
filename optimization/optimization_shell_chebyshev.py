@@ -1,7 +1,5 @@
-# import sys, os
-# sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
-import sys
-sys.path.append('.') #get rid of this at some point with central test script or when package is built
+# import sys
+# sys.path.append('.') #get rid of this at some point with central test script or when package is built
 
 import simulations.instruments.shock_tube as st
 import cti_core.cti_processor as pr
@@ -13,13 +11,13 @@ import simulations.yaml_parser as yp
 import master_equation.master_equation as mecheb
 import cti_core.cti_combine as ctic
 import copy
-import cantera as ct
+import ext.cantera.cantera as ct
 import numpy as np
 import pandas as pd 
 import os
 import matplotlib.pyplot as plt
 from ext.art.art import *
-import ext.enlighten as enlighten
+import ext.enlighten.enlighten as enlighten
 from pathlib import Path
 
 class MSI_optimization_chebyshev(object):

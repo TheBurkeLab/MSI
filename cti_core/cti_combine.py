@@ -13,7 +13,7 @@ import sys, os
 sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 
 import numpy as np
-import cantera as ct
+import ext.cantera.cantera as ct
 from .. import simulations
 from ..utilities import soln2cti_py3 as ctiw
 

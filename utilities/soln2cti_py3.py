@@ -3,7 +3,7 @@ sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import textwrap
 from string import Template
 import numpy as np
-import cantera as ct
+import ext.cantera.cantera as ct
 from decimal import Decimal
  
 def write(solution,cwd='',file_name='',original_cti=''):

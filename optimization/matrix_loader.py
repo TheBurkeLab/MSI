@@ -6,7 +6,7 @@ from ..master_equation import master_equation as meq
 #import MSI.master_equation.master_equation as meq 
 import copy
 import re
-import cantera as ct
+import ext.cantera.cantera as ct
 import math
 
 class OptMatrix(object):
@@ -3091,7 +3091,7 @@ class Adding_Target_Values(meq.Master_Equation):
                         exp_dict_list:list,
                         Y_data_Frame,
                         master_equation_reactions):
-        import cantera as ct
+        import ext.cantera.cantera as ct
         Y_df_list = []
         Y_values = []
         

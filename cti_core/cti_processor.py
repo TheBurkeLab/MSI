@@ -1,3 +1,5 @@
+import sys, os
+sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import re
 import cantera as ct
 from ..utilities import soln2cti_py3

@@ -1,3 +1,5 @@
+import sys, os
+sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import sys
 sys.path.append('.') #get rid of this at some point with central test script or when package is built
 

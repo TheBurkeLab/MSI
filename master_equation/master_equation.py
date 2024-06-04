@@ -5,6 +5,8 @@ Created on Mon Sep 17 11:56:22 2018
 
 @author: carly
 """
+import sys, os
+sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import numpy as np
 import copy
 import pandas as pd

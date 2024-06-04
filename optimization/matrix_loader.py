@@ -1,3 +1,5 @@
+import sys, os
+sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import numpy as np
 import pandas as pd
 from ..master_equation import master_equation as meq

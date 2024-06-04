@@ -9,6 +9,9 @@ writes them to internal memory.  It then reads an input from a portion of the co
 and adds those reactions to create a complete internal mechanism
 """
 
+import sys, os
+sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
+
 import numpy as np
 import cantera as ct
 from .. import simulations

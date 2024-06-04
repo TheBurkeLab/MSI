@@ -1,3 +1,5 @@
+import sys, os
+sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 from ... import simulations as sim
 import numpy as np
 import pandas as pd

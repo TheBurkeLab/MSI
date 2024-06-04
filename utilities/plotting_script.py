@@ -1,3 +1,5 @@
+import sys, os
+sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt

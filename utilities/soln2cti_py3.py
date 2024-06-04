@@ -1,5 +1,5 @@
-
-import os
+import sys, os
+sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import textwrap
 from string import Template
 import numpy as np

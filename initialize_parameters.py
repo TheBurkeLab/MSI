@@ -30,8 +30,9 @@ class yaml_parser():
         os.makedirs(mechanism_uncertainties_model_path,exist_ok=True)
         os.makedirs(mechanism_uncertainties_real_path,exist_ok=True)
 
-        # Optimization results directoruy
+        # Optimization results directory
         workspace_path=data["path_to_workspace"]
+        test_directory_path = workspace_path+"\\results\\"
         experiments_path=workspace_path+"\\input_data\\targets\\experiments"
         reactions_to_plot_path=workspace_path+"\\input_data\\targets\\rate_constants\\reactions_to_plot"
         reactions_targets_path=workspace_path+"\\input_data\\targets\\rate_constants\\reaction_targets"

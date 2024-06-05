@@ -1,0 +1,25 @@
+#MANDATORY INPUTS
+targets:
+  experiments:
+  - ['MSI_N2O_Decomposition_mar_25_2024//davidson_2_spe_1.yaml'] #active params are also within these files, like T, P, X
+  - ['MSI_N2O_Decomposition_mar_25_2024//davidson_2_spe_2.yaml']
+  - ['MSI_N2O_Decomposition_mar_25_2024//glarborg_1_H2O_set1_unc01_res005.yaml']
+  rate-constants: #optional
+    reactions_to_plot: 
+    - ['rate_constant_plots.csv'] #can be an empty string
+    reaction_targets:
+    - ['rate_constant_targets_final_shortened.csv'] #can be an empty string
+    -rate constants, initial conditions of ex
+
+mechanism:
+  files: 
+  - ['placeholder//reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti']
+  - ['PLACEHOLDER_MECHANISM.yaml'] #yaml functionality to be added
+  uncertainties:
+    model: 'placeholder//uncertainties_reduced_glarborg_cheby_v31_Li_fit_v9.csv'
+    real: 'real_uncertainties_reduced_glarborg.csv'
+
+#OPTIONAL INPUTS
+MSI-options:
+  X-prior: '' #Xdf_test711_Li.csv'#can be an empty string (opt arg) - usually is empty
+

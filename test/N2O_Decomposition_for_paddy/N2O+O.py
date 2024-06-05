@@ -171,21 +171,23 @@ yaml_files_folder = 'MSI_N2O_Decomposition_mar_25_2024'
 cti_file = 'reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti'
 model_uncertainty_csv = 'uncertainties_reduced_glarborg_cheby_v31_Li_fit_v9.csv'
 real_uncertainty_csv = 'real_uncertainties_reduced_glarborg.csv'
-X_prior_csv=''#Xdf_test711_Li.csv'
+#everything above is required
 
-rate_constant_plots_csv = 'rate_constant_plots.csv'
-rate_constant_target_csv = 'rate_constant_targets_final_shortened.csv'
+X_prior_csv=''#Xdf_test711_Li.csv'#can be an empty string (opt arg) - usually is empty
 
-master_equation_flag = True
-master_reaction_equation_cti_name = 'master_equation_reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti'
-master_equation_uncertainty_csv = 'master_equation_parameter_uncertainties_final_no_W.csv'
+rate_constant_plots_csv = 'rate_constant_plots.csv' #can be an empty string - usually we put it in. A list of all reactions that you want plotted. You can have targets wout plotting them (rarely the case)
+rate_constant_target_csv = 'rate_constant_targets_final_shortened.csv' #can be an empty string (opt arg, but usually used)
+
+master_equation_flag = True #if false, then everything until END OF MASTER EQUATION INPUTS is optional
+master_reaction_equation_cti_name = 'master_equation_reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti' #only ME reactions in here
+master_equation_uncertainty_csv = 'master_equation_parameter_uncertainties_final_no_W.csv' #only uncertainty of ME reactions in here
 master_equation_reactions = ['N2O + O <=> 2 NO', 'N2O + O <=> N2 + O2']
-master_index = [1, 2]
-T_P_min_max_dict = {
+master_index = [1, 2] # can be improved, where maybe do without indexing. But searching by name can cause errors.
+T_P_min_max_dict = { #direct outputs from MSI_theory. Could be streamlined if this code were integrated with MSI_theory
                     'N2O + O <=> 2 NO':{'T_min':200,'T_max':4000,'P_min':101325e-4,'P_max':101325e2},
                     'N2O + O <=> N2 + O2':{'T_min':200,'T_max':4000,'P_min':101325e-4,'P_max':101325e2}       
                    }
-cheb_sensitivity_dict = {
+cheb_sensitivity_dict = { #direct outputs from MSI_theory. Could be streamlined if this code were integrated with MSI_theory
          'N2O + O <=> 2 NO': [np.array([[ 9.99997911e-01, 0],[-1.01323276e-07, 0],[-2.43448265e-06, 0],[-3.21178513e-06, 0],[ 4.01331348e-06, 0],[ 3.68635879e-07, 0],[ 7.74801663e-07, 0]]),
                               np.array([[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]]), 
                               np.array([[-1.30715736, 0],[ 1.21798971, 0],[ 0.01299371, 0],[ 0.00319519, 0],[-0.00221091, 0],[-0.00290965, 0],[-0.00308971, 0]]), 
@@ -230,8 +232,11 @@ cheb_sensitivity_dict = {
                                  np.array([[ 1.32095123e+00, 0],[-1.19515092e+00, 0],[ 2.10758453e-06, 0],[ 2.78652801e-06, 0],[ 1.56078723e-06, 0],[ 2.03998112e-06, 0],[-1.67535313e-06, 0]])]
                     }
 
+#END OF MASTER EQUATION INPUTS
+
 if plot_only == False:
 
+    #start structuring directory
     main_directory = os.path.dirname(os.path.abspath(__file__)) # /home/jl/main
     # main_directory = '/home/jl/N2O_Decomposition'
     test_directory = os.path.join(main_directory,'test') # /home/jl/main/test
@@ -292,9 +297,10 @@ if plot_only == False:
     else:
         theory_parameters_df = None
         master_equation_uncertainty_df = None
+    #stop structuring directory
 
 
-    MSI_st_instance = stMSIcheb.MSI_optimization_chebyshev(
+    MSI_st_instance = stMSIcheb.MSI_optimization_chebyshev( #initialize MSI
                                                         working_directory,
                                                         cti_file,
                                                         files_to_include,
@@ -315,18 +321,19 @@ if plot_only == False:
                                                         X_prior_csv=X_prior_csv
                                                         )
         
-    MSI_st_instance.multiple_runs(number_of_iterations)
+    MSI_st_instance.multiple_runs(number_of_iterations) #run MSI
 
-    exp_dict_list_original = MSI_st_instance.experiment_dictonaries_original
-    parsed_yaml_list_original = MSI_st_instance.list_of_parsed_yamls_original
+    #start saving MSI outputs
+    exp_dict_list_original = MSI_st_instance.experiment_dictonaries_original # multi-level dictionaries, so these aren't easily saved into files. Currently we're not doing this, so the plot_only==True option skips over this.
+    parsed_yaml_list_original = MSI_st_instance.list_of_parsed_yamls_original # multi-level dictionaries, so these aren't easily saved into files. Currently we're not doing this, so the plot_only==True option skips over this.
 
     Ydf_prior = MSI_st_instance.Ydf_prior
     Sdf_prior = MSI_st_instance.Sdf_prior
     covdf_prior = MSI_st_instance.covdf_prior
     sigdf_prior = MSI_st_instance.sigdf_prior
 
-    exp_dict_list_optimized = MSI_st_instance.experiment_dictonaries
-    parsed_yaml_list_optimized = MSI_st_instance.list_of_parsed_yamls
+    exp_dict_list_optimized = MSI_st_instance.experiment_dictonaries # multi-level dictionaries, so these aren't easily saved into files. Currently we're not doing this, so the plot_only==True option skips over this.
+    parsed_yaml_list_optimized = MSI_st_instance.list_of_parsed_yamls # multi-level dictionaries, so these aren't easily saved into files. Currently we're not doing this, so the plot_only==True option skips over this.
 
     Xdf = MSI_st_instance.Xdf
     Ydf = MSI_st_instance.Ydf
@@ -342,12 +349,13 @@ if plot_only == False:
     Xdf_list = MSI_st_instance.Xdf_list
     active_parameters = MSI_st_instance.active_parameters
     target_parameters = MSI_st_instance.target_parameters
+    #stop saving MSI outputs
 
-else:
-    
+else: #if plot_only==True, then optimization is skipped and only the outputs of (a previous, saved) optimization are being plotted
+    # find where previous optimization results are saved
     main_directory = os.path.dirname(__file__) # /home/jl/main
     test_directory = os.path.join(main_directory,'test') # /home/jl/main/test
-    current_test_directory =  'test' + str(test)
+    current_test_directory =  'test' + str(test) #specify the test number
     working_directory =  os.path.join(test_directory, current_test_directory) # /home/jl/main/test/test#
     matrix_path = os.path.join(working_directory,'matrix')
     out_path = os.path.join(working_directory,'out')
@@ -376,6 +384,7 @@ else:
     active_parameters = Xdf.index.to_list()
     target_parameters = Ydf.index.to_list()
 
+#the variables in the "saving MSI outputs" section are now plotted here
 plotting_instance = plotter.Plotting(
                                      Ydf_prior, Sdf_prior, covdf_prior, sigdf_prior,
                                                                                
@@ -410,78 +419,17 @@ plotting_instance = plotter.Plotting(
                                      simulation_run=None,
                                      shock_tube_instance = None,                                                     
                                     
-                                     pdf = True, png = False, svg = False, dpi = 10)
+                                     pdf = True, png = False, svg = False, dpi = 10) #add these all as inputs to yaml file
 
-plotting_instance.plotting_convergence(convergence_sorted, 50)
+plotting_instance.plotting_convergence(convergence_sorted, 50) #plots the deltaX for the top 50 parameters. Can make "50" an adjustable input, to be added in yaml
 
 plotting_instance.plotting_observables()
 plotting_instance.plotting_uncertainty_weighted_sens()
 plotting_instance.plotting_Sdx()
 plotting_instance.merge_observable_pdfs()
 
-if bool(rate_constant_plots_csv):
+if bool(rate_constant_plots_csv): #this is skipped if rate constant plots is an empty string
     plotting_instance.plotting_rate_constants_combined_channels()    
     plotting_instance.plotting_uncertainty_weighted_sens_rate_constant()
     plotting_instance.plotting_Sdx_rate_constant()
     plotting_instance.merge_rate_constant_pdfs()
-
-if mark == True:
-
-    import N2O_Decomposition.mark as mark
-
-    tempyaml_path = os.path.join(yaml_path, 'tempyaml')
-    if not os.path.exists(tempyaml_path):
-        os.makedirs(tempyaml_path) 
-        
-    jsr_template = os.path.join(yaml_path,'barbet_experiment_id1_0.yaml')
-
-    mark_files_to_include=[]
-    mark_updated_files=[]
-    species_to_plot=['N2O','N2','O2','NO','NO2']
-    species_x='NO2'
-    species_x_units='ppm'
-    species_typeset=[r'N$_2$O',r'N$_2$',r'O$_2$','NO',r'NO$_2$']
-    species_x_typeset=r'NO$_2$'
-    # labelfont={'fontname':'Times New Roman','fontsize':12}
-    for i in range(10):
-        for j in range(2):
-            mark_files_to_include.append(os.path.join(yaml_path,'barbet_experiment_id'+str(i+35)+'_'+str(j)+'.yaml'))
-            mark_updated_files.append(os.path.join(yaml_path,'barbet_experiment_id'+str(i+35)+'_'+str(j)+'_updated.yaml'))
-    mark_yaml_lists_species=dict.fromkeys(species_to_plot)
-    mark_updated_yaml_lists_species=dict.fromkeys(species_to_plot)
-    for i,s in enumerate(species_to_plot):
-            mark_yaml_lists_species[s]=[mark_files_to_include[i] for i in range(len(mark_files_to_include)) if i%2==0]
-            mark_updated_yaml_lists_species[s]=[mark_updated_files[i] for i in range(len(mark_updated_files)) if i%2==0]
-    plot_objects=[]
-
-    for i,s in enumerate(species_to_plot):
-        if species_x_units=='ppm':
-            xlabel_suffix=' (ppm)'
-        else:
-            xlabel_suffix=''
-        units=''
-        ylabel_marker=''
-        
-        plot_objects.append(mark.species_sweep_plot(working_directory,species=s,units=units,output_dir=out_path))
-        fig,axs=plot_objects[-1].plot_exp_data(mark_yaml_lists_species[s], s, species_x,plot_objects[-1].fig,plot_objects[-1].axs)
-        model_yamls=plot_objects[-1].generate_model_yamls(mark_yaml_lists_species[s], species_x, output_folder=tempyaml_path, jsr_template=jsr_template)
-        fig,axs=plot_objects[-1].plot_model_predicts(os.path.join(working_directory, cti_file), model_yamls, s, species_x, fig, axs, color='r', label=r"$\it{A}$ $\it{priori}$ model", ls='solid')
-        fig,axs=plot_objects[-1].plot_model_predicts(MSI_st_instance.new_cti_file, model_yamls, s, species_x, fig, axs, color='b', label="MSI", ls='solid')
-        
-        axs.plot([],'w' ,label= 'T:1050')
-        axs.plot([],'w', label= 'P:1.02069')
-        
-        # if 'HE' in data_files_path:
-        #     fig,axs=plot_objects[-1].plot_exp_data(mark_yaml_lists_species[s], s, species_x,plot_objects[-1].fig,plot_objects[-1].axs, marker='o',color='black',label='Experimental Data')
-        #     axs.scatter([],'w', marker='o',color='black', facecolors='none',label='Unweighted Data')  
-        # else:
-        #     axs.scatter([],'w', marker='o',color='black',label='Experimental Data') 
-        #     fig,axs=plot_objects[-1].plot_exp_data(mark_yaml_lists_species[s], s, species_x,plot_objects[-1].fig,plot_objects[-1].axs, marker='o',color='black', facecolors='none',label='Unweighted Data')
-
-        axs.set_title('(barbet_experiment)')
-        axs.set_xlabel('Initial '+species_x_typeset+' mole fraction'+xlabel_suffix)
-        axs.set_ylabel(species_typeset[i]+' mole fraction'+ylabel_marker)
-        axs.tick_params(axis='both',direction='in')
-        axs.legend(ncol=2)
-        fig.savefig(os.path.join(out_path, 'Barbet_sweep_'+s+'.png'), bbox_inches='tight',dpi=1000)
-        fig.savefig(os.path.join(out_path, 'Barbet_sweep_'+s+'.pdf'), bbox_inches='tight',dpi=1000)

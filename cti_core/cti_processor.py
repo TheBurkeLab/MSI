@@ -1,5 +1,5 @@
-import sys, os
-sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
+# import sys, os
+# sys.path.append("C:\\Users\\pjsin\\Documents\\MSI\\ext")
 import re
 import ext.cantera.cantera as ct
 from ..utilities import soln2cti_py3

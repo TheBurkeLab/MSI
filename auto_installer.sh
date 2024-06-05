@@ -2,7 +2,7 @@
 
 #./auto_installer.sh
 
-pkg=art
+pkg=pyyaml
 mkdir "ext\\$pkg"
 pip install $pkg --target="C:\\Users\\pjsin\\Documents\\MSI\\ext\\$pkg"
 

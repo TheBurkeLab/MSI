@@ -1,12 +1,12 @@
 #MANDATORY INPUTS
-working_directory: /home/jl/main/test/test
+path_to_workspace: C:\\Users\\pjsin\\Documents\\MSI
 
 targets:
   experiments:
-    - MSI_N2O_Decomposition_mar_25_2024//davidson_2_spe_1.yaml #active params are also within these files, like T, P, X
-    - MSI_N2O_Decomposition_mar_25_2024//davidson_2_spe_2.yaml
-    - MSI_N2O_Decomposition_mar_25_2024//glarborg_1_H2O_set1_unc01_res005.yaml
-  rate-constants: #optional
+    - davidson_2_spe_1.yaml #active params are also within these files, like T, P, X
+    - davidson_2_spe_2.yaml
+    - glarborg_1_H2O_set1_unc01_res005.yaml
+  rate_constants: #optional
     reactions_to_plot: 
     - rate_constant_plots.csv #can be an empty string
     reaction_targets:
@@ -15,18 +15,18 @@ targets:
 
 mechanism:
   files: 
-  - placeholder//reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti #yaml functionality to be added
+  - reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti #yaml functionality to be added
   uncertainties:
     model: 
-    - placeholder//uncertainties_reduced_glarborg_cheby_v31_Li_fit_v9.csv
+    - uncertainties_reduced_glarborg_cheby_v31_Li_fit_v9.csv
     real: 
     - real_uncertainties_reduced_glarborg.csv
 
 master-equation: #check if this key is provided in yaml. If TRUE, then its contents are loaded. ELSE, this stuff is naturally all ignored
   files:
-  - placeholder//master_equation_reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti
+  - master_equation_reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti
   uncertainties:
-  - placeholder//master_equation_parameter_uncertainties_final_no_W.csv
+  - master_equation_parameter_uncertainties_final_no_W.csv
   reactions: 
   - equation: N2O + O <=> 2 NO  # parameters for this eqn are direct outputs from MSI_theory
     idx: 1

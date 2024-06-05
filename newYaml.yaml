@@ -1,25 +1,89 @@
 #MANDATORY INPUTS
+working_directory: /home/jl/main/test/test
+
 targets:
   experiments:
-  - ['MSI_N2O_Decomposition_mar_25_2024//davidson_2_spe_1.yaml'] #active params are also within these files, like T, P, X
-  - ['MSI_N2O_Decomposition_mar_25_2024//davidson_2_spe_2.yaml']
-  - ['MSI_N2O_Decomposition_mar_25_2024//glarborg_1_H2O_set1_unc01_res005.yaml']
+    - MSI_N2O_Decomposition_mar_25_2024//davidson_2_spe_1.yaml #active params are also within these files, like T, P, X
+    - MSI_N2O_Decomposition_mar_25_2024//davidson_2_spe_2.yaml
+    - MSI_N2O_Decomposition_mar_25_2024//glarborg_1_H2O_set1_unc01_res005.yaml
   rate-constants: #optional
     reactions_to_plot: 
-    - ['rate_constant_plots.csv'] #can be an empty string
+    - rate_constant_plots.csv #can be an empty string
     reaction_targets:
-    - ['rate_constant_targets_final_shortened.csv'] #can be an empty string
-    -rate constants, initial conditions of ex
+    - rate_constant_targets_final_shortened.csv #can be an empty string #these also become data points shown on the plots, in addition to being (theoretically) targets of optimization
+
 
 mechanism:
   files: 
-  - ['placeholder//reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti']
-  - ['PLACEHOLDER_MECHANISM.yaml'] #yaml functionality to be added
+  - placeholder//reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti #yaml functionality to be added
   uncertainties:
-    model: 'placeholder//uncertainties_reduced_glarborg_cheby_v31_Li_fit_v9.csv'
-    real: 'real_uncertainties_reduced_glarborg.csv'
+    model: 
+    - placeholder//uncertainties_reduced_glarborg_cheby_v31_Li_fit_v9.csv
+    real: 
+    - real_uncertainties_reduced_glarborg.csv
+
+master-equation: #check if this key is provided in yaml. If TRUE, then its contents are loaded. ELSE, this stuff is naturally all ignored
+  files:
+  - placeholder//master_equation_reduced_glarborg_cheby_v31_Li_fit_H2O_v6.cti
+  uncertainties:
+  - placeholder//master_equation_parameter_uncertainties_final_no_W.csv
+  reactions: 
+  - equation: N2O + O <=> 2 NO  # parameters for this eqn are direct outputs from MSI_theory
+    idx: 1
+    temperature-range: [200, 4000]
+    pressure-range: [101325e-4, 101325e2] #convert this to atm so that we can have [1e-4 atm, 100 atm]
+    data:
+    - [[ 9.99997911e-01, 0],[-1.01323276e-07, 0],[-2.43448265e-06, 0],[-3.21178513e-06, 0],[ 4.01331348e-06, 0],[ 3.68635879e-07, 0],[ 7.74801663e-07, 0]]
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]]
+    - [[-1.30715736, 0],[ 1.21798971, 0],[ 0.01299371, 0],[ 0.00319519, 0],[-0.00221091, 0],[-0.00290965, 0],[-0.00308971, 0]]
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[ 0.00308724, 0],[ 0.00413944, 0],[ 0.000795  , 0],[-0.00155552, 0],[-0.0018208 , 0],[-0.00114674, 0],[-0.00041149, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]]
+    - [[ 3.61558421, 0],[-5.56611341, 0],[ 2.73284833, 0],[-1.08262976, 0],[ 0.39631728, 0],[-0.1083588 , 0],[ 0.01747353, 0]] 
+    - [[-0.19123555, 0],[-0.35820002, 0],[-0.28718553, 0],[-0.20150148, 0],[-0.12114503, 0],[-0.05879841, 0],[-0.02918919, 0]]
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]]
+    - [[-1.39336293, 0],[-1.24590988, 0],[-0.24544511, 0],[ 0.07429575, 0],[ 0.11034933, 0],[ 0.06856676, 0],[ 0.03781361, 0]]
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[-0.9394612 , 0],[ 0.11067446, 0],[ 0.0841814 , 0],[ 0.05336743, 0],[ 0.0276621 , 0],[ 0.011345  , 0],[ 0.00313567, 0]] 
+    - [[1.01926497, 0],[1.3243695 , 0],[0.55491603, 0],[0.19588425, 0],[0.06565789, 0],[0.01966359, 0],[0.00419789, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[-0.05628151, 0],[-0.10304893, 0],[-0.07865591, 0],[-0.05026884, 0],[-0.0264133 , 0],[-0.01104112, 0],[-0.00338527, 0]]
+    - [[-0.01344154, 0],[-0.0223235 , 0],[-0.0129225 , 0],[-0.00341346, 0],[ 0.0019651 , 0],[ 0.00274956, 0],[ 0.00304885, 0]]
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]]
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[ 1.32094890e+00, 0],[-1.19514332e+00, 0],[-2.11446739e-06, 0],[-4.00423597e-06, 0],[-9.65727234e-07, 0],[-3.09878781e-07, 0],[ 8.39936271e-06, 0]]
+  - equation: N2O + O <=> N2 + O2  # parameters for this eqn are direct outputs from MSI_theory
+    idx: 2
+    temperature-range: [200,4000]
+    pressure-range: [101325e-4, 101325e2] #convert this to atm so that we can have [1e-4 atm, 100 atm]
+    data:
+    - [[ 9.99997879e-01, 0],[-3.61286169e-07, 0],[-3.03642267e-06, 0],[ 6.55656176e-06, 0],[-3.81333850e-06, 0],[ 3.48158493e-06, 0],[-2.84335608e-06, 0]]
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[-1.31876293, 0],[ 1.19886558, 0],[ 0.003977, 0],[ 0.00303719, 0],[ 0.00272921, 0],[ 0.00148647, 0],[ 0.00137597, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[ 0.54643617, 0],[-1.02637883, 0],[ 0.88588513, 0],[-0.68204939, 0],[ 0.46004548, 0],[-0.26068762, 0],[ 0.11299838, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[ 1.73086384e+01, 0],[-2.63837374e+01, 0],[ 1.08396730e+01, 0],[-4.76832610e-01, 0],[-2.37901520e+00, 0],[ 1.31391918e+00, 0],[-6.00821865e-04, 0]] 
+    - [[-0.04209322, 0],[-0.09017349, 0],[-0.08556649, 0],[-0.08341831, 0],[-0.07345397, 0],[-0.04552558, 0],[-0.05022567, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[-1.96597117, 0],[-1.53943933, 0],[-0.34477812, 0],[-0.00710602, 0],[ 0.06694799, 0],[ 0.05455289, 0],[ 0.06927936, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[-0.9876543 , 0],[ 0.02605909, 0],[ 0.02475294, 0],[ 0.02372434, 0],[ 0.02073346, 0],[ 0.01279018, 0],[ 0.01377738, 0]] 
+    - [[1.01926856, 0],[1.3243601 , 0],[0.55491831, 0],[0.19589042, 0],[0.06566142, 0],[0.01966427, 0],[0.00419393, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[-0.01132161, 0],[-0.02391362, 0],[-0.02272851, 0],[-0.02180434, 0],[-0.01909096, 0],[-0.01176643, 0],[-0.01273426, 0]] 
+    - [[-0.00211581, 0],[-0.00373376, 0],[-0.00385928, 0],[-0.00303589, 0],[-0.00267619, 0],[-0.0014784 , 0],[-0.00136935, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]] 
+    - [[ 1.32095123e+00, 0],[-1.19515092e+00, 0],[ 2.10758453e-06, 0],[ 2.78652801e-06, 0],[ 1.56078723e-06, 0],[ 2.03998112e-06, 0],[-1.67535313e-06, 0]]
+
 
 #OPTIONAL INPUTS
 MSI-options:
-  X-prior: '' #Xdf_test711_Li.csv'#can be an empty string (opt arg) - usually is empty
+  # X-prior: #'' #Xdf_test711_Li.csv'#can be an empty string (opt arg) - usually is empty
+  plot_only: False
+  number_of_iterations: 2
+  step_size: 1
 

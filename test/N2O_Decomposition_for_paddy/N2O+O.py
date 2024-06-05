@@ -18,7 +18,7 @@ import MSI.optimization.optimization_shell_chebyshev as stMSIcheb
 import MSI.utilities.plotting_script as plotter
 
 plot_only = False
-mark = False
+# mark = False
 
 number_of_iterations = 2
 step_size = 1
@@ -237,9 +237,8 @@ cheb_sensitivity_dict = { #direct outputs from MSI_theory. Could be streamlined 
 if plot_only == False:
 
     #start structuring directory
-    main_directory = os.path.dirname(os.path.abspath(__file__)) # /home/jl/main
-    # main_directory = '/home/jl/N2O_Decomposition'
-    test_directory = os.path.join(main_directory,'test') # /home/jl/main/test
+    main_directory = os.path.dirname(os.path.abspath(__file__)) 
+    test_directory = os.path.join(main_directory,'test')
     test_directory_list = [f for f in os.listdir(test_directory) if os.path.isdir(os.path.join(test_directory,f))]
     test_number_list = [eval(f.split('test')[1]) for f in test_directory_list if f.split('test')[1].isnumeric()]
     current_test_directory =  'test' + str(max(test_number_list)+1)

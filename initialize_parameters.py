@@ -9,7 +9,7 @@ import ext.pyyaml.yaml as yaml
 import numpy as np
 import sys, os
 
-class yaml_parser():
+class load_master_yaml():
     def __init__(self,fname): #initialize mandatory information from yaml
         with open (fname) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
@@ -30,20 +30,16 @@ class yaml_parser():
         os.makedirs(mechanism_uncertainties_model_path,exist_ok=True)
         os.makedirs(mechanism_uncertainties_real_path,exist_ok=True)
 
-        # Optimization results directory
-        workspace_path=data["path_to_workspace"]
-        test_directory_path = workspace_path+"\\results\\"
-        experiments_path=workspace_path+"\\input_data\\targets\\experiments"
-        reactions_to_plot_path=workspace_path+"\\input_data\\targets\\rate_constants\\reactions_to_plot"
-        reactions_targets_path=workspace_path+"\\input_data\\targets\\rate_constants\\reaction_targets"
-        mechanism_files_path=workspace_path+"\\input_data\\mechanism\\files"
-        mechanism_uncertainties_model_path=workspace_path+"\\input_data\\mechanism\\uncertainties\\model"
-        mechanism_uncertainties_real_path=workspace_path+"\\input_data\\mechanism\\uncertainties\\real"
+
 
 
         self.plot_only = data["MSI-options"]["plot_only"]
         if self.plot_only==False:
             #start structuring directory
+            # Optimization results directory
+            workspace_path=data["path_to_workspace"]
+            test_directory_path = workspace_path+"\\results\\test"
+            #fix the rest later
             main_directory = os.path.dirname(os.path.abspath(__file__)) 
             test_directory = os.path.join(main_directory,'test')
             test_directory_list = [f for f in os.listdir(test_directory) if os.path.isdir(os.path.join(test_directory,f))]

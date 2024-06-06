@@ -1,0 +1,85 @@
+!TemperatureList[K]                      1000.
+TemperatureList[K]                      200. 250.  300.  400. 500. 700. 800. 900. 1000. 1200. 1400.  1600. 1800.  2000. 2500.
+ModelEnergyLimit[kcal/mol]              400
+  Bimolecular           P2                      # H2+O2(singlet)=HO2+H CASFULL RS2
+    Fragment    HO2
+      RRHO
+        Geometry[angstrom]    3
+ O          0.0000000000       -0.0660054841       -0.6378454339
+ O          0.0000000000        0.0117003559        0.6961354914
+ H          0.0000000000        0.8620051475       -0.9252593863
+        Core    RigidRotor
+          SymmetryFactor        1.
+        End
+        Frequencies[1/cm]       3
+                     1099.03
+                     1398.18
+                     3618.99
+        ZeroEnergy[1/cm]                        0
+        ElectronicLevels[1/cm]                  1
+                0       2
+     End                                 
+      Fragment    H
+        Atom
+         Mass[amu]   1
+         ElectronicLevels[1/cm]      1
+            0    2
+      End
+    GroundEnergy[kcal/mol]                      35.68
+  End
+  Bimolecular           P1                      # H2 + O2
+   Fragment        H2                                    
+     RRHO                                                        
+     Geometry[angstrom]      2                               
+       H                  0.00000000    0.00000000    0.37198600
+       H                  0.00000000    0.00000000   -0.37198600   
+     Core     RigidRotor                                       
+       SymmetryFactor      2 
+     End                                                                                    
+     Frequencies[1/cm]    1                                   
+            4378.73                                    
+       ZeroEnergy[kcal/mol]            0 
+      ElectronicLevels[1/cm]     1
+            0    1
+     End
+    Fragment   O2
+      RRHO
+        Geometry[angstrom]    2
+ O          0.0000000000        0.0000000000       -0.6131512037
+ O          0.0000000000        0.0000000000        0.6131512037
+        Core    RigidRotor
+          SymmetryFactor        2
+        End
+        Frequencies[1/cm]       1
+1479.72
+        ZeroEnergy[1/cm]                        0
+        ElectronicLevels[1/cm]                  1
+                0       1
+     End
+    GroundEnergy[kcal/mol]                      0.00
+  End
+  Barrier     B1   P1   P2                      # H2+O2=HO2+H
+     RRHO
+        Geometry[angstrom]      4
+ O          0.0000000000        0.1173189906       -0.7129692462
+ O          0.0000000000       -0.2561624987        0.5294969170
+ H          0.0000000000        0.6507931117        1.1552842621
+ H          0.0000000000        1.5531206377        1.7570390745
+        Core    RigidRotor
+          SymmetryFactor        1
+        End
+        Frequencies[1/cm]       5
+                      387.62
+                     1218.38
+                     1338.77
+                     1458.68
+                     1690.92
+        ZeroEnergy[kcal/mol]                      43.56
+        ElectronicLevels[1/cm]                  1
+                0       2
+        Tunneling         Eckart
+           ImaginaryFrequency[1/cm]            2514.47
+           WellDepth[kcal/mol]                 7.88
+           WellDepth[kcal/mol]                 43.56
+  End
+End

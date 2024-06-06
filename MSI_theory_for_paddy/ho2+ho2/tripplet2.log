@@ -1,0 +1,405 @@
+Model::init:  starts
+   Model::ExponentialKernel::ExponentialKernel:  ... done
+   Model::LennardJonesCollision::LennardJonesCollision:  ... done
+   WELL: W1a
+   Model::RRHO::RRHO:  starts
+      Model::new_core:  starts
+         Model::RigidRotor::RigidRotor:  starts
+            molecular geometry will be used to estimate rotational constants
+            rotational configuration: nonlinear
+            rotational constants[1/cm]:        0.631223      0.0978754      0.0898156
+         Model::RigidRotor::RigidRotor:  done, cpu time[sec] = 0.006108, elapsed time[sec] = 0
+      Model::new_core:  done, cpu time[sec] = 0.007102, elapsed time[sec] = 0
+      ground state energy, kcal/mol:   -4.22
+      interpolating states number/density starts
+         core state contribution ... done, cpu time[sec] = 0.101073, elapsed time[sec] = 0
+         electronic states contribution ... done, cpu time[sec] = 0.002504, elapsed time[sec] = 0
+         vibrational modes contribution ... done, cpu time[sec] = 0.03091, elapsed time[sec] = 0
+         effective power exponent at 404.218 kcal/mol = 11.9109
+      interpolating states number/density done, cpu time[sec] = 1.03316, elapsed time[sec] = 0
+   Model::RRHO::RRHO:  done, cpu time[sec] = 1.04489, elapsed time[sec] = 0
+   WELL: W1b
+   Model::RRHO::RRHO:  starts
+      Model::new_core:  starts
+         Model::RigidRotor::RigidRotor:  starts
+            molecular geometry will be used to estimate rotational constants
+            rotational configuration: nonlinear
+            rotational constants[1/cm]:        0.563236       0.143434       0.114321
+         Model::RigidRotor::RigidRotor:  done, cpu time[sec] = 0.001151, elapsed time[sec] = 0
+      Model::new_core:  done, cpu time[sec] = 0.001635, elapsed time[sec] = 0
+      ground state energy, kcal/mol:   -9.59
+      interpolating states number/density starts
+         core state contribution ... done, cpu time[sec] = 0.091199, elapsed time[sec] = 0
+         electronic states contribution ... done, cpu time[sec] = 0.002737, elapsed time[sec] = 0
+         vibrational modes contribution ... done, cpu time[sec] = 0.030425, elapsed time[sec] = 0
+         effective power exponent at 409.59 kcal/mol = 11.8843
+      interpolating states number/density done, cpu time[sec] = 0.98628, elapsed time[sec] = 0
+   Model::RRHO::RRHO:  done, cpu time[sec] = 0.990636, elapsed time[sec] = 0
+   BIMOLECULAR: P1
+   Model::Bimolecular::Bimolecular:  starts
+      Model::RRHO::RRHO:  starts
+         Model::new_core:  starts
+            Model::RigidRotor::RigidRotor:  starts
+               molecular geometry will be used to estimate rotational constants
+               rotational configuration: nonlinear
+               rotational constants[1/cm]:         20.5397        1.11483        1.05743
+            Model::RigidRotor::RigidRotor:  done, cpu time[sec] = 0.001051, elapsed time[sec] = 0
+         Model::new_core:  done, cpu time[sec] = 0.001553, elapsed time[sec] = 0
+         ground state energy, kcal/mol:   0
+      Model::RRHO::RRHO:  done, cpu time[sec] = 0.003073, elapsed time[sec] = 0
+      Model::RRHO::RRHO:  starts
+         Model::new_core:  starts
+            Model::RigidRotor::RigidRotor:  starts
+               molecular geometry will be used to estimate rotational constants
+               rotational configuration: nonlinear
+               rotational constants[1/cm]:         20.5397        1.11483        1.05743
+            Model::RigidRotor::RigidRotor:  done, cpu time[sec] = 0.000715, elapsed time[sec] = 0
+         Model::new_core:  done, cpu time[sec] = 0.001204, elapsed time[sec] = 0
+         ground state energy, kcal/mol:   0
+      Model::RRHO::RRHO:  done, cpu time[sec] = 0.002562, elapsed time[sec] = 0
+   Model::Bimolecular::Bimolecular:  done, cpu time[sec] = 0.009357, elapsed time[sec] = 0
+   BIMOLECULAR: P2
+   Model::Bimolecular::Bimolecular:  starts
+      Model::RRHO::RRHO:  starts
+         Model::new_core:  starts
+            Model::RigidRotor::RigidRotor:  starts
+               molecular geometry will be used to estimate rotational constants
+               rotational configuration: nonlinear
+               rotational constants[1/cm]:         10.0783       0.877183       0.848353
+            Model::RigidRotor::RigidRotor:  done, cpu time[sec] = 0.000729, elapsed time[sec] = 0
+         Model::new_core:  done, cpu time[sec] = 0.00206, elapsed time[sec] = 0
+         ground state energy, kcal/mol:   0
+      Model::RRHO::RRHO:  done, cpu time[sec] = 0.003571, elapsed time[sec] = 0
+      Model::RRHO::RRHO:  starts
+         Model::new_core:  starts
+            Model::RigidRotor::RigidRotor:  starts
+               molecular geometry will be used to estimate rotational constants
+               rotational configuration: linear
+               rotational constant[1/cm]:         1.43468
+            Model::RigidRotor::RigidRotor:  done, cpu time[sec] = 0.000734, elapsed time[sec] = 0
+         Model::new_core:  done, cpu time[sec] = 0.001222, elapsed time[sec] = 0
+         ground state energy, kcal/mol:   0
+      Model::RRHO::RRHO:  done, cpu time[sec] = 0.002631, elapsed time[sec] = 0
+   Model::Bimolecular::Bimolecular:  done, cpu time[sec] = 0.009398, elapsed time[sec] = 0
+   BARRIER: B1
+   Model::RRHO::RRHO:  starts
+      Model::new_core:  starts
+         Model::Rotd::Rotd :  starts
+            WARNING: zero number of states energy is not initialized: will try to estimate it from the data
+            grid size = 179
+            effective power exponent at 2349.05 kcal/mol = 2.62206
+            zero number of states energy = 0 1/cm
+         Model::Rotd::Rotd :  done, cpu time[sec] = 0.016835, elapsed time[sec] = 0
+      Model::new_core:  done, cpu time[sec] = 0.017558, elapsed time[sec] = 0
+      ground state energy, kcal/mol:   0
+      interpolating states number/density starts
+         core state contribution ... done, cpu time[sec] = 0.611219, elapsed time[sec] = 0
+         electronic states contribution ... done, cpu time[sec] = 0.002454, elapsed time[sec] = 0
+         vibrational modes contribution ... done, cpu time[sec] = 0.014828, elapsed time[sec] = 0
+         effective power exponent at 399.998 kcal/mol = 9.01406
+      interpolating states number/density done, cpu time[sec] = 1.44999, elapsed time[sec] = 0
+   Model::RRHO::RRHO:  done, cpu time[sec] = 1.47045, elapsed time[sec] = 0
+   BARRIER: B2
+   Model::RRHO::RRHO:  starts
+      Model::new_core:  starts
+         Model::MultiRotor::MultiRotor:  starts
+            1-th internal rotation definition:
+            InternalRotation starts
+            InternalRotation done
+            mass fourier expansion starts
+               mass fourier expansion size = 11
+               1D internal mobilities for original geometry, 1/cm:     2.38988
+               generalized mass matrix [amu * bohr * bohr] for original geometry:
+               #\#           1
+               1       25.1895
+               external rotational constants for original geometry [1/cm]:   0.557973   0.167719   0.131451
+               internal mobility matrix for original geometry, 1/cm:
+               #\#           1
+               1       2.38988
+               (single rotor) internal mobility, 1/ cm:
+                 0        2.38988
+                 1        2.20744
+                 2        2.08829
+                 3        2.10827
+                 4        2.20103
+                 5        2.25342
+                 6        2.20438
+                 7        2.11426
+                 8        2.09619
+                 9         2.2157
+                10        2.39396
+               averaged internal mobility matrix, 1/cm:
+               #\#           1
+               1       2.20662
+            mass fourier expansion done, cpu time[sec] = 0.009327, elapsed time[sec] = 0
+            potential fourier expansion starts
+               potential fourier expansion size = 13
+               different order potential correlation terms contributions, %:
+                 #            1
+                 %          100
+               first order correlation contributions to the potential from different rotations, %:
+                 R            0
+                 %          100
+               high order harmonics potential contributions, %:
+               R\#        1        2        3        4        5        6
+                 0     74.5     22.7     2.52    0.199   0.0681   0.0307
+               1            100
+               2            100
+               3            100
+               4            100
+               5            100
+               6            100
+               7            100
+               8            100
+               9            100
+               10           100
+               Model potential:
+                         phi_1    V, kcal/mol            f_1
+                             0        16.7486        120.871
+                            30        17.7751        96.9004
+                            60        20.1047       -95.2444
+                            90        21.2707       -52.5891
+                           120        21.6984       -56.5185
+                           150        21.6864        22.3203
+                           180        21.6576         29.568
+                           210        21.7923       -25.3172
+                           240        21.7858       -32.4695
+                           270        21.6497       -44.1185
+                           300        20.8262       -123.237
+                           330        18.1266        105.699
+
+            potential fourier expansion done, cpu time[sec] = 0.009364, elapsed time[sec] = 0
+            descretization starts
+               angular integration grid size = 100
+               potential minimum energy correction [kcal/mol] = -0.00252455
+               potential maximum energy correction [kcal/mol] = 0.000687961
+               potential energy surface, kcal/mol:
+                      E, kcal/mol        phi_1
+                 min      16.7461       1.3748
+                 max      21.8384      225.164
+               vibrational frequencies, 1/cm:
+               #           min          max         mean
+               1       90.4407      216.102      152.833
+               2       152.159      329.582      231.583
+               3       361.262      417.187          384
+               4       575.815      708.328      638.667
+               5       752.933      1078.64       913.75
+               6       1091.36      1171.65      1124.83
+               7       1336.22      1371.16      1353.33
+               8       1419.85      1450.01      1429.75
+               9        1394.5      1678.16      1549.17
+               10      3633.04       3700.2      3676.25
+               hindered rotation frequencies f at minimum, 1/cm:
+               #            f
+               1      120.112
+               effective one-dimensional internal mobilities[1/cm]:   2.38423
+               ground energy in the harmonic oscilator approximation = 16.9178 kcal/mol
+            descretization done, cpu time[sec] = 0.075883, elapsed time[sec] = 0
+            one-dimensional uncoupled rotors model initialization starts
+               Model::HinderedRotor::HinderedRotor:  starts
+                  effective rotational constant[1/cm]  = 2.20662
+                  analytic  frequency at minimum[1/cm] = 115.526
+                  numerical frequency at minimum[1/cm] = 115.526
+                  minimum energy[kcal/mol]             = -3.68072
+                  maximum energy[kcal/mol]             = 1.41158
+                  maximum frequency[1/cm]              = 122.504
+                  ground energy [kcal/mol]             = -3.51499
+                  highest energy level [kcal/mol]      = 1564.69
+                  number of levels                     = 997
+                  10 lowest excited states [kcal/mol] relative to the ground: 0.332 0.664 0.994 1.32 1.64 1.96 2.27 2.57 2.86
+                  Statistical Weight (*** - deep tunneling regime):
+                   T, K        Quantum             PG             PI  ***
+                    100        1.23188        1.23328        1.23185
+                    200        1.76929        1.76927        1.76937
+                    300          2.362        2.36118        2.36219
+                    400        3.00482         3.0031        3.00497
+                    500        3.72158        3.71912        3.72179
+                    600        4.52812        4.52493        4.52832
+                    700        5.42535         5.4216        5.42557
+                    800        6.40448        6.40028         6.4047
+                    900        7.45219        7.44772        7.45245
+                   1000        8.55448        8.54982        8.55477
+               Model::HinderedRotor::HinderedRotor:  done, cpu time[sec] = 9.00556, elapsed time[sec] = 1
+               Model::HinderedRotor::set:  starts
+               Model::HinderedRotor::set:  done, cpu time[sec] = 7.9e-05, elapsed time[sec] = 0
+               one-dimensional uncoupled rotors model ground energy [kcal/mol] = 16.9118
+            one-dimensional uncoupled rotors model initialization done, cpu time[sec] = 9.00695, elapsed time[sec] = 1
+            Model::MultiRotor::_set_qfactor:  starts
+               potential fourier expansion size = 12
+               vibrational frequencies fourier expansion sizes:   13   13   13   13   13   13   13   13   13   13
+               internal mobility matrix fourier expansion size = 11
+               external rotation factor fourier expansion size = 11
+               quantum phase space dimensions:   77
+               reference hamiltonian size = 77
+               number of vibrational population states = 3886
+               Model::MultiRotor::_set_states_base:  ... done, cpu time[sec] = 0.0006, elapsed time[sec] = 0
+               classically estimated number of energy levels = 62
+               setting reference hamiltonian ... done, cpu time[sec] = 0.071103, elapsed time[sec] = 0
+               setting external rotation factor matrix elements ... done, cpu time[sec] = 0.031347, elapsed time[sec] = 0
+               stripped hamiltonian size = 77
+               diagonalizing hamiltonian ... done, cpu time[sec] = 0.033616, elapsed time[sec] = 0
+               averaging external rotation factor over quantum state ... done, cpu time[sec] = 0.007007, elapsed time[sec] = 0
+               quantum states  # = 63
+               first 10 energy levels, kcal/mol: 16.9178 17.2619 17.6051 17.9455 18.2815 18.6117 18.9346 19.2488 19.553 19.8456
+               ground state energy      [kcal/mol] = 16.9178
+               potential energy minimum [kcal/mol] = 16.7461
+               Model::MultiRotor::_set_states_base:  ... done, cpu time[sec] = 0.000418, elapsed time[sec] = 0
+            Model::MultiRotor::_set_qfactor:  done, cpu time[sec] = 0.254555, elapsed time[sec] = 0
+            interpolating states number/density starts
+               Model::MultiRotor::_set_states_base:  ... done, cpu time[sec] = 0.003452, elapsed time[sec] = 0
+               angular integration ... done
+               classical states interpolation ... done
+               effective power exponent at 99.9973 kcal/mol = 10.7995
+               number of states (E - energy in kcal/mol relative to the ground level):
+                   E    Classical  Q-corrected     Q-Factor 1D-Classical   1D-Quantum  1D-Q-Factor
+                 0.1      7231.25      4983.71     0.689191      7758.12      5715.17     0.736669
+                 0.2        15684      14096.1     0.898757      16918.6      15491.9      0.91567
+                 0.3      28365.4      25862.9     0.911778      30668.9        28051     0.914641
+                 0.4      45642.4      40923.4     0.896609      50705.6      45485.7     0.897056
+                 0.5      68417.3      63415.9     0.926899      79059.6      73158.5     0.925359
+                 0.6      98405.9      93674.7     0.951922       118006       111419     0.944184
+                 0.7       137464       129658     0.943213       170294       159695     0.937758
+                 0.8       187650       179240     0.955182       238362       226433     0.949952
+                 0.9       251403       242633     0.965117       325547       311745     0.957604
+                   1       330944       320374     0.968061       435022       416864     0.958261
+                 1.1       429249       414835      0.96642       572156       548354       0.9584
+                 1.2       550313       535804     0.973636       741489       716584     0.966411
+                 1.3       697134       680872     0.976673       949208       918370     0.967512
+                 1.4       873232       852912      0.97673  1.20107e+06  1.16395e+06     0.969094
+                 1.5  1.08234e+06  1.06004e+06     0.979396  1.50374e+06  1.46135e+06     0.971806
+                 1.6  1.32854e+06  1.30466e+06     0.982031  1.86418e+06  1.81558e+06     0.973934
+                 1.7   1.6174e+06  1.58914e+06     0.982525  2.29027e+06  2.23151e+06     0.974343
+                 1.8   1.9551e+06  1.92053e+06     0.982318  2.79298e+06   2.7218e+06     0.974516
+                 1.9  2.34786e+06  2.31223e+06     0.984821  3.38256e+06  3.30419e+06     0.976832
+                   2  2.80346e+06  2.76314e+06     0.985617   4.0712e+06  3.97873e+06     0.977287
+                 2.1   3.3299e+06  3.28534e+06     0.986618  4.86961e+06  4.76501e+06      0.97852
+                 2.2  3.93523e+06  3.88404e+06     0.986991  5.79304e+06   5.6715e+06     0.979019
+                 2.3  4.62891e+06  4.57389e+06     0.988114  6.85608e+06   6.7198e+06     0.980124
+                 2.4  5.42172e+06  5.36115e+06     0.988829  8.07604e+06  7.92229e+06     0.980962
+                 2.5  6.32516e+06   6.2566e+06     0.989161  9.47047e+06  9.29654e+06     0.981634
+                 2.6  7.35133e+06  7.27567e+06     0.989708  1.10603e+07   1.0862e+07     0.982065
+                 2.7  8.51351e+06  8.42885e+06     0.990057  1.28683e+07  1.26455e+07     0.982689
+                 2.8  9.82582e+06  9.73524e+06     0.990781  1.49165e+07  1.46697e+07     0.983453
+                 2.9  1.13035e+07  1.12017e+07     0.990999  1.72316e+07  1.69498e+07     0.983649
+                   3  1.29637e+07  1.28527e+07     0.991436  1.98396e+07  1.95259e+07     0.984185
+                 3.1  1.48258e+07  1.47041e+07      0.99179  2.27734e+07  2.24206e+07     0.984508
+                 3.2  1.69093e+07  1.67775e+07     0.992207   2.6065e+07   2.5675e+07     0.985035
+                 3.3  1.92389e+07  1.90917e+07     0.992349  2.97536e+07  2.93147e+07     0.985248
+                 3.4  2.18375e+07  2.16808e+07     0.992823  3.38755e+07  3.33973e+07     0.985884
+                 3.5  2.47301e+07  2.45611e+07     0.993164  3.84722e+07  3.79432e+07     0.986249
+                 3.6  2.79452e+07  2.77572e+07     0.993273  4.35887e+07  4.29978e+07     0.986444
+                 3.7  3.15099e+07  3.13047e+07     0.993489  4.92757e+07  4.86248e+07      0.98679
+                 3.8  3.54561e+07   3.5235e+07     0.993764  5.55873e+07  5.48726e+07     0.987143
+                 3.9  3.98204e+07  3.95808e+07     0.993983  6.25803e+07  6.17917e+07     0.987398
+                   4  4.46386e+07  4.43725e+07     0.994039  7.03192e+07  6.94442e+07     0.987557
+                 4.1  4.99553e+07  4.96721e+07     0.994332   7.8869e+07  7.79122e+07     0.987868
+                 4.2  5.58145e+07    5.551e+07     0.994544  8.83032e+07  8.72541e+07     0.988119
+                 4.3   6.2263e+07  6.19323e+07     0.994689  9.86969e+07  9.75442e+07     0.988321
+                 4.4  6.93523e+07  6.89902e+07     0.994778  1.10139e+08  1.08872e+08       0.9885
+                 4.5  7.71384e+07  7.67526e+07        0.995  1.22721e+08  1.21344e+08     0.988782
+                 4.6  8.56777e+07   8.5261e+07     0.995137  1.36542e+08  1.35037e+08     0.988976
+                 4.7  9.50359e+07  9.45868e+07     0.995275  1.51704e+08  1.50064e+08     0.989184
+                 4.8  1.05284e+08  1.04798e+08     0.995379  1.68323e+08  1.66532e+08     0.989359
+                 4.9  1.16507e+08  1.15984e+08      0.99551  1.86527e+08  1.84572e+08     0.989517
+                   5  1.28793e+08  1.28229e+08     0.995621  2.06455e+08  2.04324e+08     0.989679
+                 5.1  1.42231e+08  1.41622e+08     0.995714   2.2825e+08   2.2593e+08     0.989835
+                 5.2  1.56918e+08  1.56267e+08      0.99585  2.52059e+08  2.49532e+08     0.989974
+                 5.3  1.72961e+08  1.72259e+08     0.995942  2.78049e+08  2.75307e+08      0.99014
+                 5.4  1.90478e+08  1.89731e+08      0.99608  3.06394e+08   3.0342e+08     0.990292
+                 5.5   2.0959e+08   2.0878e+08     0.996137   3.3729e+08  3.34056e+08     0.990413
+                 5.6  2.30425e+08  2.29565e+08     0.996267  3.70936e+08  3.67439e+08     0.990574
+                 5.7  2.53128e+08  2.52202e+08     0.996341  4.07547e+08  4.03759e+08     0.990705
+                 5.8  2.77849e+08  2.76859e+08     0.996436  4.47354e+08  4.43252e+08      0.99083
+                 5.9  3.04754e+08  3.03686e+08     0.996494  4.90604e+08  4.86158e+08     0.990937
+                   6  3.34024e+08  3.32889e+08       0.9966  5.37563e+08  5.32772e+08     0.991088
+                 6.1   3.6584e+08  3.64625e+08      0.99668  5.88507e+08  5.83318e+08     0.991182
+                 6.2  4.00405e+08  3.99099e+08     0.996738   6.4374e+08  6.38132e+08     0.991289
+                 6.3  4.37937e+08  4.36544e+08     0.996817  7.03576e+08  6.97516e+08     0.991386
+                 6.4  4.78658e+08  4.77172e+08     0.996895  7.68357e+08  7.61839e+08     0.991518
+                 6.5  5.22815e+08  5.21236e+08     0.996979  8.38434e+08  8.31406e+08     0.991618
+                 6.6  5.70674e+08  5.68971e+08     0.997015  9.14191e+08  9.06618e+08     0.991716
+                 6.7  6.22514e+08  6.20719e+08     0.997117   9.9604e+08  9.87903e+08     0.991831
+                 6.8  6.78636e+08  6.76707e+08     0.997159  1.08442e+09  1.07566e+09     0.991923
+                 6.9  7.39352e+08  7.37305e+08     0.997232  1.17978e+09  1.17037e+09     0.992027
+                   7  8.04988e+08  8.02794e+08     0.997275   1.2826e+09  1.27248e+09     0.992107
+                 7.1  8.75921e+08  8.73594e+08     0.997343  1.39341e+09  1.38255e+09     0.992211
+                 7.2  9.52542e+08   9.5006e+08     0.997395  1.51274e+09  1.50107e+09     0.992282
+                 7.3  1.03525e+09  1.03261e+09     0.997449  1.64119e+09  1.62869e+09     0.992381
+                 7.4  1.12447e+09  1.12167e+09     0.997505  1.77936e+09  1.76593e+09     0.992454
+                 7.5  1.22067e+09  1.21769e+09     0.997556  1.92789e+09  1.91353e+09     0.992548
+                 7.6  1.32434e+09  1.32117e+09     0.997612  2.08749e+09  2.07209e+09     0.992624
+                 7.7  1.43599e+09  1.43261e+09     0.997645  2.25888e+09   2.2424e+09     0.992704
+                 7.8  1.55618e+09  1.55262e+09     0.997712  2.44282e+09   2.4252e+09      0.99279
+                 7.9  1.68548e+09  1.68167e+09     0.997742  2.64012e+09  2.62127e+09     0.992862
+                   8  1.82451e+09  1.82049e+09     0.997799  2.85164e+09  2.83152e+09     0.992945
+                 8.1  1.97393e+09  1.96964e+09     0.997827  3.07829e+09  3.05676e+09     0.993004
+                 8.2  2.13444e+09  2.12992e+09     0.997879  3.32105e+09  3.29809e+09     0.993086
+                 8.3   2.3068e+09  2.30199e+09     0.997914  3.58091e+09  3.55637e+09     0.993146
+                 8.4  2.49177e+09  2.48667e+09     0.997954  3.85894e+09  3.83277e+09     0.993219
+                 8.5  2.69017e+09  2.68478e+09     0.997993  4.15626e+09  4.12833e+09     0.993279
+                 8.6  2.90289e+09  2.89717e+09     0.998032  4.47406e+09  4.44432e+09     0.993353
+                 8.7  3.13083e+09   3.1248e+09     0.998074  4.81361e+09  4.78191e+09     0.993414
+                 8.8    3.375e+09  3.36859e+09     0.998099  5.17621e+09  5.14245e+09     0.993477
+                 8.9  3.63644e+09  3.62969e+09     0.998143  5.56328e+09  5.52735e+09     0.993542
+                   9  3.91623e+09  3.90906e+09     0.998167  5.97627e+09  5.93801e+09     0.993599
+                 9.1  4.21555e+09    4.208e+09     0.998209  6.41672e+09  6.37606e+09     0.993664
+                 9.2  4.53562e+09  4.52759e+09      0.99823  6.88625e+09  6.84296e+09     0.993714
+                 9.3  4.87774e+09   4.8693e+09      0.99827  7.38658e+09  7.34061e+09     0.993777
+                 9.4  5.24328e+09  5.23433e+09     0.998294  7.91952e+09  7.87063e+09     0.993826
+                 9.5  5.63368e+09  5.62424e+09     0.998325  8.48698e+09  8.43508e+09     0.993885
+                 9.6  6.05046e+09  6.04049e+09     0.998353  9.09091e+09  9.03576e+09     0.993934
+                 9.7  6.49521e+09   6.4847e+09     0.998381  9.73339e+09  9.67491e+09     0.993991
+                 9.8  6.96964e+09  6.95856e+09      0.99841  1.04166e+10  1.03546e+10      0.99404
+            interpolating states number/density done, cpu time[sec] = 0.369726, elapsed time[sec] = 0
+            statistical weight (*** - deep tunneling regime):
+             T, K    Classical PathIntegral
+               50        10688      6757.82
+              100      27224.8      24092.6
+              150      66360.9      62826.4
+              200       147693       143243
+              250       305623       299783
+              300       598443       590656
+              350  1.12472e+06  1.11429e+06
+              400  2.05055e+06  2.03661e+06
+              450  3.65303e+06  3.63445e+06
+              500  6.38725e+06  6.36264e+06
+              550  1.09869e+07  1.09545e+07
+              600  1.86116e+07  1.85692e+07
+              650  3.10593e+07  3.10042e+07
+              700  5.10646e+07  5.09935e+07
+              750  8.27138e+07  8.26227e+07
+              800  1.32011e+08  1.31895e+08
+              850   2.0764e+08  2.07494e+08
+              900  3.21981e+08  3.21797e+08
+              950  4.92443e+08  4.92214e+08
+             1000  7.43198e+08  7.42914e+08
+         Model::MultiRotor::MultiRotor:  done, cpu time[sec] = 9.74413, elapsed time[sec] = 1
+      Model::new_core:  done, cpu time[sec] = 9.74476, elapsed time[sec] = 1
+      Model::EckartTunnel::EckartTunnel:  ... done
+      ground state energy, kcal/mol:   -1.52
+      interpolating states number/density starts
+         core state contribution ... done, cpu time[sec] = 0.124162, elapsed time[sec] = 0
+         electronic states contribution ... done, cpu time[sec] = 0.001301, elapsed time[sec] = 0
+         tunneling contribution ... done, cpu time[sec] = 1.78294, elapsed time[sec] = 0
+         effective power exponent at 409.787 kcal/mol = 11.029
+      interpolating states number/density done, cpu time[sec] = 1.93123, elapsed time[sec] = 0
+   Model::RRHO::RRHO:  done, cpu time[sec] = 11.6774, elapsed time[sec] = 1
+   BARRIER: B8
+   Model::RRHO::RRHO:  starts
+      Model::new_core:  starts
+         Model::RigidRotor::RigidRotor:  starts
+            molecular geometry will be used to estimate rotational constants
+            rotational configuration: nonlinear
+            rotational constants[1/cm]:        0.553193       0.118076       0.103088
+         Model::RigidRotor::RigidRotor:  done, cpu time[sec] = 1.5e-05, elapsed time[sec] = 0
+      Model::new_core:  done, cpu time[sec] = 2e-05, elapsed time[sec] = 0
+      ground state energy, kcal/mol:   -3.46
+      interpolating states number/density starts
+         core state contribution ... done, cpu time[sec] = 0.000891, elapsed time[sec] = 0
+         electronic states contribution ... done, cpu time[sec] = 3.1e-05, elapsed time[sec] = 0
+         vibrational modes contribution ... done, cpu time[sec] = 0.000335, elapsed time[sec] = 0
+         effective power exponent at 403.457 kcal/mol = 11.9257
+      interpolating states number/density done, cpu time[sec] = 0.010674, elapsed time[sec] = 0
+   Model::RRHO::RRHO:  done, cpu time[sec] = 0.01073, elapsed time[sec] = 0
+   checking input ... done
+Model::init:  done, cpu time[sec] = 15.233, elapsed time[sec] = 1

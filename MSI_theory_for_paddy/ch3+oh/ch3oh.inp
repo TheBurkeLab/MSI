@@ -1,0 +1,762 @@
+TemperatureList[K]                      298.0
+PressureList[atm]                       1
+EnergyStep[1/cm]		                50.0
+ExcessEnergyOverTemperature		        40
+ModelEnergyLimit[kcal/mol]		        500
+CalculationMethod			            direct
+
+Model
+  EnergyRelaxation
+    Exponential
+      Factor[1/cm]			261.71357112075
+      Power				    .685
+      ExponentCutoff	    15
+    End
+  CollisionFrequency
+    LennardJones
+      Epsilons[1/cm]                  	180   335.
+      Sigmas[angstrom]                	3.52355   3.626   
+      Masses[amu]                     	4.     32.03
+    End
+ 
+  Well     W1				# CH3OH
+    Species
+      RRHO 
+        Mass[amu]       32.02621
+        Core    RigidRotor
+          SymmetryFactor             3.0
+		  RotationalConstants[1/cm]	 4.273   0.822   0.794
+        End
+        Rotor	Hindered
+		  Geometry[angstrom]		6
+		    C    -0.046439    0.666085    0.000000
+		    H    -1.090878    0.978507    0.000000
+		    H     0.438881    1.078714    0.893034
+		    H     0.438881    1.078714   -0.893034
+		    O    -0.046439   -0.758075    0.000000
+		    H     0.863262   -1.067841    0.000000
+          Group                         2 3 4
+          Axis                          1 5
+          FourierExpansion[1/cm]  	    5
+				0	365.
+				2   -773.35
+				4   411.35
+				1   0
+				3   0
+        End
+        Frequencies[1/cm]		11
+				3851.4   3113.1   3037.0   2989.6
+				1505.0   1493.5   1479.6   1355.5
+				1167.5   1069.9   1041.6
+        ZeroEnergy[1/cm]		-31566.
+        ElectronicLevels[1/cm]		1
+		0	1
+      End
+  End
+  
+  
+  Bimolecular	R			# CH3 + OH
+    Fragment	OH
+      RRHO
+	Geometry[angstrom]		2
+		O      0.000000      0.000000      0.578564E-01
+        H      0.000000      0.000000     -0.918217
+	Core	RigidRotor
+	  SymmetryFactor		1
+	End
+	Frequencies[1/cm]		1
+			   3706.7
+ 	ZeroEnergy[1/cm]		0
+ 	ElectronicLevels[1/cm]		2
+		0	  2
+		137   2
+      End             
+    Fragment	CH3
+      RRHO
+	Geometry[angstrom]		4
+        C      0.000000      0.254834E-06  0.000000
+        H     -0.935814     -0.540292      0.000000
+        H      0.935814     -0.540292      0.000000
+        H      0.000000       1.08058      0.000000
+	Core	RigidRotor
+	  SymmetryFactor		6
+	End
+	Frequencies[1/cm]		6
+       3283.3   3283.3   3103.3   1402.3
+	   1402.3   536.4
+ 	ZeroEnergy[1/cm]		0
+ 	ElectronicLevels[1/cm]		1
+		0	2
+      End             
+    GroundEnergy[1/cm]			0.0
+  End
+  
+  
+  Bimolecular	P1			# CH2 + H2O
+    Fragment	CH2
+      RRHO
+	Geometry[angstrom]		3
+        C      0.101241      0.000000      0.000000
+        H     -0.602728      0.000000      0.862204
+        H     -0.602728      0.000000     -0.862204
+
+	Core	RigidRotor
+	  SymmetryFactor		2
+	End
+	Frequencies[1/cm]	 	3
+				1384.6   2900.2   2965.8
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	1
+      End             
+    Fragment    H2O
+      RRHO
+	Geometry[angstrom]		3
+        O      0.655058E-01  0.000000      0.000000
+        H     -0.519809      0.000000      0.763570
+        H     -0.519809      0.000000     -0.763570
+	Core	RigidRotor
+	  SymmetryFactor		2
+	End
+	Frequencies[1/cm]		3
+        3922.1   3816.9   1602.7
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	1
+      End
+    GroundEnergy[1/cm]          213
+  End
+  
+  
+  Bimolecular	P2			# cis-HCOH + H2
+    Fragment	H2
+      RRHO
+	Geometry[angstrom]		2
+        H      0.000000      0.000000      0.7442
+        H      0.000000      0.000000      0.
+
+	Core	RigidRotor
+	  SymmetryFactor		2
+	End
+	Frequencies[1/cm]	 	1
+				4418
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	1
+      End             
+    Fragment    cis-HCOH
+      RRHO
+	Geometry[angstrom]		4
+        C      0.000000      0.827279E-01  0.742688
+        O      0.000000      0.523191E-01 -0.564727
+        H      0.000000     -0.981960       1.09726
+        H      0.000000     -0.833399     -0.977698
+	Core	RigidRotor
+	  SymmetryFactor		1
+	End
+	Frequencies[1/cm]		6
+        1007   1199   1322   1468
+		2755   3528
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	1
+      End
+    GroundEnergy[1/cm]          -4571
+  End
+  
+  
+  Bimolecular	P3			# trans-HCOH + H2
+    Fragment	H2
+      RRHO
+	Geometry[angstrom]		2
+        H      0.000000      0.000000      0.7442
+        H      0.000000      0.000000      0.
+
+	Core	RigidRotor
+	  SymmetryFactor		2
+	End
+	Frequencies[1/cm]	 	1
+				4418
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	1
+      End             
+    Fragment    trans-HCOH
+      RRHO
+	Geometry[angstrom]		4
+        C      0.000000      0.123774      0.735472
+        O      0.000000     -0.837664E-01 -0.559573
+        H      0.000000     -0.914660       1.14129
+        H      0.000000      0.770339      -1.01762
+	Core	RigidRotor
+	  SymmetryFactor		1
+	End
+	Frequencies[1/cm]		6
+        1097   1216   1320   1504
+		2858   3717
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	1
+      End
+    GroundEnergy[1/cm]          -6194
+  End
+  
+  
+  Bimolecular	P4			# H2CO + H2
+    Fragment	H2
+      RRHO
+	Geometry[angstrom]		2
+        H      0.000000      0.000000      0.7442
+        H      0.000000      0.000000      0.
+
+	Core	RigidRotor
+	  SymmetryFactor		2
+	End
+	Frequencies[1/cm]	 	1
+				4418
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	1
+      End             
+    Fragment    H2CO
+      RRHO
+	Geometry[angstrom]		4
+        O    0.000000    0.000000    0.674292
+        C    0.000000    0.000000   -0.527468
+        H    0.000000    0.939945   -1.114765
+        H    0.000000   -0.939945   -1.114765
+	Core	RigidRotor
+	  SymmetryFactor		2
+	End
+	Frequencies[1/cm]		6
+        1202   1260   1531   1815
+		2883   2941
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	1
+      End
+    GroundEnergy[1/cm]          -24424
+  End
+  
+  
+  Bimolecular	P5			# H + CH2OH
+    Fragment	H
+      Atom
+      Mass[amu]    1.00783
+      ElectronicLevels[1/cm]          1
+                0       2
+    End
+    Fragment    CH2OH
+      RRHO
+	Geometry[angstrom]		5
+        C      0.167989E-01  0.376166E-01  0.726970
+        O     -0.658893E-01 -0.131273E-01 -0.636110
+        H      0.811624      0.743898E-01  -1.02129
+        H      0.959324     -0.197897       1.20689
+        H     -0.928205     -0.116632       1.22561
+	Core	RigidRotor
+	  SymmetryFactor		2
+	End
+	Frequencies[1/cm]		9
+        407   533   1050   1198
+		1351  1480  3127   3273
+		3843
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	2
+      End
+    GroundEnergy[1/cm]          1504
+  End
+  
+  
+  Bimolecular	P6			# H + CH3O
+    Fragment	H
+      Atom
+      Mass[amu]    1.00783
+      ElectronicLevels[1/cm]          1
+                0       2
+    End
+    Fragment    CH3O
+      RRHO
+	Geometry[angstrom]		5
+        C      0.000000      0.902950E-02  0.666658
+        O      0.000000      0.349919E-02 -0.699059
+        H      0.000000      -1.06120      0.960403
+        H      0.910899      0.449077       1.09818
+        H     -0.910899      0.449077       1.09818
+	Core	RigidRotor
+	  SymmetryFactor		3
+	End
+	Frequencies[1/cm]		9
+        691   957   1103   1353
+		1365  1510  2890   2965
+		3009
+ 	ZeroEnergy[1/cm]		    0
+ 	ElectronicLevels[1/cm]		1
+		0	2
+      End
+    GroundEnergy[1/cm]          4718
+  End
+  
+  
+    Barrier     B1   W1   R    		# CH3 + OH == CH3OH
+    Read
+        File                            Channel_1.dat
+		Mass[amu]                       32.0262
+		GroundEnergy[1/cm]              0
+    End
+  
+    Barrier     B2   W1   P1    	# CH3OH == CH2 + H2O
+    Read
+        File                            New_Channel_2.dat
+		Mass[amu]                       32.0262
+		GroundEnergy[1/cm]              213
+    End
+	
+	Barrier     B3   W1   P2    	# CH3OH == cis-HCOH + H2
+    Variational
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.788	0.834	0.807
+        End
+      	Frequencies[1/cm]          11
+	    411	810	1026	1090	1217	1312	1419	1471	2980	3175	3822
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -7384       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.737	0.833	0.806
+        End
+      	Frequencies[1/cm]          11
+	    427	792	1029	1060	1212	1308	1415	1469	2915	3159	3814
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -6246       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.685	0.833	0.803
+        End
+      	Frequencies[1/cm]          11
+	    444	781	1024	1040	1209	1306	1416	1468	2835	3141	3805
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -5199       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.633	0.833	0.801
+        End
+      	Frequencies[1/cm]          11
+	    466	775	1000	1044	1210	1306	1425	1467	2743	3122	3796
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -4242       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.578	0.833	0.798
+        End
+      	Frequencies[1/cm]          11
+	    486	773	975	1051	1211	1309	1443	1467	2641	3102	3786
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -3377       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.522	0.833	0.795
+        End
+      	Frequencies[1/cm]          11
+	    508	772	953	1059	1214	1311	1456	1484	2535	3080	3774
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -2606       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.463	0.833	0.791
+        End
+      	Frequencies[1/cm]          11
+	    531	769	936	1066	1216	1311	1453	1531	2432	3057	3762
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -1930       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.402	0.833	0.787
+        End
+      	Frequencies[1/cm]          11
+	    554	762	925	1072	1218	1308	1447	1590	2344	3034	3750
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -1350       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.337	0.832	0.783
+        End
+      	Frequencies[1/cm]          11
+	    573	748	919	1076	1220	1301	1440	1642	2294	3010	3737
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -875       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.271	0.832	0.779
+        End
+      	Frequencies[1/cm]          11
+	    586	727	917	1076	1222	1289	1434	1661	2311	2986	3724
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -503       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.201	0.831	0.774
+        End
+      	Frequencies[1/cm]          11
+	    592	703	917	1071	1224	1272	1429	1632	2400	2963	3710
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -240       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.128	0.829	0.769
+        End
+      	Frequencies[1/cm]          11
+	    589	678	917	1060	1226	1254	1425	1575	2540	2942	3696
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -75       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.049	0.828	0.763
+        End
+      	Frequencies[1/cm]          11
+	    573	656	916	1041	1223	1239	1422	1501	2718	2920	3682
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                0       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 2.969	0.826	0.756
+        End
+      	Frequencies[1/cm]          11
+	    549	637	913	1015	1209	1239	1411	1435	2874	2927	3669
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -21       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 2.897	0.824	0.750
+        End
+      	Frequencies[1/cm]          11
+	    521	622	909	986	1196	1241	1358	1426	2875	3071	3657
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -108       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 2.827	0.821	0.744
+        End
+      	Frequencies[1/cm]          11
+	    492	604	898	958	1183	1243	1305	1426	2861	3222	3647
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -247       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 2.758	0.819	0.737
+        End
+      	Frequencies[1/cm]          11
+	    462	584	876	937	1166	1236	1273	1428	2848	3359	3637
+      	ZeroEnergy[kcal/mol]       -1.549655798 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -425       1
+    End
+	Tunneling      Eckart
+         ImaginaryFrequency[1/cm]    775.
+         WellDepth[1/cm]             4058.
+         WellDepth[1/cm]             30848.
+    End
+	End
+	
+	Barrier     B4   W1   P3    	# CH3OH == trans-HCOH + H2
+    Variational
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.849	0.834	0.802
+        End
+      	Frequencies[1/cm]          11
+	    218	830	1027	1110	1182	1354	1442	1473	2879	3198	3832
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -6087       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.794	0.834	0.801
+        End
+      	Frequencies[1/cm]          11
+	    264	818	1033	1082	1176	1353	1443	1469	2804	3184	3827
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -5016       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.737	0.834	0.799
+        End
+      	Frequencies[1/cm]          11
+	    310	810	1040	1056	1173	1352	1450	1471	2717	3168	3822
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -4043       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.678	0.834	0.797
+        End
+      	Frequencies[1/cm]          11
+	    357	805	1030	1050	1172	1351	1456	1485	2622	3151	3817
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -3168       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.618	0.834	0.794
+        End
+      	Frequencies[1/cm]          11
+	    403	801	1010	1060	1173	1350	1456	1518	2526	3132	3812
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -2392       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.555	0.834	0.791
+        End
+      	Frequencies[1/cm]          11
+	    448	794	994	1068	1174	1347	1453	1564	2436	3113	3807
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -1722       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.489	0.834	0.788
+        End
+      	Frequencies[1/cm]          11
+	    488	781	984	1075	1175	1341	1450	1617	2366	3093	3802
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -1160       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.421	0.833	0.784
+        End
+      	Frequencies[1/cm]          11
+	    523	761	979	1079	1177	1331	1447	1656	2338	3072	3797
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -707       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.351	0.833	0.780
+        End
+      	Frequencies[1/cm]          11
+	    550	736	977	1079	1179	1316	1445	1659	2375	3052	3792
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -370       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.275	0.832	0.776
+        End
+      	Frequencies[1/cm]          11
+	    568	707	976	1073	1181	1299	1444	1624	2478	3032	3786
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -135       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.193	0.831	0.771
+        End
+      	Frequencies[1/cm]          11
+	    576	675	974	1060	1184	1279	1444	1560	2637	3012	3781
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                0       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.111	0.830	0.765
+        End
+      	Frequencies[1/cm]          11
+	    570	647	969	1040	1187	1261	1445	1487	2813	2994	3776
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                24       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 3.036	0.829	0.760
+        End
+      	Frequencies[1/cm]          11
+	    552	628	959	1020	1188	1250	1416	1452	2956	2998	3771
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -35       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 2.961	0.827	0.754
+        End
+      	Frequencies[1/cm]          11
+	    526	611	940	1002	1187	1244	1354	1453	2958	3141	3766
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -160       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 2.889	0.825	0.748
+        End
+      	Frequencies[1/cm]          11
+	    497	594	910	988	1182	1242	1302	1456	2946	3287	3762
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -336       1
+    End
+	RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             1
+		  RotationalConstants[1/cm]	 2.818	0.822	0.741
+        End
+      	Frequencies[1/cm]          11
+	    468	575	875	977	1171	1242	1263	1459	2935	3419	3758
+      	ZeroEnergy[kcal/mol]       -4.474559637 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                -549       1
+    End
+	Tunneling      Eckart
+         ImaginaryFrequency[1/cm]    874.
+         WellDepth[1/cm]             4635.
+         WellDepth[1/cm]             29963.
+    End
+	End
+	
+	Barrier     B5   W1   P4    	# CH3OH == H2CO + H2
+    RRHO 
+        Mass[amu]       32.0262
+        Core    RigidRotor
+          SymmetryFactor             2.0
+		  RotationalConstants[1/cm]	 3.468	0.919	0.850
+        End
+		Tunneling      Eckart
+         ImaginaryFrequency[1/cm]    2138.
+         WellDepth[1/cm]             31511.
+         WellDepth[1/cm]             24381.5
+		End
+      	Frequencies[1/cm]          11
+	    865	904	1148	1177	1250	1453	1499	1947	2273	2933	2974
+      	ZeroEnergy[kcal/mol]       -0.195851332 ! mpb: TS barrier height relative to fragments' ATcT values as described in Jasper's paper
+        ElectronicLevels[1/cm]     1
+                0       1
+	End
+	
+	Barrier     B6   W1   P5    	# CH3OH == CH2OH + H
+    Read
+        File                            New_Channel_6.dat
+		Mass[amu]                       32.0262
+		GroundEnergy[1/cm]              1504
+    End
+	
+	Barrier     B7   W1   P6    	# CH3OH == CH3O + H
+    Read
+        File                            New_Channel_7.dat
+		Mass[amu]                       32.0262
+		GroundEnergy[1/cm]              4718
+    End
+End

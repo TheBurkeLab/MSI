@@ -1,0 +1,3515 @@
+Wells (G - ground energy, D - dissociation limit, kcal/mol):
+      Name        G        D
+       W1a     -4.2     -3.5
+       W1b     -9.6     -3.5
+
+Bimolecular Products (G - ground energy, kcal/mol):
+      Name        G
+        P1      0.0
+        P2    -38.1
+
+Well-to-Bimolecular Barriers (H/G - barrier height/well depth, kcal/mol)
+      Name        H     Well        G  Product
+        B1      0.0      W1a     -4.2       P1
+        B2     -1.5      W1b     -9.6       P2
+
+Well-to-Well Barriers (H/G - barrier height/well depth, kcal/mol):
+      Name        H     Well       G1     Well       G2
+        B8     -3.5      W1a     -4.2      W1b     -9.6
+
+________________________________________________________________________________________
+
+Unimolecular Rate Units: 1/sec;  Bimolecular Rate Units: cm^3/sec
+
+______________________________________________________________________________________
+
+Species-Species Rate Tables:
+
+Temperature = 200 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.52389e+10  8.00082e+09          ***
+W1b       8.56302e+06          ***          ***  1.26622e+08
+P1        2.18909e-10          ***          ***          ***
+P2                ***  6.49038e-49          ***          ***
+
+Temperature = 200 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 200 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 200 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 200 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 200 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 210 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  5.06834e+10  1.29562e+10          ***
+W1b       1.98087e+07          ***          ***     1.54e+08
+P1        2.16794e-10          ***          ***          ***
+P2                ***  2.28849e-47          ***          ***
+
+Temperature = 210 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 210 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 210 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 210 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 210 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 220 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  5.62523e+10  1.99648e+10          ***
+W1b        4.2636e+07          ***          ***  1.87306e+08
+P1        2.14522e-10          ***          ***          ***
+P2                ***  5.94529e-46          ***          ***
+
+Temperature = 220 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 220 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 220 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 220 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 220 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 230 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  6.19205e+10  2.94658e+10          ***
+W1b       8.61679e+07          ***          ***  2.27995e+08
+P1        2.12114e-10          ***          ***          ***
+P2                ***  1.18528e-44          ***          ***
+
+Temperature = 230 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 230 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 230 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 230 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 230 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 240 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  6.76658e+10  4.18794e+10          ***
+W1b       1.64768e+08          ***          ***  2.79475e+08
+P1        2.09595e-10          ***          ***          ***
+P2                ***  1.88649e-43          ***          ***
+
+Temperature = 240 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 240 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 240 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 240 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 240 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 250 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  7.34679e+10  5.75839e+10          ***
+W1b       3.00018e+08          ***          ***  3.36709e+08
+P1        2.06986e-10          ***          ***          ***
+P2                ***  2.40582e-42          ***          ***
+
+Temperature = 250 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 250 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 250 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 250 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 250 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 260 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  7.93092e+10  7.68972e+10          ***
+W1b       5.23046e+08          ***          ***  4.09261e+08
+P1        2.04308e-10          ***          ***          ***
+P2                ***  2.58371e-41          ***          ***
+
+Temperature = 260 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 260 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 260 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 260 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 260 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 270 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  8.51738e+10  1.00063e+11          ***
+W1b       8.77157e+08          ***          ***  4.97497e+08
+P1        2.01582e-10          ***          ***          ***
+P2                ***   2.3635e-40          ***          ***
+
+Temperature = 270 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 270 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 270 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 270 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 270 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 280 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  9.10478e+10  1.27244e+11          ***
+W1b        1.4207e+09          ***          ***  6.03871e+08
+P1        1.98826e-10          ***          ***          ***
+P2                ***  1.87068e-39          ***          ***
+
+Temperature = 280 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 280 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 280 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 280 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 280 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 290 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  9.69189e+10  1.58514e+11          ***
+W1b       2.23009e+09          ***          ***  7.33516e+08
+P1        1.96055e-10          ***          ***          ***
+P2                ***   1.3031e-38          ***          ***
+
+Temperature = 290 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 290 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 290 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 290 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 290 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 300 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.02776e+11  1.93865e+11          ***
+W1b       3.40293e+09          ***          ***  8.86588e+08
+P1        1.93285e-10          ***          ***          ***
+P2                ***  8.04671e-38          ***          ***
+
+Temperature = 300 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 300 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 300 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 300 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 300 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 310 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.08611e+11   2.3321e+11          ***
+W1b       5.06103e+09          ***          ***   1.0711e+09
+P1        1.90528e-10          ***          ***          ***
+P2                ***  4.47437e-37          ***          ***
+
+Temperature = 310 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 310 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 310 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 310 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 310 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 320 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.14414e+11   2.7639e+11          ***
+W1b       7.35338e+09          ***          ***  1.29226e+09
+P1        1.87795e-10          ***          ***          ***
+P2                ***  2.26044e-36          ***          ***
+
+Temperature = 320 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 320 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 320 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 320 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 320 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 330 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.20179e+11  3.23184e+11          ***
+W1b       1.04589e+10          ***          ***  1.55714e+09
+P1        1.85095e-10          ***          ***          ***
+P2                ***  1.04662e-35          ***          ***
+
+Temperature = 330 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 330 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 330 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 330 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 330 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 340 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.25899e+11  3.73323e+11          ***
+W1b        1.4589e+10          ***          ***  1.87325e+09
+P1        1.82437e-10          ***          ***          ***
+P2                ***  4.47348e-35          ***          ***
+
+Temperature = 340 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 340 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 340 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 340 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 340 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 350 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***   1.3157e+11  4.26496e+11          ***
+W1b       1.99893e+10          ***          ***  2.24149e+09
+P1        1.79827e-10          ***          ***          ***
+P2                ***   1.7704e-34          ***          ***
+
+Temperature = 350 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 350 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 350 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 350 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 350 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 360 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.37186e+11  4.82364e+11          ***
+W1b       2.69421e+10          ***          ***  2.68007e+09
+P1         1.7727e-10          ***          ***          ***
+P2                ***  6.55618e-34          ***          ***
+
+Temperature = 360 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 360 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 360 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 360 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 360 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 370 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.42745e+11  5.40571e+11          ***
+W1b        3.5767e+10          ***          ***  3.18669e+09
+P1        1.74772e-10          ***          ***          ***
+P2                ***   2.2731e-33          ***          ***
+
+Temperature = 370 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 370 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 370 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 370 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 370 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 380 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.48242e+11  6.00751e+11          ***
+W1b       4.68221e+10          ***          ***  3.78675e+09
+P1        1.72334e-10          ***          ***          ***
+P2                ***  7.45056e-33          ***          ***
+
+Temperature = 380 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 380 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 380 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 380 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 380 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 390 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.53676e+11  6.62536e+11          ***
+W1b       6.05044e+10          ***          ***  4.48481e+09
+P1        1.69962e-10          ***          ***          ***
+P2                ***  2.31227e-32          ***          ***
+
+Temperature = 390 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 390 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 390 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 390 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 390 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 400 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.59044e+11  7.25566e+11          ***
+W1b       7.72499e+10          ***          ***  5.29233e+09
+P1        1.67655e-10          ***          ***          ***
+P2                ***   6.8189e-32          ***          ***
+
+Temperature = 400 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 400 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 400 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 400 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 400 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 410 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.64344e+11   7.8949e+11          ***
+W1b       9.75329e+10          ***          ***  6.23097e+09
+P1        1.65416e-10          ***          ***          ***
+P2                ***  1.92001e-31          ***          ***
+
+Temperature = 410 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 410 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 410 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 410 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 410 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 420 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.69575e+11  8.53974e+11          ***
+W1b       1.21865e+11          ***          ***  7.30432e+09
+P1        1.63245e-10          ***          ***          ***
+P2                ***  5.16744e-31          ***          ***
+
+Temperature = 420 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 420 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 420 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 420 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 420 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 430 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.74736e+11  9.18704e+11          ***
+W1b       1.50796e+11          ***          ***  8.54099e+09
+P1        1.61143e-10          ***          ***          ***
+P2                ***  1.33555e-30          ***          ***
+
+Temperature = 430 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 430 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 430 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 430 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 430 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 440 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.79827e+11  9.83387e+11          ***
+W1b       1.84908e+11          ***          ***  9.95533e+09
+P1         1.5911e-10          ***          ***          ***
+P2                ***   3.3212e-30          ***          ***
+
+Temperature = 440 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 440 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 440 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 440 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 440 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 450 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.84846e+11  1.04775e+12          ***
+W1b       2.24817e+11          ***          ***  1.15675e+10
+P1        1.57146e-10          ***          ***          ***
+P2                ***  7.96565e-30          ***          ***
+
+Temperature = 450 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 450 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 450 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 450 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 450 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 460 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.89794e+11  1.11155e+12          ***
+W1b       2.71172e+11          ***          ***  1.33993e+10
+P1        1.55249e-10          ***          ***          ***
+P2                ***  1.84669e-29          ***          ***
+
+Temperature = 460 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 460 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 460 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 460 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 460 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 470 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.94671e+11  1.17457e+12          ***
+W1b       3.24648e+11          ***          ***  1.54741e+10
+P1        1.53419e-10          ***          ***          ***
+P2                ***  4.14661e-29          ***          ***
+
+Temperature = 470 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 470 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 470 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 470 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 470 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 480 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  1.99476e+11  1.23661e+12          ***
+W1b       3.85947e+11          ***          ***  1.78245e+10
+P1        1.51655e-10          ***          ***          ***
+P2                ***  9.03877e-29          ***          ***
+
+Temperature = 480 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 480 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 480 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 480 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 480 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 490 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***   2.0421e+11  1.29749e+12          ***
+W1b       4.55796e+11          ***          ***  2.04519e+10
+P1        1.49956e-10          ***          ***          ***
+P2                ***  1.91328e-28          ***          ***
+
+Temperature = 490 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 490 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 490 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 490 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 490 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 500 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.08873e+11  1.35707e+12          ***
+W1b       5.34939e+11          ***          ***  2.34098e+10
+P1        1.48321e-10          ***          ***          ***
+P2                ***  3.94461e-28          ***          ***
+
+Temperature = 500 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 500 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 500 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 500 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 500 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 510 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.13466e+11  1.41521e+12          ***
+W1b       6.24143e+11          ***          ***  2.67295e+10
+P1        1.46747e-10          ***          ***          ***
+P2                ***  7.93194e-28          ***          ***
+
+Temperature = 510 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 510 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 510 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 510 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 510 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 520 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.17989e+11  1.47181e+12          ***
+W1b       7.24185e+11          ***          ***  3.04144e+10
+P1        1.45234e-10          ***          ***          ***
+P2                ***  1.55608e-27          ***          ***
+
+Temperature = 520 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 520 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 520 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 520 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 520 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 530 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.22444e+11  1.52677e+12          ***
+W1b       8.35859e+11          ***          ***  3.45271e+10
+P1        1.43781e-10          ***          ***          ***
+P2                ***  2.98526e-27          ***          ***
+
+Temperature = 530 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 530 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 530 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 530 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 530 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 540 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***   2.2683e+11  1.58003e+12          ***
+W1b       9.59965e+11          ***          ***  3.90907e+10
+P1        1.42384e-10          ***          ***          ***
+P2                ***  5.60464e-27          ***          ***
+
+Temperature = 540 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 540 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 540 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 540 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 540 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 550 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.31148e+11  1.63152e+12          ***
+W1b       1.09731e+12          ***          ***  4.41468e+10
+P1        1.41044e-10          ***          ***          ***
+P2                ***    1.031e-26          ***          ***
+
+Temperature = 550 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 550 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 550 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 550 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 550 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 560 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***    2.354e+11  1.68121e+12          ***
+W1b       1.24871e+12          ***          ***  4.97354e+10
+P1        1.39758e-10          ***          ***          ***
+P2                ***   1.8602e-26          ***          ***
+
+Temperature = 560 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 560 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 560 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 560 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 560 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 570 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.39586e+11  1.72905e+12          ***
+W1b       1.41497e+12          ***          ***  5.58932e+10
+P1        1.38524e-10          ***          ***          ***
+P2                ***  3.29472e-26          ***          ***
+
+Temperature = 570 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 570 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 570 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 570 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 570 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 580 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.43708e+11  1.77505e+12          ***
+W1b       1.59691e+12          ***          ***  6.26616e+10
+P1        1.37342e-10          ***          ***          ***
+P2                ***  5.73349e-26          ***          ***
+
+Temperature = 580 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 580 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 580 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 580 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 580 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 590 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.47765e+11  1.81917e+12          ***
+W1b       1.79533e+12          ***          ***  7.00927e+10
+P1        1.36209e-10          ***          ***          ***
+P2                ***  9.81239e-26          ***          ***
+
+Temperature = 590 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 590 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 590 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 590 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 590 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 600 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***   2.5176e+11  1.86144e+12          ***
+W1b       2.01104e+12          ***          ***  7.82279e+10
+P1        1.35124e-10          ***          ***          ***
+P2                ***  1.65268e-25          ***          ***
+
+Temperature = 600 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 600 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 600 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 600 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 600 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 610 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.55693e+11  1.90186e+12          ***
+W1b       2.24483e+12          ***          ***  8.71205e+10
+P1        1.34086e-10          ***          ***          ***
+P2                ***  2.74159e-25          ***          ***
+
+Temperature = 610 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 610 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 610 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 610 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 610 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 620 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.59564e+11  1.94044e+12          ***
+W1b       2.49747e+12          ***          ***  9.68164e+10
+P1        1.33092e-10          ***          ***          ***
+P2                ***   4.4822e-25          ***          ***
+
+Temperature = 620 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 620 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 620 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 620 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 620 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 630 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.63376e+11  1.97721e+12          ***
+W1b       2.76976e+12          ***          ***  1.07368e+11
+P1        1.32142e-10          ***          ***          ***
+P2                ***  7.22664e-25          ***          ***
+
+Temperature = 630 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 630 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 630 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 630 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 630 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 640 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***   2.6713e+11  2.01219e+12          ***
+W1b       3.06243e+12          ***          ***  1.18834e+11
+P1        1.31233e-10          ***          ***          ***
+P2                ***   1.1498e-24          ***          ***
+
+Temperature = 640 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 640 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 640 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 640 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 640 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 650 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.70825e+11  2.04542e+12          ***
+W1b       3.37623e+12          ***          ***  1.31266e+11
+P1        1.30365e-10          ***          ***          ***
+P2                ***  1.80626e-24          ***          ***
+
+Temperature = 650 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 650 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 650 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 650 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 650 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 660 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.74463e+11  2.07693e+12          ***
+W1b       3.71188e+12          ***          ***  1.44721e+11
+P1        1.29537e-10          ***          ***          ***
+P2                ***  2.80312e-24          ***          ***
+
+Temperature = 660 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 660 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 660 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 660 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 660 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 670 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.78046e+11  2.10677e+12          ***
+W1b        4.0701e+12          ***          ***  1.59265e+11
+P1        1.28746e-10          ***          ***          ***
+P2                ***   4.2998e-24          ***          ***
+
+Temperature = 670 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 670 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 670 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 670 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 670 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 680 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.81574e+11  2.13497e+12          ***
+W1b       4.45155e+12          ***          ***  1.74968e+11
+P1        1.27991e-10          ***          ***          ***
+P2                ***  6.52267e-24          ***          ***
+
+Temperature = 680 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 680 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 680 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 680 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 680 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 690 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.85048e+11  2.16157e+12          ***
+W1b       4.85692e+12          ***          ***  1.91843e+11
+P1        1.27272e-10          ***          ***          ***
+P2                ***  9.78705e-24          ***          ***
+
+Temperature = 690 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 690 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 690 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 690 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 690 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 700 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  2.88469e+11  2.18662e+12          ***
+W1b       5.28684e+12          ***          ***  2.10003e+11
+P1        1.26587e-10          ***          ***          ***
+P2                ***  1.45356e-23          ***          ***
+
+Temperature = 700 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 700 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 700 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 700 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 700 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 800 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  3.19984e+11  2.36203e+12          ***
+W1b       1.10605e+13          ***          ***  4.76477e+11
+P1        1.21368e-10          ***          ***          ***
+P2                ***  4.66088e-22          ***          ***
+
+Temperature = 800 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 800 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 800 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 800 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 800 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 900 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  3.47205e+11  2.43144e+12          ***
+W1b       1.98131e+13          ***          ***  9.48256e+11
+P1        1.18482e-10          ***          ***          ***
+P2                ***  7.47064e-21          ***          ***
+
+Temperature = 900 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 900 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 900 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 900 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 900 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1000 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  3.70882e+11  2.43103e+12          ***
+W1b       3.17804e+13          ***          ***  1.70115e+12
+P1        1.17247e-10          ***          ***          ***
+P2                ***  7.27079e-20          ***          ***
+
+Temperature = 1000 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1000 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1000 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1000 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1000 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1100 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  3.91627e+11  2.38647e+12          ***
+W1b       4.69847e+13          ***          ***    2.808e+12
+P1        1.17192e-10          ***          ***          ***
+P2                ***  4.87862e-19          ***          ***
+
+Temperature = 1100 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1100 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1100 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1100 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1100 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1200 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.09927e+11  2.31501e+12          ***
+W1b       6.52902e+13          ***          ***  4.33215e+12
+P1        1.17992e-10          ***          ***          ***
+P2                ***  2.46146e-18          ***          ***
+
+Temperature = 1200 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1200 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1200 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1200 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1200 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1300 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.26176e+11    2.228e+12          ***
+W1b       8.64573e+13          ***          ***  6.32309e+12
+P1        1.19419e-10          ***          ***          ***
+P2                ***  9.92996e-18          ***          ***
+
+Temperature = 1300 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1300 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1300 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1300 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1300 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1400 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.40691e+11  2.13285e+12          ***
+W1b       1.10188e+14          ***          ***  8.81465e+12
+P1         1.2131e-10          ***          ***          ***
+P2                ***   3.3498e-17          ***          ***
+
+Temperature = 1400 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1400 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1400 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1400 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1400 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1500 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.53729e+11   2.0344e+12          ***
+W1b       1.36157e+14          ***          ***  1.18249e+13
+P1        1.23549e-10          ***          ***          ***
+P2                ***  9.77104e-17          ***          ***
+
+Temperature = 1500 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1500 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1500 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1500 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1500 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1600 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.65499e+11  1.93581e+12          ***
+W1b        1.6404e+14          ***          ***  1.53575e+13
+P1        1.26048e-10          ***          ***          ***
+P2                ***  2.52811e-16          ***          ***
+
+Temperature = 1600 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1600 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1600 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1600 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1600 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1700 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.76175e+11  1.83907e+12          ***
+W1b       1.93523e+14          ***          ***  1.94035e+13
+P1        1.28744e-10          ***          ***          ***
+P2                ***  5.91825e-16          ***          ***
+
+Temperature = 1700 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1700 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1700 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1700 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1700 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1800 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.85901e+11  1.74543e+12          ***
+W1b       2.24313e+14          ***          ***  2.39435e+13
+P1        1.31588e-10          ***          ***          ***
+P2                ***  1.27326e-15          ***          ***
+
+Temperature = 1800 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1800 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1800 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1800 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1800 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1900 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  4.94796e+11  1.65566e+12          ***
+W1b       2.56145e+14          ***          ***  2.89508e+13
+P1        1.34544e-10          ***          ***          ***
+P2                ***  2.54919e-15          ***          ***
+
+Temperature = 1900 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1900 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1900 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1900 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 1900 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2000 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***   5.0296e+11  1.57014e+12          ***
+W1b        2.8878e+14          ***          ***  3.43926e+13
+P1        1.37583e-10          ***          ***          ***
+P2                ***  4.79777e-15          ***          ***
+
+Temperature = 2000 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2000 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2000 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2000 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2000 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2100 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  5.10481e+11  1.48907e+12          ***
+W1b       3.22007e+14          ***          ***  4.02322e+13
+P1        1.40682e-10          ***          ***          ***
+P2                ***   8.5591e-15          ***          ***
+
+Temperature = 2100 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2100 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2100 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2100 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2100 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2200 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  5.17429e+11  1.41245e+12          ***
+W1b       3.55642e+14          ***          ***   4.6431e+13
+P1        1.43824e-10          ***          ***          ***
+P2                ***  1.45728e-14          ***          ***
+
+Temperature = 2200 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2200 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2200 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2200 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2200 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2300 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  5.23868e+11  1.34022e+12          ***
+W1b       3.89523e+14          ***          ***  5.29498e+13
+P1        1.46995e-10          ***          ***          ***
+P2                ***  2.38158e-14          ***          ***
+
+Temperature = 2300 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2300 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2300 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2300 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2300 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2400 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  5.29852e+11  1.27222e+12          ***
+W1b       4.23512e+14          ***          ***  5.97478e+13
+P1        1.50184e-10          ***          ***          ***
+P2                ***  3.75384e-14          ***          ***
+
+Temperature = 2400 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2400 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2400 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2400 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2400 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2500 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***  5.35425e+11  1.20828e+12          ***
+W1b       4.57492e+14          ***          ***  6.67876e+13
+P1        1.53382e-10          ***          ***          ***
+P2                ***  5.72993e-14          ***          ***
+
+Temperature = 2500 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2500 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2500 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2500 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2500 K    Pressure = 4 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2600 K
+
+High Pressure Rate Coefficients:
+
+From\To           W1a          W1b           P1           P2
+W1a               ***   5.4063e+11   1.1482e+12          ***
+W1b       4.91362e+14          ***          ***  7.40315e+13
+P1         1.5658e-10          ***          ***          ***
+P2                ***  8.49943e-14          ***          ***
+
+Temperature = 2600 K    Pressure = 0.1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2600 K    Pressure = 0.5 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2600 K    Pressure = 1 atm
+
+From\To           W1a          W1b           P1           P2
+W1a               ***          ***          ***          ***
+W1b               ***          ***          ***          ***
+P1                ***          ***          ***          ***
+P2                ***          ***          ***          ***
+
+Temperature = 2600 K    Pressure = 2 atm
+
+From\To           W1a          W1b           P1           P2
+W1a         

@@ -1,0 +1,22 @@
+Model::init:  starts
+   Model::ExponentialKernel::ExponentialKernel:  ... done
+   Model::LennardJonesCollision::LennardJonesCollision:  ... done
+   WELL: W1a
+   Model::RRHO::RRHO:  starts
+      Model::new_core:  starts
+         Model::RigidRotor::RigidRotor:  starts
+            molecular geometry will be used to estimate rotational constants
+            rotational configuration: nonlinear
+            rotational constants[1/cm]:        0.631223      0.0978754      0.0898156
+         Model::RigidRotor::RigidRotor:  done, cpu time[sec] = 0.00721, elapsed time[sec] = 0
+      Model::new_core:  done, cpu time[sec] = 0.008312, elapsed time[sec] = 0
+      ground state energy, kcal/mol:   -4.22
+      interpolating states number/density starts
+         core state contribution ... done, cpu time[sec] = 0.196898, elapsed time[sec] = 0
+         electronic states contribution ... done, cpu time[sec] = 0.005112, elapsed time[sec] = 0
+         vibrational modes contribution ... done, cpu time[sec] = 0.064707, elapsed time[sec] = 0
+         effective power exponent at 404.218 kcal/mol = 11.9109
+      interpolating states number/density done, cpu time[sec] = 1.33818, elapsed time[sec] = 0
+   Model::RRHO::RRHO:  done, cpu time[sec] = 1.35269, elapsed time[sec] = 0
+   WELL: W1b
+Model::init:  done, cpu time[sec] = 1.37337, elapsed time[sec] = 0

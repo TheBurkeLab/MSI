@@ -1,0 +1,256 @@
+# Lei converted from the varifelx file from MPB's IJCK paper on H2/O2
+
+TemperatureList[K]                      1500
+PressureList[atm]                       1
+EnergyStep[1/cm]                        50
+ExcessEnergyOverTemperature			    30
+ModelEnergyLimit[kcal/mol]				400
+CalculationMethod						low-eigenvalue
+!ChemicalEigenvalueMax                   0.2
+DefaultReductionScheme                      (W2,W3)
+!EigenvectorOutput						evec.out
+!EigenvectorNumber						10
+!WellCutoff								10
+!Reactant								R
+!MicroRateOutput                         rate.out
+!MicroEnerMax[kcal/mol]					100.
+!MicroEnerMin[kcal/mol]					-47.5041
+!MicroEnerStep[kcal/mol] 				0.28591116
+
+
+Model
+  EnergyRelaxation
+    Exponential
+      Factor[1/cm]			261.71357112075 
+      Power				    0.685 
+      ExponentCutoff			15
+    End
+  CollisionFrequency
+    LennardJones
+        Epsilons[1/cm]                  180. 272.
+        Sigmas[angstrom]                3.52355 4.455
+         Masses[amu]                     84. 34.
+    End
+	
+	
+  Well     W1	# H2OO
+    Species
+    RRHO 
+	Mass[amu]        34
+      Core                 RigidRotor
+	    RotationalConstants[1/cm]               9.615559797	0.789152897	0.76472762
+        SymmetryFactor                          1
+      End
+      Frequencies[1/cm]			6
+	680.92	862.82	896.64	1614.64	3703.22	3802.36
+      ZeroEnergy[1/cm]			-14180.
+      ElectronicLevels[1/cm]			1
+	0	1
+    End
+  End
+  
+  Well     W2   # HOOH
+    Species
+    RRHO 
+	Mass[amu]        34
+      Core                 RigidRotor
+	    RotationalConstants[1/cm]               9.615559797	0.789152897	0.76472762
+        SymmetryFactor                          1
+      End
+      Frequencies[1/cm]			6
+	680.92	862.82	896.64	1614.64	3703.22	3802.36
+      ZeroEnergy[1/cm]			-30000.
+      ElectronicLevels[1/cm]			1
+	0	1
+    End
+  End
+  
+  Well     W3   # HO...OH
+    Species
+    RRHO 
+	Mass[amu]        34
+      Core                 RigidRotor
+	    RotationalConstants[1/cm]               9.615559797	0.789152897	0.76472762
+        SymmetryFactor                          1
+      End
+      Frequencies[1/cm]			6
+	680.92	862.82	896.64	1614.64	3703.22	3802.36
+      ZeroEnergy[1/cm]			-16000.
+      ElectronicLevels[1/cm]			1
+	0	1
+    End
+  End
+  
+  Bimolecular		R	# H + HO2
+    Fragment	HO2
+      RRHO
+	Geometry[angstrom]	3
+ O          0.00000      0.117628E-01  0.697673    
+ O          0.00000     -0.657491E-01 -0.639496    
+ H          0.00000      0.863780     -0.930845    
+	Core	RigidRotor
+	  SymmetryFactor	1
+	End
+	Frequencies[1/cm]	3
+	1108	1426	3641
+ 	ZeroEnergy[1/cm]			0
+ 	ElectronicLevels[1/cm]			1
+		0	2
+      End             
+  Fragment    H
+    Atom
+      Mass[amu]    1
+      ElectronicLevels[1/cm]          1
+                0       2
+    End
+    GroundEnergy[1/cm]			0.0
+  End
+  
+  Bimolecular		P1	# OH + OH
+  Fragment	OH
+      RRHO
+	Geometry[angstrom]	2
+ O          0.  0.    0.572639E-01    
+ H          0.  0.    -0.916223        
+	Core	RigidRotor
+	  SymmetryFactor	1
+	End
+	Frequencies[1/cm]	1
+	3715
+ 	ZeroEnergy[1/cm]			0
+ 	ElectronicLevels[1/cm]			1
+		0	2
+      End             
+  Fragment	OH
+      RRHO
+	Geometry[angstrom]	2
+ O          0.  0.    0.572639E-01    
+ H          0.  0.    -0.916223        
+	Core	RigidRotor
+	  SymmetryFactor	1
+	End
+	Frequencies[1/cm]	1
+	3715
+ 	ZeroEnergy[1/cm]			0
+ 	ElectronicLevels[1/cm]			1
+		0	2
+      End             
+    GroundEnergy[1/cm]			-13150.
+  End
+  
+  Bimolecular       P2  # H2O + O(1D)
+  Fragment	H2O
+      RRHO
+	Geometry[angstrom]	3
+ O          0.00000      0.656732E-01   0.00000    
+ H          0.00000     -0.525385      0.758714    
+ H          0.00000     -0.525385     -0.758714    
+	Core	RigidRotor
+	  SymmetryFactor	2
+	End
+	Frequencies[1/cm]	3
+	1645	3807	3916
+ 	ZeroEnergy[1/cm]			0
+ 	ElectronicLevels[1/cm]			1
+		0	1
+      End             
+  Fragment    O(1D)
+    Atom
+      Mass[amu]    1
+      ElectronicLevels[1/cm]          1
+                0       1
+    End
+    GroundEnergy[1/cm]			-2850.
+  End
+  
+  Bimolecular       P3  # H2O + O(3P)
+    Dummy
+ 
+     Barrier     B1   W1   R    # H + HO2 = H2OO
+       RRHO
+      Mass[amu]    34
+       Core      Rotd
+        File                            R=W1.dat
+        SymmetryFactor     1
+      End
+          ZeroEnergy[1/cm]           0.
+          ElectronicLevels[1/cm]         1
+               0    1
+        End
+		
+	Barrier     B2   W2   R    # H + HO2 = HOOH
+	 RRHO
+	   Mass[amu]           34
+       Core      Rotd
+        File                            R=W2.dat
+        SymmetryFactor     1         
+      End
+          ZeroEnergy[1/cm]           0.
+          ElectronicLevels[1/cm]         1
+               0    1
+    End
+	
+	Barrier     B3   W1   P2    # H2OO = H2O + O(1D)
+	 RRHO
+	   Mass[amu]           34
+       Core      Rotd
+        File                            W1=P2.dat
+        SymmetryFactor     1         
+      End
+          ZeroEnergy[1/cm]           -2850.
+          ElectronicLevels[1/cm]         1
+               0    1
+    End
+	
+	Barrier     B4   W3   P1    # HOOH = OH + OH
+	 RRHO
+	   Mass[amu]           34
+       Core      Rotd
+        File                            W3=P1.dat
+        SymmetryFactor     1         
+      End
+          ZeroEnergy[1/cm]           -13150.
+          ElectronicLevels[1/cm]         1
+               0    1
+    End
+	
+	Barrier     B5   W3   P3    # HOOH = H2O + O(3P)
+	 RRHO 
+	Mass[amu]        34
+      Core                 RigidRotor
+	    RotationalConstants[1/cm]               15.801351	0.42031749	0.4094267
+        SymmetryFactor                          1
+      End
+      Frequencies[1/cm]			5
+	366	633	826	1720	3758
+      ZeroEnergy[1/cm]			-12171.
+      ElectronicLevels[1/cm]			1
+	0	3
+    End
+  
+  Barrier     B6   W1   W2    # H2OO = HOOH
+	 RRHO 
+	Mass[amu]        34
+      Core                 RigidRotor
+	    RotationalConstants[1/cm]               10.29041777	0.736851987	0.72214204
+        SymmetryFactor                          0.5
+      End
+      Frequencies[1/cm]			5
+	667	933	1425	2938	3755
+      ZeroEnergy[1/cm]			-12740.
+      ElectronicLevels[1/cm]			1
+	0	1
+    End
+  
+  Barrier     B7   W2   W3    # HOOH = HO...OH
+	 RRHO
+	   Mass[amu]           34
+       Core      Rotd
+        File                            W2=W3.dat
+        SymmetryFactor     1         
+      End
+          ZeroEnergy[1/cm]           -13150.
+          ElectronicLevels[1/cm]         1
+               0    1
+    End
+End

@@ -1,0 +1,313 @@
+  
+ *****************************************************
+ *                                                   *
+ *  VARIFLEX: VERSION 2.0m; (November, 2008)         *
+ *  S. J. Klippenstein, A. F. Wagner, R. C. Dunbar,  *
+ *  D. M. Wardlaw, S. H. Robertson, and J. A. Miller *
+ *                                                   *
+ *****************************************************
+  
+
+ OH + OH <-> O + H2O                                                            
+
+ ****** Calculation Type ******
+
+ Thermal assocation rate constants will be evaluated
+ for  1 channels in a radical-radical reaction
+ The component rates will be evaluated at the E/J resolved level
+ for the high stabilization efficiency (high P) limit
+
+ ****** Calculation Ranges ******
+
+ Pressures (torr)
+    760.00
+ In addition to the high and low pressure limits
+
+ Temperatures (K)
+    200.00   210.00   220.00   230.00   240.00   250.00
+    260.00   270.00   280.00   290.00   300.00   310.00
+    320.00   330.00   340.00   350.00   360.00   370.00
+    380.00   390.00   400.00   410.00   420.00   430.00
+    440.00   450.00   460.00   470.00   480.00   490.00
+    500.00   510.00   520.00   530.00   540.00   550.00
+    560.00   570.00   580.00   590.00   600.00   610.00
+    620.00   630.00   640.00   650.00   660.00   670.00
+    680.00   690.00   700.00   800.00   900.00  1000.00
+   1100.00  1200.00  1300.00  1400.00  1500.00  1600.00
+   1700.00  1800.00  1900.00  2000.00  2100.00  2200.00
+   2300.00  2400.00  2500.00  2600.00  2700.00  2800.00
+   2900.00  3000.00
+
+ ****** Convolution Ranges ******
+
+ Energy values relative to separated fragments (cm-1)
+ ranging from      0.00 to  29950.00 in steps of     50.00
+
+ The total angular momentum J will 
+  cover the range from     2 to   138 in steps of     4
+
+ ****** Data for fragment 1 of channel   1 ******
+
+ Electronic state degeneracies and energies (cm-1)
+     2  0.0000    
+
+ Corrected Vibrational frequencies (cm-1)
+  3715.0
+
+ Zero point energy =   1857.5    cm-1
+
+ Rotational symmetry number is   1.00    
+
+ Fragment1 is linear with
+ a rotational constant of   18.90     (cm-1)
+
+ ****** Data for fragment 2 of channel   1 ******
+
+ Electronic state degeneracies and energies (cm-1)
+     2  0.0000    
+     4  138.40    
+     2  276.80    
+
+ Corrected Vibrational frequencies (cm-1)
+  3715.0
+
+ Zero point energy =   1857.5    cm-1
+
+ Rotational symmetry number is   1.00    
+
+ Fragment2 is linear with
+ a rotational constant of   18.90     (cm-1)
+  
+ ****** Orientation tests for each fragment ******
+  
+ Fragment1 is a Linear top
+ Mass(g/mol)     Ref.x(Ang)    Ref.y(Ang)     Ref.z(Ang) for fragment  1
+    16.0000       0.00000       0.00000      0.572639E-01
+    1.00000       0.00000       0.00000     -0.916223    
+ Moments(amu*A**2):  0.891931      0.891931       0.00000    
+  
+ Fragment2 is a Linear top
+ Mass(g/mol)     Ref.x(Ang)    Ref.y(Ang)     Ref.z(Ang) for fragment  2
+    16.0000       0.00000       0.00000      0.572639E-01
+    1.00000       0.00000       0.00000     -0.916223    
+ Moments(amu*A**2):  0.891931      0.891931       0.00000    
+
+ ****** Transition State Treatment Data ******
+
+ A statistical treatment of the conserved  mode vibrational 
+ contribution to the transition state partition functions
+ will be performed
+ icons test           2           1           1
+
+ The vibrational step size for the evaluation of the 
+ number of states =    1.00 cm-1
+ The transitional mode number of states will be evaluated
+ on a grid of   40 points starting at   1.0000     cm-1 
+and with the step size increasing with energy
+ Interpolation of these values will provide the 
+ transitional mode numbers for the vibrational grid
+
+ A statistical treatment of the electronic state contributions
+ will be performed
+ for all   1 electronic states in the transition state region
+
+ For effective TS location   1
+  of electronic state   1 in channel   1
+ the number of states will be evaluated according to 
+ Rigid Rotor Harmonic Oscillator assumptions for the energetics
+
+ ****** RRHO data ******
+
+
+ Corrected Vibrational frequencies (cm-1) for R           1
+   366.0  633.0  826.0 1720.0 3758.0
+
+ Zero point energy =   3651.5    cm-1
+
+ Rotational symmetry number is   1.00    
+ The TS is a near prolate top
+ For R number    1
+ rot. constants   15.801     0.42032     0.40943    (cm-1)
+ symm. rot. constants   15.801     0.41487    (cm-1)
+ With an Eckart tunneling correction
+ for an imaginary barrier frequency of    1696.     cm-1 
+ and with the reactants and products located    1358.     and    6885.    
+ cm-1 below the barrier
+
+ Delta H_0 for channel     1 TS relative to channel 1 is   973.00     cm-1
+
+ ****** End of all input ******
+
+ ***** Partition function results *****
+
+ The partition functions for the complex and the fragments are
+ evaluated relative to their respective zero-point levels.  That for 
+ the TS is instead evaluated relative to the zero-point level of
+ the fragments. The partition function for the fragments includes the
+ contribution from relative translational motions.  Those for the
+ complex and the TS do not contain any translational contributions
+
+ Temp Q_Fragments  Q_TS   (Monte Carlo err)
+  (K)    (cm-3)            (%; 0==>quadrature)
+  200. 0.535E+28  373.       0.0
+  210. 0.651E+28  412.       0.0
+  220. 0.785E+28  455.       0.0
+  230. 0.938E+28  504.       0.0
+  240. 0.111E+29  558.       0.0
+  250. 0.131E+29  617.       0.0
+  260. 0.153E+29  683.       0.0
+  270. 0.178E+29  757.       0.0
+  280. 0.206E+29  837.       0.0
+  290. 0.236E+29  926.       0.0
+  300. 0.270E+29 0.102E+04   0.0
+  310. 0.308E+29 0.113E+04   0.0
+  320. 0.349E+29 0.125E+04   0.0
+  330. 0.394E+29 0.138E+04   0.0
+  340. 0.442E+29 0.152E+04   0.0
+  350. 0.496E+29 0.167E+04   0.0
+  360. 0.553E+29 0.184E+04   0.0
+  370. 0.616E+29 0.202E+04   0.0
+  380. 0.683E+29 0.221E+04   0.0
+  390. 0.756E+29 0.242E+04   0.0
+  400. 0.834E+29 0.265E+04   0.0
+  410. 0.917E+29 0.290E+04   0.0
+  420. 0.101E+30 0.317E+04   0.0
+  430. 0.110E+30 0.346E+04   0.0
+  440. 0.120E+30 0.376E+04   0.0
+  450. 0.131E+30 0.410E+04   0.0
+  460. 0.143E+30 0.445E+04   0.0
+  470. 0.155E+30 0.483E+04   0.0
+  480. 0.168E+30 0.524E+04   0.0
+  490. 0.182E+30 0.568E+04   0.0
+  500. 0.197E+30 0.615E+04   0.0
+  510. 0.212E+30 0.665E+04   0.0
+  520. 0.229E+30 0.718E+04   0.0
+  530. 0.246E+30 0.775E+04   0.0
+  540. 0.264E+30 0.835E+04   0.0
+  550. 0.283E+30 0.899E+04   0.0
+  560. 0.303E+30 0.967E+04   0.0
+  570. 0.324E+30 0.104E+05   0.0
+  580. 0.346E+30 0.112E+05   0.0
+  590. 0.369E+30 0.120E+05   0.0
+  600. 0.393E+30 0.128E+05   0.0
+  610. 0.419E+30 0.137E+05   0.0
+  620. 0.445E+30 0.147E+05   0.0
+  630. 0.473E+30 0.157E+05   0.0
+  640. 0.502E+30 0.168E+05   0.0
+  650. 0.532E+30 0.179E+05   0.0
+  660. 0.563E+30 0.191E+05   0.0
+  670. 0.596E+30 0.204E+05   0.0
+  680. 0.630E+30 0.217E+05   0.0
+  690. 0.666E+30 0.231E+05   0.0
+  700. 0.703E+30 0.246E+05   0.0
+  800. 0.116E+31 0.440E+05   0.0
+  900. 0.180E+31 0.745E+05   0.0
+ 1000. 0.266E+31 0.120E+06   0.0
+ 1100. 0.380E+31 0.187E+06   0.0
+ 1200. 0.527E+31 0.282E+06   0.0
+ 1300. 0.712E+31 0.414E+06   0.0
+ 1400. 0.943E+31 0.593E+06   0.0
+ 1500. 0.123E+32 0.831E+06   0.0
+ 1600. 0.157E+32 0.114E+07   0.0
+ 1700. 0.199E+32 0.155E+07   0.0
+ 1800. 0.249E+32 0.207E+07   0.0
+ 1900. 0.308E+32 0.272E+07   0.0
+ 2000. 0.378E+32 0.354E+07   0.0
+ 2100. 0.459E+32 0.456E+07   0.0
+ 2200. 0.554E+32 0.581E+07   0.0
+ 2300. 0.664E+32 0.733E+07   0.0
+ 2400. 0.791E+32 0.917E+07   0.0
+ 2500. 0.936E+32 0.114E+08   0.0
+ 2600. 0.110E+33 0.140E+08   0.0
+ 2700. 0.129E+33 0.171E+08   0.0
+ 2800. 0.150E+33 0.208E+08   0.0
+ 2900. 0.175E+33 0.251E+08   0.0
+ 3000. 0.202E+33 0.300E+08   0.0
+
+ ****** High pressure limit rate constants ******
+
+ For D0 =   20000.     cm-1
+
+ Temp  k_bi-TST  MonteCarlo error
+  (K)   (cm3/s)    rel(%) [0 error==>quadrature]
+  200. 0.2911E-12  0.00    
+  210. 0.2771E-12  0.00    
+  220. 0.2660E-12  0.00    
+  230. 0.2573E-12  0.00    
+  240. 0.2505E-12  0.00    
+  250. 0.2454E-12  0.00    
+  260. 0.2416E-12  0.00    
+  270. 0.2390E-12  0.00    
+  280. 0.2374E-12  0.00    
+  290. 0.2367E-12  0.00    
+  300. 0.2367E-12  0.00    
+  310. 0.2374E-12  0.00    
+  320. 0.2387E-12  0.00    
+  330. 0.2406E-12  0.00    
+  340. 0.2429E-12  0.00    
+  350. 0.2457E-12  0.00    
+  360. 0.2489E-12  0.00    
+  370. 0.2525E-12  0.00    
+  380. 0.2564E-12  0.00    
+  390. 0.2607E-12  0.00    
+  400. 0.2653E-12  0.00    
+  410. 0.2702E-12  0.00    
+  420. 0.2753E-12  0.00    
+  430. 0.2807E-12  0.00    
+  440. 0.2864E-12  0.00    
+  450. 0.2924E-12  0.00    
+  460. 0.2986E-12  0.00    
+  470. 0.3050E-12  0.00    
+  480. 0.3116E-12  0.00    
+  490. 0.3185E-12  0.00    
+  500. 0.3256E-12  0.00    
+  510. 0.3329E-12  0.00    
+  520. 0.3404E-12  0.00    
+  530. 0.3482E-12  0.00    
+  540. 0.3561E-12  0.00    
+  550. 0.3643E-12  0.00    
+  560. 0.3726E-12  0.00    
+  570. 0.3812E-12  0.00    
+  580. 0.3899E-12  0.00    
+  590. 0.3989E-12  0.00    
+  600. 0.4081E-12  0.00    
+  610. 0.4174E-12  0.00    
+  620. 0.4270E-12  0.00    
+  630. 0.4367E-12  0.00    
+  640. 0.4467E-12  0.00    
+  650. 0.4569E-12  0.00    
+  660. 0.4672E-12  0.00    
+  670. 0.4778E-12  0.00    
+  680. 0.4885E-12  0.00    
+  690. 0.4995E-12  0.00    
+  700. 0.5107E-12  0.00    
+  800. 0.6334E-12  0.00    
+  900. 0.7770E-12  0.00    
+ 1000. 0.9421E-12  0.00    
+ 1100. 0.1130E-11  0.00    
+ 1200. 0.1340E-11  0.00    
+ 1300. 0.1575E-11  0.00    
+ 1400. 0.1833E-11  0.00    
+ 1500. 0.2117E-11  0.00    
+ 1600. 0.2425E-11  0.00    
+ 1700. 0.2759E-11  0.00    
+ 1800. 0.3118E-11  0.00    
+ 1900. 0.3502E-11  0.00    
+ 2000. 0.3912E-11  0.00    
+ 2100. 0.4348E-11  0.00    
+ 2200. 0.4808E-11  0.00    
+ 2300. 0.5293E-11  0.00    
+ 2400. 0.5802E-11  0.00    
+ 2500. 0.6335E-11  0.00    
+ 2600. 0.6889E-11  0.00    
+ 2700. 0.7465E-11  0.00    
+ 2800. 0.8061E-11  0.00    
+ 2900. 0.8675E-11  0.00    
+ 3000. 0.9305E-11  0.00    
+
+ ****** Wall Clock Timing Information  in secs. or min. or hours ******
+
+   Read       PF       TSPF      T Rate    CID       Total   
+  0.406E+17-0.736E+17 0.736E+17-0.736E+17  0.00    -0.3302E+17 seconds
+  0.676E+15-0.123E+16 0.123E+16-0.123E+16  0.00    -0.5504E+15 minutes
+  0.113E+14-0.204E+14 0.204E+14-0.204E+14  0.00    -0.9173E+13 hours

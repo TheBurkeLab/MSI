@@ -1,3 +1,25 @@
+# MSI_THEORY
+Temperature_list: [200,700,10] #third term is list size
+Pressure_list: [1,6,20] #atm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #MANDATORY INPUTS
 path_to_workspace: C:\\Users\\pjsin\\Documents\\MSI
 

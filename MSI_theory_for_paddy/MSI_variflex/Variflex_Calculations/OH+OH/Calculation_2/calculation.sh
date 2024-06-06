@@ -1,0 +1,6 @@
+cd /home/leil/MSI/MSI_variflex/Variflex_Calculations/OH+OH/Calculation_2/nominal_B1_Energy_1_0.0 
+echo Running nominal Variflex...
+./variflex.exe 
+echo Running perturbed Variflex...
+cd /home/leil/MSI/MSI_variflex/Variflex_Calculations/OH+OH/Calculation_2/perturb_B1_Frequencies_1_0.5 
+./variflex.exe 

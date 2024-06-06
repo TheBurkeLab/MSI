@@ -1,0 +1,98 @@
+!TemperatureList[K]                      1000.
+TemperatureList[K]                      1000. 1500. 2000. 2500. 3000. 3500. 4000. 4500. 5000.
+!ModelEnergyLimit[kcal/mol]              400
+!TemperatureList[K]                     50 200 300 400 500 600 700 900 1100 1300 1500 1700 1900 2100 2300 2500 2700 3000
+PressureList[atm]                        10
+EnergyStepOverTemperature             0.5          #Ratio of discretization energy step to T
+ExcessEnergyOverTemperature           30
+ModelEnergyLimit[kcal/mol]            400
+WellCutoff                            10
+ChemicalEigenvalueMax                 0.2
+ChemicalEigenvalueMin                 1.e-6          #only for direct diagonalization method
+CalculationMethod                     direct
+EigenvalueOutput                      eigenvalue.out
+MicroRateOutput                       ke.out
+MicroEnerMin[kcal/mol]                0.
+MicroEnerMax[kcal/mol]                20.
+MicroEnerStep[kcal/mol]               0.1
+
+Model
+  EnergyRelaxation
+    Exponential
+      Factor[1/cm]		75
+      Power				0.95  
+      ExponentCutoff	15    
+    End
+  CollisionFrequency
+    LennardJones                        ### N2O Ar
+      Epsilons[1/cm]                  	200  79.2
+      Sigmas[angstrom]                	3.3    3.47 
+      Masses[amu]                     	44.     39.9
+    End
+
+  Bimolecular           P1    
+    Fragment    N2O         
+      RRHO
+        Geometry[angstrom]    3
+ N                  0.00000000    0.00000000   -0.07302100
+ N                  0.00000000    0.00000000   -1.18871700
+ O                  0.00000000    0.00000000    1.10402000
+        Core    RigidRotor
+          SymmetryFactor        2.
+        End
+        Frequencies[1/cm]      4 
+        593.0 593.0 1317.6 2315.1                                  
+        ZeroEnergy[1/cm]                        0
+        ElectronicLevels[1/cm]                  1
+                0       1
+     End                                 
+    Fragment     O(3P)
+       Atom
+         Mass[amu]   16
+         ElectronicLevels[1/cm]      3
+            0       5
+            158.29  3
+            226.99  1
+      End
+    GroundEnergy[kcal/mol]                      0.0
+  End
+  Well     W1				# N2O
+    Species
+      RRHO 
+        Geometry[angstrom]        3
+        N        0.000000000      0.000000000      1.205381000
+        N        0.000000000      0.000000000      0.072791000
+        O        0.000000000      0.000000000     -1.118400000
+        Core    RigidRotor
+          SymmetryFactor             2
+        End
+        Frequencies[1/cm]		4
+        593.1212               593.1226              1286.9245
+        2267.1378
+        ZeroEnergy[kcal/mol]		0.0
+        ElectronicLevels[1/cm]		1
+		0	1
+      End
+  End
+  Barrier     B1   P1   W1                     
+     RRHO
+        Geometry[angstrom]      4
+ O                 -1.73926018    1.12887633    0.00000000
+ O                 -1.06529092   -0.39033710    0.00000000
+ N                  0.32831230   -0.43112549    0.00000000
+ N                  1.21534288    0.29809989    0.00000000
+        Core    RigidRotor
+          SymmetryFactor        1
+        End
+        Frequencies[1/cm]       5     
+        1792.9 662.8 500.8 375.9 188.5
+    	 ZeroEnergy[kcal/mol]                   38.5
+        ElectronicLevels[1/cm]                  1
+                0       2
+        Tunneling         Eckart
+           ImaginaryFrequency[1/cm]          1320.3
+           WellDepth[kcal/mol]               39.5
+           WellDepth[kcal/mol]               119.2
+  End
+End
+End

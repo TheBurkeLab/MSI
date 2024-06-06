@@ -1,0 +1,119 @@
+ *Title
+
+& OH + OH <-> O + H2O  
+
+! KeyDebugP
+ TspfDebugP
+
+*CalculationType
+
+ NeutralP
+ EJResP
+ AssociationP
+ HighPresP
+
+*CalculationRanges
+
+ TRangeP ListDQ
+   11
+  ValuesL
+ 200. 300. 500. 700.  1000., 1250., 1500., 1750., 2000., 2250., 2500.
+
+*ConvolutionRanges
+
+ ERangeP StepDQ
+  0.,50.0,600
+
+ JRangeP StepDQ
+   2,4,35
+
+*Channel1 
+
+*Fragments
+
+! Structure data for fragment HO
+
+ LinearP
+ NElecStatesD
+   1
+   ElecStatesL
+     2, 0.0
+     
+  NModesD
+  1, 1.00
+  ModesL
+ 3715.
+
+ SigRotD
+   1.0
+
+ CartesianP
+ NAtomsD
+   2
+ PositionL
+    16.0000   0.  0.    0.572639E-01    
+    1.00000   0.  0.    -0.916223        
+
+! Structure data for fragment HO
+
+ LinearP
+ NElecStatesD
+   3
+   ElecStatesL
+     2, 0.0
+     4, 138.4
+     2, 276.8
+     
+  NModesD
+  1, 1.00
+  ModesL
+ 3715.
+
+ SigRotD
+   1.0
+
+ CartesianP
+ NAtomsD
+   2
+ PositionL
+    16.0000   0.  0.     0.572639E-01    
+    1.00000   0.  0.    -0.916223        
+
+*TransState
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! TS #1 OH...OH = H2O + O
+ 
+ StepScaleD
+   1.0,1.0,40   
+
+ NElecStatesD
+ 1
+ ElecStatesL
+ 3 0.0
+ 
+ RRHOP
+ 
+ NearProlateP
+
+ NModesD
+ 5 1.0
+ ModesL
+ 366	633	826	1720	3758
+ 
+ SigRotD
+  1.0
+ 
+ RotConstP
+ MassD
+ 34.0
+ RotConstD
+ 15.801351	0.42031749	0.4094267
+ 
+  EckTunD
+  1696   1358.    6885.   !mpb - including van der waals well
+!  1696   973.    6535.
+ TSEnergyD
+  973.
+
+*End 
+

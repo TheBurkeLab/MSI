@@ -1,0 +1,88 @@
+TemperatureList[K] 				 200   210   220   230   240   250   260   270   280   290   300   310   320   330   340   350   360   370   380   390   400   410   420   430   440   450   460   470   480   490   500   510   520   530   540   550   560   570   580   590   600   610   620   630   640   650   660   670   680   690   700   800   900   1000   1100   1200   1300   1400   1500   1600   1700   1800   1900   2000   2100   2200   2300   2400   2500   2600   2700   2800   2900   3000
+PressureList[atm] 				 0.1   0.5   1.0   2.0   4.0
+EnergyStepOverTemperature 				 0.2
+ExcessEnergyOverTemperature 				 30.0
+ModelEnergyLimit[kcal/mol] 				 400
+CalculationMethod 				   direct  
+WellCutoff 				 10.0
+ChemicalEigenvalueMax 				 0.2
+MicroRateOutput 				   ke_sing.out  
+MicroEnerMin[kcal/mol] 				 -5.
+MicroEnerMax[kcal/mol] 				 10.
+MicroEnerStep[kcal/mol] 				 0.2
+WellExtension 				     
+DefaultReductionScheme 				   W3  
+
+Model 				     
+EnergyRelaxation 				     
+Exponential 				     
+Factor[1/cm] 				 200
+Power 				 0.85
+ExponentCutoff 				 15.0
+End 				     
+CollisionFrequency 				     
+LennardJones 				     
+Epsilons[1/cm] 				 70.0   200.0
+Sigmas[angstrom] 				 3.3   5.0
+Masses[amu] 				 28.0   66.0
+End 				     
+
+Well 				   W2a  
+Species 				     
+RRHO 				     
+Geometry[angstrom] 				 6
+O 				 -0.552059308     -0.2777991499     -1.8227517374
+O 				 0.5079660154     0.368641181     -1.4156439606
+H 				 0.5861918547     0.1230419721     -0.4698923931
+O 				 0.5085345625     -0.401685514     1.3031292052
+O 				 -0.4653395273     0.3044899364     1.7944067191
+H 				 -0.571933487     -0.0221898062     2.705811062
+Core 				   RigidRotor  
+SymmetryFactor 				 0.2
+End 				     
+Frequencies[1/cm] 				 12
+22.71    61.27    101.46    208.97    291.27    592.46    1254.23    1266.62    1463.71    1537.52    3535.0    3668.26    
+ZeroEnergy[kcal/mol] 				 -3.8
+ElectronicLevels[1/cm] 				 1
+0.0    1.0    
+End 				     
+End 				     
+
+Well 				   W2b  
+Species 				     
+RRHO 				     
+Geometry[angstrom] 				 6
+O 				 0.6868611087     -1.2436192863     0.0
+O 				 -0.59864084     -1.3837867719     0.0
+O 				 -0.6868611087     1.2436192863     0.0
+O 				 0.59864084     1.3837867719     0.0
+H 				 -0.9286225986     -0.4410528673     0.0
+H 				 0.9286225986     0.4410528673     0.0
+Core 				   RigidRotor  
+SymmetryFactor 				 1.0
+End 				     
+Frequencies[1/cm] 				 12
+137.39    210.03    298.84    344.17    665.43    871.24    1341.5    1351.21    1593.53    1605.26    3109.35    3272.49    
+ZeroEnergy[kcal/mol] 				 -8.5
+ElectronicLevels[1/cm] 				 1
+0.0    1.0    
+End 				     
+End 				     
+
+Well 				   W3  
+Species 				     
+RRHO 				     
+Geometry[angstrom] 				 6
+O 				 0.3794191553     -0.5566233651     -0.5899380173
+O 				 -0.3858812275     -0.5404849786     0.5919979113
+O 				 -0.0922958425     0.5407767287     -1.3961918754
+O 				 0.1675069826     0.4690412084     1.4427754717
+H 				 -0.8478797545     0.1255007447     -1.8354668982
+H 				 -0.2433993264     1.2600917821     1.063330997
+Core 				   RigidRotor  
+SymmetryFactor 				 1.0
+End 				     
+Rotor 				   Hindered  
+Group 				 3  5
+Axis 				 1  2
+Symmetry 				 1

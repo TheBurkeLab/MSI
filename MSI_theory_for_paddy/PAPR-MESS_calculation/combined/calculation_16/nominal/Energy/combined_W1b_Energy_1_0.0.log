@@ -1,0 +1,3 @@
+Model::init:  starts
+   Model::ExponentialKernel::ExponentialKernel:  ... done
+Model::init:  done, cpu time[sec] = 0.00493, elapsed time[sec] = 0

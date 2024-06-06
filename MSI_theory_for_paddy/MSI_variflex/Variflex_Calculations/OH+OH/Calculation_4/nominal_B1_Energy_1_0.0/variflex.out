@@ -1,0 +1,122 @@
+  
+ *****************************************************
+ *                                                   *
+ *  VARIFLEX: VERSION 2.0m; (November, 2008)         *
+ *  S. J. Klippenstein, A. F. Wagner, R. C. Dunbar,  *
+ *  D. M. Wardlaw, S. H. Robertson, and J. A. Miller *
+ *                                                   *
+ *****************************************************
+  
+
+ OH + OH <-> O + H2O                                                            
+
+ ****** Calculation Type ******
+
+ Thermal assocation rate constants will be evaluated
+ for  1 channels in a radical-radical reaction
+ The component rates will be evaluated at the E/J resolved level
+ for the high stabilization efficiency (high P) limit
+
+ ****** Calculation Ranges ******
+
+ Pressures (torr)
+    760.00
+ In addition to the high and low pressure limits
+
+ Temperatures (K)
+    200.00   210.00   220.00   230.00   240.00   250.00
+    260.00   270.00   280.00   290.00   300.00   310.00
+    320.00   330.00   340.00   350.00   360.00   370.00
+    380.00   390.00   400.00   410.00   420.00   430.00
+    440.00   450.00   460.00   470.00   480.00   490.00
+    500.00   510.00   520.00   530.00   540.00   550.00
+    560.00   570.00   580.00   590.00   600.00   610.00
+    620.00   630.00   640.00   650.00   660.00   670.00
+    680.00   690.00   700.00   800.00   900.00  1000.00
+   1100.00  1200.00  1300.00  1400.00  1500.00  1600.00
+   1700.00  1800.00  1900.00  2000.00  2100.00  2200.00
+   2300.00  2400.00  2500.00  2600.00  2700.00  2800.00
+   2900.00  3000.00
+
+ ****** Convolution Ranges ******
+
+ Energy values relative to separated fragments (cm-1)
+ ranging from      0.00 to  29950.00 in steps of     50.00
+
+ The total angular momentum J will 
+  cover the range from     2 to   138 in steps of     4
+
+ ****** Data for fragment 1 of channel   1 ******
+
+ Electronic state degeneracies and energies (cm-1)
+     2  0.0000    
+
+ Corrected Vibrational frequencies (cm-1)
+  3715.0
+
+ Zero point energy =   1857.5    cm-1
+
+ Rotational symmetry number is   1.00    
+
+ Fragment1 is linear with
+ a rotational constant of   18.90     (cm-1)
+
+ ****** Data for fragment 2 of channel   1 ******
+
+ Electronic state degeneracies and energies (cm-1)
+     2  0.0000    
+     4  138.40    
+     2  276.80    
+
+ Corrected Vibrational frequencies (cm-1)
+  3715.0
+
+ Zero point energy =   1857.5    cm-1
+
+ Rotational symmetry number is   1.00    
+
+ Fragment2 is linear with
+ a rotational constant of   18.90     (cm-1)
+  
+ ****** Orientation tests for each fragment ******
+  
+ Fragment1 is a Linear top
+ Mass(g/mol)     Ref.x(Ang)    Ref.y(Ang)     Ref.z(Ang) for fragment  1
+    16.0000       0.00000       0.00000      0.572639E-01
+    1.00000       0.00000       0.00000     -0.916223    
+ Moments(amu*A**2):  0.891931      0.891931       0.00000    
+  
+ Fragment2 is a Linear top
+ Mass(g/mol)     Ref.x(Ang)    Ref.y(Ang)     Ref.z(Ang) for fragment  2
+    16.0000       0.00000       0.00000      0.572639E-01
+    1.00000       0.00000       0.00000     -0.916223    
+ Moments(amu*A**2):  0.891931      0.891931       0.00000    
+
+ ****** Transition State Treatment Data ******
+
+ A statistical treatment of the conserved  mode vibrational 
+ contribution to the transition state partition functions
+ will be performed
+ icons test           2           1           1
+
+ The vibrational step size for the evaluation of the 
+ number of states =    1.00 cm-1
+ The transitional mode number of states will be evaluated
+ on a grid of   40 points starting at   1.0000     cm-1 
+and with the step size increasing with energy
+ Interpolation of these values will provide the 
+ transitional mode numbers for the vibrational grid
+
+ A statistical treatment of the electronic state contributions
+ will be performed
+ for all   1 electronic states in the transition state region
+
+ For effective TS location   1
+  of electronic state   1 in channel   1
+ the number of states will be evaluated according to 
+ Rigid Rotor Harmonic Oscillator assumptions for the energetics
+
+ ****** RRHO data ******
+
+
+ Corrected Vibrational frequencies (cm-1) for R           1

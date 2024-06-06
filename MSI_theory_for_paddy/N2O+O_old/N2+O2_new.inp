@@ -1,0 +1,223 @@
+TemperatureList[K]                      1000. 1500. 2000. 2500. 3000. 3500. 4000. 4500. 5000.
+PressureList[atm]                        0.0001 0.01 10
+EnergyStepOverTemperature             0.5          ! Ratio of discretization energy step to T
+ExcessEnergyOverTemperature           30
+ModelEnergyLimit[kcal/mol]            500
+WellCutoff                            10
+ChemicalEigenvalueMax                 0.2
+ChemicalEigenvalueMin                 1.e-6          ! only for direct diagonalization method
+CalculationMethod                     direct
+EigenvalueOutput                      eigenvalue.out
+MicroRateOutput                       ke.out
+MicroEnerMin[kcal/mol]                0.
+MicroEnerMax[kcal/mol]                100.
+MicroEnerStep[kcal/mol]            1
+
+Model
+  EnergyRelaxation
+    Exponential
+      Factor[1/cm]		75
+      Power				0.95  
+      ExponentCutoff	15    
+    End
+  CollisionFrequency
+    LennardJones                       ! N2O, Ar
+      Epsilons[1/cm]                  	200  79.2
+      Sigmas[angstrom]                	3.3    3.47 
+      Masses[amu]                     	44.     39.9
+    End  
+    Bimolecular           P1               ! N2O + O
+    Fragment    N2O         
+      RRHO
+        Geometry[angstrom]    3  ! 3 atoms
+ N                 -1.00557668    0.23396007    1.39265113
+ N                 -0.66240966    1.18927616    1.89885667
+ O                 -0.30145350    2.19411406    2.43130296
+        Core    RigidRotor
+          SymmetryFactor        1.      ! since it is linear
+        End
+        Frequencies[1/cm]      4 
+        593.0 593.0 1317.6 2315.1                                  
+        ZeroEnergy[1/cm]                        0
+        ElectronicLevels[1/cm]                  1    ! singlet 
+                0       1        ! charge 0 and spin multiplicity 1
+     End                                 
+    Fragment     O(3P)
+       Atom
+         Mass[amu]   16
+         ElectronicLevels[1/cm]      3
+            0       5
+            158.29  3       ! from paper
+            226.99  1       ! from paper
+      End
+    GroundEnergy[kcal/mol]                      0.0
+  End
+  Bimolecular           P2      ! N2 + O2
+   Fragment        N2                                  
+     RRHO                                                        
+     Geometry[angstrom]      2   ! 2 atoms                         
+ N                 -1.07349225    0.20930232    0.00000000
+ N                  0.03100775    0.20930232    0.00000000
+     Core     RigidRotor                                       
+       SymmetryFactor     2    ! symmetry of 2 
+     End                                                                                    
+     Frequencies[1/cm]    1                                  
+                     2365.9                        
+       ZeroEnergy[kcal/mol]            0 
+      ElectronicLevels[1/cm]     1
+            0    1
+     End
+   Fragment        O2                                  
+     RRHO                                                        
+     Geometry[angstrom]      2   ! 2 atoms                            
+ O                  0.12811251    0.19473483   -0.01729394
+ O                  1.34861827    0.20973797   -0.03307613
+     Core     RigidRotor                                       
+       SymmetryFactor     2    ! symmetry of 2 
+     End                                                                                    
+     Frequencies[1/cm]    1                                  
+                     1547.1                        
+       ZeroEnergy[kcal/mol]            0 
+      ElectronicLevels[1/cm]     1    ! singlet 
+            0    3       ! charge 0 and spin multiplicity 1
+     End
+    GroundEnergy[kcal/mol]                  -80.7
+  End
+  Well     W1   ! MIN A1
+    Species
+    RRHO
+      Geometry[angstrom]                        4
+ N                 -1.73994347   -0.71104271    0.39382911
+ N                 -0.60612632   -0.71170522    0.40754784
+ O                 -2.93292893   -0.71034579    0.37731196
+ O                 -2.15842415   -0.71053513    3.65196725
+      Core                 RigidRotor
+        SymmetryFactor                          1
+      End
+      Frequencies[1/cm]                         6
+38.8 62.8 601.9 604.0 1296.9 2274.4
+      ZeroEnergy[kcal/mol]                      -1.0
+      ElectronicLevels[1/cm]                    1
+        0       3
+    End
+  End
+  Well     W2     ! also MIN A1 in order to have the W1 go to both barriers TS B2 and TS A2
+    Species
+    RRHO
+      Geometry[angstrom]                        4   ! 4 atoms
+ N                 -1.73994347   -0.71104271    0.39382911
+ N                 -0.60612632   -0.71170522    0.40754784
+ O                 -2.93292893   -0.71034579    0.37731196
+ O                 -2.15842415   -0.71053513    3.65196725
+      Core                 RigidRotor
+        SymmetryFactor                          1
+      End
+      Frequencies[1/cm]                         6
+38.8 62.8 601.9 604.0 1296.9 2274.4
+      ZeroEnergy[kcal/mol]                      -1.1
+      ElectronicLevels[1/cm]                    1
+        0       3
+    End
+  End
+
+   Barrier     B1   P1   W1   ! imaginary barrier in between N2O + O and MIN A1 necearry for MESS file to run
+    RRHO
+      Stoichiometry O2N2
+        Core    Rotd
+        File barrier_1.dat
+          SymmetryFactor        2.
+        End
+        Frequencies[1/cm]                       4
+        593.0 593.0 1317.6 2315.1  
+        ZeroEnergy[kcal/mol]                    0.
+        ElectronicLevels[1/cm]                 1
+                0       3
+  End  
+    Barrier     B2   P1   W2     ! imaginary barrier in between N2O + O and MIN A1 necearry for MESS file to run
+    RRHO
+      Stoichiometry O2N2
+        Core    Rotd
+        File barrier_2.dat
+          SymmetryFactor        2.
+        End
+        Frequencies[1/cm]                       4
+        593.0 593.0 1317.6 2315.1  
+        ZeroEnergy[kcal/mol]                    0.
+        ElectronicLevels[1/cm]                 1
+                0       3
+  End     
+  Barrier     B3  W1   W2      ! extremely high barrier between the W1 and W2 in order to make sure there is way to travel between the two          
+     RRHO
+        Geometry[angstrom]      4
+ N                 -1.73994347   -0.71104271    0.39382911
+ N                 -0.60612632   -0.71170522    0.40754784
+ O                 -2.93292893   -0.71034579    0.37731196
+ O                 -2.15842415   -0.71053513    3.65196725
+        Core    RigidRotor
+          SymmetryFactor        1
+        End
+        Frequencies[1/cm]       5     
+        1792.9 662.8 500.8 375.9 188.5
+    	 ZeroEnergy[kcal/mol]                   138.5
+        ElectronicLevels[1/cm]                  1
+                0       3
+End
+  Barrier     B4   W1   P2    ! TS A2              
+     RRHO
+        Geometry[angstrom]      4
+ O                 -4.71431712   -0.09552360    1.45678666
+ O                 -3.98038813   -0.02325412   -0.03263247
+ N                 -2.58626661   -0.02268554   -0.01785133
+ N                 -1.72897742   -0.05858226    0.74527355
+        Core    RigidRotor
+          SymmetryFactor        1
+        End
+        Frequencies[1/cm]       5     
+        1792.9 662.8 500.8 375.9 188.5
+    	 ZeroEnergy[kcal/mol]                   38.5
+        ElectronicLevels[1/cm]                  1
+                0       3
+        Tunneling         Eckart
+          ImaginaryFrequency[1/cm]          1320.3
+           WellDepth[kcal/mol]               39.5
+           WellDepth[kcal/mol]               119.2
+  End
+End
+  Barrier     B5   W2   P2     ! TS B2               
+     RRHO
+        Geometry[angstrom]      4
+ O                 -1.39553370   -0.38067146   -1.77751036
+ O                 -1.06943915   -0.39021569    0.00000000
+ N                  0.33246053   -0.43124690    0.00000000
+ N                  1.08666630   -0.45332122    0.88343965
+        Core    RigidRotor
+          SymmetryFactor        1
+        End
+        Frequencies[1/cm]       5     
+        1497.9 571.8 430.2 278.8 204.8
+         ZeroEnergy[kcal/mol]                   56.3
+        ElectronicLevels[1/cm]                  1
+                0       3
+        Tunneling         Eckart
+           ImaginaryFrequency[1/cm]          1969.2
+           WellDepth[kcal/mol]               57.3
+           WellDepth[kcal/mol]               137
+  End
+End
+End
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

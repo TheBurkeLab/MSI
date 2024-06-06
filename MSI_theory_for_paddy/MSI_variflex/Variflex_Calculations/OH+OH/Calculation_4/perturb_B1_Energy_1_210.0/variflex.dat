@@ -1,0 +1,85 @@
+*Title
+& OH + OH <-> O + H2O
+TspfDebugP
+*CalculationType
+NeutralP
+EJResP
+AssociationP
+HighPresP
+*CalculationRanges
+PRangeP ListDQ
+1
+ValuesL
+760.0
+TRangeP ListDQ
+74
+ValuesL
+200  210  220  230  240  250  260  270  280  290  300  310  320  330  340  350  360  370  380  390  400  410  420  430  440  450  460  470  480  490  500  510  520  530  540  550  560  570  580  590  600  610  620  630  640  650  660  670  680  690  700  800  900  1000  1100  1200  1300  1400  1500  1600  1700  1800  1900  2000  2100  2200  2300  2400  2500  2600  2700  2800  2900  3000
+*ConvolutionRanges
+ERangeP StepDQ
+ 0. 50.0 600
+JRangeP StepDQ
+ 2 4 35
+*Channel1
+*Fragments
+LinearP
+NElecStatesD
+ 1
+ElecStatesL
+ 2  0.0
+NModesD
+ 1  1.00
+ModesL
+ 3715.
+SigRotD
+ 1.0
+CartesianP
+NAtomsD
+ 2
+PositionL
+ 16.0000   0.  0.    0.572639E-01
+ 1.00000   0.  0.    -0.916223
+LinearP
+NElecStatesD
+ 3
+ElecStatesL
+ 2  0.0
+ 4  138.4
+ 2  276.8
+NModesD
+ 1  1.00
+ModesL
+ 3715.
+SigRotD
+ 1.0
+CartesianP
+NAtomsD
+ 2
+PositionL
+ 16.0000   0.  0.     0.572639E-01
+ 1.00000   0.  0.    -0.916223
+*TransState
+StepScaleD
+ 1.0 1.0 40
+NElecStatesD
+ 1
+ElecStatesL
+ 3 0.0
+RRHOP
+NearProlateP
+NModesD
+ 5 1.0
+ModesL
+ 366 633 826 1720 3758
+SigRotD
+ 1.0
+RotConstP
+MassD
+ 34.0
+RotConstD
+ 15.801351 0.42031749 0.4094267
+EckTunD
+ 1696   1358.    6885.
+TSEnergyD
+1183.0
+*End

@@ -7885,15 +7885,7 @@ class Plotting(object):
             #print(unique_reactions_optimized)
             self.unique_reactions_optimized = unique_reactions_optimized
             
-            marker_list = [
-                           's', '^', 'd', '8', 'v', 'X', 'h', '<', 'p', '*', '>', 'P', 'D',
-                           's', '^', 'd', '8', 'v', 'X', 'h', '<', 'p', '*', '>', 'P', 'D',
-                           's', '^', 'd', '8', 'v', 'X', 'h', '<', 'p', '*', '>', 'P', 'D',
-                           's', '^', 'd', '8', 'v', 'X', 'h', '<', 'p', '*', '>', 'P', 'D',
-                           's', '^', 'd', '8', 'v', 'X', 'h', '<', 'p', '*', '>', 'P', 'D',
-                           's', '^', 'd', '8', 'v', 'X', 'h', '<', 'p', '*', '>', 'P', 'D',
-                           's', '^', 'd', '8', 'v', 'X', 'h', '<', 'p', '*', '>', 'P', 'D',
-                          ]     
+            marker_list = ['s', '^', 'd', '8', 'v', 'X', 'h', '<', 'p', '*', '>', 'P', 'D']     
             marker_refs_list = []       
             
             self.rate_loop = self.manager.counter(total=len(unique_reactions_optimized), desc='Rate Constant Plots:', unit='plots', color='green') 
@@ -8108,7 +8100,7 @@ class Plotting(object):
                     if isinstance(target_value_refs_optimized_for_plotting[i][j],str):
                     
                         if target_value_refs_optimized_for_plotting[i][j] in marker_refs_list:
-                            m = marker_list[marker_refs_list.index(target_value_refs_optimized_for_plotting[i][j])]
+                            m = marker_list[marker_refs_list.index(target_value_refs_optimized_for_plotting[i][j])%13]
                             if j > 0:
                                 if target_value_refs_optimized_for_plotting[i][j] == target_value_refs_optimized_for_plotting[i][j-1]:
                                     plt.semilogy(target_value_temps_optimized_for_plotting[i][j],target_value_ks_optimized_for_plotting[i][j], m, color='black', markerfacecolor='none')
@@ -8120,7 +8112,7 @@ class Plotting(object):
                             plt.semilogy(target_value_temps_optimized_for_plotting[i][j],target_value_ks_optimized_for_plotting[i][j], 'o', color='black', markerfacecolor='none')                        
                         else:
                             marker_refs_list.append(target_value_refs_optimized_for_plotting[i][j])
-                            m = marker_list[marker_refs_list.index(target_value_refs_optimized_for_plotting[i][j])]
+                            m = marker_list[marker_refs_list.index(target_value_refs_optimized_for_plotting[i][j])%13]
                             if j > 0:
                                 if target_value_refs_optimized_for_plotting[i][j] == target_value_refs_optimized_for_plotting[i][j-1]:
                                     plt.semilogy(target_value_temps_optimized_for_plotting[i][j],target_value_ks_optimized_for_plotting[i][j], m, color='black', markerfacecolor='none')
@@ -8130,7 +8122,7 @@ class Plotting(object):
                                 plt.semilogy(target_value_temps_optimized_for_plotting[i][j],target_value_ks_optimized_for_plotting[i][j], m, color='black', markerfacecolor='none', label=target_value_refs_optimized_for_plotting[i][j])
                     else:
                         if target_value_refs_optimized_for_plotting[i][j] in marker_refs_list:
-                            m = marker_list[marker_refs_list.index(target_value_refs_optimized_for_plotting[i][j])]
+                            m = marker_list[marker_refs_list.index(target_value_refs_optimized_for_plotting[i][j])%13]
                             if j > 0:
                                 if target_value_refs_optimized_for_plotting[i][j] == target_value_refs_optimized_for_plotting[i][j-1]:
                                     plt.semilogy(target_value_temps_optimized_for_plotting[i][j],target_value_ks_optimized_for_plotting[i][j], m, color='black', markerfacecolor='none')
@@ -8142,7 +8134,7 @@ class Plotting(object):
                             plt.semilogy(target_value_temps_optimized_for_plotting[i][j],target_value_ks_optimized_for_plotting[i][j], 'o', color='black', markerfacecolor='none')
                         else:
                             marker_refs_list.append(target_value_refs_optimized_for_plotting[i][j])
-                            m = marker_list[marker_refs_list.index(target_value_refs_optimized_for_plotting[i][j])]
+                            m = marker_list[marker_refs_list.index(target_value_refs_optimized_for_plotting[i][j])%13]
                             if j > 0:
                                 if target_value_refs_optimized_for_plotting[i][j] == target_value_refs_optimized_for_plotting[i][j-1]:
                                     plt.semilogy(target_value_temps_optimized_for_plotting[i][j],target_value_ks_optimized_for_plotting[i][j], m, color='black', markerfacecolor='none')
@@ -8373,7 +8365,7 @@ class Plotting(object):
             #fig = plt.figure(figsize=(20, 10))
             colors=['k','r','b','g','m']
             line_type=['-.','-','--',(0,(5,10)),':']
-            marker_list = [None,None,None,None,None]
+            # marker_list = [None,None,None,None,None]
             #line_type  = ['--', '-.', '-', ':','-']
 
             UWSA_Rate_Constant_df = pd.DataFrame()
@@ -8389,7 +8381,7 @@ class Plotting(object):
                         df = pd.read_csv(observable_list_for_legend_csv_path)
                         observable_list_for_legend = df['optimization_variable'].tolist()
                         #print(observable_list_for_legend)
-                        plt.plot(c,d,marker=marker_list[ccc],color=colors[ccc],linestyle=line_type[ccc],label = observable_list_for_legend[top_columns] +' '+str(Sig[top_columns])) 
+                        plt.plot(c,d,marker=None,color=colors[ccc],linestyle=line_type[ccc],label = observable_list_for_legend[top_columns] +' '+str(Sig[top_columns])) 
                     else:
                         observables_list_for_legend = self.active_parameters
                         plt.plot(c,d,label = observables_list_for_legend[top_columns] +' '+str(Sig[top_columns])) 

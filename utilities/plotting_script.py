@@ -481,16 +481,9 @@ class Plotting(object):
                         if 'W' in list(data_df.columns):
                             weighted_df = data_df[data_df['W'] > 1.00e-06]
                             unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
-                            # print('hey')
                         else:
                             weighted_df = data_df
-                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)
-                        
-                        # weighted_df = data_df[data_df['W'] != 1.00e-09]
-                        # unweighted_df = data_df[data_df['W'] == 1.00e-09]      
-                                          
-                        # weighted_df = data_df[data_df['W'] != 1.00e-06 or < 1.00e-06]
-                        # unweighted_df = data_df[data_df['W'] <= 1.00e-06]                        
+                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)                       
                         
                         plt.xlabel('Time [ms]')
                         plt.ylabel(observable_ylabel_transformed + ' Mole Fraction')
@@ -605,13 +598,7 @@ class Plotting(object):
                             unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
                         else:
                             weighted_df = data_df
-                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)
-                                                    
-                        # weighted_df = data_df[data_df['W'] != 1.00e-09]
-                        # unweighted_df = data_df[data_df['W'] == 1.00e-09]
-                        
-                        # weighted_df = data_df[data_df['W'] != 1.00e-06 or < 1.00e-06]
-                        # unweighted_df = data_df[data_df['W'] <= 1.00e-06]                              
+                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)                           
 
                         plt.xlabel('Temperature [K]')
                         plt.ylabel(observable_ylabel_transformed + ' Mole Fraction')
@@ -652,10 +639,7 @@ class Plotting(object):
                             temp_optimized_error_df_for_species['low_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
                             temp_optimized_error_df_for_species['high_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
                             temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
-                            temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)            
-
-                        # plt.scatter(weighted_df['Temperature'],weighted_df[observable],marker='o',color='black',label='Experimental Data')    
-                        # plt.scatter(unweighted_df['Temperature'],unweighted_df[observable],marker='o',color='black', facecolors='none',label='Unweighted Data')      
+                            temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)                 
                         
                         if len(data_df) == len(weighted_df):
                             plt.scatter(weighted_df['Temperature'],weighted_df[observable],marker='o',color='black',label='Experimental Data')   
@@ -776,10 +760,19 @@ class Plotting(object):
                     #print(observable_counter,'THIS IS OBSERVABLE COUNTER')
                     if re.match('[Ss]hock [Tt]ube',exp['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp['experiment_type']):
                         #print(observable_counter)
+                        data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
+                        
+                        if 'W' in list(data_df.columns):
+                            weighted_df = data_df[data_df['W'] > 1.00e-06]
+                            unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
+                        else:
+                            weighted_df = data_df
+                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)
+                        
                         if observable+'_ppm' in exp['experimental_data'][observable_counter].columns:
-                            plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['simulation'].timeHistories[0][observable]*1e6,'b',label='MSI')
-                            plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")
-                            plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_ppm'],'o',color='black',label='Experimental Data') 
+                            # plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['simulation'].timeHistories[0][observable]*1e6,'b',label='MSI')
+                            # plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")
+                            # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_ppm'],'o',color='black',label='Experimental Data') 
                             plt.xlabel('Time [ms]')
                             plt.ylabel(observable_ylabel_transformed+ ' Mole Fraction [ppm]')
                             # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
@@ -794,7 +787,6 @@ class Plotting(object):
                                 
                                 high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
                                 high_error_optimized = np.multiply(high_error_optimized,exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
-                                # low_error_optimized = np.exp(np.array(sigmas_optimized[i][observable_counter])*-1)
                                 low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)                                
                                 low_error_optimized = np.multiply(low_error_optimized,exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
                                 
@@ -816,7 +808,11 @@ class Plotting(object):
                                 temp_original_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
                                 
                                 temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                                temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)                                       
+                                temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)  
+
+                                if len(data_df) != len(unweighted_df):
+                                    plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
+                                    plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')
 
                                 #high_error_original = np.exp(sigmas_original[i][observable_counter])
                                 #high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
@@ -825,6 +821,16 @@ class Plotting(object):
                                 
                                 #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
                                 #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
+                            if len(data_df) == len(weighted_df):
+                                plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
+                            else:
+                                plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')  
+                                plt.scatter(unweighted_df['Time']*1e3,unweighted_df[observable+'_ppm'],marker='o',color='black', facecolors='none',label='Unweighted Data')     
+                        
+                            plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")     
+                        
+                            plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['simulation'].timeHistories[0][observable]*1e6,'b',label='MSI')    
+
                         elif observable+'_mol/cm^3' in exp['experimental_data'][observable_counter].columns:
                             concentration_optimized = np.true_divide(1,exp['simulation'].timeHistories[0]['temperature'].to_numpy())*exp['simulation'].timeHistories[0]['pressure'].to_numpy()
                            
@@ -833,9 +839,9 @@ class Plotting(object):
                            
                             concentration_original *= (1/(8.314e6))*self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable].dropna().to_numpy()
                             
-                            plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,concentration_optimized,'b',label='MSI')
-                            plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,concentration_original,'r',label= r"$\it{A}$ $\it{priori}$ model")
-                            plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_mol/cm^3'],'o',color='black',label='Experimental Data') 
+                            # plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,concentration_optimized,'b',label='MSI')
+                            # plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,concentration_original,'r',label= r"$\it{A}$ $\it{priori}$ model")
+                            # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_mol/cm^3'],'o',color='black',label='Experimental Data') 
                             plt.xlabel('Time [ms]')
                             plt.ylabel(r'$\frac{mol}{cm^3}$'+''+observable_ylabel_transformed)
                             # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
@@ -877,7 +883,21 @@ class Plotting(object):
                                 temp_original_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
                                 
                                 # temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                                # temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)                                                                              
+                                # temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)  
+
+                                if len(data_df) != len(unweighted_df):
+                                    plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
+                                    plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')
+
+                            if len(data_df) == len(weighted_df):
+                                plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_mol/cm^3'],marker='o',color='black',label='Experimental Data')    
+                            else:
+                                plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_mol/cm^3'],marker='o',color='black',label='Experimental Data')  
+                                plt.scatter(unweighted_df['Time']*1e3,unweighted_df[observable+'_mol/cm^3'],marker='o',color='black', facecolors='none',label='Unweighted Data')     
+                        
+                            plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,concentration_original,'r',label= r"$\it{A}$ $\it{priori}$ model")     
+                        
+                            plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,concentration_optimized,'b',label='MSI')                                                                                
                         
                         plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation'].temperature))
                         plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))

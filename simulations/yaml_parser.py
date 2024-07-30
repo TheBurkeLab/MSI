@@ -1790,8 +1790,6 @@ class Parser(object):
                     config3['Absorption-coefficients'][parameterOne]['wave-lengths'][wavelength]['parameter-one']['value'] = float(parameterOnesUpdated[parameterOne][0])
 
         
-     
-
             for parameterTwo in range(len(config3['Absorption-coefficients'])):
                 for wavelength in range(len(config3['Absorption-coefficients'][parameterTwo]['wave-lengths'])):
                     config3['Absorption-coefficients'][parameterTwo]['wave-lengths'][wavelength]['parameter-two']['value'] = float(parameterTwosUpdated[parameterTwo][0])

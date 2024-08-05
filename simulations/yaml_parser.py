@@ -1356,7 +1356,7 @@ class Parser(object):
         return values
     
     def yaml_file_updates(self,file_name_list,
-                          parsed_yaml_list,
+                        #   parsed_yaml_list,
                           experiment_dict_list,
                           physical_observables_updates_list,
                           loop_counter=0):
@@ -1416,7 +1416,7 @@ class Parser(object):
             else: 
                 new_file_name = file_name_list[yaml_file][0]
     
-            if experiment_dict_list[0]['simulation'].physicalSens ==1 :
+            if experiment_dict_list[0]['simulation']['physicalSens'] ==1 :
                 if re.match('[Ss]hock [Tt]ube',self.original_experimental_conditions[yaml_file]['simulationType']) and re.match('[Ss]pecies[- ][Pp]rofile',self.original_experimental_conditions[yaml_file]['experimentType']):
                     temp = self.original_experimental_conditions[yaml_file]['temperature']
                     time_shift = self.original_experimental_conditions[yaml_file]['timeShift']

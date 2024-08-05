@@ -130,7 +130,7 @@ class Master_Equation(object):
     
         nested_list = []
         def slicing_out_reactions(reaction_string,array):
-            reactions_in_cti_file = exp_dict_list[0]['simulation'].processor.solution.reaction_equations()
+            reactions_in_cti_file = exp_dict_list[0]['simulation']['reaction_equations']
             index_of_reaction_in_cti = reactions_in_cti_file.index(reaction_string)
             column_of_array = array[:,index_of_reaction_in_cti]
             column_of_array = column_of_array.reshape((column_of_array.shape[0],
@@ -138,7 +138,7 @@ class Master_Equation(object):
             return column_of_array
         mapped_to_alpha_full_simulation = []
         for i, exp in enumerate(exp_dict_list):
-            # print(exp['simulation'].timeHistories)
+            # print(exp['simulation']['timeHistories'])
             simulation = []
             single_experiment = []
             #print(parsed_yaml_file_list[i]['moleFractionObservables'][0],parsed_yaml_file_list[i]['concentrationObservables'][0],parsed_yaml_file_list[i]['ignitionDelayObservables'])
@@ -150,13 +150,13 @@ class Master_Equation(object):
                     for reaction in master_equation_reactions:
                         column = slicing_out_reactions(reaction,observable)
                         if re.match('[Ss]hock[- ][Tt]ube',exp['simulation_type']) and re.match('[Ss]pecies[- ][Pp]rofile',exp['experiment_type']):
-                            single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation'].pressureAndTemperatureToExperiment[xx],reaction))
+                            single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation']['pressureAndTemperatureToExperiment'][xx],reaction))
                         elif re.match('[Ss]hock[- ][Tt]ube',exp['simulation_type']) and re.match('[Ii]gnition[- ][Dd]elay',exp['experiment_type']):
-                            single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation'].timeHistories[0],reaction))
+                            single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation']['timeHistories'][0],reaction))
                         elif re.match('[Ff]low[- ][Rr]eactor',exp['simulation_type']) and re.match('[Ss]pecies[- ][Pp]rofile',exp['experiment_type']):
-                            single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation'].timeHistories[0],reaction))
+                            single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation']['timeHistories'][0],reaction))
                         elif re.match('[Jj][Ss][Rr]',exp['simulation_type']) and re.match('[Ss]pecies[- ][Pp]rofile',exp['experiment_type']):
-                            single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation'].timeHistories[0],reaction))                            
+                            single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation']['timeHistories'][0],reaction))                            
 
                         temp.append(single_reaction_array)
                         observable_list.append(single_reaction_array)
@@ -325,7 +325,7 @@ class Master_Equation(object):
         
         #this function is not working correctly
         #print(delta_x_molecular_params_by_reaction_dict)
-        reactions_in_cti_file = exp_dict_list[0]['simulation'].processor.solution.reaction_equations()
+        reactions_in_cti_file = exp_dict_list[0]['simulation']['reaction_equations']
         number_of_reactions = len(reactions_in_cti_file)
         
         #this is where would need to implement tuple

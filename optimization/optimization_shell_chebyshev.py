@@ -180,7 +180,7 @@ class MSI_optimization_chebyshev(object):
     def running_simulations(self,loop_counter=0):
         optimization_instance = opt.Optimization_Utility()
         if loop_counter == 0:
-            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files(self.list_of_parsed_yamls,
+            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files_parallel(self.list_of_parsed_yamls,
                                               self.yaml_file_list_with_working_directory ,
                                               self.manager,
                                               processor=self.processor, 
@@ -199,7 +199,7 @@ class MSI_optimization_chebyshev(object):
             
         else:
             
-            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files(self.list_of_parsed_yamls,
+            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files_parallel(self.list_of_parsed_yamls,
                                               self.updated_yaml_file_name_list ,
                                               self.manager,
                                               processor=self.processor, 
@@ -249,7 +249,7 @@ class MSI_optimization_chebyshev(object):
         matrix_builder_instance = ml.OptMatrix()
         self.matrix_builder_instance = matrix_builder_instance
         S_matrix = matrix_builder_instance.load_S(self.experiment_dictonaries,
-                                                  self.list_of_parsed_yamls,
+                                                #   self.list_of_parsed_yamls,
                                                   dk=self.perturbment,
                                                   master_equation_reactions = self.master_equation_reactions,
                                                   mapped_master_equation_sensitivites=self.MP_for_S_matrix,
@@ -260,7 +260,7 @@ class MSI_optimization_chebyshev(object):
         
         if loop_counter == 0:
             Y_matrix,Ydf,active_parameters = matrix_builder_instance.load_Y(self.experiment_dictonaries,
-                                                                   self.list_of_parsed_yamls,
+                                                                #    self.list_of_parsed_yamls,
                                                                    loop_counter=loop_counter,
                                                                    master_equation_flag = self.master_equation_flag,
                                                                    master_equation_uncertainty_df = self.master_equation_uncertainty_df,
@@ -276,7 +276,7 @@ class MSI_optimization_chebyshev(object):
                         
         else:
             Y_matrix,Ydf,active_parameters = matrix_builder_instance.load_Y(self.experiment_dictonaries,
-                                                                   self.list_of_parsed_yamls,
+                                                                #    self.list_of_parsed_yamls,
                                                                    loop_counter=loop_counter,
                                                                    X=self.X_to_subtract_from_Y,
                                                                    master_equation_flag = self.master_equation_flag,
@@ -296,7 +296,7 @@ class MSI_optimization_chebyshev(object):
         self.Ydf = Ydf
         
         Z_matrix,zdf,sigma = matrix_builder_instance.build_Z(self.experiment_dictonaries,
-                                                                      self.list_of_parsed_yamls,
+                                                                    #   self.list_of_parsed_yamls,
                                                                        loop_counter=loop_counter,
                                                                        reaction_uncertainty = os.path.join(self.working_directory, self.reaction_uncertainty_csv),
                                                                        master_equation_uncertainty_df=self.master_equation_uncertainty_df,
@@ -473,7 +473,8 @@ class MSI_optimization_chebyshev(object):
     def updating_files(self,loop_counter=0):
         if loop_counter==0:
             updated_file_name_list = self.yaml_instance.yaml_file_updates(self.yaml_file_list_with_working_directory,
-                                                 self.list_of_parsed_yamls,self.experiment_dictonaries,
+                                                #  self.list_of_parsed_yamls,
+                                                 self.experiment_dictonaries,
                                                  self.physical_obervable_updates_list,
                                                  loop_counter = loop_counter)
             self.updated_file_name_list = updated_file_name_list
@@ -491,7 +492,8 @@ class MSI_optimization_chebyshev(object):
         else:
             
             updated_file_name_list = self.yaml_instance.yaml_file_updates(self.updated_yaml_file_name_list,
-                                                 self.list_of_parsed_yamls,self.experiment_dictonaries,
+                                                #  self.list_of_parsed_yamls,
+                                                 self.experiment_dictonaries,
                                                  self.physical_obervable_updates_list,
                                                  loop_counter = loop_counter)
             

@@ -255,9 +255,9 @@ class ignition_delay(sim.Simulation):
                 paralell_running = True
                 #TRYING TO IMPLEMENT PARALELL
                 
-                sens = self.BFM_paralell(delay,n_procs = self.n_processors,simulation_type = '[Ss]hock[ -][Tt]ube')
+                # sens = self.BFM_paralell(delay,n_procs = self.n_processors,simulation_type = '[Ss]hock[ -][Tt]ube')
                 
-                #sens=self.BFM(delay,simulation_type = '[Ss]hock[ -][Tt]ube')
+                sens=self.BFM(delay,simulation_type = '[Ss]hock[ -][Tt]ube')
                     
                 #uncomment above
 

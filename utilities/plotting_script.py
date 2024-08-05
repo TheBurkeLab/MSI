@@ -9203,7 +9203,6 @@ class Plotting(object):
         print('Merging pdfs for rate constants')
         print('--------------------------------------------------------------------------')
 
-        #obama
         Rate_Constant_pdfs = set(glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9].pdf"))
                                 + glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9][0-9].pdf")))
         Rate_Constant_pdfs = natsort.natsorted(Rate_Constant_pdfs)

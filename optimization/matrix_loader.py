@@ -1147,9 +1147,9 @@ class OptMatrix(object):
                 
                 if loop_counter ==0:
                     if re.match('[Ss]hock [Tt]ube',exp_dict_list[i]['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp_dict_list[i]['experiment_type']):
-                        dic_of_conditions = exp_dic['simulation']['conditions']
+                        dict_of_conditions = exp_dic['simulation']['conditions']
                         #subtract out the dilluant 
-                        species_in_simulation = len(set(dic_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))
+                        species_in_simulation = len(set(dict_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))
                         
                         #add two for Temperature and Pressure
                         len_of_phsycial_observables_in_simulation = species_in_simulation + 2 + 1
@@ -1160,9 +1160,10 @@ class OptMatrix(object):
                         active_parameters.append('Temperature'+' experiment'+str(i))
                         Y_data_Frame.append('Pressure'+' experiment'+str(i))  
                         active_parameters.append('Pressure'+' experiment'+str(i))                   
-                        for species in list(set(dic_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne'])): 
-                            Y_data_Frame.append('X_'+species+' experiment'+str(i))
-                            active_parameters.append('X_'+species+' experiment'+str(i))
+                        for species in list(dict_of_conditions.keys()):
+                            if species not in ['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']:
+                                Y_data_Frame.append('X_'+species+' experiment'+str(i))
+                                active_parameters.append('X_'+species+' experiment'+str(i))
                         Y_data_Frame.append('TimeShift'+' experiment'+str(i)) 
                         active_parameters.append('TimeShift'+' experiment'+str(i))
                         
@@ -1181,9 +1182,10 @@ class OptMatrix(object):
                             active_parameters.append('Temperature_'+str(temp)+' experiment'+str(i))
                         Y_data_Frame.append('Pressure'+' experiment'+str(i))
                         active_parameters.append('Pressure'+' experiment'+str(i))
-                        for species in list(set(dict_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne'])):
-                            Y_data_Frame.append('X_'+species+' experiment'+str(i))
-                            active_parameters.append('X_'+species+' experiment'+str(i))
+                        for species in list(dict_of_conditions.keys()):
+                            if species not in ['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']:
+                                Y_data_Frame.append('X_'+species+' experiment'+str(i))
+                                active_parameters.append('X_'+species+' experiment'+str(i))
                         Y_data_Frame.append('ResidenceTime'+' experiment'+str(i))
                         active_parameters.append('ResidenceTime'+' experiment'+str(i))
 
@@ -1360,10 +1362,10 @@ class OptMatrix(object):
                             active_parameters.append('Temperature_'+str(temp)+' experiment'+str(i))
                         Y_data_Frame.append('Pressure'+' experiment'+str(i))
                         active_parameters.append('Pressure'+' experiment'+str(i))
-                        for species in list(set(dict_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne'])):
-                            Y_data_Frame.append('X_'+species+' experiment'+str(i))
-                            active_parameters.append('X_'+species+' experiment'+str(i))
-                        
+                        for species in list(dict_of_conditions.keys()):
+                            if species not in ['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']:
+                                Y_data_Frame.append('X_'+species+' experiment'+str(i))
+                                active_parameters.append('X_'+species+' experiment'+str(i))
                         for timeshift in exp_dic['simulation']['fullParsedYamlFile']['timeShiftOriginal']:
                             Y_data_Frame.append('TimeShift_'+str(timeshift)+' experiment'+str(i))
                             active_parameters.append('TimeShift_'+str(timeshift)+' experiment'+str(i))
@@ -1382,9 +1384,10 @@ class OptMatrix(object):
                         active_parameters.append('Temperature'+' experiment'+str(i))
                         Y_data_Frame.append('Pressure'+' experiment'+str(i))
                         active_parameters.append('Pressure'+' experiment'+str(i))
-                        for species in list(set(dic_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne'])):
-                            Y_data_Frame.append('X'+'_'+species+' experiment'+str(i))
-                            active_parameters.append('X'+'_'+species+' experiment'+str(i))
+                        for species in list(dic_of_conditions.keys()):
+                            if species not in ['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']:
+                                Y_data_Frame.append('X_'+species+' experiment'+str(i))
+                                active_parameters.append('X_'+species+' experiment'+str(i))
                         Y_data_Frame.append('TimeShift'+' experiment'+str(i))
                         active_parameters.append('TimeShift'+' experiment'+str(i))
                         
@@ -1401,9 +1404,10 @@ class OptMatrix(object):
                             active_parameters.append('Temperature'+'_'+str(value)+' '+'experiment'+str(i))
                         Y_data_Frame.append('Pressure'+' '+'experiment'+str(i))
                         active_parameters.append('Pressure'+' '+'experiment'+str(i))
-                        for variable in list(set(dict_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne'])):
-                            Y_data_Frame.append('X'+'_'+str(variable)+' '+'experiment'+str(i))
-                            active_parameters.append('X'+'_'+str(variable)+' '+'experiment'+str(i))
+                        for species in list(dict_of_conditions.keys()):
+                            if species not in ['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']:
+                                Y_data_Frame.append('X_'+species+' experiment'+str(i))
+                                active_parameters.append('X_'+species+' experiment'+str(i))
                         Y_data_Frame.append('ResidenceTime'+' '+'experiment'+str(i))
                         active_parameters.append('ResidenceTime'+' '+'experiment'+str(i))
 
@@ -1450,9 +1454,11 @@ class OptMatrix(object):
                             active_parameters.append('Temperature'+'_'+str(value)+' '+'experiment'+str(i))
                         Y_data_Frame.append('Pressure'+' '+'experiment'+str(i))
                         active_parameters.append('Pressure'+' '+'experiment'+str(i))
-                        for variable in list(set(dict_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne'])):
-                            Y_data_Frame.append('X'+'_'+str(variable)+' '+'experiment'+str(i))
-                            active_parameters.append('X'+'_'+str(variable)+' '+'experiment'+str(i))
+                        # for variable in list(set(dict_of_conditions.keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne'])):
+                        for species in list(dict_of_conditions.keys()):
+                            if species not in ['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']:
+                                Y_data_Frame.append('X'+'_'+str(species)+' '+'experiment'+str(i))
+                                active_parameters.append('X'+'_'+str(species)+' '+'experiment'+str(i))
                         
                         for variable in list(exp_dic['simulation']['fullParsedYamlFile']['timeShiftOriginal']):
                             Y_data_Frame.append('TimeShift'+'_'+str(variable)+' '+'experiment'+str(i))
@@ -1611,134 +1617,134 @@ class OptMatrix(object):
 
 
 
-    def get_physical_parameters_df(self, 
-                                   exp_dict_list:list, 
-                                   optimized_physical_parameters:list, 
-                                   optimized_absorption_parameters:list, 
-                                #    parsed_yaml_file_list_original:list
-                                   ):
+    # def get_physical_parameters_df(self, 
+    #                                exp_dict_list:list, 
+    #                                optimized_physical_parameters:list, 
+    #                                optimized_absorption_parameters:list, 
+    #                             #    parsed_yaml_file_list_original:list
+    #                                ):
         
-        physical_parameters_names = []
-        nominal_physical_parameters = []
-        # optimized_physical_parameters = []
-        physical_parameters_units = []
+    #     physical_parameters_names = []
+    #     nominal_physical_parameters = []
+    #     # optimized_physical_parameters = []
+    #     physical_parameters_units = []
                                 
-        for i,exp_dic in enumerate(exp_dict_list):
-            if re.match('[Ss]hock [Tt]ube',exp_dict_list[i]['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp_dict_list[i]['experiment_type']):
+    #     for i,exp_dic in enumerate(exp_dict_list):
+    #         if re.match('[Ss]hock [Tt]ube',exp_dict_list[i]['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp_dict_list[i]['experiment_type']):
 
-                physical_parameters_names.append('Temperature'+'_'+'experiment'+'_'+str(i))
-                physical_parameters_names.append('Pressure'+'_'+'experiment'+'_'+str(i))                        
-                for value in range(len(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))):
-                    physical_parameters_names.append('X'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                physical_parameters_names.append('TimeShift'+'_'+'experiment'+'_'+str(i)) 
+    #             physical_parameters_names.append('Temperature'+'_'+'experiment'+'_'+str(i))
+    #             physical_parameters_names.append('Pressure'+'_'+'experiment'+'_'+str(i))                        
+    #             for value in range(len(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))):
+    #                 physical_parameters_names.append('X'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             physical_parameters_names.append('TimeShift'+'_'+'experiment'+'_'+str(i)) 
                 
-                nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['temperature'])
-                nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['pressure'])
-                for value in [exp_dic['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dic['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
-                    nominal_physical_parameters.append(value)
-                nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['timeShift'])
+    #             nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['temperature'])
+    #             nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['pressure'])
+    #             for value in [exp_dic['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dic['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
+    #                 nominal_physical_parameters.append(value)
+    #             nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['timeShift'])
                 
-                # optimized_physical_parameters.append(physical_obervable_updates_list[i]['T_experiment_'+str(i)])
-                # optimized_physical_parameters.append(physical_obervable_updates_list[i]['P_experiment_'+str(i)])
-                # for j in range(len([exp_dic['simulation']['conditions'][species] for species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))])):
-                #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['X_'+str(j)+'_experiment_'+str(i)]*100)
-                # optimized_physical_parameters.append(physical_obervable_updates_list[i]['Time_shift_experiment_'+str(i)])                 
+    #             # optimized_physical_parameters.append(physical_obervable_updates_list[i]['T_experiment_'+str(i)])
+    #             # optimized_physical_parameters.append(physical_obervable_updates_list[i]['P_experiment_'+str(i)])
+    #             # for j in range(len([exp_dic['simulation']['conditions'][species] for species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))])):
+    #             #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['X_'+str(j)+'_experiment_'+str(i)]*100)
+    #             # optimized_physical_parameters.append(physical_obervable_updates_list[i]['Time_shift_experiment_'+str(i)])                 
                 
-                physical_parameters_units.append('K')
-                physical_parameters_units.append('atm')
-                for value in [exp_dic['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dic['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
-                    physical_parameters_units.append('unitless')
-                physical_parameters_units.append('s')                        
+    #             physical_parameters_units.append('K')
+    #             physical_parameters_units.append('atm')
+    #             for value in [exp_dic['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dic['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
+    #                 physical_parameters_units.append('unitless')
+    #             physical_parameters_units.append('s')                        
                 
                 
-            elif re.match('[Jj][Ss][Rr]',exp_dict_list[i]['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp_dict_list[i]['experiment_type']):
+    #         elif re.match('[Jj][Ss][Rr]',exp_dict_list[i]['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp_dict_list[i]['experiment_type']):
 
-                for value in range(len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])):
-                    physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                physical_parameters_names.append('Pressure'+'_'+'experiment'+'_'+str(i))
-                for value in range(len(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))):
-                    physical_parameters_names.append('X'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                physical_parameters_names.append('ResidenceTime'+'_'+'experiment'+'_'+str(i))
+    #             for value in range(len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])):
+    #                 physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             physical_parameters_names.append('Pressure'+'_'+'experiment'+'_'+str(i))
+    #             for value in range(len(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))):
+    #                 physical_parameters_names.append('X'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             physical_parameters_names.append('ResidenceTime'+'_'+'experiment'+'_'+str(i))
                 
-                for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['temperatures']:
-                    nominal_physical_parameters.append(value)
-                nominal_physical_parameters.append(exp_dict_list[i]['simulation']['fullParsedYamlFile']['pressure'])
-                for value in [exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
-                    nominal_physical_parameters.append(value)
-                nominal_physical_parameters.append(exp_dict_list[i]['simulation']['fullParsedYamlFile']['residence_time'])
+    #             for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['temperatures']:
+    #                 nominal_physical_parameters.append(value)
+    #             nominal_physical_parameters.append(exp_dict_list[i]['simulation']['fullParsedYamlFile']['pressure'])
+    #             for value in [exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
+    #                 nominal_physical_parameters.append(value)
+    #             nominal_physical_parameters.append(exp_dict_list[i]['simulation']['fullParsedYamlFile']['residence_time'])
                 
-                # for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])):
-                #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['T'+str(j+1)+'_experiment_'+str(i)])
-                # optimized_physical_parameters.append(physical_obervable_updates_list[i]['P_experiment_'+str(i)])
-                # for j in range(len([exp_dic['simulation']['conditions'][species] for species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))])):
-                #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['X_'+str(j)+'_experiment_'+str(i)]*100)
-                # optimized_physical_parameters.append(physical_obervable_updates_list[i]['R_experiment_'+str(i)])
+    #             # for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])):
+    #             #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['T'+str(j+1)+'_experiment_'+str(i)])
+    #             # optimized_physical_parameters.append(physical_obervable_updates_list[i]['P_experiment_'+str(i)])
+    #             # for j in range(len([exp_dic['simulation']['conditions'][species] for species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))])):
+    #             #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['X_'+str(j)+'_experiment_'+str(i)]*100)
+    #             # optimized_physical_parameters.append(physical_obervable_updates_list[i]['R_experiment_'+str(i)])
                 
-                for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['temperatures']:
-                    physical_parameters_units.append('K')
-                physical_parameters_units.append('atm')
-                for value in [exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
-                    physical_parameters_units.append('unitless')
-                physical_parameters_units.append('s')                        
+    #             for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['temperatures']:
+    #                 physical_parameters_units.append('K')
+    #             physical_parameters_units.append('atm')
+    #             for value in [exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
+    #                 physical_parameters_units.append('unitless')
+    #             physical_parameters_units.append('s')                        
 
                 
-            elif re.match('[Ff]lame [Ss]peed',exp_dict_list[i]['simulation_type']) and re.match('[Oo][Nn][Ee]|[1][ -][dD][ -][Ff]lame',exp_dict_list[i]['experimentType']):
+    #         elif re.match('[Ff]lame [Ss]peed',exp_dict_list[i]['simulation_type']) and re.match('[Oo][Nn][Ee]|[1][ -][dD][ -][Ff]lame',exp_dict_list[i]['experimentType']):
 
-                print('GOTTA ADD FLAME SPEED to nominal observables')
+    #             print('GOTTA ADD FLAME SPEED to nominal observables')
 
-            #     conditions = exp_dic['conditions_dict_list']
-            #     species_to_loop =  exp_dic['uncertainty']['species_relative_uncertainty']['species']
-            #     pressures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
-            #     list_with_most_species_in_them = []
-            #     for specie in species_to_loop:
-            #         list_with_most_species_in_them.append(len(conditions[specie]))
-            #     max_species = max(list_with_most_species_in_them)
-            #     if 'Diluant' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluant' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
-            #         diluant = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluant']
-            #     species_in_simulation = len(set(species_in_simulation).difference(diluant)) * max_species
-            #     temperatures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])
-            #     pressure_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
-            #     len_of_phsycial_observables_in_simulation = species_in_simulation+temperatures_in_simulation+pressure_in_simulation
-            #     temp_zeros = np.zeros((len_of_phsycial_observables_in_simulation,1))
-            #     Y = np.vstack((Y,temp_zeros))
+    #         #     conditions = exp_dic['conditions_dict_list']
+    #         #     species_to_loop =  exp_dic['uncertainty']['species_relative_uncertainty']['species']
+    #         #     pressures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
+    #         #     list_with_most_species_in_them = []
+    #         #     for specie in species_to_loop:
+    #         #         list_with_most_species_in_them.append(len(conditions[specie]))
+    #         #     max_species = max(list_with_most_species_in_them)
+    #         #     if 'Diluant' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluant' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
+    #         #         diluant = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluant']
+    #         #     species_in_simulation = len(set(species_in_simulation).difference(diluant)) * max_species
+    #         #     temperatures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])
+    #         #     pressure_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
+    #         #     len_of_phsycial_observables_in_simulation = species_in_simulation+temperatures_in_simulation+pressure_in_simulation
+    #         #     temp_zeros = np.zeros((len_of_phsycial_observables_in_simulation,1))
+    #         #     Y = np.vstack((Y,temp_zeros))
                 
                 
                 
                 
                 
-            #     for value in range(temperatures_in_simulation):
-            #         nominal_physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-            #     for value in range(pressures_in_simulation):
-            #         nominal_physical_parameters_names.append('Pressure'+'_'+str(value)+'experiment'+'_'+str(i))
-            #     for variable in range(species_in_simulation):
-            #         nominal_physical_parameters_names.append('X'+'_'+str(variable)+'_'+'experiment'+'_'+str(i))  
+    #         #     for value in range(temperatures_in_simulation):
+    #         #         nominal_physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #         #     for value in range(pressures_in_simulation):
+    #         #         nominal_physical_parameters_names.append('Pressure'+'_'+str(value)+'experiment'+'_'+str(i))
+    #         #     for variable in range(species_in_simulation):
+    #         #         nominal_physical_parameters_names.append('X'+'_'+str(variable)+'_'+'experiment'+'_'+str(i))  
                     
-            # elif re.match('[Ss]hock [Tt]ube',exp_dict_list[i]['simulation_type']) and re.match('[Ii]gnition[- ][Dd]elay',exp_dict_list[i]['experiment_type']):
+    #         # elif re.match('[Ss]hock [Tt]ube',exp_dict_list[i]['simulation_type']) and re.match('[Ii]gnition[- ][Dd]elay',exp_dict_list[i]['experiment_type']):
 
-                print('GOTTA ADD IGNITION DELAY to nominal obervables')
+    #             print('GOTTA ADD IGNITION DELAY to nominal obervables')
 
-                # conditions = exp_dic['conditions_dict_list']
-                # species_uncertainties = exp_dic['uncertainty']['species_relative_uncertainty']['dictonary_of_values']
-                # species_to_loop =  list(exp_dic['conditions_dict_list'].keys())
-                # list_with_most_species_in_them = []
-                # for specie in species_to_loop:
-                #     list_with_most_species_in_them.append(len(conditions[specie]))
-                # max_species = max(list_with_most_species_in_them)
-                # diluent=[]   
-                # if 'Diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
-                #     diluent = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluent']
-                # singular_species=[]
-                # for species in list(exp_dic['simulation']['fullParsedYamlFile']['conditions'].keys()):
-                #     if len(exp_dic['simulation']['fullParsedYamlFile']['conditions'][species])==1 and species not in diluent:
-                #         singular_species.append(species)                            
-                # species = copy.deepcopy(species_to_loop)
-                # species_in_simulation = int(len(singular_species)+((len(set(exp_dic['simulation']['fullParsedYamlFile']['speciesNames']).difference(diluent))-len(singular_species))*len(exp_dic['simulation']['fullParsedYamlFile']['conditions_to_run'])))
-                # temperatures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])
-                # pressures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
-                # time_shift_length = 1
-                # len_of_phsycial_observables_in_simulation = species_in_simulation+temperatures_in_simulation+pressures_in_simulation + time_shift_length
-                # temp_zeros = np.zeros((len_of_phsycial_observables_in_simulation,1))
-                # Y = np.vstack((Y,temp_zeros))
+    #             # conditions = exp_dic['conditions_dict_list']
+    #             # species_uncertainties = exp_dic['uncertainty']['species_relative_uncertainty']['dictonary_of_values']
+    #             # species_to_loop =  list(exp_dic['conditions_dict_list'].keys())
+    #             # list_with_most_species_in_them = []
+    #             # for specie in species_to_loop:
+    #             #     list_with_most_species_in_them.append(len(conditions[specie]))
+    #             # max_species = max(list_with_most_species_in_them)
+    #             # diluent=[]   
+    #             # if 'Diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
+    #             #     diluent = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluent']
+    #             # singular_species=[]
+    #             # for species in list(exp_dic['simulation']['fullParsedYamlFile']['conditions'].keys()):
+    #             #     if len(exp_dic['simulation']['fullParsedYamlFile']['conditions'][species])==1 and species not in diluent:
+    #             #         singular_species.append(species)                            
+    #             # species = copy.deepcopy(species_to_loop)
+    #             # species_in_simulation = int(len(singular_species)+((len(set(exp_dic['simulation']['fullParsedYamlFile']['speciesNames']).difference(diluent))-len(singular_species))*len(exp_dic['simulation']['fullParsedYamlFile']['conditions_to_run'])))
+    #             # temperatures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])
+    #             # pressures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
+    #             # time_shift_length = 1
+    #             # len_of_phsycial_observables_in_simulation = species_in_simulation+temperatures_in_simulation+pressures_in_simulation + time_shift_length
+    #             # temp_zeros = np.zeros((len_of_phsycial_observables_in_simulation,1))
+    #             # Y = np.vstack((Y,temp_zeros))
                 
                 
                 
@@ -1748,151 +1754,151 @@ class OptMatrix(object):
                 
                 
                 
-                # for value in range(temperatures_in_simulation):
-                #     nominal_physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                # for value in range(pressures_in_simulation):
-                #     nominal_physical_parameters_names.append('Pressure'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                # diluent=[]   
-                # if 'Diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
-                #     diluent = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluent']
-                # for x,species in enumerate(exp_dic['simulation']['fullParsedYamlFile']['speciesNames']):
-                #     if species in singular_species and species not in diluent:
-                #         nominal_physical_parameters_names.append('X'+'_'+str(x)+'_'+species+'_'+'experiment'+'_'+str(i))
-                #     elif species not in singular_species and species not in diluent:
-                #         for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['conditions_to_run'])):
-                #             nominal_physical_parameters_names.append('X'+'_'+str(x)+'_'+species+'_'+'experiment'+'_'+str(i))    
-                # nominal_physical_parameters_names.append('TimeShift'+'_'+'experiment'+'_'+str(i))
+    #             # for value in range(temperatures_in_simulation):
+    #             #     nominal_physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             # for value in range(pressures_in_simulation):
+    #             #     nominal_physical_parameters_names.append('Pressure'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             # diluent=[]   
+    #             # if 'Diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
+    #             #     diluent = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluent']
+    #             # for x,species in enumerate(exp_dic['simulation']['fullParsedYamlFile']['speciesNames']):
+    #             #     if species in singular_species and species not in diluent:
+    #             #         nominal_physical_parameters_names.append('X'+'_'+str(x)+'_'+species+'_'+'experiment'+'_'+str(i))
+    #             #     elif species not in singular_species and species not in diluent:
+    #             #         for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['conditions_to_run'])):
+    #             #             nominal_physical_parameters_names.append('X'+'_'+str(x)+'_'+species+'_'+'experiment'+'_'+str(i))    
+    #             # nominal_physical_parameters_names.append('TimeShift'+'_'+'experiment'+'_'+str(i))
             
-            elif re.match('[Rr][Cc][Mm]',exp_dict_list[i]['simulation_type']) and re.match('[Ii]gnition[- ][Dd]elay',exp_dict_list[i]['experiment_type']):
+    #         elif re.match('[Rr][Cc][Mm]',exp_dict_list[i]['simulation_type']) and re.match('[Ii]gnition[- ][Dd]elay',exp_dict_list[i]['experiment_type']):
 
 
-                print('GOTTA ADD RCM to nominal observables')
+    #             print('GOTTA ADD RCM to nominal observables')
 
-                # conditions = exp_dic['conditions_dict_list']
-                # species_uncertainties = exp_dic['uncertainty']['species_relative_uncertainty']['dictonary_of_values']
-                # species_to_loop =  list(exp_dic['conditions_dict_list'].keys())
-                # list_with_most_species_in_them = []
-                # for specie in species_to_loop:
-                #     list_with_most_species_in_them.append(len(conditions[specie]))
-                # max_species = max(list_with_most_species_in_them)
-                # diluent=[]   
-                # if 'Diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
-                #     diluent = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluent']
-                # singular_species=[]
-                # for species in list(exp_dic['simulation']['fullParsedYamlFile']['conditions'].keys()):
-                #     if len(exp_dic['simulation']['fullParsedYamlFile']['conditions'][species])==1 and species not in diluent:
-                #         singular_species.append(species)                            
-                # species = copy.deepcopy(species_to_loop)
-                # species_in_simulation = int(len(singular_species)+((len(set(exp_dic['simulation']['fullParsedYamlFile']['speciesNames']).difference(diluent))-len(singular_species))*len(exp_dic['simulation']['fullParsedYamlFile']['conditions_to_run'])))
-                # temperatures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])
-                # pressures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
-                # time_shift_length = 1
-                # len_of_phsycial_observables_in_simulation = species_in_simulation+temperatures_in_simulation+pressures_in_simulation + time_shift_length
-                # temp_zeros = np.zeros((len_of_phsycial_observables_in_simulation,1))
-                # Y = np.vstack((Y,temp_zeros))
+    #             # conditions = exp_dic['conditions_dict_list']
+    #             # species_uncertainties = exp_dic['uncertainty']['species_relative_uncertainty']['dictonary_of_values']
+    #             # species_to_loop =  list(exp_dic['conditions_dict_list'].keys())
+    #             # list_with_most_species_in_them = []
+    #             # for specie in species_to_loop:
+    #             #     list_with_most_species_in_them.append(len(conditions[specie]))
+    #             # max_species = max(list_with_most_species_in_them)
+    #             # diluent=[]   
+    #             # if 'Diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
+    #             #     diluent = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluent']
+    #             # singular_species=[]
+    #             # for species in list(exp_dic['simulation']['fullParsedYamlFile']['conditions'].keys()):
+    #             #     if len(exp_dic['simulation']['fullParsedYamlFile']['conditions'][species])==1 and species not in diluent:
+    #             #         singular_species.append(species)                            
+    #             # species = copy.deepcopy(species_to_loop)
+    #             # species_in_simulation = int(len(singular_species)+((len(set(exp_dic['simulation']['fullParsedYamlFile']['speciesNames']).difference(diluent))-len(singular_species))*len(exp_dic['simulation']['fullParsedYamlFile']['conditions_to_run'])))
+    #             # temperatures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])
+    #             # pressures_in_simulation = len(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
+    #             # time_shift_length = 1
+    #             # len_of_phsycial_observables_in_simulation = species_in_simulation+temperatures_in_simulation+pressures_in_simulation + time_shift_length
+    #             # temp_zeros = np.zeros((len_of_phsycial_observables_in_simulation,1))
+    #             # Y = np.vstack((Y,temp_zeros))
                 
                 
-                # nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])
-                # nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
-                # nominal_physical_parameters.append(list(exp_dic['conditions_dict_list'].values()))
-                # nominal_physical_parameters.append(exp_dic['simulation'].time_shift_values)   
-                # nominal_physical_parameters.append(exp_dic['simulation'].residence_time_values)                          
+    #             # nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])
+    #             # nominal_physical_parameters.append(exp_dic['simulation']['fullParsedYamlFile']['pressures'])
+    #             # nominal_physical_parameters.append(list(exp_dic['conditions_dict_list'].values()))
+    #             # nominal_physical_parameters.append(exp_dic['simulation'].time_shift_values)   
+    #             # nominal_physical_parameters.append(exp_dic['simulation'].residence_time_values)                          
                 
                 
                 
-                # for value in range(temperatures_in_simulation):
-                #     nominal_physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                # for value in range(pressures_in_simulation):
-                #     nominal_physical_parameters_names.append('Pressure'+'_'+str(value)+'_'+'experiment'+'_'+str(i)) 
-                # diluent=[]   
-                # if 'Diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
-                #     diluent = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluent']
-                # for x,species in enumerate(exp_dic['simulation']['fullParsedYamlFile']['speciesNames']):
-                #     if species in singular_species and species not in diluent:
-                #         nominal_physical_parameters_names.append('X'+'_'+str(x)+'_'+species+'_'+'experiment'+'_'+str(i))
-                #     elif species not in singular_species and species not in diluent:
-                #         for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['conditions_to_run'])):
-                #             nominal_physical_parameters_names.append('X'+'_'+str(x)+'_'+species+'_'+'experiment'+'_'+str(i))    
-                # nominal_physical_parameters_names.append('TimeShift'+'_'+'experiment'+'_'+str(i))     
+    #             # for value in range(temperatures_in_simulation):
+    #             #     nominal_physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             # for value in range(pressures_in_simulation):
+    #             #     nominal_physical_parameters_names.append('Pressure'+'_'+str(value)+'_'+'experiment'+'_'+str(i)) 
+    #             # diluent=[]   
+    #             # if 'Diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys() or 'diluent' in exp_dic['uncertainty']['species_relative_uncertainty']['type_dict'].keys():
+    #             #     diluent = exp_dic['uncertainty']['species_relative_uncertainty']['type_dict']['diluent']
+    #             # for x,species in enumerate(exp_dic['simulation']['fullParsedYamlFile']['speciesNames']):
+    #             #     if species in singular_species and species not in diluent:
+    #             #         nominal_physical_parameters_names.append('X'+'_'+str(x)+'_'+species+'_'+'experiment'+'_'+str(i))
+    #             #     elif species not in singular_species and species not in diluent:
+    #             #         for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['conditions_to_run'])):
+    #             #             nominal_physical_parameters_names.append('X'+'_'+str(x)+'_'+species+'_'+'experiment'+'_'+str(i))    
+    #             # nominal_physical_parameters_names.append('TimeShift'+'_'+'experiment'+'_'+str(i))     
                                     
-            elif re.match('[Ss]pecies[- ][Pp]rofile',exp_dict_list[i]['experiment_type']) and re.match('[Ff]low[ -][Rr]eactor',exp_dict_list[i]['simulation_type']):
+    #         elif re.match('[Ss]pecies[- ][Pp]rofile',exp_dict_list[i]['experiment_type']) and re.match('[Ff]low[ -][Rr]eactor',exp_dict_list[i]['simulation_type']):
 
-                for value in range(len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])):
-                    physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                physical_parameters_names.append('Pressure'+'_'+'experiment'+'_'+str(i))
-                for value in range(len(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))):
-                    physical_parameters_names.append('X'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                for value in range(len(exp_dic['simulation']['fullParsedYamlFile']['timeshifts'])):
-                    physical_parameters_names.append('TimeShift'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
-                for value in range(len(exp_dic['simulation']['fullParsedYamlFile']['residenceTimes'])):
-                    physical_parameters_names.append('ResTime'+'_'+str(value)+'_'+'experiment'+'_'+str(i))   
+    #             for value in range(len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])):
+    #                 physical_parameters_names.append('Temperature'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             physical_parameters_names.append('Pressure'+'_'+'experiment'+'_'+str(i))
+    #             for value in range(len(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))):
+    #                 physical_parameters_names.append('X'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             for value in range(len(exp_dic['simulation']['fullParsedYamlFile']['timeshifts'])):
+    #                 physical_parameters_names.append('TimeShift'+'_'+str(value)+'_'+'experiment'+'_'+str(i))
+    #             for value in range(len(exp_dic['simulation']['fullParsedYamlFile']['residenceTimes'])):
+    #                 physical_parameters_names.append('ResTime'+'_'+str(value)+'_'+'experiment'+'_'+str(i))   
                     
-                for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['temperatures']:
-                    nominal_physical_parameters.append(value)
-                nominal_physical_parameters.append(exp_dict_list[i]['simulation']['fullParsedYamlFile']['pressure'])
-                for value in [exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
-                    nominal_physical_parameters.append(value)
-                for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['timeShift']:
-                    nominal_physical_parameters.append(value)   
-                for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['residenceTimes']:
-                    nominal_physical_parameters.append(value)                     
+    #             for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['temperatures']:
+    #                 nominal_physical_parameters.append(value)
+    #             nominal_physical_parameters.append(exp_dict_list[i]['simulation']['fullParsedYamlFile']['pressure'])
+    #             for value in [exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
+    #                 nominal_physical_parameters.append(value)
+    #             for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['timeShift']:
+    #                 nominal_physical_parameters.append(value)   
+    #             for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['residenceTimes']:
+    #                 nominal_physical_parameters.append(value)                     
                 
-                # for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])):
-                #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['T'+str(j+1)+'_experiment_'+str(i)])
-                # optimized_physical_parameters.append(physical_obervable_updates_list[i]['P_experiment_'+str(i)])
-                # for j in range(len([exp_dic['simulation']['conditions'][species] for species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))])):
-                #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['X_'+str(j)+'_experiment_'+str(i)]*100)
-                # for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['timeshifts'])):
-                #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['Time_Shift'+str(j+1)+'_experiment_'+str(i)])   
-                # for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['residenceTimes'])):
-                #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['R'+str(j+1)+'_experiment_'+str(i)])              
+    #             # for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['temperatures'])):
+    #             #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['T'+str(j+1)+'_experiment_'+str(i)])
+    #             # optimized_physical_parameters.append(physical_obervable_updates_list[i]['P_experiment_'+str(i)])
+    #             # for j in range(len([exp_dic['simulation']['conditions'][species] for species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))])):
+    #             #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['X_'+str(j)+'_experiment_'+str(i)]*100)
+    #             # for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['timeshifts'])):
+    #             #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['Time_Shift'+str(j+1)+'_experiment_'+str(i)])   
+    #             # for j in range(len(exp_dic['simulation']['fullParsedYamlFile']['residenceTimes'])):
+    #             #     optimized_physical_parameters.append(physical_obervable_updates_list[i]['R'+str(j+1)+'_experiment_'+str(i)])              
                 
-                for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['temperatures']:
-                    physical_parameters_units.append('K')
-                physical_parameters_units.append('atm')
-                for value in [exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
-                    physical_parameters_units.append('unitless')
-                for variable in exp_dict_list[i]['simulation']['fullParsedYamlFile']['timeShift']:
-                    physical_parameters_units.append('s')
-                for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['residenceTimes']:  
-                    physical_parameters_units.append('s')    
+    #             for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['temperatures']:
+    #                 physical_parameters_units.append('K')
+    #             physical_parameters_units.append('atm')
+    #             for value in [exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'][species] for species in exp_dict_list[i]['simulation']['fullParsedYamlFile']['conditions'] if species in list(set(exp_dic['simulation']['conditions'].keys()).difference(['Ar','AR','ar','HE','He','he','Kr','KR','kr','Xe','XE','xe','NE','Ne','ne']))]:
+    #                 physical_parameters_units.append('unitless')
+    #             for variable in exp_dict_list[i]['simulation']['fullParsedYamlFile']['timeShift']:
+    #                 physical_parameters_units.append('s')
+    #             for value in exp_dict_list[i]['simulation']['fullParsedYamlFile']['residenceTimes']:  
+    #                 physical_parameters_units.append('s')    
                         
-        pert_coef = {} #build a dict matching pert_coef to their experiment and wavelength.          
-        pert_coef_nominal = {}   
-        # for exp in exp_dict_list:
-        for i,exp_dic in enumerate(exp_dict_list):
-            if 'perturbed_coef' not in exp_dic.keys():
-                continue
-            perturbed_for_exp = exp_dic['perturbed_coef']
-            for j, x in enumerate(perturbed_for_exp):
-                if x[0][2] not in pert_coef.keys():
-                    pert_coef[optimized_absorption_parameters[j]] = [x[1]]
-                    pert_coef_nominal[(exp_dict_list[i]['simulation']['fullParsedYamlFile']['parameterOnes'][0][0],exp_dict_list[i]['simulation']['fullParsedYamlFile']['parameterTwos'][0][0])] = [x[1]]
-                else:
-                    pert_coef[optimized_absorption_parameters[j]].append(x[1])
-                    pert_coef_nominal[(exp_dict_list[i]['simulation']['fullParsedYamlFile']['parameterOnes'][0][0],exp_dict_list[i]['simulation']['fullParsedYamlFile']['parameterTwos'][0][0])].append(x[1])
+    #     pert_coef = {} #build a dict matching pert_coef to their experiment and wavelength.          
+    #     pert_coef_nominal = {}   
+    #     # for exp in exp_dict_list:
+    #     for i,exp_dic in enumerate(exp_dict_list):
+    #         if 'perturbed_coef' not in exp_dic.keys():
+    #             continue
+    #         perturbed_for_exp = exp_dic['perturbed_coef']
+    #         for j, x in enumerate(perturbed_for_exp):
+    #             if x[0][2] not in pert_coef.keys():
+    #                 pert_coef[optimized_absorption_parameters[j]] = [x[1]]
+    #                 pert_coef_nominal[(exp_dict_list[i]['simulation']['fullParsedYamlFile']['parameterOnes'][0][0],exp_dict_list[i]['simulation']['fullParsedYamlFile']['parameterTwos'][0][0])] = [x[1]]
+    #             else:
+    #                 pert_coef[optimized_absorption_parameters[j]].append(x[1])
+    #                 pert_coef_nominal[(exp_dict_list[i]['simulation']['fullParsedYamlFile']['parameterOnes'][0][0],exp_dict_list[i]['simulation']['fullParsedYamlFile']['parameterTwos'][0][0])].append(x[1])
 
                     
-        # num_ind_pert_coef = len(pert_coef)         
-        # temp_zeros = np.zeros((num_ind_pert_coef,1))
-        # if loop_counter == 0:
-        #     Y = np.vstack((Y,temp_zeros))
-        # else:  
-        #     if 'absorbance_coefficent_observables' in X.keys():
-        #         temp_array = X['absorbance_coefficent_observables'] 
-        #         temp_array = [a for a in temp_array if a != 'null']
-        #         temp_array = np.array(temp_array)
-        #         temp_array = np.array(temp_array)*-1
-        #         temp_array = temp_array.reshape((temp_array.shape[0],1))
-        #         Y = np.vstack((Y,temp_array))
-        for x in range(len(pert_coef)):
-            physical_parameters_names.append('Sigma'+'_'+str(x))
-            nominal_physical_parameters.append(list(pert_coef_nominal.keys())[x][0]) # paramter one
-            optimized_physical_parameters.append(optimized_absorption_parameters[x]) # paramter one
-            physical_parameters_units.append('cm^2/mol^-1')            
+    #     # num_ind_pert_coef = len(pert_coef)         
+    #     # temp_zeros = np.zeros((num_ind_pert_coef,1))
+    #     # if loop_counter == 0:
+    #     #     Y = np.vstack((Y,temp_zeros))
+    #     # else:  
+    #     #     if 'absorbance_coefficent_observables' in X.keys():
+    #     #         temp_array = X['absorbance_coefficent_observables'] 
+    #     #         temp_array = [a for a in temp_array if a != 'null']
+    #     #         temp_array = np.array(temp_array)
+    #     #         temp_array = np.array(temp_array)*-1
+    #     #         temp_array = temp_array.reshape((temp_array.shape[0],1))
+    #     #         Y = np.vstack((Y,temp_array))
+    #     for x in range(len(pert_coef)):
+    #         physical_parameters_names.append('Sigma'+'_'+str(x))
+    #         nominal_physical_parameters.append(list(pert_coef_nominal.keys())[x][0]) # paramter one
+    #         optimized_physical_parameters.append(optimized_absorption_parameters[x]) # paramter one
+    #         physical_parameters_units.append('cm^2/mol^-1')            
             
-        physical_parameters_df = pd.DataFrame({'parameter': physical_parameters_names,'nominal value': nominal_physical_parameters,'optimized value': optimized_physical_parameters,'units':physical_parameters_units})  
-        return physical_parameters_df      
+    #     physical_parameters_df = pd.DataFrame({'parameter': physical_parameters_names,'nominal value': nominal_physical_parameters,'optimized value': optimized_physical_parameters,'units':physical_parameters_units})  
+    #     return physical_parameters_df      
     
     
     

@@ -225,6 +225,12 @@ class MSI_optimization_chebyshev(object):
                                                                                                   self.list_of_parsed_yamls,
                                                                                                   self.master_equation_reactions,
                                                                                                   self.manager)   
+        
+        # mapped_to_alpha_full_simulation,nested_list = master_equation_cheby_instance.map_to_alpha(self.chebyshev_sensitivities,
+        #                                                                                           self.experiment_dictonaries,
+        #                                                                                           self.list_of_parsed_yamls,
+        #                                                                                           self.master_equation_reactions)   
+        
         self.mapped_to_alpha_full_simulation = mapped_to_alpha_full_simulation
         MP_for_S_matrix,new_sens_dict,broken_up_by_reaction,tottal_dict,tester = master_equation_cheby_instance.map_parameters_to_s_matrix(self.mapped_to_alpha_full_simulation,
                                                                                     self.chebyshev_sensitivities,

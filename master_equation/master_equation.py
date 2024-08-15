@@ -114,7 +114,76 @@ class Master_Equation(object):
         P_reduced = np.divide(numerator,denominator)
         return P_reduced
 
+    # def map_to_alpha(self,sensitivty_dict:dict,
+    #              exp_dict_list:list,
+    #              parsed_yaml_file_list,
+    #              master_equation_reactions:list):
+        
+        
+    #     #flatten master euqation reactions
+    #     flatten = lambda *n: (e for a in n
+    #         for e in (flatten(*a) if isinstance(a, (tuple, list)) else (a,)))  
+    #     #flatten master index 
+    #     master_equation_reactions = list(flatten(master_equation_reactions))
 
+        
+    
+    #     nested_list = []
+    #     def slicing_out_reactions(reaction_string,array):
+    #         reactions_in_cti_file = exp_dict_list[0]['simulation']['reaction_equations']
+    #         index_of_reaction_in_cti = reactions_in_cti_file.index(reaction_string)
+    #         column_of_array = array[:,index_of_reaction_in_cti]
+    #         column_of_array = column_of_array.reshape((column_of_array.shape[0],
+    #                                                               1))  
+    #         return column_of_array
+    #     mapped_to_alpha_full_simulation = []
+    #     for i, exp in enumerate(exp_dict_list):
+    #         # print(exp['simulation']['timeHistories'])
+    #         simulation = []
+    #         single_experiment = []
+    #         #print(parsed_yaml_file_list[i]['moleFractionObservables'][0],parsed_yaml_file_list[i]['concentrationObservables'][0],parsed_yaml_file_list[i]['ignitionDelayObservables'])
+    #         if parsed_yaml_file_list[i]['moleFractionObservables'][0] != None or parsed_yaml_file_list[i]['concentrationObservables'][0] != None or parsed_yaml_file_list[i]['ignitionDelayObservables'][0] !=None:
+    #             As = exp['ksens']['A']
+    #             for xx,observable in enumerate(As):
+    #                 temp = []
+    #                 observable_list = []
+    #                 for reaction in master_equation_reactions:
+    #                     column = slicing_out_reactions(reaction,observable)
+    #                     if re.match('[Ss]hock[- ][Tt]ube',exp['simulation_type']) and re.match('[Ss]pecies[- ][Pp]rofile',exp['experiment_type']):
+    #                         single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation']['pressureAndTemperatureToExperiment'][xx],reaction))
+    #                     elif re.match('[Ss]hock[- ][Tt]ube',exp['simulation_type']) and re.match('[Ii]gnition[- ][Dd]elay',exp['experiment_type']):
+    #                         single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation']['timeHistories'][0],reaction))
+    #                     elif re.match('[Ff]low[- ][Rr]eactor',exp['simulation_type']) and re.match('[Ss]pecies[- ][Pp]rofile',exp['experiment_type']):
+    #                         single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation']['timeHistories'][0],reaction))
+    #                     elif re.match('[Jj][Ss][Rr]',exp['simulation_type']) and re.match('[Ss]pecies[- ][Pp]rofile',exp['experiment_type']):
+    #                         single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['simulation']['timeHistories'][0],reaction))                            
+
+    #                     temp.append(single_reaction_array)
+    #                     observable_list.append(single_reaction_array)
+                        
+    #                 simulation.append(observable_list)
+                   
+    #                 single_experiment.append(np.hstack((temp)))
+                    
+                 
+    #         if 'absorbance_observables' in list(exp.keys()):
+    #             wavelengths = parsed_yaml_file_list[i]['absorbanceCsvWavelengths']
+    #             for k,wl in enumerate(wavelengths):
+    #                 temp = []
+    #                 observable_list = []
+    #                 for reaction in master_equation_reactions:
+    #                     column = slicing_out_reactions(reaction,exp['absorbance_ksens'][wl][0])
+    #                     single_reaction_array = self.array_reshape(self.multiply_by_sensitivites(column,sensitivty_dict[reaction][0],exp['time_history_interpolated_against_abs'][wl],reaction))
+    #                     temp.append(single_reaction_array)
+    #                     observable_list.append(single_reaction_array)
+                        
+    #                 single_experiment.append(np.hstack((temp)))
+    #                 simulation.append(observable_list)
+                   
+    #         nested_list.append(simulation)        
+    #         mapped_to_alpha_full_simulation.append(np.vstack((single_experiment)))
+        
+    #     return mapped_to_alpha_full_simulation,nested_list
     
     
     def map_to_alpha(self,sensitivty_dict:dict,
@@ -139,7 +208,7 @@ class Master_Equation(object):
             return column_of_array
         # mapped_to_alpha_full_simulation = []
 
-        def map_to_alpha_parallel_function(i,exp_dict_list,nested_list,mapped_to_alpha_full_simulation):
+        def map_to_alpha_parallel_function(i,exp_dict_list,nested_list_dict,mapped_to_alpha_full_simulation_dict):
                   
             exp = exp_dict_list[i]
             simulation = []
@@ -182,22 +251,23 @@ class Master_Equation(object):
                     single_experiment.append(np.hstack((temp)))
                     simulation.append(observable_list)
 
-            nested_list.append(simulation)        
-            mapped_to_alpha_full_simulation.append(np.vstack((single_experiment)))
+            nested_list_dict[i] = simulation
+            mapped_to_alpha_full_simulation_dict[i] = np.vstack((single_experiment))
+
                 
         systems = len(exp_dict_list)
         WORKERS = systems
         self.me_loop=manager.counter(total=systems,desc='      Building Master Equation s-Matrix:',unit='experiments',color='gray')   
         started = 0
         active = {}
-        nested_list = multiprocessing.Manager().list()
-        mapped_to_alpha_full_simulation = multiprocessing.Manager().list()
+        nested_list_dict = multiprocessing.Manager().dict()
+        mapped_to_alpha_full_simulation_dict = multiprocessing.Manager().dict()
         jobs = []
         while systems > started or active:
             if systems > started and len(active) < WORKERS:
                 queue = multiprocessing.Queue()
                 started += 1
-                process = multiprocessing.Process(target=map_to_alpha_parallel_function, name='System %d' % started, args=(started-1,exp_dict_list,nested_list,mapped_to_alpha_full_simulation))
+                process = multiprocessing.Process(target=map_to_alpha_parallel_function, name='System %d' % started, args=(started-1,exp_dict_list,nested_list_dict,mapped_to_alpha_full_simulation_dict))
                 jobs.append(process)
                 process.start()
                 active[started] = (process, queue)
@@ -213,7 +283,10 @@ class Master_Equation(object):
         process.close()
         # self.me_loop.close()
         
-        return mapped_to_alpha_full_simulation,nested_list
+                    
+        return [mapped_to_alpha_full_simulation_dict[i] for i in range(len(mapped_to_alpha_full_simulation_dict))], [nested_list_dict[i] for i in range(len(nested_list_dict))]
+        
+        # return mapped_to_alpha_full_simulation,nested_list
     
 
             

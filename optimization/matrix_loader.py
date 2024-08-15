@@ -3089,7 +3089,7 @@ class OptMatrix(object):
 
 
 class Adding_Target_Values(meq.Master_Equation):
-    def __init__(self,S_matrix,Y_matrix,z_matrix,sigma,Y_data_Frame,z_data_Frame,T_P_min_max_dict={}):
+    def __init__(self,manager,S_matrix,Y_matrix,z_matrix,sigma,Y_data_Frame,z_data_Frame,T_P_min_max_dict={}):
         self.S_matrix = S_matrix
         self.Y_matrix = Y_matrix
         self.z_matrix = z_matrix
@@ -3098,6 +3098,7 @@ class Adding_Target_Values(meq.Master_Equation):
         self.z_data_Frame = z_data_Frame
         meq.Master_Equation.__init__(self)
         self.T_P_min_max_dict = T_P_min_max_dict
+        self.manager = manager
         
         
         
@@ -3996,6 +3997,9 @@ class Adding_Target_Values(meq.Master_Equation):
 
             MP_stack = []
             target_values_to_stack =  []
+            
+            self.k_loop=self.manager.counter(total=len(target_reactions),desc='      Adding k Target Values:           ',unit='targets',color='gray')   
+            
             for i,reaction in enumerate(target_reactions):
                 
                 print('target '+str(i)+': ' + reaction)
@@ -4403,13 +4407,8 @@ class Adding_Target_Values(meq.Master_Equation):
                         combined_master_and_A_n_Ea= np.hstack((A_n_Ea_stacked,master_equation_stacked))
                         target_values_to_stack.append(combined_master_and_A_n_Ea)
 
+                self.k_loop.update()
 
-
-
-
-                        
-                    
-                    
             S_matrix = S_matrix
             shape_s = S_matrix.shape
             S_target_values = []

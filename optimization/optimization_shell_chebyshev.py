@@ -180,7 +180,7 @@ class MSI_optimization_chebyshev(object):
     def running_simulations(self,loop_counter=0):
         optimization_instance = opt.Optimization_Utility()
         if loop_counter == 0:
-            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files_parallel(self.list_of_parsed_yamls,
+            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files(self.list_of_parsed_yamls,
                                               self.yaml_file_list_with_working_directory ,
                                               self.manager,
                                               processor=self.processor, 
@@ -199,7 +199,7 @@ class MSI_optimization_chebyshev(object):
             
         else:
             
-            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files_parallel(self.list_of_parsed_yamls,
+            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files(self.list_of_parsed_yamls,
                                               self.updated_yaml_file_name_list ,
                                               self.manager,
                                               processor=self.processor, 
@@ -223,7 +223,8 @@ class MSI_optimization_chebyshev(object):
         mapped_to_alpha_full_simulation,nested_list = master_equation_cheby_instance.map_to_alpha(self.chebyshev_sensitivities,
                                                                                                   self.experiment_dictonaries,
                                                                                                   self.list_of_parsed_yamls,
-                                                                                                  self.master_equation_reactions)   
+                                                                                                  self.master_equation_reactions,
+                                                                                                  self.manager)   
         self.mapped_to_alpha_full_simulation = mapped_to_alpha_full_simulation
         MP_for_S_matrix,new_sens_dict,broken_up_by_reaction,tottal_dict,tester = master_equation_cheby_instance.map_parameters_to_s_matrix(self.mapped_to_alpha_full_simulation,
                                                                                     self.chebyshev_sensitivities,
@@ -328,7 +329,7 @@ class MSI_optimization_chebyshev(object):
         
         ### This needs to be editied to accomidate chebychev 
         
-        adding_target_values_instance = ml.Adding_Target_Values(self.S_matrix,self.Y_matrix,self.Z_matrix,self.sigma,
+        adding_target_values_instance = ml.Adding_Target_Values(self.manager,self.S_matrix,self.Y_matrix,self.Z_matrix,self.sigma,
                                                                 self.Ydf,self.zdf,T_P_min_max_dict = self.T_P_min_max_dict)
         
         self.adding_target_values_instance = adding_target_values_instance
@@ -565,55 +566,90 @@ class MSI_optimization_chebyshev(object):
         print('Iteration ' + str(loop_counter+1))    
         print('--------------------------------------------------------------------------')    
         
+        steps = 5
+        if self.master_equation_flag == True:
+            steps += 1
+        if bool(self.k_target_values_csv):
+            steps += 1
+        self.subloop=self.manager.counter(total=steps,desc='   Iteration '+str(loop_counter+1)+':',unit='steps',color='gray')   
+            
         self.append_working_directory()
         #every loop run this, probably not?
         self.establish_processor(loop_counter=loop_counter)
         self.parsing_yaml_files(loop_counter = loop_counter)
 
-        
         if loop_counter == 0:
             original_experimental_conditions_local = copy.deepcopy(self.yaml_instance.original_experimental_conditions)
             self.original_experimental_conditions_local = original_experimental_conditions_local
         
-        
+        print('\nRunning Experimental Simuations')
         self.running_simulations(loop_counter=loop_counter)
+        self.subloop.update()
         
         if self.master_equation_flag == True:
+            print('\nBuilding Master Equation s-Matrix')
             self.master_equation_s_matrix_building(loop_counter=loop_counter)
+            self.subloop.update()
             #need to add functionality to update with the surgate model or drop out of loop
+            
+        print('\nBuilding Rest of the Matrices')
         self.building_matrices(loop_counter=loop_counter)
+        self.subloop.update()
+        
         if bool(self.k_target_values_csv):
-        # if not self.k_target_values_csv.empty:
+            print('\nAdding k Target Values')
             self.adding_k_target_values(loop_counter=loop_counter)
+            self.subloop.update()
         else:
             self.k_target_values_for_S = np.array([])
         
+        print('\nPerforming Matrix Math')
         self.matrix_math(loop_counter=loop_counter)
+        self.subloop.update()
         
+        print('\nSaving DataFrames')
+        self.df_loop=self.manager.counter(total=8,desc='      Saving DataFrames to CSVs:        ',unit='dataframes',color='gray')   
+        print('Xdf')
         self.Xdf = pd.DataFrame({'value': self.X.T[0]}, index=self.active_parameters)   
-        self.Ydf = pd.DataFrame({'value': self.Y_matrix.T[0]}, index=self.target_parameters)          
-        self.ydf = pd.DataFrame({'value': self.y_matrix.T[0]}, index=self.target_parameters)          
-        self.Zdf = pd.DataFrame({'value': self.Z_matrix.T[0]}, index=self.target_parameters)          
-        self.Sdf = pd.DataFrame(self.S_matrix, columns=self.active_parameters, index=self.target_parameters)
-        self.sdf = pd.DataFrame(self.s_matrix, columns=self.active_parameters, index=self.target_parameters)
-        self.covdf = pd.DataFrame(self.covariance, columns=self.active_parameters, index=self.active_parameters)
-        self.sigdf = pd.DataFrame({'value': list(np.sqrt(np.diag(self.covariance)))}, index=self.active_parameters)   
-        
         self.Xdf.to_csv(os.path.join(self.matrix_path,'Xdf.csv'))
         self.Xdf.to_csv(os.path.join(self.matrix_path,'Xdf_'+str(loop_counter+1)+'.csv'))
+        self.df_loop.update()
+        print('Ydf')
+        self.Ydf = pd.DataFrame({'value': self.Y_matrix.T[0]}, index=self.target_parameters)     
         self.Ydf.to_csv(os.path.join(self.matrix_path,'Ydf.csv'))
+        self.df_loop.update()
+        print('ydf')
+        self.ydf = pd.DataFrame({'value': self.y_matrix.T[0]}, index=self.target_parameters)      
         self.ydf.to_csv(os.path.join(self.matrix_path,'ydf.csv'))
+        self.df_loop.update()    
+        print('Zdf')
+        self.Zdf = pd.DataFrame({'value': self.Z_matrix.T[0]}, index=self.target_parameters)          
         self.Zdf.to_csv(os.path.join(self.matrix_path,'Zdf.csv'))
+        self.df_loop.update()
+        print('Sdf')
+        self.Sdf = pd.DataFrame(self.S_matrix, columns=self.active_parameters, index=self.target_parameters)
         self.Sdf.to_csv(os.path.join(self.matrix_path,'Sdf.csv'))
+        self.df_loop.update()
+        print('sdf')
+        self.sdf = pd.DataFrame(self.s_matrix, columns=self.active_parameters, index=self.target_parameters)
         self.sdf.to_csv(os.path.join(self.matrix_path,'sdf.csv'))
+        self.df_loop.update()
+        print('covdf')
+        self.covdf = pd.DataFrame(self.covariance, columns=self.active_parameters, index=self.active_parameters)
         self.covdf.to_csv(os.path.join(self.matrix_path,'covdf.csv'))
+        self.df_loop.update()
+        print('sigdf')
+        self.sigdf = pd.DataFrame({'value': list(np.sqrt(np.diag(self.covariance)))}, index=self.active_parameters)   
         self.sigdf.to_csv(os.path.join(self.matrix_path,'sigdf.csv'))
-                
+        self.df_loop.update()
+        self.subloop.update()
+               
         if loop_counter==0:
             self.saving_first_itteration_matrices(loop_counter=loop_counter)
             
+        print('\nUpdating Files')
         self.updating_files(loop_counter=loop_counter)
-        
+        self.subloop.update()
         
     def multiple_runs(self,loops):
         

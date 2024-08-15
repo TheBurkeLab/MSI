@@ -1783,7 +1783,7 @@ class Plotting(object):
                 if self.svg == True:
                     plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)    
             
-            self.obs_UWSA_loop.update()     
+            # self.obs_UWSA_loop.update()     
             
 
             

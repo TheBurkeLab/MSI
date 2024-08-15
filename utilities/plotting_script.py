@@ -48,9 +48,9 @@ class Plotting(object):
                   active_parameters,
                   target_parameters,  
                                     
-                #   parsed_yaml_list_original,
+                  parsed_yaml_list_original,
                   exp_dict_list_original,
-                #   parsed_yaml_list_optimized,
+                  parsed_yaml_list_optimized,
                   exp_dict_list_optimized,
                   
                   working_directory='',
@@ -114,9 +114,9 @@ class Plotting(object):
         self.active_parameters = active_parameters
         self.target_parameters = target_parameters
     
-        # self.parsed_yaml_list_original = parsed_yaml_list_original
+        self.parsed_yaml_list_original = parsed_yaml_list_original
         self.exp_dict_list_original = exp_dict_list_original
-        # self.parsed_yaml_list_optimized = parsed_yaml_list_optimized
+        self.parsed_yaml_list_optimized = parsed_yaml_list_optimized
         self.exp_dict_list_optimized = exp_dict_list_optimized
         
         self.working_directory = working_directory

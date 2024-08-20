@@ -26,24 +26,11 @@ class JSR_steadystate(sim.Simulation):
     
     
     def __init__(self,pressure:float,temperature:float,observables:list,
-                 kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,mechanicalBoundary,
-                 processor:ctp.Processor=None,cti_path="", 
+                 kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,mechanicalBoundary,cti_path="", 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={},residence_time:float=1.0,pvalveCoefficient:float=0.01,
                  maxpRise:float=0.001,save_timeHistories:int=0,rtol:float=1e-14,atol:float=1e-15):
-        
-        #sim.Simulation.__init__(self,pressure,temperature,observables,kineticSens,physicalSens,
-        #                        conditions,processor,cti_path)
-        #set up processor and initialize all variables  common to every simulation  
-        if processor!=None and cti_path!="":
-            print("Error: Cannot give both a processor and a cti file path, pick one")
-        elif processor==None and cti_path=="":
-            print("Error: Must give either a processor or a cti file path")
-        if processor != None:
-            self.processor = processor 
-        elif cti_path!="":
-            self.processor = ctp.Processor(cti_path)
         
         self.pressure=pressure
         '''Pressure of the reactor in atm'''
@@ -58,6 +45,7 @@ class JSR_steadystate(sim.Simulation):
         self.conditions=conditions
         '''Mole fractions for the gas flow into the reactor.  Accepts a dictionary similarly to {\'H2\':0.1,\'O2\':0.1,\'Ar\':0.8}'''
         self.cti_path=cti_path
+        self.gas=ct.Solution(self.cti_path)
         '''Full file path for Cantera cti file.  Only needed if `self.processor` has not been defined.'''
         self.thermalBoundary = thermalBoundary
         '''Deprecated '''
@@ -92,7 +80,8 @@ class JSR_steadystate(sim.Simulation):
             self.timeHistories=None
         if save_physSensHistories == 1:
             self.physSensHistories = []
-        self.setTPX()
+        # self.setTPX()
+        self.gas.TPX = self.temperature, self.pressure, self.conditions
         self.dk = 0.01
         self.rtol=rtol
         self.atol=atol
@@ -150,9 +139,9 @@ class JSR_steadystate(sim.Simulation):
     
     def run_single(self):
         
-        gas=self.processor.solution
+        gas=self.gas
         reactorPressure=gas.P
-        self.reactorPressure=self.processor.solution.P
+        self.reactorPressure=self.gas.P
         pressureValveCoefficient=self.pvalveCoefficient
         maxPressureRiseAllowed=self.maxPrise
         
@@ -164,8 +153,8 @@ class JSR_steadystate(sim.Simulation):
             ###################################################################
             #Block to create temp reactor network to pre-solve JSR without kinetic sens
             ct.suppress_thermo_warnings()
-            tempgas=ct.Solution(self.processor.cti_path)
-            tempgas.TPX=self.processor.solution.TPX
+            tempgas=ct.Solution(self.cti_path)
+            tempgas.TPX=self.gas.TPX
             tempfuelAirMixtureTank=ct.Reservoir(tempgas)
             tempexhaust=ct.Reservoir(tempgas)
             tempstirredReactor=ct.IdealGasReactor(tempgas,energy=self.energycon,
@@ -191,13 +180,13 @@ class JSR_steadystate(sim.Simulation):
         pretoc=time.time()
         
         # print('Presolving Took {:3.2f}s to compute'.format(pretoc-pretic))        
-        fuelAirMixtureTank=ct.Reservoir(self.processor.solution)
-        exhaust=ct.Reservoir(self.processor.solution)
+        fuelAirMixtureTank=ct.Reservoir(self.gas)
+        exhaust=ct.Reservoir(self.gas)
         if bool(self.observables) and self.kineticSens==1:
             stirredReactor=ct.IdealGasReactor(tempgas,energy=self.energycon,
                                           volume=self.reactor_volume)
         else:
-            stirredReactor=ct.IdealGasReactor(self.processor.solution,energy=self.energycon,
+            stirredReactor=ct.IdealGasReactor(self.gas,energy=self.energycon,
                                           volume=self.reactor_volume)
         #stirredReactor=ct.IdealGasReactor(self.processor.solution,energy=self.energycon,
         #                                  volume=self.reactor_volume)    
@@ -333,24 +322,11 @@ class JSR_steadystate(sim.Simulation):
 class JSR_multiTemp_steadystate(sim.Simulation):
         
     def __init__(self,volume:float,pressure:float,temperatures:list,observables:list,
-                 kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,mechanicalBoundary,
-                 processor:ctp.Processor=None,cti_path="", 
+                 kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,mechanicalBoundary,cti_path="", 
                  save_physSensHistories=0,moleFractionObservables:list=[],save_timeHistories:int=0,
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={},residence_time:float=1.0,pvalveCoefficient:float=0.01,
-                 maxpRise:float=0.001,atol:float=1e-15,rtol:float=1e-14):
-        
-#    sim.Simulation.__init__(self,pressure,temperature,observables,kineticSens,physicalSens,
-#                                conditions,processor,cti_path)
-        
-        if processor!=None and cti_path!="":
-            print("Error: Cannot give both a processor and a cti file path, pick one")
-        elif processor==None and cti_path=="":
-            print("Error: Must give either a processor or a cti file path")
-        if processor != None:
-            self.processor = processor 
-        elif cti_path!="":
-            self.processor = ctp.Processor(cti_path)        
+                 maxpRise:float=0.001,atol:float=1e-15,rtol:float=1e-14):   
         
         self.save_physSensHistories=save_physSensHistories
         self.volume=volume
@@ -374,6 +350,8 @@ class JSR_multiTemp_steadystate(sim.Simulation):
         self.energycon='off'
         self.residence_time=residence_time
         
+        self.cti_path = cti_path
+        self.gas = ct.Solution(self.cti_path)
                
         if save_timeHistories == 1:
             self.timeHistories=[]
@@ -402,7 +380,7 @@ class JSR_multiTemp_steadystate(sim.Simulation):
                                      conditions=self.conditions,
                                      thermalBoundary=self.thermalBoundary,
                                      mechanicalBoundary=self.mechanicalBoundary,
-                                     processor=self.processor,
+                                     cti_path=self.cti_path,
                                      save_physSensHistories=self.save_physSensHistories,
                                      residence_time=self.residence_time,
                                      rtol=self.rtol,
@@ -420,7 +398,7 @@ class JSR_multiTemp_steadystate(sim.Simulation):
                                      conditions=self.conditions,
                                      thermalBoundary=self.thermalBoundary,
                                      mechanicalBoundary=self.mechanicalBoundary,
-                                     processor=self.processor,
+                                     cti_path=self.cti_path,
                                      save_physSensHistories=self.save_physSensHistories,
                                      residence_time=self.residence_time,
                                      rtol=self.rtol*10.0,

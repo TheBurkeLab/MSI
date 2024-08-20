@@ -7,14 +7,13 @@ import pickle
 import numpy.polynomial.polynomial as poly
 
 from .. import simulation as sim
-from ...cti_core import cti_processor as ctp
+# from ...cti_core import cti_processor as ctp
 
 class RCM(sim.Simulation):
     
     def __init__(self,pressure:float,temperature:float,observables:list,
                  kineticSens:int,physicalSens:int,conditions:dict,
-                 initialTime,finalTime,thermalBoundary,mechanicalBoundary,
-                 processor:ctp.Processor=None,cti_path="",save_timeHistories:int=0, 
+                 initialTime,finalTime,thermalBoundary,mechanicalBoundary,cti_path="",save_timeHistories:int=0, 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={},
@@ -35,8 +34,14 @@ class RCM(sim.Simulation):
               the shocktube. For example, constant pressure or constant volume
             - histories: save the timehistories of all runs of the simulation
         '''
-        sim.Simulation.__init__(self,pressure,temperature,observables,kineticSens,physicalSens,
-                                 conditions,processor,cti_path)
+        # sim.Simulation.__init__(self,pressure,temperature,observables,kineticSens,physicalSens,
+        #                          conditions,cti_path)
+        
+        self.temperature = temperature
+        self.pressure = pressure
+        self.conditions = conditions
+        self.cti_path = cti_path
+        self.gas = ct.Solution(self.cti_path)
         self.initialTime = initialTime
         self.finalTime = finalTime
         self.thermalBoundary = thermalBoundary
@@ -63,7 +68,8 @@ class RCM(sim.Simulation):
             self.timeHistories=None
         if save_physSensHistories == 1:
             self.physSensHistories = []
-        self.setTPX()
+        # self.setTPX()
+        self.gas.TPX = self.temperature, self.pressure, self.conditions
         self.dk = [0]
         self.atol=atol
         self.rtol=rtol
@@ -100,14 +106,14 @@ class RCM(sim.Simulation):
             print('RCM is not a constant pressure simulation')
         else:
             if self.exact_deriv_flag == False:
-                RCM = ct.IdealGasReactor(self.processor.solution)
+                RCM = ct.IdealGasReactor(self.gas)
                 env = ct.Reservoir(ct.Solution('air.xml'))
                 wall = ct.Wall(RCM, env, A=1.0, velocity=self.volume_trace_class)
                 sim = ct.ReactorNet([RCM])
                 sim.set_max_time_step(inp_time[1])
                 
             if self.exact_deriv_flag == True:
-                RCM = ct.IdealGasReactor(self.processor.solution)
+                RCM = ct.IdealGasReactor(self.gas)
                 env = ct.Reservoir(ct.Solution('air.xml'))
                 wall = ct.Wall(RCM, env, A=1.0, velocity=self.volume_trace_class_exact_derivitive)
                 sim = ct.ReactorNet([RCM])
@@ -123,17 +129,17 @@ class RCM(sim.Simulation):
         self.timeHistory = pd.DataFrame(columns=columnNames)
 
         if self.kineticSens == 1:
-            for i in range(self.processor.solution.n_reactions):
+            for i in range(self.gas.n_reactions):
                 RCM.add_sensitivity_reaction(i)
             dfs = [pd.DataFrame() for x in range(len(self.observables))]
-            tempArray = [np.zeros(self.processor.solution.n_reactions) for x in range(len(self.observables))]
+            tempArray = [np.zeros(self.gas.n_reactions) for x in range(len(self.observables))]
 
         t = self.initialTime
         counter = 0
         #print(sim.rtol_sensitivity,sim.atol_sensitivity)
         
      
-        vol_sol = ct.SolutionArray(self.processor.solution, extra=["time", "volume"])
+        vol_sol = ct.SolutionArray(self.gas, extra=["time", "volume"])
         
         self.vol_sol = vol_sol
 
@@ -154,11 +160,11 @@ class RCM(sim.Simulation):
             self.timeHistory.loc[counter] = state
             if self.kineticSens == 1:
                 counter_1 = 0
-                for observable,reaction in itertools.product(self.observables, range(self.processor.solution.n_reactions)):
+                for observable,reaction in itertools.product(self.observables, range(self.gas.n_reactions)):
                     tempArray[self.observables.index(observable)][reaction] = sim.sensitivity(observable,
                                                                                                     reaction)
                     counter_1 +=1
-                    if counter_1 % self.processor.solution.n_reactions == 0:
+                    if counter_1 % self.gas.n_reactions == 0:
                         dfs[self.observables.index(observable)] = dfs[self.observables.index(observable)].append(((
                             pd.DataFrame(tempArray[self.observables.index(observable)])).transpose()),
                             ignore_index=True)

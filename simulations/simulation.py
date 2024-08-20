@@ -90,7 +90,7 @@ class Simulation(object):
                     #print('Words: '+str(conditions_copy[x]))
             new_conditions = conditions_copy
         
-        self.processor.solution.TPX=temperature,pressure*self.pasc_to_atm, new_conditions
+        self.gas.TPX=temperature,pressure*self.pasc_to_atm, new_conditions
         #print(self.processor.solution.TPX)
         
            

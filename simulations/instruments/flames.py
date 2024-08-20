@@ -7,7 +7,7 @@ Created on Fri Nov  9 15:33:46 2018
 
 import cantera as ct
 from .. import simulation as sim
-from ...cti_core import cti_processor as ctp
+# from ...cti_core import cti_processor as ctp
 import pandas as pd
 import numpy as np
 import time
@@ -25,27 +25,14 @@ class free_flame(sim.Simulation):
     
     
     def __init__(self,pressure:float,temperature:float,observables:list,
-                 kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,
-                 processor:ctp.Processor=None,cti_path="", 
+                 kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,cti_path="", 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={},flame_width:float=1.0,
                  save_timeHistories:int=0,T_profile=pd.DataFrame(columns=['z','T']),soret=True,
                  tol_ss=[1.0e-5, 1.0e-13],tol_ts=[1.0e-4, 1.0e-10],loglevel=1,flametype='Flame Speed',
                  log_file=True,log_name='log.txt'):
-        
-        #sim.Simulation.__init__(self,pressure,temperature,observables,kineticSens,physicalSens,
-        #                        conditions,processor,cti_path)
-        #set up processor and initialize all variables  common to every simulation  
-        if processor!=None and cti_path!="":
-            print("Error: Cannot give both a processor and a cti file path, pick one")
-        elif processor==None and cti_path=="":
-            print("Error: Must give either a processor or a cti file path")
-        if processor != None:
-            self.processor = processor 
-        elif cti_path!="":
-            self.processor = ctp.Processor(cti_path)
-        
+
         self.pressure=pressure
         self.temperature=temperature
         self.observables=observables
@@ -53,6 +40,7 @@ class free_flame(sim.Simulation):
         self.physicalSens=physicalSens
         self.conditions=conditions
         self.cti_path=cti_path
+        self.gas = ct.Solution(self.cti_path)
         self.thermalBoundary = thermalBoundary
         self.kineticSensitivities= None
         self.experimentalData = None
@@ -79,7 +67,8 @@ class free_flame(sim.Simulation):
             self.timeHistories=None
         if save_physSensHistories == 1:
             self.physSensHistories = []
-        self.setTPX()
+        # self.setTPX()
+        self.gas.TPX = self.temperature, self.pressure, self.conditions
         self.dk = 0.01
         self.solution=None
         
@@ -144,7 +133,7 @@ class free_flame(sim.Simulation):
             diff=adjusted_rate-modified_rate
         
             return diff
-        gas=self.processor.solution       
+        gas=self.gas    
         
         self.flame=ct.FreeFlame(gas,width=self.flame_width)
         self.TPX=copy.deepcopy(gas.TPX)
@@ -360,7 +349,7 @@ class free_flame(sim.Simulation):
                     current_array=copy.deepcopy(gas.reaction(i).coeffs)
                     temp_u=np.zeros(np.shape(current_array))
                     sens=np.zeros(np.shape(current_array))
-                    temp_gas=ct.Solution(self.processor.cti_path)
+                    temp_gas=ct.Solution(self.cti_path)
                     #temp_gas.TPX=gas.TPX
                     #temp_gas.TP=1500,gas.P
                     #temp_range=np.linspace(gas.reactions()[i].Tmin,gas.reactions()[i].Tmax,len(gas.reactions()[i].coeffs[:,0])+1)
@@ -444,24 +433,12 @@ class flamespeed_multi_condition(sim.Simulation):
         
     def __init__(self,pressures:float,temperatures:float,observables:list,
                  kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,
-                 processor:ctp.Processor=None, 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={},flame_width:float=1.0,
                  save_timeHistories:int=0,T_profile=pd.DataFrame(columns=['z','T']),soret=True,
                  tol_ss=[1.0e-5, 1.0e-13],tol_ts=[1.0e-4, 1.0e-10],loglevel=1,flametype='Flame Speed',cti_path=""):
-        
-#    sim.Simulation.__init__(self,pressure,temperature,observables,kineticSens,physicalSens,
-#                                conditions,processor,cti_path)
-        
-        if processor!=None and cti_path!="":
-            print("Error: Cannot give both a processor and a cti file path, pick one")
-        elif processor==None and cti_path=="":
-            print("Error: Must give either a processor or a cti file path")
-        if processor != None:
-            self.processor = processor 
-        elif cti_path!="":
-            self.processor = ctp.Processor(cti_path)        
+              
         self.flamespeedObservables=['u0']
         self.save_physSensHistories=save_physSensHistories
         self.temperatures=temperatures
@@ -486,6 +463,9 @@ class flamespeed_multi_condition(sim.Simulation):
         self.loglevel=loglevel
         self.flametype=flametype
         self.save_timeHistories=save_timeHistories
+        
+        self.cti_path = cti_path
+        self.gas = ct.Solution(self.cti_path)
                
         if save_timeHistories == 1:
             self.timeHistories=[]
@@ -514,7 +494,6 @@ class flamespeed_multi_condition(sim.Simulation):
                                           physicalSens=self.physicalSens,
                                           conditions=self.conditions[k],
                                           thermalBoundary=self.thermalBoundary,
-                                          processor=self.processor,
                                           save_physSensHistories=self.save_physSensHistories,
                                           flame_width=self.flame_width,
                                           save_timeHistories=self.save_timeHistories,

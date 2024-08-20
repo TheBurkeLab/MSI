@@ -1,7 +1,7 @@
 import sys, os
 import MSI.simulations as sim
 import re
-import MSI.cti_core.cti_processor as pr
+# import MSI.cti_core.cti_processor as pr
 import MSI.optimization.matrix_loader as ml
 import MSI.simulations.absorbance.curve_superimpose as csp
 import MSI.simulations.yaml_parser as yp
@@ -13,8 +13,6 @@ import MSI.simulations.instruments.flow_reactor as fr
 import pandas as pd
 import numpy as np
 import multiprocessing
-import gc
-import time
 
 #acts as front end to the rest of the system
 
@@ -53,8 +51,8 @@ class Optimization_Utility(object):
         simulation_dict = {}
         simulation_dict['kineticSens'] = simulation.kineticSens
         simulation_dict['physicalSens'] = simulation.physicalSens
-        simulation_dict['reaction_equations'] = simulation.processor.solution.reaction_equations()
-        simulation_dict['cti_path'] = simulation.processor.cti_path
+        simulation_dict['reaction_equations'] = simulation.gas.reaction_equations()
+        simulation_dict['cti_path'] = simulation.cti_path
         simulation_dict['fullParsedYamlFile'] = simulation.fullParsedYamlFile
         if 'timeHistoryInterpToExperiment' in dir(simulation):
             simulation_dict['timeHistoryInterpToExperiment'] = simulation.timeHistoryInterpToExperiment
@@ -258,7 +256,7 @@ class Optimization_Utility(object):
         
         return uncertainty_dict
     
-    def running_full_flame_speed(self,processor=None,
+    def running_full_flame_speed(self,cti_path,
                                  experiment_dictionary:dict={},
                                  kineticSens = 1,
                                  physicalSens =1,
@@ -272,7 +270,6 @@ class Optimization_Utility(object):
         #                                           physicalSens:int,
         #                                           conditions:dict,
         #                                           thermalBoundary='Adiabatic',
-        #                                           processor:ctp.Processor=None,
         #                                           save_physSensHistories=0,
         #                                           moleFractionObservables:list=[],
         #                                           absorbanceObservables:list=[],
@@ -289,7 +286,7 @@ class Optimization_Utility(object):
         #                                           cti_path="")
         experiment = 'not yet installed'
         return experiment
-    def running_ignition_delay(self,processor=None,
+    def running_ignition_delay(self,cti_path,
                                experiment_dictionary:dict={},
                                kineticSens=1,
                                physicalSens=1,
@@ -307,8 +304,7 @@ class Optimization_Utility(object):
                                                conditions=experiment_dictionary['conditions_to_run'],
                                                thermalBoundary=experiment_dictionary['thermalBoundary'],
                                                mechanicalBoundary=experiment_dictionary['mechanicalBoundary'],
-                                               processor=processor,
-                                               cti_path="", 
+                                               cti_path=cti_path,
                                                save_physSensHistories=1,
                                                fullParsedYamlFile=experiment_dictionary, 
                                                save_timeHistories=1,
@@ -330,8 +326,7 @@ class Optimization_Utility(object):
                                                conditions=experiment_dictionary['conditions_to_run'],
                                                thermalBoundary=experiment_dictionary['thermalBoundary'],
                                                mechanicalBoundary=experiment_dictionary['mechanicalBoundary'],
-                                               processor=processor,
-                                               cti_path="", 
+                                               cti_path=cti_path,
                                                save_physSensHistories=1,
                                                fullParsedYamlFile=experiment_dictionary, 
                                                save_timeHistories=1,
@@ -478,7 +473,7 @@ class Optimization_Utility(object):
         return experiment
         
         
-    def running_flow_reactor(self,processor=None,
+    def running_flow_reactor(self,cti_path,
                              experiment_dictonary:dict={},
                              kineticSens = 1,
                              physicalSens = 1,
@@ -496,8 +491,7 @@ class Optimization_Utility(object):
                                                 conditions=experiment_dictonary['conditions'],
                                                 thermalBoundary=experiment_dictonary['thermalBoundary'],
                                                 mechanicalBoundary=experiment_dictonary['mechanicalBoundary'],
-                                                processor=processor,
-                                                cti_path="", 
+                                                cti_path=cti_path,
                                                 save_physSensHistories=1,
                                                 save_timeHistories=1,
                                                 timeshifts=experiment_dictonary['timeShift'],
@@ -543,7 +537,7 @@ class Optimization_Utility(object):
                                             yaml_dict=experiment_dictonary)                                                
         return experiment
     
-    def running_full_jsr(self,processor=None,
+    def running_full_jsr(self,cti_path,
                              experiment_dictionary:dict={},
                              kineticSens = 1,
                              physicalSens = 1,
@@ -559,9 +553,9 @@ class Optimization_Utility(object):
                     conditions=experiment_dictionary['conditions'],
                     thermalBoundary=experiment_dictionary['thermalBoundary'],
                     mechanicalBoundary=experiment_dictionary['mechanicalBoundary'],
-                    processor=processor,
                     save_physSensHistories=1,
                     save_timeHistories=1,
+                    cti_path=cti_path,
                     residence_time=experiment_dictionary['residence_time'],
                     moleFractionObservables = experiment_dictionary['moleFractionObservables'],
                     concentrationObservables = experiment_dictionary['concentrationObservables'],
@@ -607,7 +601,7 @@ class Optimization_Utility(object):
                                            yaml_dict=experiment_dictionary)
         return experiment
         
-    def running_full_shock_tube(self,processor=None,
+    def running_full_shock_tube(self,cti_path,
                                            experiment_dictonary:dict={},
                                            kineticSens = 1,
                                            physicalSens = 1,
@@ -623,9 +617,9 @@ class Optimization_Utility(object):
                      finalTime = experiment_dictonary['finalTime'],
                      thermalBoundary = experiment_dictonary['thermalBoundary'],
                      mechanicalBoundary = experiment_dictonary['mechanicalBoundary'],
-                     processor = processor,
                      save_timeHistories = 1,
                      save_physSensHistories = 1,
+                     cti_path=cti_path,
                      moleFractionObservables = experiment_dictonary['moleFractionObservables'],
                      concentrationObservables = experiment_dictonary['concentrationObservables'],
                      fullParsedYamlFile = experiment_dictonary,
@@ -669,7 +663,7 @@ class Optimization_Utility(object):
         #write test case and check if we can get as far as just returnign the experiment
         return experiment
     
-    def running_full_shock_tube_absorption(self,processor=None,
+    def running_full_shock_tube_absorption(self,cti_path,
                                            experiment_dictonary:dict={},
                                            absorbance_yaml_file_path = '',
                                            kineticSens = 1,
@@ -686,9 +680,9 @@ class Optimization_Utility(object):
                      finalTime = experiment_dictonary['finalTime'],
                      thermalBoundary = experiment_dictonary['thermalBoundary'],
                      mechanicalBoundary = experiment_dictonary['mechanicalBoundary'],
-                     processor = processor,
                      save_timeHistories = 1,
                      save_physSensHistories = 1,
+                     cti_path=cti_path,
                      moleFractionObservables = experiment_dictonary['moleFractionObservables'],
                      absorbanceObservables = experiment_dictonary['absorbanceObservables'],
                      concentrationObservables = experiment_dictonary['concentrationObservables'],
@@ -771,7 +765,7 @@ class Optimization_Utility(object):
     
     
     
-    def running_shock_tube_absorption_only(self,processor=None,
+    def running_shock_tube_absorption_only(self,cti_path,
                                            experiment_dictonary:dict={},
                                            absorbance_yaml_file_path = '',
                                            kineticSens = 1,
@@ -788,9 +782,9 @@ class Optimization_Utility(object):
                      finalTime = experiment_dictonary['finalTime'],
                      thermalBoundary = experiment_dictonary['thermalBoundary'],
                      mechanicalBoundary = experiment_dictonary['mechanicalBoundary'],
-                     processor = processor,
                      save_timeHistories = 1,
                      save_physSensHistories = 1,
+                     cti_path=cti_path,
                      moleFractionObservables = experiment_dictonary['moleFractionObservables'],
                      absorbanceObservables = experiment_dictonary['absorbanceObservables'],
                      concentrationObservables = experiment_dictonary['concentrationObservables'],
@@ -861,7 +855,7 @@ class Optimization_Utility(object):
         return experiment    
     
     
-    def running_full_variable_pressure_shock_tube(self,processor=None,
+    def running_full_variable_pressure_shock_tube(self,cti_path,
                                            experiment_dictonary:dict={},
                                            kineticSens = 1,
                                            physicalSens = 1,
@@ -877,9 +871,9 @@ class Optimization_Utility(object):
                      finalTime = experiment_dictonary['finalTime'],
                      thermalBoundary = experiment_dictonary['thermalBoundary'],
                      mechanicalBoundary = experiment_dictonary['mechanicalBoundary'],
-                     processor = processor,
                      save_timeHistories = 1,
                      save_physSensHistories = 1,
+                     cti_path=cti_path,
                      moleFractionObservables = experiment_dictonary['moleFractionObservables'],
                      concentrationObservables = experiment_dictonary['concentrationObservables'],
                      fullParsedYamlFile = experiment_dictonary,
@@ -926,10 +920,10 @@ class Optimization_Utility(object):
         return experiment    
     
     
-    def looping_over_parsed_yaml_files(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
+    def looping_over_parsed_yaml_files(self,list_of_parsed_yamls,list_of_yaml_paths,manager,cti_path,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
         
         self.manager = manager
-        self.sim_loop=self.manager.counter(total=len(list_of_parsed_yamls),desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')    
+        self.subloop=self.manager.counter(total=len(list_of_parsed_yamls),desc='Iteration '+str(loop_counter+1)+':',unit='experiments',color='gray')    
        
         experiment_list = []
         for i,yamlDict in enumerate(list_of_parsed_yamls):
@@ -943,7 +937,7 @@ class Optimization_Utility(object):
 
                 
                     if 'absorbanceObservables' not in yamlDict.keys():
-                        experiment = self.running_full_shock_tube(processor=processor,
+                        experiment = self.running_full_shock_tube(cti_path,
                                            experiment_dictonary=yamlDict,
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
@@ -954,7 +948,7 @@ class Optimization_Utility(object):
                     elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
                         path = list_of_yaml_paths[i][1]
                         
-                        experiment = self.running_shock_tube_absorption_only(processor=processor,
+                        experiment = self.running_shock_tube_absorption_only(cti_path,
                                                                              experiment_dictonary = yamlDict,
                                                                              absorbance_yaml_file_path = path,
                                                                              kineticSens = kineticSens,
@@ -965,7 +959,7 @@ class Optimization_Utility(object):
                     
                     else:
                         path = list_of_yaml_paths[i][1]
-                        experiment = self.running_full_shock_tube_absorption(processor=processor,
+                        experiment = self.running_full_shock_tube_absorption(cti_path,
                                            experiment_dictonary=yamlDict,
                                            absorbance_yaml_file_path = path,
                                            kineticSens = kineticSens,
@@ -977,7 +971,7 @@ class Optimization_Utility(object):
                         
             elif re.match('[Ss]hock [Tt]ube',simulation_type) and re.match('[Ii]gnition[- ][Dd]elay',experiment_type):
                  if 'absorbanceObservables' not in yamlDict.keys():
-                        experiment = self.running_ignition_delay(processor=processor,
+                        experiment = self.running_ignition_delay(cti_path,
                                            experiment_dictionary=yamlDict,
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
@@ -988,7 +982,7 @@ class Optimization_Utility(object):
                  elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
 #                        path = list_of_yaml_paths[i][1]
 #                        print(path)
-#                        experiment = self.running_shock_tube_absorption_only(processor=processor,
+#                        experiment = self.running_shock_tube_absorption_only(cti_path,
 #                                                                             experiment_dictonary = yamlDict,
 #                                                                             absorbance_yaml_file_path = path,
 #                                                                             kineticSens = kineticSens,
@@ -999,7 +993,7 @@ class Optimization_Utility(object):
                         print('Absorbance currently not enabled for ignition delay')
                  else:
 #                        path = list_of_yaml_paths[i][1]
-#                        experiment = self.running_full_shock_tube_absorption(processor=processor,
+#                        experiment = self.running_full_shock_tube_absorption(cti_path,
 #                                           experiment_dictonary=yamlDict,
 #                                           absorbance_yaml_file_path = path,
 #                                           kineticSens = kineticSens,
@@ -1013,7 +1007,7 @@ class Optimization_Utility(object):
             elif re.match('[Rr][Cc][Mm]',simulation_type) and re.match('[Ii]gnition[- ][Dd]elay',experiment_type):
                  
                  if 'absorbanceObservables' not in yamlDict.keys():
-                        experiment = self.running_ignition_delay(processor=processor,
+                        experiment = self.running_ignition_delay(cti_path,
                                            experiment_dictionary=yamlDict,
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
@@ -1024,7 +1018,7 @@ class Optimization_Utility(object):
                  elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
 #                        path = list_of_yaml_paths[i][1]
 #                        print(path)
-#                        experiment = self.running_shock_tube_absorption_only(processor=processor,
+#                        experiment = self.running_shock_tube_absorption_only(cti_path,
 #                                                                             experiment_dictonary = yamlDict,
 #                                                                             absorbance_yaml_file_path = path,
 #                                                                             kineticSens = kineticSens,
@@ -1035,7 +1029,7 @@ class Optimization_Utility(object):
                         print('Absorbance currently not enabled for ignition delay')
                  else:
 #                        path = list_of_yaml_paths[i][1]
-#                        experiment = self.running_full_shock_tube_absorption(processor=processor,
+#                        experiment = self.running_full_shock_tube_absorption(cti_path,
 #                                           experiment_dictonary=yamlDict,
 #                                           absorbance_yaml_file_path = path,
 #                                           kineticSens = kineticSens,
@@ -1051,7 +1045,7 @@ class Optimization_Utility(object):
                 
                     if 'absorbanceObservables' not in yamlDict.keys():
                         
-                        experiment = self.running_full_jsr(processor=processor,
+                        experiment = self.running_full_jsr(cti_path,
                                            experiment_dictionary=yamlDict,
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
@@ -1062,7 +1056,7 @@ class Optimization_Utility(object):
                     elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
 #                        path = list_of_yaml_paths[i][1]
 #                        print(path)
-#                        experiment = self.running_shock_tube_absorption_only(processor=processor,
+#                        experiment = self.running_shock_tube_absorption_only(cti_path,
 #                                                                             experiment_dictonary = yamlDict,
 #                                                                             absorbance_yaml_file_path = path,
 #                                                                             kineticSens = kineticSens,
@@ -1073,7 +1067,7 @@ class Optimization_Utility(object):
                         print('Absorbance currently not enabled for jsr')
                     else:
 #                        path = list_of_yaml_paths[i][1]
-#                        experiment = self.running_full_shock_tube_absorption(processor=processor,
+#                        experiment = self.running_full_shock_tube_absorption(cti_path,
 #                                           experiment_dictonary=yamlDict,
 #                                           absorbance_yaml_file_path = path,
 #                                           kineticSens = kineticSens,
@@ -1091,7 +1085,7 @@ class Optimization_Utility(object):
                 
                 
                     if 'absorbanceObservables' not in yamlDict.keys():
-                        experiment= self.running_flow_reactor(processor=processor,
+                        experiment= self.running_flow_reactor(cti_path,
                                            experiment_dictonary=yamlDict,
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
@@ -1107,41 +1101,27 @@ class Optimization_Utility(object):
             else:
                 print('We do not have this simulation installed yet')
             
-            self.sim_loop.update()
-        self.sim_loop.close()            
+            self.subloop.update()
+        self.subloop.close()            
         
         return experiment_list
     
-    def looping_over_parsed_yaml_files_parallel_pool(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
+    def looping_over_parsed_yaml_files_parallel(self,list_of_parsed_yamls,list_of_yaml_paths,manager,cti_path,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
         
         systems = len(list_of_parsed_yamls)
         WORKERS = systems
-        
-        args = [[i,list_of_parsed_yamls[i],list_of_yaml_paths[i],kineticSens,physicalSens,dk] for i in range(len(list_of_parsed_yamls))]
-        
-        with multiprocessing.Pool(processes=WORKERS,maxtasksperchild=1) as pool:
-            temp_mat=pool.map(self.parallel_pool_function,args)
-            pool.close()
-            pool.join()
-            self.matrices=temp_mat
-
-
         self.manager = manager
-        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')   
+        self.subloop=self.manager.counter(total=systems,desc='Iteration '+str(loop_counter+1)+':',unit='experiments',color='gray')   
         started = 0
         active = {}
         # experiment_list = multiprocessing.Manager().list()
         experiment_dict = multiprocessing.Manager().dict()
         jobs = []
         while systems > started or active:
-            print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-            
             if systems > started and len(active) < WORKERS:
-                print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-                
                 queue = multiprocessing.Queue()
                 started += 1
-                process = multiprocessing.Process(target=self.parallel_pool_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict))
+                process = multiprocessing.Process(target=self.parallel_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,cti_path,kineticSens,physicalSens,dk,experiment_dict))
                 jobs.append(process)
                 process.start()
                 active[started] = (process, queue)
@@ -1150,167 +1130,21 @@ class Optimization_Utility(object):
                 alive = process.is_alive()
                 if not alive:
                     del active[system]
-                    # process.join()  # Wait for the process to terminate
-                    # process.close()  # Close the process
-                    # del process
-                    self.sim_loop.update()
-            time.sleep(0.1)
+                    self.subloop.update()
         for proc in jobs:
             proc.join()
-        process.close()
-
-        return [experiment_dict[i] for i in range(len(experiment_dict))]
-    
-    def parallel_pool_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
-                
-        yamlDict = list_of_parsed_yamls[exp_number]
-        yamlPath = list_of_yaml_paths[exp_number]
-                
-        simulation_type = yamlDict['simulationType']
-        experiment_type = yamlDict['experimentType']
-        
-        # experiment_list = []
-        
-        if re.match('[Ss]hock [Tt]ube',simulation_type) and re.match('[Ss]pecies[- ][Pp]rofile',experiment_type):
-                if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment = self.running_full_shock_tube(processor=processor,
-                                        experiment_dictonary=yamlDict,
-                                        kineticSens = kineticSens,
-                                        physicalSens = physicalSens,
-                                        dk = dk,
-                                        exp_number=exp_number)
-                    # experiment_list.append(experiment)
-                elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
-                    path = yamlPath[1]
-                    experiment = self.running_shock_tube_absorption_only(processor=processor,
-                                                                            experiment_dictonary = yamlDict,
-                                                                            absorbance_yaml_file_path = path,
-                                                                            kineticSens = kineticSens,
-                                                                            physicalSens = physicalSens,
-                                                                            dk = dk,
-                                                                            exp_number=exp_number)
-                    # experiment_list.append(experiment)
-                else:
-                    path = yamlPath[1]
-                    experiment = self.running_full_shock_tube_absorption(processor=processor,
-                                        experiment_dictonary=yamlDict,
-                                        absorbance_yaml_file_path = path,
-                                        kineticSens = kineticSens,
-                                        physicalSens = physicalSens,
-                                        dk = dk,
-                                        exp_number=exp_number)
-                    # experiment_list.append(experiment)
-        elif re.match('[Ss]hock [Tt]ube',simulation_type) and re.match('[Ii]gnition[- ][Dd]elay',experiment_type):
-                if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment = self.running_ignition_delay(processor=processor,
-                                        experiment_dictionary=yamlDict,
-                                        kineticSens = kineticSens,
-                                        physicalSens = physicalSens,
-                                        dk = dk,
-                                        exp_number=exp_number)
-                    # experiment_list.append(experiment)
-                elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
-                    print('Absorbance currently not enabled for ignition delay')
-                else:
-                    print('Absorbance currently not enabled for ignition delay')
-        elif re.match('[Rr][Cc][Mm]',simulation_type) and re.match('[Ii]gnition[- ][Dd]elay',experiment_type):
-                if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment = self.running_ignition_delay(processor=processor,
-                                        experiment_dictionary=yamlDict,
-                                        kineticSens = kineticSens,
-                                        physicalSens = physicalSens,
-                                        dk = dk,
-                                        exp_number=exp_number)
-                    # experiment_list.append(experiment)
-                elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
-                    print('Absorbance currently not enabled for ignition delay')
-                else:
-                    print('Absorbance currently not enabled for ignition delay')
-        elif re.match('[Jj][Ss][Rr]',simulation_type) or re.match('[Jj]et[- ][Ss]tirred[- ][Rr]eactor',simulation_type):
-                if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment = self.running_full_jsr(processor=processor,
-                                        experiment_dictionary=yamlDict,
-                                        kineticSens = kineticSens,
-                                        physicalSens = physicalSens,
-                                        dk = dk,
-                                        exp_number=exp_number)
-                    # experiment_list.append(experiment)
-                elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
-                    print('Absorbance currently not enabled for jsr')
-                else:
-                    print('Absorbance currently not enabled for jsr')
-        elif re.match('[Ff]lame[ -][Ss]peed',simulation_type) and re.match('[Oo][Nn][Ee]|[1][ -][dD][ -][Ff]lame',experiment_type):
-            print("ADD FLAME SPEED DICT HERE")           
-        elif re.match('[Ff]low[ -][Rr]eactor',simulation_type) and re.match('[Ss]pecies[- ][Pp]rofile',experiment_type):
-                if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment= self.running_flow_reactor(processor=processor,
-                                        experiment_dictonary=yamlDict,
-                                        kineticSens = kineticSens,
-                                        physicalSens = physicalSens,
-                                        dk = dk,
-                                        exp_number=exp_number)
-                    # experiment_list.append(experiment)
-                elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
-                    print('Absorbance currently not enabled for flow reactor')
-                else:
-                    print('Absorbance currently not enabled for jsr')                
-        else:
-            print('We do not have this simulation installed yet')
-        
-        
-        return experiment
-        
-        
-        
-    
-    def looping_over_parsed_yaml_files_parallel(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
-        
-        systems = len(list_of_parsed_yamls)
-        WORKERS = systems
-        self.manager = manager
-        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')   
-        started = 0
-        active = {}
-        # experiment_list = multiprocessing.Manager().list()
-        experiment_dict = multiprocessing.Manager().dict()
-        jobs = []
-        while systems > started or active:
-            print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-            
-            if systems > started and len(active) < WORKERS:
-                print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-                
-                queue = multiprocessing.Queue()
-                started += 1
-                process = multiprocessing.Process(target=self.parallel_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict))
-                jobs.append(process)
-                process.start()
-                active[started] = (process, queue)
-            for system in tuple(active.keys()):
-                process, queue = active[system]
-                alive = process.is_alive()
-                if not alive:
-                    del active[system]
-                    # process.join()  # Wait for the process to terminate
-                    # process.close()  # Close the process
-                    # del process
-                    self.sim_loop.update()
-            time.sleep(0.1)
-        for proc in jobs:
-            proc.join()
-        process.close()
         
         # self.manager = manager
-        # self.sim_loop=self.manager.counter(total=len(list_of_parsed_yamls),desc='Iteration '+str(loop_counter+1)+':',unit='experiments',color='gray')   
+        # self.subloop=self.manager.counter(total=len(list_of_parsed_yamls),desc='Iteration '+str(loop_counter+1)+':',unit='experiments',color='gray')   
         # experiment_list = []
         # for i, parsed_yaml in enumerate(list_of_parsed_yamls):
-        #     experiment_list.append(self.parallel_function(i,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk))
-        #     self.sim_loop.update()
-        # self.sim_loop.close()   
-        # gc.collect()
+        #     experiment_list.append(self.parallel_function(i,list_of_parsed_yamls,list_of_yaml_paths,kineticSens,physicalSens,dk))
+        #     self.subloop.update()
+        # self.subloop.close()   
+        
         return [experiment_dict[i] for i in range(len(experiment_dict))]
     
-    def parallel_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
+    def parallel_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,cti_path,kineticSens,physicalSens,dk,experiment_dict):
                 
         yamlDict = list_of_parsed_yamls[exp_number]
         yamlPath = list_of_yaml_paths[exp_number]
@@ -1322,7 +1156,7 @@ class Optimization_Utility(object):
         
         if re.match('[Ss]hock [Tt]ube',simulation_type) and re.match('[Ss]pecies[- ][Pp]rofile',experiment_type):
                 if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment = self.running_full_shock_tube(processor=processor,
+                    experiment = self.running_full_shock_tube(cti_path,
                                         experiment_dictonary=yamlDict,
                                         kineticSens = kineticSens,
                                         physicalSens = physicalSens,
@@ -1331,7 +1165,7 @@ class Optimization_Utility(object):
                     # experiment_list.append(experiment)
                 elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
                     path = yamlPath[1]
-                    experiment = self.running_shock_tube_absorption_only(processor=processor,
+                    experiment = self.running_shock_tube_absorption_only(cti_path,
                                                                             experiment_dictonary = yamlDict,
                                                                             absorbance_yaml_file_path = path,
                                                                             kineticSens = kineticSens,
@@ -1341,7 +1175,7 @@ class Optimization_Utility(object):
                     # experiment_list.append(experiment)
                 else:
                     path = yamlPath[1]
-                    experiment = self.running_full_shock_tube_absorption(processor=processor,
+                    experiment = self.running_full_shock_tube_absorption(cti_path,
                                         experiment_dictonary=yamlDict,
                                         absorbance_yaml_file_path = path,
                                         kineticSens = kineticSens,
@@ -1351,7 +1185,7 @@ class Optimization_Utility(object):
                     # experiment_list.append(experiment)
         elif re.match('[Ss]hock [Tt]ube',simulation_type) and re.match('[Ii]gnition[- ][Dd]elay',experiment_type):
                 if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment = self.running_ignition_delay(processor=processor,
+                    experiment = self.running_ignition_delay(cti_path,
                                         experiment_dictionary=yamlDict,
                                         kineticSens = kineticSens,
                                         physicalSens = physicalSens,
@@ -1364,7 +1198,7 @@ class Optimization_Utility(object):
                     print('Absorbance currently not enabled for ignition delay')
         elif re.match('[Rr][Cc][Mm]',simulation_type) and re.match('[Ii]gnition[- ][Dd]elay',experiment_type):
                 if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment = self.running_ignition_delay(processor=processor,
+                    experiment = self.running_ignition_delay(cti_path,
                                         experiment_dictionary=yamlDict,
                                         kineticSens = kineticSens,
                                         physicalSens = physicalSens,
@@ -1377,7 +1211,7 @@ class Optimization_Utility(object):
                     print('Absorbance currently not enabled for ignition delay')
         elif re.match('[Jj][Ss][Rr]',simulation_type) or re.match('[Jj]et[- ][Ss]tirred[- ][Rr]eactor',simulation_type):
                 if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment = self.running_full_jsr(processor=processor,
+                    experiment = self.running_full_jsr(cti_path,
                                         experiment_dictionary=yamlDict,
                                         kineticSens = kineticSens,
                                         physicalSens = physicalSens,
@@ -1392,7 +1226,7 @@ class Optimization_Utility(object):
             print("ADD FLAME SPEED DICT HERE")           
         elif re.match('[Ff]low[ -][Rr]eactor',simulation_type) and re.match('[Ss]pecies[- ][Pp]rofile',experiment_type):
                 if 'absorbanceObservables' not in yamlDict.keys():
-                    experiment= self.running_flow_reactor(processor=processor,
+                    experiment= self.running_flow_reactor(cti_path,
                                         experiment_dictonary=yamlDict,
                                         kineticSens = kineticSens,
                                         physicalSens = physicalSens,

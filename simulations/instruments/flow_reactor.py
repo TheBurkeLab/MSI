@@ -1,6 +1,6 @@
 import cantera as ct
 from .. import simulation as sim
-from ...cti_core import cti_processor as ctp
+# from ...cti_core import cti_processor as ctp
 import pandas as pd
 import numpy as np
 import time
@@ -16,8 +16,7 @@ class flow_reactor(sim.Simulation):
     
     def __init__(self,pressure:float,temperature:float,observables:list,
                  kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,
-                 mechanicalBoundary,
-                 processor:ctp.Processor=None,cti_path="", 
+                 mechanicalBoundary,cti_path="", 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  concentrationObservables:list=[],
                  fullParsedYamlFile:dict={}, save_timeHistories:int=0,
@@ -88,16 +87,6 @@ class flow_reactor(sim.Simulation):
         None.
 
         '''
-        
-        
-        if processor!=None and cti_path!="":
-            print("Error: Cannot give both a processor and a cti file path, pick one")
-        elif processor==None and cti_path=="":
-            print("Error: Must give either a processor or a cti file path")
-        if processor != None:
-            self.processor = processor 
-        elif cti_path!="":
-            self.processor = ctp.Processor(cti_path)
         self.pressure=pressure
         self.temperature=temperature
         self.observables=observables
@@ -105,6 +94,7 @@ class flow_reactor(sim.Simulation):
         self.physicalSens=physicalSens
         self.conditions=conditions
         self.cti_path=cti_path
+        self.gas = ct.Solution(self.cti_path)
         self.thermalBoundary = thermalBoundary
         self.mechanicalBoundary=mechanicalBoundary
         self.kineticSensitivities= None
@@ -130,7 +120,8 @@ class flow_reactor(sim.Simulation):
             self.timeHistories=None
         if save_physSensHistories == 1:
             self.physSensHistories = []
-        self.setTPX()
+        # self.setTPX()
+        self.gas.TPX = self.temperature, self.pressure, self.conditions
         self.dk = 0.01
         self.solution=None
     
@@ -169,7 +160,7 @@ class flow_reactor(sim.Simulation):
                           finalTime = self.finalTime,
                           thermalBoundary = self.thermalBoundary,
                           mechanicalBoundary = self.mechanicalBoundary,
-                          processor = self.processor,
+                          cti_path=self.cti_path,
                           save_timeHistories = 1,
                           save_physSensHistories = 0,
                           moleFractionObservables = self.moleFractionObservables,
@@ -191,7 +182,7 @@ class flow_reactor(sim.Simulation):
                               finalTime = self.finalTime,
                               thermalBoundary = self.thermalBoundary,
                               mechanicalBoundary = self.mechanicalBoundary,
-                              processor = self.processor,
+                              cti_path=self.cti_path,
                               save_timeHistories = 1,
                               save_physSensHistories = 0,
                               moleFractionObservables = self.moleFractionObservables,
@@ -212,7 +203,7 @@ class flow_reactor(sim.Simulation):
                               finalTime = self.finalTime,
                               thermalBoundary = self.thermalBoundary,
                               mechanicalBoundary = self.mechanicalBoundary,
-                              processor = self.processor,
+                              cti_path=self.cti_path,
                               save_timeHistories = 1,
                               save_physSensHistories = 0,
                               moleFractionObservables = self.moleFractionObservables,
@@ -234,7 +225,7 @@ class flow_reactor(sim.Simulation):
                               finalTime = self.finalTime,
                               thermalBoundary = self.thermalBoundary,
                               mechanicalBoundary = self.mechanicalBoundary,
-                              processor = self.processor,
+                              cti_path=self.cti_path,
                               save_timeHistories = 1,
                               save_physSensHistories = 0,
                               moleFractionObservables = self.moleFractionObservables,
@@ -454,8 +445,7 @@ class flow_reactor_wrapper(sim.Simulation):
     
     def __init__(self,pressure:float,temperatures:list,observables:list,
                  kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,
-                 mechanicalBoundary,
-                 processor:ctp.Processor=None,cti_path="", 
+                 mechanicalBoundary,cti_path="", 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  concentrationObservables:list=[],
                  fullParsedYamlFile:dict={}, save_timeHistories:int=0,
@@ -522,18 +512,6 @@ class flow_reactor_wrapper(sim.Simulation):
         None.
 
         '''
-        
-        
-        
-        
-        if processor!=None and cti_path!="":
-            print("Error: Cannot give both a processor and a cti file path, pick one")
-        elif processor==None and cti_path=="":
-            print("Error: Must give either a processor or a cti file path")
-        if processor != None:
-            self.processor = processor 
-        elif cti_path!="":
-            self.processor = ctp.Processor(cti_path)
         self.pressure=pressure
         self.temperatures=temperatures
         self.observables=observables
@@ -541,6 +519,7 @@ class flow_reactor_wrapper(sim.Simulation):
         self.physicalSens=physicalSens
         self.conditions=conditions
         self.cti_path=cti_path
+        self.gas = ct.Solution(self.cti_path)
         self.thermalBoundary = thermalBoundary
         self.mechanicalBoundary=mechanicalBoundary
         self.kineticSensitivities= None
@@ -569,6 +548,7 @@ class flow_reactor_wrapper(sim.Simulation):
         if save_physSensHistories == 1:
             self.physSensHistories = []
         #self.setTPX()
+        self.gas.TPX = self.temperatures[0], self.pressure, self.conditions
         self.dk = [0]
         self.solution=None
         
@@ -610,7 +590,6 @@ class flow_reactor_wrapper(sim.Simulation):
                                    conditions=self.conditions,
                                    thermalBoundary=self.thermalBoundary,
                                    mechanicalBoundary=self.mechanicalBoundary,
-                                   processor=self.processor,
                                    cti_path=self.cti_path, 
                                    save_physSensHistories=self.save_physSensHistories,
                                    moleFractionObservables=self.moleFractionObservables,

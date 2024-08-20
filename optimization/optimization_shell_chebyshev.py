@@ -2,7 +2,7 @@ import sys
 sys.path.append('.') #get rid of this at some point with central test script or when package is built
 
 import MSI.simulations.instruments.shock_tube as st
-import MSI.cti_core.cti_processor as pr
+# import MSI.cti_core.cti_processor as pr
 import MSI.optimization.matrix_loader as ml
 import MSI.optimization.opt_runner as opt
 import MSI.simulations.absorbance.curve_superimpose as csp
@@ -54,7 +54,6 @@ class MSI_optimization_chebyshev(object):
         self.matrix_path = os.path.join(self.working_directory, 'matrix')
         self.yaml_file_list = yaml_file_list
         self.yaml_file_list_with_working_directory = None
-        self.processor = None
         self.list_of_yaml_objects = None
         self.list_of_parsed_yamls = None
         self.experiment_dictonaries = None
@@ -124,7 +123,7 @@ class MSI_optimization_chebyshev(object):
 # pre process the cti file to remove reactions and rename it,also save it as the first run of the file
         
     # run the cti writer to establish processor and make cti file 
-    def establish_processor(self,loop_counter=0):
+    def establish_gas(self,loop_counter=0):
         if loop_counter==0 and self.master_equation_flag==False:
             new_file,original_rxn_eqs,master_rxn_eqs =ctic.cti_write2(original_cti=os.path.join(self.working_directory,self.cti_file_name),
                                                                       working_directory=self.working_directory,
@@ -139,9 +138,7 @@ class MSI_optimization_chebyshev(object):
                                                                       file_name= self.cti_file_name.replace('.cti','')+'_updated')
             self.new_cti_file = new_file
             
-        
-        processor = pr.Processor(self.new_cti_file)
-        self.processor = processor
+        self.gas = ct.Solution(self.new_cti_file)
         return 
     
     def parsing_yaml_files(self,loop_counter=0,list_of_updated_yamls=[]):
@@ -180,10 +177,10 @@ class MSI_optimization_chebyshev(object):
     def running_simulations(self,loop_counter=0):
         optimization_instance = opt.Optimization_Utility()
         if loop_counter == 0:
-            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files(self.list_of_parsed_yamls,
+            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files_parallel(self.list_of_parsed_yamls,
                                               self.yaml_file_list_with_working_directory ,
                                               self.manager,
-                                              processor=self.processor, 
+                                              os.path.join(self.working_directory,self.cti_file_name),
                                               kineticSens=self.kineticSens,
                                               physicalSens=self.physicalSens,
                                               dk=self.perturbment,loop_counter=loop_counter)
@@ -199,10 +196,10 @@ class MSI_optimization_chebyshev(object):
             
         else:
             
-            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files(self.list_of_parsed_yamls,
+            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files_parallel(self.list_of_parsed_yamls,
                                               self.updated_yaml_file_name_list ,
                                               self.manager,
-                                              processor=self.processor, 
+                                              os.path.join(self.working_directory,self.cti_file_name),
                                               kineticSens=self.kineticSens,
                                               physicalSens=self.physicalSens,
                                               dk=self.perturbment,loop_counter=loop_counter)
@@ -581,7 +578,7 @@ class MSI_optimization_chebyshev(object):
             
         self.append_working_directory()
         #every loop run this, probably not?
-        self.establish_processor(loop_counter=loop_counter)
+        self.establish_gas(loop_counter=loop_counter)
         self.parsing_yaml_files(loop_counter = loop_counter)
 
         if loop_counter == 0:

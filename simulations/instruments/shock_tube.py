@@ -5,14 +5,13 @@ import pandas as pd
 import re
 import pickle
 from .. import simulation as sim
-from ...cti_core import cti_processor as ctp
+# from ...cti_core import cti_processor as ctp
 
 class shockTube(sim.Simulation):
     
     def __init__(self,pressure:float,temperature:float,observables:list,
                  kineticSens:int,physicalSens:int,conditions:dict,
-                 initialTime,finalTime,thermalBoundary,mechanicalBoundary,
-                 processor:ctp.Processor=None,cti_path="",save_timeHistories:int=0, 
+                 initialTime,finalTime,thermalBoundary,mechanicalBoundary,cti_path="",save_timeHistories:int=0, 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={},
@@ -98,8 +97,16 @@ class shockTube(sim.Simulation):
 
         '''
 
-        sim.Simulation.__init__(self,pressure,temperature,observables,kineticSens,physicalSens,
-                                conditions,processor,cti_path)
+        # sim.Simulation.__init__(self,pressure,temperature,observables,kineticSens,physicalSens,
+        #                         conditions,cti_path)
+        self.temperature = temperature
+        self.pressure = pressure
+        self.conditions = conditions
+        self.observables=observables
+        self.kineticSens=kineticSens
+        self.physicalSens=physicalSens
+        self.cti_path = cti_path
+        self.gas = ct.Solution(self.cti_path)
         self.initialTime = initialTime
         self.finalTime = finalTime
         self.thermalBoundary = thermalBoundary
@@ -121,7 +128,8 @@ class shockTube(sim.Simulation):
             self.timeHistories=None
         if save_physSensHistories == 1:
             self.physSensHistories = []
-        self.setTPX()
+        # self.setTPX()
+        self.gas.TPX = self.temperature, self.pressure, self.conditions
         self.dk = [0]
         self.atol=atol
         self.rtol=rtol
@@ -138,8 +146,7 @@ class shockTube(sim.Simulation):
         print('initial time: {0}\nfinal time: {1}\n'.format(self.initialTime,self.finalTime),
               '\nthermalBoundary: {0}\nmechanicalBoundary: {1}'.format(self.thermalBoundary,self.mechanicalBoundary),
               '\npressure: {0}\ntemperature: {1}\nobservables: {2}'.format(self.pressure,self.temperature,self.observables),
-              '\nkineticSens: {0}\nphysicalSens: {1}'.format(self.kineticSens,self.physicalSens),
-              '\nTPX: {0}'.format(self.processor.solution.TPX)
+              '\nkineticSens: {0}\nphysicalSens: {1}'.format(self.kineticSens,self.physicalSens)
               )
     #maybe unify paths with cti file?, also really fix the python styling
     def write_time_histories(self, path=''):
@@ -275,11 +282,11 @@ class shockTube(sim.Simulation):
         mechanicalBoundary = conditions[1]
         #same solution for both cp and cv sims
         if mechanicalBoundary == 'constant pressure':
-            shockTube = ct.IdealGasConstPressureReactor(self.processor.solution,
+            shockTube = ct.IdealGasConstPressureReactor(self.gas,
                                                         name = 'R1',
                                                         energy = conditions[0])
         else:
-            shockTube = ct.IdealGasReactor(self.processor.solution,
+            shockTube = ct.IdealGasReactor(self.gas,
                                            name = 'R1',
                                            energy = conditions[0])
         sim = ct.ReactorNet([shockTube])
@@ -294,10 +301,10 @@ class shockTube(sim.Simulation):
         self.timeHistory = pd.DataFrame(columns=columnNames)
 
         if self.kineticSens == 1:
-            for i in range(self.processor.solution.n_reactions):
+            for i in range(self.gas.n_reactions):
                 shockTube.add_sensitivity_reaction(i)
             dfs = [pd.DataFrame() for x in range(len(self.observables))]
-            tempArray = [np.zeros(self.processor.solution.n_reactions) for x in range(len(self.observables))]
+            tempArray = [np.zeros(self.gas.n_reactions) for x in range(len(self.observables))]
 
         t = self.initialTime
         counter = 0
@@ -314,11 +321,11 @@ class shockTube(sim.Simulation):
             self.timeHistory.loc[counter] = state
             if self.kineticSens == 1:
                 counter_1 = 0
-                for observable,reaction in itertools.product(self.observables, range(self.processor.solution.n_reactions)):
+                for observable,reaction in itertools.product(self.observables, range(self.gas.n_reactions)):
                     tempArray[self.observables.index(observable)][reaction] = sim.sensitivity(observable,
                                                                                                     reaction)
                     counter_1 +=1
-                    if counter_1 % self.processor.solution.n_reactions == 0:
+                    if counter_1 % self.gas.n_reactions == 0:
                         dfs[self.observables.index(observable)] = dfs[self.observables.index(observable)].append(((
                             pd.DataFrame(tempArray[self.observables.index(observable)])).transpose()),
                             ignore_index=True)

@@ -1,7 +1,7 @@
 import multiprocessing
 import cantera as ct
 from .. import simulation as sim
-from ...cti_core import cti_processor as ctp
+# from ...cti_core import cti_processor as ctp
 import pandas as pd
 import numpy as np
 import time
@@ -25,8 +25,7 @@ class ignition_delay(sim.Simulation):
     
     def __init__(self,pressure:float,temperature:float,observables:list,
                  kineticSens:int,physicalSens:int,conditions:dict,thermalBoundary,
-                 mechanicalBoundary,
-                 processor:ctp.Processor=None,cti_path="", 
+                 mechanicalBoundary,cti_path="", 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={}, save_timeHistories:int=0,
@@ -34,16 +33,6 @@ class ignition_delay(sim.Simulation):
                  finalTime:float=1.0,target:str='temperature',target_type:str='max derivative',n_processors:int=5,
                  volumeTrace=''):
         
-        
-        if processor!=None and cti_path!="":
-            print("Error: Cannot give both a processor and a cti file path, pick one")
-        elif processor==None and cti_path=="":
-            print("Error: Must give either a processor or a cti file path")
-        if processor != None:
-            self.processor = processor 
-        elif cti_path!="":
-            self.processor = ctp.Processor(cti_path)
-        #self.n_processors=n_processors
         self.n_processors=20 #figure out where this is set
         self.pressure=pressure
         self.temperature=temperature
@@ -52,6 +41,7 @@ class ignition_delay(sim.Simulation):
         self.physicalSens=physicalSens
         self.conditions=conditions
         self.cti_path=cti_path
+        self.gas = ct.Solution(self.cti_path)
         self.thermalBoundary = thermalBoundary
         self.mechanicalBoundary=mechanicalBoundary
         self.kineticSensitivities= None
@@ -79,7 +69,8 @@ class ignition_delay(sim.Simulation):
             self.timeHistories=None
         if save_physSensHistories == 1:
             self.physSensHistories = []
-        self.setTPX()
+        # self.setTPX()
+        self.gas.TPX = self.temperature, self.pressure, self.conditions
         self.dk = 0.01
         self.solution=None
         self.target=target
@@ -99,7 +90,6 @@ class ignition_delay(sim.Simulation):
                          finalTime = self.finalTime,
                          thermalBoundary = self.thermalBoundary,
                          mechanicalBoundary = self.mechanicalBoundary,
-                         processor = self.processor,
                          save_timeHistories = 1,
                          save_physSensHistories = 0,
                          moleFractionObservables = self.moleFractionObservables,
@@ -124,7 +114,6 @@ class ignition_delay(sim.Simulation):
                          finalTime = self.finalTime,
                          thermalBoundary = self.thermalBoundary,
                          mechanicalBoundary = self.mechanicalBoundary,
-                         processor = self.processor,
                          save_timeHistories = 1,
                          save_physSensHistories = 0,
                          moleFractionObservables = self.moleFractionObservables,
@@ -149,7 +138,6 @@ class ignition_delay(sim.Simulation):
                          finalTime = self.finalTime,
                          thermalBoundary = self.thermalBoundary,
                          mechanicalBoundary = self.mechanicalBoundary,
-                         processor = self.processor,
                          save_timeHistories = 1,
                          save_physSensHistories = 0,
                          moleFractionObservables = self.moleFractionObservables,
@@ -167,7 +155,6 @@ class ignition_delay(sim.Simulation):
                          finalTime = args[6],
                          thermalBoundary = args[7],
                          mechanicalBoundary = args[8],
-                         processor = temp_proc,
                          save_timeHistories = 1,
                          save_physSensHistories = 0,
                          moleFractionObservables = args[9],
@@ -538,12 +525,12 @@ class ignition_delay(sim.Simulation):
         import matplotlib.pyplot as plt
         plt.plot(temp_st.timeHistory['time'],nom_soln,label='Nominal T')
         #print(sens[:,0,0])
-        ksens=np.zeros(temp_st.processor.solution.n_reactions)
-        for i in range(temp_st.processor.solution.n_reactions):
+        ksens=np.zeros(temp_st.gas.n_reactions)
+        for i in range(temp_st.gas.n_reactions):
             if i==0:
-                self.processor.solution.set_multiplier(1+0.001,0)
+                self.gas.set_multiplier(1+0.001,0)
                 temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
-                self.processor.solution.set_multiplier(1.0,0)
+                self.gas.set_multiplier(1.0,0)
             tempsen=sens[:,i,0]
             sens_add=0.0
             Tprime=copy.deepcopy(nom_soln)
@@ -578,14 +565,14 @@ class ignition_delay(sim.Simulation):
     
         
     def BFM(self,nominal,simulation_type = ''):
-         sens=np.zeros(self.processor.solution.n_reactions)
+         sens=np.zeros(self.gas.n_reactions)
          if re.match('^[Mm]ax [Dd]erivative$',self.target_type):
             if re.match('[Tt]emperature',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     #stub
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -593,13 +580,13 @@ class ignition_delay(sim.Simulation):
 
                     delay=self.ig_dTdt(temp_history)
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
                     
             elif re.match('[Pp]ressure',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -608,13 +595,13 @@ class ignition_delay(sim.Simulation):
                     print(nominal,'THIS IS NOMINAL')
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
                     print('sensitivity',i,':',sens[i])
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
                     
             elif not re.match('[Tt]emperature',self.target) and not re.match('[Pp]ressure',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -622,13 +609,13 @@ class ignition_delay(sim.Simulation):
                     delay=self.ig_dXdt(temp_history,self.target)
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
                     #print(nominal,delay,sens[i])
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
          elif re.match('[Mm]ax[ -][Vv]alue',self.target_type):
             if re.match('[Tt]emperature',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -636,26 +623,26 @@ class ignition_delay(sim.Simulation):
 
                     delay=self.ig_Tmax(temp_history)
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
                     
             elif re.match('[Pp]ressure',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_RCM().timeHistory)                    
                     delay=self.ig_Pmax(temp_history)
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
                     
             elif not re.match('[Tt]emperature',self.target) and not re.match('[Pp]ressure',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -663,15 +650,15 @@ class ignition_delay(sim.Simulation):
                     delay=self.ig_Xmax(temp_history,self.target)
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
                     #print(nominal,delay,sens[i])
-                    self.processor.solution.set_multiplier(1.0,i)             
+                    self.gas.set_multiplier(1.0,i)             
          elif re.match('^[Mm]ax[ -][Dd]erivative[- ][Tt]angent[ -][Ii]ntercept$',self.target_type):
              
             if re.match('[Tt]emperature',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
 
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -679,28 +666,28 @@ class ignition_delay(sim.Simulation):
 
                     delay=self.ig_dTdt_int(temp_history)
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
                     
             elif re.match('[Pp]ressure',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_RCM().timeHistory)                    
                     delay=self.ig_dPdt_int(temp_history)
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
                     
             elif not re.match('[Tt]emperature',self.target) and not re.match('[Pp]ressure',self.target):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     #stub
                     #print('Solving kinetic sensitivity for reaction '+str(i+1))
                     #print('INSIDE HERE')
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -708,7 +695,7 @@ class ignition_delay(sim.Simulation):
                     delay=self.ig_dXdt_int(temp_history,self.target)
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
                     #print(nominal,delay,sens[i])
-                    self.processor.solution.set_multiplier(1.0,i)   
+                    self.gas.set_multiplier(1.0,i)   
          elif re.match('[Ss]pecific[ -][Vv]alue',self.target_type):
             split_item = self.target.split(' ')
             if len(split_item) ==2:
@@ -716,9 +703,9 @@ class ignition_delay(sim.Simulation):
                 
             if re.match('[Tt]emperature',split_item[0]):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -726,26 +713,26 @@ class ignition_delay(sim.Simulation):
 
                     delay=self.ig_T_specific_value(temp_history, split_item[1], split_item[2])
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
                     
             elif re.match('[Pp]ressure',split_item[0]):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_RCM().timeHistory)                    
                     delay=self.ig_P_specific_value(temp_history, split_item[1], split_item[2])
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
-                    self.processor.solution.set_multiplier(1.0,i)
+                    self.gas.set_multiplier(1.0,i)
                     
             elif not re.match('[Tt]emperature',split_item[0]) and not re.match('[Pp]ressure',split_item[0]):
                 
-                for i in range(self.processor.solution.n_reactions):
+                for i in range(self.gas.n_reactions):
                     print('Solving kinetic sensitivity for reaction '+str(i+1))
-                    self.processor.solution.set_multiplier(1+self.dk,i)
+                    self.gas.set_multiplier(1+self.dk,i)
                     if re.match('[Ss]hock[ -][Tt]ube',self.fullParsedYamlFile['simulationType']):
                         temp_history=copy.deepcopy(self.run_shocktube().timeHistory)
                     elif re.match('[Rr][Cc][Mm]',self.fullParsedYamlFile['simulationType']):
@@ -754,7 +741,7 @@ class ignition_delay(sim.Simulation):
                     
                     sens[i]=self.sensitivityCalculation(nominal,delay,self.dk)
                     #print(nominal,delay,sens[i])
-                    self.processor.solution.set_multiplier(1.0,i)   
+                    self.gas.set_multiplier(1.0,i)   
                                         
                     
                     
@@ -937,8 +924,7 @@ class ignition_delay_wrapper(sim.Simulation):
     
     def __init__(self,pressures,temperatures,observables:list,
                  kineticSens:int,physicalSens:int,conditions,thermalBoundary,
-                 mechanicalBoundary,
-                 processor:ctp.Processor=None,cti_path="", 
+                 mechanicalBoundary,cti_path="", 
                  save_physSensHistories=0,moleFractionObservables:list=[],
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={}, save_timeHistories:int=0,
@@ -947,17 +933,6 @@ class ignition_delay_wrapper(sim.Simulation):
                  target_type:str='max derivative',n_processors:int=2, 
                  volumeTraceList=[]):
         
-        
-        
-        
-        if processor!=None and cti_path!="":
-            print("Error: Cannot give both a processor and a cti file path, pick one")
-        elif processor==None and cti_path=="":
-            print("Error: Must give either a processor or a cti file path")
-        if processor != None:
-            self.processor = processor 
-        elif cti_path!="":
-            self.processor = ctp.Processor(cti_path)
         self.n_processors=n_processors
         self.pressures=pressures
         self.temperatures=temperatures
@@ -967,6 +942,7 @@ class ignition_delay_wrapper(sim.Simulation):
         self.save_physSensHistories=save_physSensHistories
         self.conditions=conditions
         self.cti_path=cti_path
+        self.gas = ct.Solution(self.cti_path)
         self.thermalBoundary = thermalBoundary
         self.mechanicalBoundary=mechanicalBoundary
         self.kineticSensitivities= None
@@ -1019,7 +995,6 @@ class ignition_delay_wrapper(sim.Simulation):
                                                    conditions=self.conditions[k],
                                                    thermalBoundary=self.thermalBoundary,
                                                    mechanicalBoundary=self.mechanicalBoundary,
-                                                   processor=self.processor,
                                                    cti_path=self.cti_path, 
                                                    save_physSensHistories=self.save_physSensHistories,
                                                    moleFractionObservables=self.moleFractionObservables,
@@ -1066,7 +1041,6 @@ class ignition_delay_wrapper(sim.Simulation):
                                                    conditions=self.conditions[k],
                                                    thermalBoundary=self.thermalBoundary,
                                                    mechanicalBoundary=self.mechanicalBoundary,
-                                                   processor=self.processor,
                                                    cti_path=self.cti_path, 
                                                    save_physSensHistories=self.save_physSensHistories,
                                                    moleFractionObservables=self.moleFractionObservables,
@@ -1112,7 +1086,6 @@ class ignition_delay_wrapper(sim.Simulation):
                                                conditions=self.conditions[k],
                                                thermalBoundary=self.thermalBoundary,
                                                mechanicalBoundary=self.mechanicalBoundary,
-                                               processor=self.processor,
                                                cti_path=self.cti_path, 
                                                save_physSensHistories=self.save_physSensHistories,
                                                moleFractionObservables=self.moleFractionObservables,

@@ -1111,7 +1111,8 @@ class Optimization_Utility(object):
         systems = len(list_of_parsed_yamls)
         WORKERS = systems
         self.manager = manager
-        self.subloop=self.manager.counter(total=systems,desc='Iteration '+str(loop_counter+1)+':',unit='experiments',color='gray')   
+        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')   
+        # self.subloop=self.manager.counter(total=systems,desc='Iteration '+str(loop_counter+1)+':',unit='experiments',color='gray')   
         started = 0
         active = {}
         # experiment_list = multiprocessing.Manager().list()
@@ -1130,7 +1131,7 @@ class Optimization_Utility(object):
                 alive = process.is_alive()
                 if not alive:
                     del active[system]
-                    self.subloop.update()
+                    self.sim_loop.update()
         for proc in jobs:
             proc.join()
         

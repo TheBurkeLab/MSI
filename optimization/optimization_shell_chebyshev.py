@@ -460,8 +460,9 @@ class MSI_optimization_chebyshev(object):
         return
     
     
-    def saving_first_itteration_matrices(self,loop_counter=0):
-  
+    def saving_first_iteration_matrices(self,loop_counter=0):
+ 
+        self.ydf_prior = copy.deepcopy(self.ydf)
         self.Ydf_prior = copy.deepcopy(self.Ydf)
         self.Sdf_prior = copy.deepcopy(self.Sdf)
         self.covdf_prior = copy.deepcopy(self.covdf)
@@ -469,6 +470,7 @@ class MSI_optimization_chebyshev(object):
         self.experiment_dictonaries_original = self.experiment_dictonaries     
         
         self.Xdf_prior.to_csv(os.path.join(self.matrix_path,'Xdf_prior.csv'))
+        self.ydf_prior.to_csv(os.path.join(self.matrix_path,'ydf_prior.csv'))
         self.Ydf_prior.to_csv(os.path.join(self.matrix_path,'Ydf_prior.csv'))
         self.Sdf_prior.to_csv(os.path.join(self.matrix_path,'Sdf_prior.csv'))
         self.covdf_prior.to_csv(os.path.join(self.matrix_path,'covdf_prior.csv'))
@@ -651,7 +653,7 @@ class MSI_optimization_chebyshev(object):
         self.subloop.update()
                
         if loop_counter==0:
-            self.saving_first_itteration_matrices(loop_counter=loop_counter)
+            self.saving_first_iteration_matrices(loop_counter=loop_counter)
             
         print('\nUpdating Files')
         self.updating_files(loop_counter=loop_counter)

@@ -1813,9 +1813,11 @@ class Plotting(object):
                                 observable_ylabel_string[i] = '_{' + str(oys) + '}'
                     observable_ylabel_transformed = "".join(observable_ylabel_string)                             
                     if 'Absorbance' in observable_ylabel:
-                        plt.ylabel(observable_ylabel)
+                        # plt.ylabel(observable_ylabel)
+                        plt.ylabel('abs')
                     else:   
-                        plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \Delta x_j$')
+                        # plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \Delta x_j$')
+                        plt.ylabel(r'$\frac{\partial(\rm f_i)}{\partial(\rm x_j)} \rm \Delta x_j$')
                     plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
                     if top_columns.split('_')[0] == 'k':
                         X_A = X[top_columns_index][0]

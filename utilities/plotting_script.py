@@ -21,7 +21,7 @@ import MSI.simulations.instruments.ignition_delay as ig
 import MSI.cti_core.cti_processor as pr
 import MSI.simulations.instruments.jsr_steadystate as jsr
 import glob
-from pypdf import PdfMerger
+from PyPDF2 import PdfReader, PdfWriter
 import natsort
 import shutil
 import enlighten
@@ -9159,16 +9159,19 @@ class Plotting(object):
         print('Merging pdfs for obervables')
         print('--------------------------------------------------------------------------')
 
-        
         Experiment_pdfs = set(glob.glob(os.path.join(self.out_path, "Experiment_[0-9]_[!US]*.pdf")) 
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9]_[!US]*.pdf")) 
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9][0-9]_[!US]*.pdf")))
         Experiment_pdfs = natsort.natsorted(Experiment_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Experiment_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Experiment.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Experiment.pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Experiment_pdfs:
             os.remove(pdf)
 
@@ -9176,11 +9179,15 @@ class Plotting(object):
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9]_[U]*.pdf")) 
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9][0-9]_[U]*.pdf")))
         Experiment_UWSA_pdfs = natsort.natsorted(Experiment_UWSA_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Experiment_UWSA_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Experiment_UWSA.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Experiment_UWSA.pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Experiment_UWSA_pdfs:
             os.remove(pdf)
 
@@ -9188,13 +9195,17 @@ class Plotting(object):
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9]_[Sdx]*.pdf")) 
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9][0-9]_[Sdx]*.pdf")))
         Experiment_Sdx_pdfs = natsort.natsorted(Experiment_Sdx_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Experiment_Sdx_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Experiment_Sdx.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Experiment_Sdx.pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Experiment_Sdx_pdfs:
-            os.remove(pdf)        
+            os.remove(pdf)     
             
     def merge_rate_constant_pdfs(self):
         
@@ -9206,33 +9217,45 @@ class Plotting(object):
         Rate_Constant_pdfs = set(glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9].pdf"))
                                 + glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9][0-9].pdf")))
         Rate_Constant_pdfs = natsort.natsorted(Rate_Constant_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Rate_Constant_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Rate_Constant.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Rate_Constant.pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Rate_Constant_pdfs:
             os.remove(pdf)
             
         Rate_Constant_UWSA_pdfs = set(glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9]_[U]*.pdf"))
                                     + glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9][0-9]_[U]*.pdf")) )
         Rate_Constant_UWSA_pdfs = natsort.natsorted(Rate_Constant_UWSA_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Rate_Constant_UWSA_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Rate_Constant_UWSA.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Rate_Constant_UWSA.pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Rate_Constant_UWSA_pdfs:
             os.remove(pdf)
             
         Rate_Constant_Sdx_pdfs = set(glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9]_[Sdx]*.pdf"))
                                     + glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9][0-9]_[Sdx]*.pdf")) )
         Rate_Constant_Sdx_pdfs = natsort.natsorted(Rate_Constant_Sdx_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Rate_Constant_Sdx_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Rate_Constant_Sdx.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Rate_Constant_Sdx.pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Rate_Constant_Sdx_pdfs:
             os.remove(pdf)
             
@@ -9259,14 +9282,17 @@ class Plotting(object):
                 plt.ylabel(r'ln($X$)')
                 plt.title(convergence_sorted.index[i])
                 plt.savefig(os.path.join(self.matrix_path,'convergence_plot_' + str(i) + '.pdf'), bbox_inches='tight', dpi=1)
-            
         convergece_plots_pdfs = set(glob.glob(os.path.join(self.matrix_path, "convergence_plot*.pdf")))
         convergece_plots_pdfs = natsort.natsorted(convergece_plots_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in convergece_plots_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.matrix_path, "convergence_plots.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.matrix_path, "convergence_plots.pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for i, convergence_plot_file in enumerate(list(set(glob.glob(os.path.join(self.matrix_path, "convergence_plot_*.pdf"))))):
             os.remove(convergence_plot_file)
             

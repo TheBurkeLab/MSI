@@ -9169,7 +9169,7 @@ class Plotting(object):
             reader = PdfReader(pdf)
             for page in reader.pages:
                 writer.add_page(page)
-        with open(os.path.join(self.out_path, "Experiment.pdf"), "wb") as output_pdf:
+        with open(os.path.join(self.out_path, "Experiment_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
             writer.write(output_pdf)
 
         for pdf in Experiment_pdfs:
@@ -9185,7 +9185,7 @@ class Plotting(object):
             reader = PdfReader(pdf)
             for page in reader.pages:
                 writer.add_page(page)
-        with open(os.path.join(self.out_path, "Experiment_UWSA.pdf"), "wb") as output_pdf:
+        with open(os.path.join(self.out_path, "Experiment_UWSA_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
             writer.write(output_pdf)
 
         for pdf in Experiment_UWSA_pdfs:
@@ -9201,7 +9201,7 @@ class Plotting(object):
             reader = PdfReader(pdf)
             for page in reader.pages:
                 writer.add_page(page)
-        with open(os.path.join(self.out_path, "Experiment_Sdx.pdf"), "wb") as output_pdf:
+        with open(os.path.join(self.out_path, "Experiment_Sdx_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
             writer.write(output_pdf)
 
         for pdf in Experiment_Sdx_pdfs:
@@ -9223,7 +9223,7 @@ class Plotting(object):
             reader = PdfReader(pdf)
             for page in reader.pages:
                 writer.add_page(page)
-        with open(os.path.join(self.out_path, "Rate_Constant.pdf"), "wb") as output_pdf:
+        with open(os.path.join(self.out_path, "Rate_Constant_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
             writer.write(output_pdf)
 
         for pdf in Rate_Constant_pdfs:
@@ -9238,7 +9238,7 @@ class Plotting(object):
             reader = PdfReader(pdf)
             for page in reader.pages:
                 writer.add_page(page)
-        with open(os.path.join(self.out_path, "Rate_Constant_UWSA.pdf"), "wb") as output_pdf:
+        with open(os.path.join(self.out_path, "Rate_Constant_UWSA_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
             writer.write(output_pdf)
 
         for pdf in Rate_Constant_UWSA_pdfs:
@@ -9253,7 +9253,7 @@ class Plotting(object):
             reader = PdfReader(pdf)
             for page in reader.pages:
                 writer.add_page(page)
-        with open(os.path.join(self.out_path, "Rate_Constant_Sdx.pdf"), "wb") as output_pdf:
+        with open(os.path.join(self.out_path, "Rate_Constant_Sdx_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
             writer.write(output_pdf)
 
         for pdf in Rate_Constant_Sdx_pdfs:
@@ -9290,7 +9290,7 @@ class Plotting(object):
             reader = PdfReader(pdf)
             for page in reader.pages:
                 writer.add_page(page)
-        with open(os.path.join(self.matrix_path, "convergence_plots.pdf"), "wb") as output_pdf:
+        with open(os.path.join(self.matrix_path, "convergence_plots_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
             writer.write(output_pdf)
 
         for i, convergence_plot_file in enumerate(list(set(glob.glob(os.path.join(self.matrix_path, "convergence_plot_*.pdf"))))):

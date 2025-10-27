@@ -470,7 +470,7 @@ class MSI_optimization_chebyshev(object):
         self.experiment_dictonaries_original = self.experiment_dictonaries     
         
         self.Xdf_prior.to_csv(os.path.join(self.matrix_path,'Xdf_prior.csv'))
-        self.ydf_prior.to_csv(os.path.join(self.matrix_path,'ydf_prior.csv'))
+        self.ydf_prior.to_csv(os.path.join(self.matrix_path,'zw_Ydf_prior.csv'))
         self.Ydf_prior.to_csv(os.path.join(self.matrix_path,'Ydf_prior.csv'))
         self.Sdf_prior.to_csv(os.path.join(self.matrix_path,'Sdf_prior.csv'))
         self.covdf_prior.to_csv(os.path.join(self.matrix_path,'covdf_prior.csv'))
@@ -628,7 +628,7 @@ class MSI_optimization_chebyshev(object):
         self.df_loop.update()
         print('ydf')
         self.ydf = pd.DataFrame({'value': self.y_matrix.T[0]}, index=self.target_parameters)      
-        self.ydf.to_csv(os.path.join(self.matrix_path,'ydf.csv'))
+        self.ydf.to_csv(os.path.join(self.matrix_path,'zw_Ydf.csv'))
         self.df_loop.update()    
         print('Zdf')
         self.Zdf = pd.DataFrame({'value': self.Z_matrix.T[0]}, index=self.target_parameters)          
@@ -640,7 +640,7 @@ class MSI_optimization_chebyshev(object):
         self.df_loop.update()
         print('sdf')
         self.sdf = pd.DataFrame(self.s_matrix, columns=self.active_parameters, index=self.target_parameters)
-        self.sdf.to_csv(os.path.join(self.matrix_path,'sdf.csv'))
+        self.sdf.to_csv(os.path.join(self.matrix_path,'zw_Sdf.csv'))
         self.df_loop.update()
         print('covdf')
         self.covdf = pd.DataFrame(self.covariance, columns=self.active_parameters, index=self.active_parameters)

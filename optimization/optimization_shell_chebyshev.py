@@ -709,36 +709,6 @@ class MSI_optimization_chebyshev(object):
                 convergence=pd.DataFrame(np.array([list(Xdf_list[i].value) for i in range(len(Xdf_list))]).T, index=self.active_parameters, columns=np.arange(1,len(Xdf_list)+1))     
                 self.convergence_sorted = convergence.loc[convergence.abs().sum(axis=1).sort_values(ascending=False).index]
                 self.convergence_sorted.to_csv(os.path.join(self.matrix_path,'convergence.csv'))
-        
-                if loop == loops-1:   
-                    X_pert = pd.DataFrame({'X':list(self.Xdf.value),'sigma_prior':list(self.sigdf_prior.value),'X/sigma_prior':np.divide(list(self.Xdf.value),list(self.sigdf_prior.value))},index=self.active_parameters)
-                    X_prev=pd.read_csv(os.path.join(self.matrix_path,'Xdf_'+str(loop)+'.csv'))["value"]
-                    for i,M in enumerate(self.yaml_file_list):
-                        Zdf_pert = copy.deepcopy(self.Zdf)
-                        yam_nam = os.path.splitext(os.path.basename(M[0]))[0]
-                        rows = Zdf_pert.loc[Zdf_pert.index.str.contains(yam_nam)]
-                        rows = rows.loc[rows.index.str.contains("datapoint")]
-                        #potential break point
-                        for j,row in Zdf_pert.iterrows(): 
-                            if row.name in rows.index:
-                                Zdf_pert.loc[j] = row["value"]/1.05 #1.05 hard coded in; want to be able to modify
-                        #potential break point
-                        Zdf_pert = np.array([[z] for z in np.array(Zdf_pert["value"])])
-                        one_over_z = np.array(np.true_divide(1,Zdf_pert))
-                        y_mat_pert = self.Y_matrix * one_over_z
-                        s_mat_pert = self.S_matrix * (one_over_z.flatten()[:,np.newaxis])
-                        pseudoInverse = np.linalg.pinv(s_mat_pert)
-                        delta_X_pert = np.dot(pseudoInverse,y_mat_pert)
-                        delta_X_pert = np.multiply(self.step_size,delta_X_pert)
-                        delta_X_pert = [x[0] for x in delta_X_pert]
-                        #potential break point
-                        Xdf_pert = np.add(X_prev,delta_X_pert)
-                        X_pert.insert(len(X_pert.columns), 'Xp: ' + yam_nam, list(Xdf_pert), True)
-                        #potential break point
-                        X_pert.insert(len(X_pert.columns), 'Xp/sigma: ' + yam_nam, np.divide(list(Xdf_pert),list(self.sigdf_prior.value)), True)
-                    self.X_pert = X_pert
-                    self.X_pert.to_csv(os.path.join(self.matrix_path,'X_pert.csv'))
-
                     
             # self.physical_parameters_df = self.matrix_builder_instance.get_physical_parameters_df(self.experiment_dictonaries,
             #                                                                                  self.optimized_physical_parameters,
@@ -754,6 +724,45 @@ class MSI_optimization_chebyshev(object):
         # for i,Xdf_iteration in enumerate(self.Xdf_list):
         #     Xdf_iteration.to_csv(os.path.join(self.matrix_path,'Xdf_'+str(i)+'.csv'))     
         self.manager.stop()         
+        
+        #creation of X_pert and X_pert_over_sigma
+
+        self.manager = enlighten.get_manager()
+        self.mainloop=self.manager.counter(total=len(self.yaml_file_list),desc='Perturbed X Matrix Generation:',unit='experiments',color='red')   
+
+        X_pert = pd.DataFrame({'X':list(self.Xdf.value)},index=self.active_parameters)
+        X_pert_over_sig = pd.DataFrame({'sigma_prior':list(self.sigdf_prior.value),'X/sigma_prior':np.divide(list(self.Xdf.value),list(self.sigdf_prior.value))},index=self.active_parameters)
+        X_prev=pd.read_csv(os.path.join(self.matrix_path,'Xdf_'+str(loops-1)+'.csv'))["value"]
+        for i,M in enumerate(self.yaml_file_list):
+            Zdf_pert = copy.deepcopy(self.Zdf)
+            yam_nam = os.path.splitext(os.path.basename(M[0]))[0]
+            rows = Zdf_pert.loc[Zdf_pert.index.str.contains(yam_nam)]
+            rows = rows.loc[rows.index.str.contains("datapoint")]
+            for j,row in Zdf_pert.iterrows(): 
+                if row.name in rows.index:
+                    Zdf_pert.loc[j] = row["value"]/1.05 #1.05 hard coded in; want to be able to modify
+            Zdf_pert = np.array([[z] for z in np.array(Zdf_pert["value"])])
+            one_over_z = np.array(np.true_divide(1,Zdf_pert))
+            y_mat_pert = self.Y_matrix * one_over_z
+            s_mat_pert = self.S_matrix * (one_over_z.flatten()[:,np.newaxis])
+            try:
+                pseudoInverse = np.linalg.pinv(s_mat_pert)
+                delta_X_pert = np.dot(pseudoInverse,y_mat_pert)
+                delta_X_pert = np.multiply(self.step_size,delta_X_pert)
+                delta_X_pert = [x[0] for x in delta_X_pert]
+                Xdf_pert = np.add(X_prev,delta_X_pert)
+                X_pert.insert(len(X_pert.columns), 'X-Xp: ' + yam_nam, np.subtract(list(self.Xdf.value),list(Xdf_pert)), True)
+                X_pert_over_sig.insert(len(X_pert.columns), '(X-Xp)/sigma: ' + yam_nam, np.divide(np.subtract(list(self.Xdf.value),list(Xdf_pert)),list(self.sigdf_prior.value)), True)
+            except:
+                X_pert.insert(len(X_pert.columns), 'X-Xp: ' + yam_nam, np.zeros(len(list(self.Xdf.value))), True)
+                X_pert_over_sig.insert(len(X_pert.columns), '(X-Xp)/sigma: ' + yam_nam, np.zeros(len(list(self.Xdf.value))), True)
+            self.mainloop.update()
+        self.X_pert = X_pert
+        self.X_pert_over_sig = X_pert_over_sig
+        self.X_pert.to_csv(os.path.join(self.matrix_path,'X_pert.csv'))
+        self.X_pert_over_sig.to_csv(os.path.join(self.matrix_path,'X_pert_over_sig.csv'))
+        self.manager.stop() 
+        
         return
     
                                                                   

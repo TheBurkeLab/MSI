@@ -21,10 +21,11 @@ import MSI.simulations.instruments.ignition_delay as ig
 import MSI.cti_core.cti_processor as pr
 import MSI.simulations.instruments.jsr_steadystate as jsr
 import glob
-from pypdf import PdfMerger
+from PyPDF2 import PdfReader, PdfWriter
 import natsort
 import shutil
 import enlighten
+import multiprocessing
 
 class Plotting(object):
     def __init__(self,
@@ -218,7 +219,7 @@ class Plotting(object):
                             length_of_experimental_data.append(exp['experimental_data'][observable_counter].shape[0])
                             observable_counter+=1
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 absorbance_wl=0
                 for k,wl in enumerate(wavelengths):
                     length_of_experimental_data.append(exp['absorbance_experimental_data'][k]['time'].shape[0])
@@ -262,32 +263,32 @@ class Plotting(object):
     def run_ignition_delay(self,exp,cti,n_of_data_points=10):
         
         p=pr.Processor(cti)
-        if 'volumeTraceCsv' not in exp['simulation'].fullParsedYamlFile.keys():
-            if len(exp['simulation'].fullParsedYamlFile['temperatures'])>1:
-                tempmin=np.min(exp['simulation'].fullParsedYamlFile['temperatures'])
+        if 'volumeTraceCsv' not in exp['simulation']['fullParsedYamlFile'].keys():
+            if len(exp['simulation']['fullParsedYamlFile']['temperatures'])>1:
+                tempmin=np.min(exp['simulation']['fullParsedYamlFile']['temperatures'])
                 print(tempmin , 'THis is the min temp')
-                tempmax=np.max(exp['simulation'].fullParsedYamlFile['temperatures'])
+                tempmax=np.max(exp['simulation']['fullParsedYamlFile']['temperatures'])
                 print(tempmax,'This is the max temp')
                 total_range=tempmax-tempmin
                 tempmax=tempmax+0.1*total_range
                 tempmin=tempmin-0.1*total_range
                 temprange=np.linspace(tempmin,tempmax,n_of_data_points)
-                pressures=exp['simulation'].fullParsedYamlFile['pressures']
+                pressures=exp['simulation']['fullParsedYamlFile']['pressures']
                 print(pressures,'These are the pressures')
-                conds=exp['simulation'].fullParsedYamlFile['conditions_to_run']
+                conds=exp['simulation']['fullParsedYamlFile']['conditions_to_run']
                 print(conds,'These are the conditions')
                 
-            elif len(exp['simulation'].fullParsedYamlFile['pressures'])>1:
-                pmin = exp['simulation'].fullParsedYamlFile['pressures']*0.9
-                pmax = exp['simulation'].fullParsedYamlFile['pressures']*1.1
+            elif len(exp['simulation']['fullParsedYamlFile']['pressures'])>1:
+                pmin = exp['simulation']['fullParsedYamlFile']['pressures']*0.9
+                pmax = exp['simulation']['fullParsedYamlFile']['pressures']*1.1
                 total_range=pmax-pmin
                 pmax=pmax+0.1*total_range
                 pmin=pmin-0.1*total_range
                 pressures = np.linspace(pmin,pmax,n_of_data_points)
-                temprange = exp['simulation'].fullParsedYamlFile['temperatures']
-                conds = exp['simulation'].fullParsedYamlFile['conditions_to_run']
+                temprange = exp['simulation']['fullParsedYamlFile']['temperatures']
+                conds = exp['simulation']['fullParsedYamlFile']['conditions_to_run']
                 
-            elif len(exp['simulation'].fullParsedYamlFile['conditions_to_run'])>1:
+            elif len(exp['simulation']['fullParsedYamlFile']['conditions_to_run'])>1:
                 print('Plotting for conditions depedendent ignition delay not yet installed')
                 
                 
@@ -295,50 +296,50 @@ class Plotting(object):
             
             ig_delay=ig.ignition_delay_wrapper(pressures=pressures,
                                                temperatures=temprange,
-                                               observables=exp['simulation'].fullParsedYamlFile['observables'],
+                                               observables=exp['simulation']['fullParsedYamlFile']['observables'],
                                                kineticSens=0,
                                                physicalSens=0,
                                                conditions=conds,
-                                               thermalBoundary=exp['simulation'].fullParsedYamlFile['thermalBoundary'],
-                                               mechanicalBoundary=exp['simulation'].fullParsedYamlFile['mechanicalBoundary'],
+                                               thermalBoundary=exp['simulation']['fullParsedYamlFile']['thermalBoundary'],
+                                               mechanicalBoundary=exp['simulation']['fullParsedYamlFile']['mechanicalBoundary'],
                                                processor=p,
                                                cti_path="", 
                                                save_physSensHistories=0,
-                                               fullParsedYamlFile=exp['simulation'].fullParsedYamlFile, 
+                                               fullParsedYamlFile=exp['simulation']['fullParsedYamlFile'], 
                                                save_timeHistories=0,
                                                log_file=True,
                                                log_name='log.txt',
-                                               timeshift=exp['simulation'].fullParsedYamlFile['time_shift'],
-                                               initialTime=exp['simulation'].fullParsedYamlFile['initialTime'],
-                                               finalTime=exp['simulation'].fullParsedYamlFile['finalTime'],
-                                               target=exp['simulation'].fullParsedYamlFile['target'],
-                                               target_type=exp['simulation'].fullParsedYamlFile['target_type'],
+                                               timeshift=exp['simulation']['fullParsedYamlFile']['time_shift'],
+                                               initialTime=exp['simulation']['fullParsedYamlFile']['initialTime'],
+                                               finalTime=exp['simulation']['fullParsedYamlFile']['finalTime'],
+                                               target=exp['simulation']['fullParsedYamlFile']['target'],
+                                               target_type=exp['simulation']['fullParsedYamlFile']['target_type'],
                                                n_processors=2)
             soln,temp=ig_delay.run()
-        elif 'volumeTraceCsv' in exp['simulation'].fullParsedYamlFile.keys():
-            if len(exp['simulation'].fullParsedYamlFile['temperatures'])>1:
-                tempmin=np.min(exp['simulation'].fullParsedYamlFile['temperatures'])
-                tempmax=np.max(exp['simulation'].fullParsedYamlFile['temperatures'])
+        elif 'volumeTraceCsv' in exp['simulation']['fullParsedYamlFile'].keys():
+            if len(exp['simulation']['fullParsedYamlFile']['temperatures'])>1:
+                tempmin=np.min(exp['simulation']['fullParsedYamlFile']['temperatures'])
+                tempmax=np.max(exp['simulation']['fullParsedYamlFile']['temperatures'])
                 total_range=tempmax-tempmin
                 tempmax=tempmax+0.1*total_range
                 tempmin=tempmin-0.1*total_range
                 temprange=np.linspace(tempmin,tempmax,n_of_data_points)
-                pressures=exp['simulation'].fullParsedYamlFile['pressures']
-                conds=exp['simulation'].fullParsedYamlFile['conditions_to_run']
-                volumeTrace = exp['simulation'].fullParsedYamlFile['volumeTraceCsv']
+                pressures=exp['simulation']['fullParsedYamlFile']['pressures']
+                conds=exp['simulation']['fullParsedYamlFile']['conditions_to_run']
+                volumeTrace = exp['simulation']['fullParsedYamlFile']['volumeTraceCsv']
                 
-            elif len(exp['simulation'].fullParsedYamlFile['pressures'])>1:
-                pmin = exp['simulation'].fullParsedYamlFile['pressures']*0.9
-                pmax = exp['simulation'].fullParsedYamlFile['pressures']*1.1
+            elif len(exp['simulation']['fullParsedYamlFile']['pressures'])>1:
+                pmin = exp['simulation']['fullParsedYamlFile']['pressures']*0.9
+                pmax = exp['simulation']['fullParsedYamlFile']['pressures']*1.1
                 total_range=pmax-pmin
                 pmax=pmax+0.1*total_range
                 pmin=pmin-0.1*total_range
                 pressures = np.linspace(pmin,pmax,n_of_data_points)
-                temprange = exp['simulation'].fullParsedYamlFile['temperatures']
-                conds = exp['simulation'].fullParsedYamlFile['conditions_to_run']
-                volumeTrace = exp['simulation'].fullParsedYamlFile['volumeTraceCsv']
+                temprange = exp['simulation']['fullParsedYamlFile']['temperatures']
+                conds = exp['simulation']['fullParsedYamlFile']['conditions_to_run']
+                volumeTrace = exp['simulation']['fullParsedYamlFile']['volumeTraceCsv']
                 
-            elif len(exp['simulation'].fullParsedYamlFile['conditions_to_run'])>1:
+            elif len(exp['simulation']['fullParsedYamlFile']['conditions_to_run'])>1:
                 print('Plotting for conditions depedendent ignition delay not yet installed')
                 
                 
@@ -346,24 +347,24 @@ class Plotting(object):
             
             ig_delay=ig.ignition_delay_wrapper(pressures=pressures,
                                                temperatures=temprange,
-                                               observables=exp['simulation'].fullParsedYamlFile['observables'],
+                                               observables=exp['simulation']['fullParsedYamlFile']['observables'],
                                                kineticSens=0,
                                                physicalSens=0,
                                                conditions=conds,
-                                               thermalBoundary=exp['simulation'].fullParsedYamlFile['thermalBoundary'],
-                                               mechanicalBoundary=exp['simulation'].fullParsedYamlFile['mechanicalBoundary'],
+                                               thermalBoundary=exp['simulation']['fullParsedYamlFile']['thermalBoundary'],
+                                               mechanicalBoundary=exp['simulation']['fullParsedYamlFile']['mechanicalBoundary'],
                                                processor=p,
                                                cti_path="", 
                                                save_physSensHistories=0,
-                                               fullParsedYamlFile=exp['simulation'].fullParsedYamlFile, 
+                                               fullParsedYamlFile=exp['simulation']['fullParsedYamlFile'], 
                                                save_timeHistories=0,
                                                log_file=True,
                                                log_name='log.txt',
-                                               timeshift=exp['simulation'].fullParsedYamlFile['time_shift'],
-                                               initialTime=exp['simulation'].fullParsedYamlFile['initialTime'],
-                                               finalTime=exp['simulation'].fullParsedYamlFile['finalTime'],
-                                               target=exp['simulation'].fullParsedYamlFile['target'],
-                                               target_type=exp['simulation'].fullParsedYamlFile['target_type'],
+                                               timeshift=exp['simulation']['fullParsedYamlFile']['time_shift'],
+                                               initialTime=exp['simulation']['fullParsedYamlFile']['initialTime'],
+                                               finalTime=exp['simulation']['fullParsedYamlFile']['finalTime'],
+                                               target=exp['simulation']['fullParsedYamlFile']['target'],
+                                               target_type=exp['simulation']['fullParsedYamlFile']['target_type'],
                                                n_processors=2,
                                                volumeTrace=volumeTrace)
             soln,temp=ig_delay.run()        
@@ -374,9 +375,9 @@ class Plotting(object):
         
         p=pr.Processor(cti)
         
-        tempmin=np.min(exp['simulation'].fullParsedYamlFile['temperatures'])
+        tempmin=np.min(exp['simulation']['fullParsedYamlFile']['temperatures'])
         # print('Tempmin: '+str(tempmin))
-        tempmax=np.max(exp['simulation'].fullParsedYamlFile['temperatures'])
+        tempmax=np.max(exp['simulation']['fullParsedYamlFile']['temperatures'])
         # print('Tempmax: '+str(tempmax))
         if tempmax!=tempmin:
             total_range=tempmax-tempmin
@@ -387,32 +388,34 @@ class Plotting(object):
             tempmin=tempmin*0.9
         temprange=np.linspace(tempmin,tempmax,n_of_data_points)
         # print(temprange)
-        pressures=exp['simulation'].fullParsedYamlFile['pressure']
-        conds=exp['simulation'].fullParsedYamlFile['conditions']
+        pressures=exp['simulation']['fullParsedYamlFile']['pressure']
+        conds=exp['simulation']['fullParsedYamlFile']['conditions']
             
             
             
         
-        jsr1=jsr.JSR_multiTemp_steadystate(volume=exp['simulation'].fullParsedYamlFile['volume'],
+        jsr1=jsr.JSR_multiTemp_steadystate(volume=exp['simulation']['fullParsedYamlFile']['volume'],
                     pressure=pressures,
                     temperatures=temprange,
-                    observables=exp['simulation'].fullParsedYamlFile['observables'],
+                    observables=exp['simulation']['fullParsedYamlFile']['observables'],
                     kineticSens=0,
                     physicalSens=0,
                     conditions=conds,
-                    thermalBoundary=exp['simulation'].fullParsedYamlFile['thermalBoundary'],
-                    mechanicalBoundary=exp['simulation'].fullParsedYamlFile['mechanicalBoundary'],
+                    thermalBoundary=exp['simulation']['fullParsedYamlFile']['thermalBoundary'],
+                    mechanicalBoundary=exp['simulation']['fullParsedYamlFile']['mechanicalBoundary'],
                     processor=p,
                     save_physSensHistories=0,
                     save_timeHistories=0,
-                    residence_time=exp['simulation'].fullParsedYamlFile['residence_time'],
-                    moleFractionObservables = exp['simulation'].fullParsedYamlFile['moleFractionObservables'],
-                    fullParsedYamlFile = exp['simulation'].fullParsedYamlFile)
+                    residence_time=exp['simulation']['fullParsedYamlFile']['residence_time'],
+                    moleFractionObservables = exp['simulation']['fullParsedYamlFile']['moleFractionObservables'],
+                    fullParsedYamlFile = exp['simulation']['fullParsedYamlFile'])
         soln,temp=jsr1.run()
         
         
         #print(soln)
         return soln
+    
+
     
     def plotting_observables(self,file_identifier='',filetype='.jpg'):
             
@@ -421,792 +424,542 @@ class Plotting(object):
         print('Observable Plots')
         print('--------------------------------------------------------------------------')
          
-        obs_list = []
-        for i,exp in enumerate(self.exp_dict_list_optimized):
-            for observable in exp['mole_fraction_observables'] + exp['concentration_observables'] + exp['ignition_delay_observables']:
-                if observable == None:
-                    continue 
-                obs_list.append(observable)
-            if 'perturbed_coef' in exp.keys():
-                for wl in self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']:    
-                    obs_list.append(wl)    
-        self.obs_list = obs_list     
+        # obs_list = []
+        # for i,exp in enumerate(self.exp_dict_list_optimized):
+        #     for observable in exp['mole_fraction_observables'] + exp['concentration_observables'] + exp['ignition_delay_observables']:
+        #         if observable == None:
+        #             continue 
+        #         obs_list.append(observable)
+        #     if 'perturbed_coef' in exp.keys():
+        #         for wl in self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']:    
+        #             obs_list.append(wl)    
+        # self.obs_list = obs_list     
                                       
-        self.obs_loop = self.manager.counter(total=len(self.obs_list), desc='Observable Plots:', unit='plots', color='blue') 
+        # self.obs_loop = self.manager.counter(total=len(self.obs_list), desc='Observable Plots:', unit='plots', color='blue') 
                     
         sigmas_original,test1 = self.calculating_sigmas(self.S_matrix_original, self.covariance_original)
         sigmas_optimized,test2 = self.calculating_sigmas(self.S_matrix, self.covariance)
         
         
-        for i,exp in enumerate(self.exp_dict_list_optimized):
+        systems = len(self.exp_dict_list_optimized)
+        WORKERS = systems
+        self.obs_loop = self.manager.counter(total=len(self.exp_dict_list_optimized), desc='Observable Plots:', unit='experiments', color='blue')  
+        started = 0
+        active = {}
+        while systems > started or active:
+            if systems > started and len(active) < WORKERS:
+                queue = multiprocessing.Queue()
+                started += 1
+                process = multiprocessing.Process(target=self.plotting_observables_parallel, name='System %d' % started, args=(started-1,self.exp_dict_list_optimized[started-1],sigmas_original,sigmas_optimized))
+                process.start()
+                active[started] = (process, queue)
+            for system in tuple(active.keys()):
+                process, queue = active[system]
+                alive = process.is_alive()
+                if not alive:
+                    del active[system]
+                    self.obs_loop.update()
+        
+    def plotting_observables_parallel(self,i,exp,sigmas_original,sigmas_optimized):
+        # return
+        # for i,exp in enumerate(self.exp_dict_list_optimized):
             
-            observable_counter=0     
-                   
-            for j,observable in enumerate(exp['mole_fraction_observables'] + exp['concentration_observables'] + exp['ignition_delay_observables']):
+        observable_counter=0     
                 
-                plt.figure()
-                temp_optimized_df_for_species = pd.DataFrame()
-                temp_optimized_error_df_for_species = pd.DataFrame()
-                temp_original_df_for_species = pd.DataFrame()
-                temp_original_error_df_for_species = pd.DataFrame()   
+        for j,observable in enumerate(exp['mole_fraction_observables'] + exp['concentration_observables'] + exp['ignition_delay_observables']):
             
-                            
-                # print(observable, observable_counter)
-                if observable == None:
-                    continue
-                
-                print(os.path.basename(self.files_to_include[0][i][0])[:-5] + ' ' + observable)
-                
-                plt.title('Experiment_'+str(i+1) + ' (' + os.path.basename(self.files_to_include[0][i][0])[:-5] + ')')
-                
-                observable_ylabel_string = list(observable)
-                for k, oys in enumerate(observable_ylabel_string):
+            plt.figure()
+            temp_optimized_df_for_species = pd.DataFrame()
+            temp_optimized_error_df_for_species = pd.DataFrame()
+            temp_original_df_for_species = pd.DataFrame()
+            temp_original_error_df_for_species = pd.DataFrame()   
+        
+                        
+            # print(observable, observable_counter)
+            if observable == None:
+                continue
+            
+            print(os.path.basename(self.files_to_include[0][i][0])[:-5] + ' ' + observable)
+            
+            plt.title('Experiment_'+str(i+1) + ' (' + os.path.basename(self.files_to_include[0][i][0])[:-5] + ')')
+            
+            observable_ylabel_string = list(observable)
+            for k, oys in enumerate(observable_ylabel_string):
 
-                    if oys.isdigit() == True:
-                        if k == 0:
-                            pass
-                        elif observable_ylabel_string[k-1] == ' ':
-                            pass
-                        else:
-                            observable_ylabel_string[k] = '$_{' + str(oys) + '}$'
+                if oys.isdigit() == True:
+                    if k == 0:
+                        pass
+                    elif observable_ylabel_string[k-1] == ' ':
+                        pass
+                    else:
+                        observable_ylabel_string[k] = '$_{' + str(oys) + '}$'
 
-                observable_ylabel_transformed = r'' + "".join(observable_ylabel_string)                     
+            observable_ylabel_transformed = r'' + "".join(observable_ylabel_string)                     
 
-                if observable in exp['mole_fraction_observables']:
+            if observable in exp['mole_fraction_observables']:
 
-                    if re.match('[Ss]hock [Tt]ube',exp['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp['experiment_type']):
+                if re.match('[Ss]hock [Tt]ube',exp['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp['experiment_type']):
+                    
+                    data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
+                    
+                    if 'W' in list(data_df.columns):
+                        weighted_df = data_df[data_df['W'] > 1.00e-06]
+                        unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
+                    else:
+                        weighted_df = data_df
+                        unweighted_df = pd.DataFrame(columns=weighted_df.columns)                       
+                    
+                    plt.xlabel('Time [ms]')
+                    plt.ylabel(observable_ylabel_transformed + ' Mole Fraction')
+                    # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
+                    
+                    temp_optimized_df_for_species['time [s]'] = pd.Series(exp['simulation']['timeHistories'][0]['time'])
+                    temp_optimized_df_for_species[observable] = pd.Series(exp['simulation']['timeHistories'][0][observable])
+                    
+                    temp_original_df_for_species['time [s]'] = pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time'])
+                    temp_original_df_for_species[observable] = pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable])
+                    
+                    if bool(sigmas_optimized) == True:
                         
-                        data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
+                        high_error_original = np.exp(sigmas_original[i][observable_counter])
+                        high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                        low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                        low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
                         
-                        if 'W' in list(data_df.columns):
-                            weighted_df = data_df[data_df['W'] > 1.00e-06]
-                            unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
-                        else:
-                            weighted_df = data_df
-                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)                       
-                        
-                        plt.xlabel('Time [ms]')
-                        plt.ylabel(observable_ylabel_transformed + ' Mole Fraction')
-                        # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
-                        
-                        temp_optimized_df_for_species['time [s]'] = pd.Series(exp['simulation'].timeHistories[0]['time'])
-                        temp_optimized_df_for_species[observable] = pd.Series(exp['simulation'].timeHistories[0][observable])
-                        
-                        temp_original_df_for_species['time [s]'] = pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time'])
-                        temp_original_df_for_species[observable] = pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable])
-                        
-                        if bool(sigmas_optimized) == True:
-                            
-                            high_error_original = np.exp(sigmas_original[i][observable_counter])
-                            high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                            low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                            low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                            
 
-                            # print(pd.Series(exp['experimental_data'][observable_counter]['Time']))
-                            
-                            temp_original_error_df_for_species['low_error_bar_time [s]'] = pd.Series(exp['experimental_data'][observable_counter]['Time'])
-                            temp_original_error_df_for_species['high_error_bar_time [s]'] = pd.Series(exp['experimental_data'][observable_counter]['Time'])
-                            
-                            temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                            temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)                                
-                            
-                            high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                            high_error_optimized = np.multiply(high_error_optimized,exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                            low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
-                            low_error_optimized = np.multiply(low_error_optimized,exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                            
-                            if len(data_df) != len(unweighted_df):
-                                
-                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
-                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')
-                                
-                            temp_optimized_error_df_for_species['low_error_bar_time [s]'] = pd.Series(exp['experimental_data'][observable_counter]['Time'])
-                            temp_optimized_error_df_for_species['high_error_bar_time [s]'] = pd.Series(exp['experimental_data'][observable_counter]['Time'])
-                            
-                            temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
-                            temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)
+                        # print(pd.Series(exp['experimental_data'][observable_counter]['Time']))
                         
-                        if len(data_df) == len(weighted_df):
-                            plt.scatter(weighted_df['Time']*1e3,weighted_df[observable],marker='o',color='black',label='Experimental Data')    
-                        else:
-                            plt.scatter(weighted_df['Time']*1e3,weighted_df[observable],marker='o',color='black',label='Experimental Data')  
-                            plt.scatter(unweighted_df['Time']*1e3,unweighted_df[observable],marker='o',color='black', facecolors='none',label='Unweighted Data')     
+                        temp_original_error_df_for_species['low_error_bar_time [s]'] = pd.Series(exp['experimental_data'][observable_counter]['Time'])
+                        temp_original_error_df_for_species['high_error_bar_time [s]'] = pd.Series(exp['experimental_data'][observable_counter]['Time'])
                         
-                        plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable],'r',label= r"$\it{A}$ $\it{priori}$ model")     
+                        temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
+                        temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)                                
                         
-                        plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['simulation'].timeHistories[0][observable],'b',label='MSI')                                      
+                        high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
+                        high_error_optimized = np.multiply(high_error_optimized,exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                        low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
+                        low_error_optimized = np.multiply(low_error_optimized,exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                        
+                        if len(data_df) != len(unweighted_df):
                             
-                        #stub
-                        plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation'].temperature))
-                        plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))
-                        key_list = []
-                        for key in self.exp_dict_list_original[i]['simulation'].conditions.keys():
+                            plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
+                            plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')
                             
-                            plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].conditions[key]))
-                            key_list.append(key)
-                       
-                        #plt.legend(handlelength=3)
-                        plt.legend(ncol=2)
-                        sp = '_'.join(key_list)
-                        #print(sp)
+                        temp_optimized_error_df_for_species['low_error_bar_time [s]'] = pd.Series(exp['experimental_data'][observable_counter]['Time'])
+                        temp_optimized_error_df_for_species['high_error_bar_time [s]'] = pd.Series(exp['experimental_data'][observable_counter]['Time'])
+                        
+                        temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
+                        temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)
+                    
+                    if len(data_df) == len(weighted_df):
+                        plt.scatter(weighted_df['Time']*1e3,weighted_df[observable],marker='o',color='black',label='Experimental Data')    
+                    else:
+                        plt.scatter(weighted_df['Time']*1e3,weighted_df[observable],marker='o',color='black',label='Experimental Data')  
+                        plt.scatter(unweighted_df['Time']*1e3,unweighted_df[observable],marker='o',color='black', facecolors='none',label='Unweighted Data')     
+                    
+                    plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable],'r',label= r"$\it{A}$ $\it{priori}$ model")     
+                    
+                    plt.plot(exp['simulation']['timeHistories'][0]['time']*1e3,exp['simulation']['timeHistories'][0][observable],'b',label='MSI')                                      
+                        
+                    #stub
+                    plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']))
+                    plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']))
+                    key_list = []
+                    for key in self.exp_dict_list_original[i]['simulation']['conditions'].keys():
+                        
+                        plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['conditions'][key]))
+                        key_list.append(key)
+                    
+                    #plt.legend(handlelength=3)
+                    plt.legend(ncol=2)
+                    sp = '_'.join(key_list)
+                    #print(sp)
 
-                        # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K'+'_'+str(self.exp_dict_list_original[i]['simulation'].pressure)+'_'+sp+'_'+'.pdf', bbox_inches='tight')
-                        # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K'+'_'+str(self.exp_dict_list_original[i]['simulation'].pressure)+'_'+sp+'_'+'.svg', bbox_inches='tight',transparent=True)
-                        # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K'+'_'+str(self.exp_dict_list_original[i]['simulation'].pressure)+'_'+sp+'.csv',index=False)  
+                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
+                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.svg', bbox_inches='tight',transparent=True)
+                    # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'.csv',index=False)  
 
-                        
-                        if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                        if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
-                        if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)
-                                
-                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
-                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
-                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)  
-                        
-                        #stub
-                        # plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.pdf', bbox_inches='tight')
-                        # plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)                      
-                          
-
-
-                        observable_counter+=1
-
-                    elif re.match('[Jj][Ss][Rr]',exp['simulation_type']):
-                        
-                        # nominal=self.run_jsr(self.exp_dict_list_original[i],self.nominal_cti)
-                        # MSI_model=self.run_jsr(exp,self.new_cti)
-                        
-                        # print('HERE')
-                        # # print(exp['simulation'].timeHistories[0]['temperature'])
-                        # print(self.exp_dict_list_original[i])
-                        
-                        
-                        
-                        # plt.plot(MSI_model['temperature'],MSI_model[observable],'b',label='MSI')
-                        # plt.plot(nominal['temperature'],nominal[observable],'r',label= "$\it{A priori}$ model")
-                        # plt.plot(exp['experimental_data'][observable_counter]['Temperature'],exp['experimental_data'][observable_counter][observable],'o',color='black',label='Experimental Data')
-                        
-                        data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
-                        
-                        if 'W' in list(data_df.columns):
-                            weighted_df = data_df[data_df['W'] > 1.00e-06]
-                            unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
-                        else:
-                            weighted_df = data_df
-                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)                           
-
-                        plt.xlabel('Temperature [K]')
-                        plt.ylabel(observable_ylabel_transformed + ' Mole Fraction')
-                        # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
-                        
-                        temp_optimized_df_for_species['temperature [K]'] = pd.Series(exp['simulation'].timeHistories[0]['temperature'])
-                        temp_optimized_df_for_species[observable] = pd.Series(exp['simulation'].timeHistories[0][observable])         
-                        
-                        temp_original_df_for_species['temperature [K]'] = pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['temperature'])
-                        temp_original_df_for_species[observable] =  pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable])                    
-                                                
-                        if bool(sigmas_optimized) == True:
+                    
+                    if self.pdf == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    if self.png == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                    if self.svg == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)
                             
-                            high_error_original = np.exp(sigmas_original[i][observable_counter])
-                            high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable].dropna().values)
-                            low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                            low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable].dropna().values)   
-                                                                                
-                            temp_original_error_df_for_species['low_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
-                            temp_original_error_df_for_species['high_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
-                            temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                            temp_original_error_df_for_species['high_error_bar'] = pd.Series(high_error_original)                               
-                            
-                            high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                            high_error_optimized = np.multiply(high_error_optimized,exp['simulation'].timeHistories[0][observable].dropna().values)
-                            low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
-                            low_error_optimized = np.multiply(low_error_optimized,exp['simulation'].timeHistories[0][observable].dropna().values)
-                            
-                            if len(data_df) != len(unweighted_df):
-                                if len(high_error_optimized)>1 and len(low_error_optimized) > 1:
-                                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'b--')
-                                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'b--')
-                                    
-                                else:
-                                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'bx')
-                                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'bx')
-                            
-                            temp_optimized_error_df_for_species['low_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
-                            temp_optimized_error_df_for_species['high_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
-                            temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
-                            temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)                 
+                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
+                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
+                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)  
+                    
+                    #stub
+                    # plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                    # plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)                      
                         
-                        if len(data_df) == len(weighted_df):
-                            plt.scatter(weighted_df['Temperature'],weighted_df[observable],marker='o',color='black',label='Experimental Data')   
-                        else:
-                            plt.scatter(weighted_df['Temperature'],weighted_df[observable],marker='o',color='black',label='Experimental Data')    
-                            plt.scatter(unweighted_df['Temperature'],unweighted_df[observable],marker='o',color='black', facecolors='none',label='Unweighted Data')                          
-                        
-                        plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['temperature'],self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable],'ro',label= r"$\it{A}$ $\it{priori}$ model")    
-                        plt.plot(exp['simulation'].timeHistories[0]['temperature'],exp['simulation'].timeHistories[0][observable],'bo',label='MSI')
-             
-                        
-                        plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))
-                        key_list = []
-                        for key in self.exp_dict_list_original[i]['simulation'].conditions.keys():
-                            
-                            plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].conditions[key]))
-                            key_list.append(key)
-                       
-                        #plt.legend(handlelength=3)
-                        plt.legend(ncol=2)
-                        sp = '_'.join(key_list)
-                        
-                        if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                        if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
-                        if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                        
-                        
-                                   
 
-                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)   
-                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
-                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
-                        
-                        # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.csv',index=False)    
 
-                        observable_counter+=1    
+                    observable_counter+=1
 
-                    elif re.match('[Ss]pecies[- ][Pp]rofile',exp['experiment_type']) and re.match('[Ff]low[ -][Rr]eactor',exp['simulation_type']):
-                        plt.plot(exp['simulation'].timeHistories[0]['temperature'],exp['simulation'].timeHistories[0][observable],'b',label='MSI')
-                        plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['temperature'],self.exp_dict_list_original['simulation'].timeHistories[0][observable],'r',label= r"$\it{A}$ $\it{priori}$ model")
-                        plt.plot(exp['experimental_data'][observable_counter]['Temperature'],exp['experimental_data'][observable_counter][observable],'o',color='black',label='Experimental Data')
-                        plt.xlabel('Temperature [K]')
-                        plt.ylabel(observable_ylabel_transformed + ' Mole Fraction')
-                        # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
-                        
-                        temp_optimized_df_for_species['temperature'] = pd.Series(exp['simulation'].timeHistories[0]['temperature'])
-                        temp_optimized_df_for_species[observable] = pd.Series(exp['simulation'].timeHistories[0][observable])               
-                        
-                        temp_original_df_for_species['temperature'] = pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['temperature'])
-                        temp_original_df_for_species[observable] =  pd.Series(self.exp_dict_list_original['simulation'].timeHistories[0][observable])              
+                elif re.match('[Jj][Ss][Rr]',exp['simulation_type']):
+                    
+                    # nominal=self.run_jsr(self.exp_dict_list_original[i],self.nominal_cti)
+                    # MSI_model=self.run_jsr(exp,self.new_cti)
+                    
+                    # print('HERE')
+                    # # print(exp['simulation']['timeHistories'][0]['temperature'])
+                    # print(self.exp_dict_list_original[i])
+                    
+                    
+                    
+                    # plt.plot(MSI_model['temperature'],MSI_model[observable],'b',label='MSI')
+                    # plt.plot(nominal['temperature'],nominal[observable],'r',label= "$\it{A priori}$ model")
+                    # plt.plot(exp['experimental_data'][observable_counter]['Temperature'],exp['experimental_data'][observable_counter][observable],'o',color='black',label='Experimental Data')
+                    
+                    data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
+                    
+                    if 'W' in list(data_df.columns):
+                        weighted_df = data_df[data_df['W'] > 1.00e-06]
+                        unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
+                    else:
+                        weighted_df = data_df
+                        unweighted_df = pd.DataFrame(columns=weighted_df.columns)                           
+
+                    plt.xlabel('Temperature [K]')
+                    plt.ylabel(observable_ylabel_transformed + ' Mole Fraction')
+                    # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
+                    
+                    temp_optimized_df_for_species['temperature [K]'] = pd.Series(exp['simulation']['timeHistories'][0]['temperature'])
+                    temp_optimized_df_for_species[observable] = pd.Series(exp['simulation']['timeHistories'][0][observable])         
+                    
+                    temp_original_df_for_species['temperature [K]'] = pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['temperature'])
+                    temp_original_df_for_species[observable] =  pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable])                    
                                             
-                        if bool(sigmas_optimized) == True:
-                            
-                            high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                            high_error_optimized = np.multiply(high_error_optimized,exp['simulation'].timeHistories[0][observable].dropna().values)
-                            low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
-                            low_error_optimized = np.multiply(low_error_optimized,exp['simulation'].timeHistories[0][observable].dropna().values)
-                            
+                    if bool(sigmas_optimized) == True:
+                        
+                        high_error_original = np.exp(sigmas_original[i][observable_counter])
+                        high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable].dropna().values)
+                        low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                        low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable].dropna().values)   
+                                                                            
+                        temp_original_error_df_for_species['low_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
+                        temp_original_error_df_for_species['high_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
+                        temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
+                        temp_original_error_df_for_species['high_error_bar'] = pd.Series(high_error_original)                               
+                        
+                        high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
+                        high_error_optimized = np.multiply(high_error_optimized,exp['simulation']['timeHistories'][0][observable].dropna().values)
+                        low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
+                        low_error_optimized = np.multiply(low_error_optimized,exp['simulation']['timeHistories'][0][observable].dropna().values)
+                        
+                        if len(data_df) != len(unweighted_df):
                             if len(high_error_optimized)>1 and len(low_error_optimized) > 1:
                                 plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'b--')
                                 plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'b--')
                                 
                             else:
-                                plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'bX')
-                                plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'bX')
-                            
-                            temp_optimized_error_df_for_species['low_error_bar_temperature'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
-                            temp_optimized_error_df_for_species['high_error_bar_temperature'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
-                            
-                            temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
-                            temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)            
-                            
-                            
-                            high_error_original = np.exp(sigmas_original[i][observable_counter])
-                            # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable].dropna().values)
-                            high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                            low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                            low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                            
-                            temp_original_error_df_for_species['low_error_bar_temperature'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
-                            temp_original_error_df_for_species['high_error_bar_temperature'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
-                                                    
-                            temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                            temp_original_error_df_for_species['high_error_bar'] = pd.Series(high_error_original)   
+                                plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'bx')
+                                plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'bx')
                         
-                        plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation'].temperature))
-                        plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))
-                        key_list = []
-                        for key in self.exp_dict_list_original[i]['simulation'].conditions.keys():
-                            
-                            plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].conditions[key]))
-                            key_list.append(key)
-                       
-                        #plt.legend(handlelength=3)
-                        plt.legend(ncol=2)
-                        sp = '_'.join(key_list)
-                        
-                        if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                        if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
-                        if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)          
-
-                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)   
-                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)   
-                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
-                        
-                        # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.csv',index=False)    
-
-                        observable_counter+=1    
-                        
-                if observable in exp['concentration_observables']:
-                    #print(observable_counter,'THIS IS OBSERVABLE COUNTER')
-                    if re.match('[Ss]hock [Tt]ube',exp['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp['experiment_type']):
-                        #print(observable_counter)
-                        data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
-                        
-                        if 'W' in list(data_df.columns):
-                            weighted_df = data_df[data_df['W'] > 1.00e-06]
-                            unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
-                        else:
-                            weighted_df = data_df
-                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)
-                        
-                        if observable+'_ppm' in exp['experimental_data'][observable_counter].columns:
-                            # plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['simulation'].timeHistories[0][observable]*1e6,'b',label='MSI')
-                            # plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")
-                            # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_ppm'],'o',color='black',label='Experimental Data') 
-                            plt.xlabel('Time [ms]')
-                            plt.ylabel(observable_ylabel_transformed+ ' Mole Fraction [ppm]')
-                            # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
-                            
-                            temp_optimized_df_for_species['time'] = pd.Series(exp['simulation'].timeHistories[0]['time']*1e3)
-                            temp_optimized_df_for_species[observable] = pd.Series(exp['simulation'].timeHistories[0][observable]*1e6)
-                            
-                            temp_original_df_for_species['time'] = pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3)
-                            temp_original_df_for_species[observable] = pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6)                            
-                            
-                            if bool(sigmas_optimized)==True:
-                                
-                                high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                                high_error_optimized = np.multiply(high_error_optimized,exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
-                                low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)                                
-                                low_error_optimized = np.multiply(low_error_optimized,exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
-                                
-                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
-                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')       
-                                
-                                temp_optimized_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
-                                temp_optimized_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
-                                
-                                temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
-                                temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)
-                                
-                                high_error_original = np.exp(sigmas_original[i][observable_counter])
-                                high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
-                                low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                                low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
-                                                            
-                                temp_original_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
-                                temp_original_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
-                                
-                                temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                                temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)  
-
-                                if len(data_df) != len(unweighted_df):
-                                    plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
-                                    plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')
-
-                                #high_error_original = np.exp(sigmas_original[i][observable_counter])
-                                #high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
-                                #low_error_original = np.exp(np.array(sigmas_original[i][observable_counter])*-1)
-                                #low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
-                                
-                                #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
-                                #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
-                            if len(data_df) == len(weighted_df):
-                                plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
-                            else:
-                                plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')  
-                                plt.scatter(unweighted_df['Time']*1e3,unweighted_df[observable+'_ppm'],marker='o',color='black', facecolors='none',label='Unweighted Data')     
-                        
-                            plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")     
-                        
-                            plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['simulation'].timeHistories[0][observable]*1e6,'b',label='MSI')    
-
-                        elif observable+'_mol/cm^3' in exp['experimental_data'][observable_counter].columns:
-                            concentration_optimized = np.true_divide(1,exp['simulation'].timeHistories[0]['temperature'].to_numpy())*exp['simulation'].timeHistories[0]['pressure'].to_numpy()
-                           
-                            concentration_optimized *= (1/(8.314e6))*exp['simulation'].timeHistories[0][observable].dropna().to_numpy()
-                            concentration_original = np.true_divide(1,self.exp_dict_list_original[i]['simulation'].timeHistories[0]['temperature'].to_numpy())*self.exp_dict_list_original[i]['simulation'].timeHistories[0]['pressure'].to_numpy()
-                           
-                            concentration_original *= (1/(8.314e6))*self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable].dropna().to_numpy()
-                            
-                            # plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,concentration_optimized,'b',label='MSI')
-                            # plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,concentration_original,'r',label= r"$\it{A}$ $\it{priori}$ model")
-                            # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_mol/cm^3'],'o',color='black',label='Experimental Data') 
-                            plt.xlabel('Time [ms]')
-                            plt.ylabel(r'$\frac{mol}{cm^3}$'+''+observable_ylabel_transformed)
-                            # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
-                            
-                            temp_optimized_df_for_species['time'] = pd.Series(exp['simulation'].timeHistories[0]['time']*1e3)
-                            temp_optimized_df_for_species[observable] = pd.Series(concentration_optimized)
-                            
-                            temp_original_df_for_species['time'] = pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3)
-                            temp_original_df_for_species[observable] = pd.Series(concentration_original)                                    
-                            
-                            if bool(sigmas_optimized)==True:
-                                concentration_sig = np.true_divide(1,exp['simulation'].pressureAndTemperatureToExperiment[observable_counter]['temperature'].to_numpy())*exp['simulation'].pressureAndTemperatureToExperiment[observable_counter]['pressure'].to_numpy()
-                        
-                                concentration_sig *= (1/(8.314e6))*exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().to_numpy()
-                                high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                                high_error_optimized = np.multiply(high_error_optimized,concentration_sig)
-                                low_error_optimized = np.exp(np.array(sigmas_optimized[i][observable_counter])*-1)
-                                low_error_optimized = np.multiply(low_error_optimized,concentration_sig)
-                                
-                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
-                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--') 
-                                
-                                temp_optimized_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
-                                temp_optimized_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
-                                
-                                temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
-                                temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)
-                                
-                                # concentration_sig_original = np.true_divide(1,high_error_original,self.exp_dict_list_original[i]['simulation'].pressureAndTemperatureToExperiment[observable_counter]['temperature'].to_numpy())*high_error_original,self.exp_dict_list_original[i]['simulation'].pressureAndTemperatureToExperiment[observable_counter]['pressure'].to_numpy()
-                                # concentration_sig_original *= (1/(8.314e6))*high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().to_numpy()                                
-                                
-                                # high_error_original = np.exp(sigmas_original[i][observable_counter])
-                                # high_error_original = np.multiply(high_error_original,concentration_sig_original)
-                                # low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                                # low_error_original = np.multiply(low_error_original,concentration_sig_original)
-                                                            
-
-                                temp_original_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
-                                temp_original_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
-                                
-                                # temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                                # temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)  
-
-                                if len(data_df) != len(unweighted_df):
-                                    plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
-                                    plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')
-
-                            if len(data_df) == len(weighted_df):
-                                plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_mol/cm^3'],marker='o',color='black',label='Experimental Data')    
-                            else:
-                                plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_mol/cm^3'],marker='o',color='black',label='Experimental Data')  
-                                plt.scatter(unweighted_df['Time']*1e3,unweighted_df[observable+'_mol/cm^3'],marker='o',color='black', facecolors='none',label='Unweighted Data')     
-                        
-                            plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,concentration_original,'r',label= r"$\it{A}$ $\it{priori}$ model")     
-                        
-                            plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,concentration_optimized,'b',label='MSI')                                                                                
-                        
-                        plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation'].temperature))
-                        plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))
-                        key_list = []
-                        for key in self.exp_dict_list_original[i]['simulation'].conditions.keys():
-                            
-                            plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].conditions[key]))
-                            key_list.append(key)
-                       
-                        #plt.legend(handlelength=3)
-                        plt.legend(ncol=2)
-                        sp = '_'.join(key_list)
-                        
-                        #print(sp)
-                        #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K'+'_'+str(self.exp_dict_list_original[i]['simulation'].pressure)+'_'+sp+'_'+'.pdf', bbox_inches='tight')
-                        
-                        #stub
-                        # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.pdf', bbox_inches='tight')
-                        # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
+                        temp_optimized_error_df_for_species['low_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
+                        temp_optimized_error_df_for_species['high_error_bar_temperature [K]'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
+                        temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
+                        temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)                 
                     
-                        if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                        if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
-                        if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
-
-                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
-                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
-                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)  
-
-                        observable_counter+=1
+                    if len(data_df) == len(weighted_df):
+                        plt.scatter(weighted_df['Temperature'],weighted_df[observable],marker='o',color='black',label='Experimental Data')   
+                    else:
+                        plt.scatter(weighted_df['Temperature'],weighted_df[observable],marker='o',color='black',label='Experimental Data')    
+                        plt.scatter(unweighted_df['Temperature'],unweighted_df[observable],marker='o',color='black', facecolors='none',label='Unweighted Data')                          
                     
-                    elif re.match('[Ff]low [Rr]eactor',exp['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp['experiment_type']):
-
-                        data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
+                    plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['temperature'],self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable],'ro',label= r"$\it{A}$ $\it{priori}$ model")    
+                    plt.plot(exp['simulation']['timeHistories'][0]['temperature'],exp['simulation']['timeHistories'][0][observable],'bo',label='MSI')
+            
+                    
+                    plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']))
+                    key_list = []
+                    for key in self.exp_dict_list_original[i]['simulation']['conditions'].keys():
                         
-                        if 'W' in list(data_df.columns):
-                            weighted_df = data_df[data_df['W'] > 1.00e-06]
-                            unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
+                        plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['conditions'][key]))
+                        key_list.append(key)
+                    
+                    #plt.legend(handlelength=3)
+                    plt.legend(ncol=2)
+                    sp = '_'.join(key_list)
+                    
+                    if self.pdf == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    if self.png == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                    if self.svg == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                        
+                    
+                                
+
+                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)   
+                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
+                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
+                    
+                    # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)    
+
+                    observable_counter+=1    
+
+                elif re.match('[Ss]pecies[- ][Pp]rofile',exp['experiment_type']) and re.match('[Ff]low[ -][Rr]eactor',exp['simulation_type']):
+                    plt.plot(exp['simulation']['timeHistories'][0]['temperature'],exp['simulation']['timeHistories'][0][observable],'b',label='MSI')
+                    plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['temperature'],self.exp_dict_list_original['simulation']['timeHistories'][0][observable],'r',label= r"$\it{A}$ $\it{priori}$ model")
+                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'],exp['experimental_data'][observable_counter][observable],'o',color='black',label='Experimental Data')
+                    plt.xlabel('Temperature [K]')
+                    plt.ylabel(observable_ylabel_transformed + ' Mole Fraction')
+                    # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
+                    
+                    temp_optimized_df_for_species['temperature'] = pd.Series(exp['simulation']['timeHistories'][0]['temperature'])
+                    temp_optimized_df_for_species[observable] = pd.Series(exp['simulation']['timeHistories'][0][observable])               
+                    
+                    temp_original_df_for_species['temperature'] = pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['temperature'])
+                    temp_original_df_for_species[observable] =  pd.Series(self.exp_dict_list_original['simulation']['timeHistories'][0][observable])              
+                                        
+                    if bool(sigmas_optimized) == True:
+                        
+                        high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
+                        high_error_optimized = np.multiply(high_error_optimized,exp['simulation']['timeHistories'][0][observable].dropna().values)
+                        low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
+                        low_error_optimized = np.multiply(low_error_optimized,exp['simulation']['timeHistories'][0][observable].dropna().values)
+                        
+                        if len(high_error_optimized)>1 and len(low_error_optimized) > 1:
+                            plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'b--')
+                            plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'b--')
+                            
                         else:
-                            weighted_df = data_df
-                            unweighted_df = pd.DataFrame(columns=weighted_df.columns)
-                                                    
-                        # weighted_df = data_df[data_df['W'] != 1.00e-09]
-                        # unweighted_df = data_df[data_df['W'] == 1.00e-09]
+                            plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'bX')
+                            plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'bX')
                         
-                        # weighted_df = data_df[data_df['W'] != 1.00e-06 or < 1.00e-06]
-                        # unweighted_df = data_df[data_df['W'] <= 1.00e-06]                              
+                        temp_optimized_error_df_for_species['low_error_bar_temperature'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
+                        temp_optimized_error_df_for_species['high_error_bar_temperature'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
+                        
+                        temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
+                        temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)            
+                        
+                        
+                        high_error_original = np.exp(sigmas_original[i][observable_counter])
+                        # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable].dropna().values)
+                        high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                        low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                        low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                        
+                        temp_original_error_df_for_species['low_error_bar_temperature'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
+                        temp_original_error_df_for_species['high_error_bar_temperature'] = pd.Series(exp['experimental_data'][observable_counter]['Temperature'])
+                                                
+                        temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
+                        temp_original_error_df_for_species['high_error_bar'] = pd.Series(high_error_original)   
+                    
+                    plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']))
+                    plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']))
+                    key_list = []
+                    for key in self.exp_dict_list_original[i]['simulation']['conditions'].keys():
+                        
+                        plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['conditions'][key]))
+                        key_list.append(key)
+                    
+                    #plt.legend(handlelength=3)
+                    plt.legend(ncol=2)
+                    sp = '_'.join(key_list)
+                    
+                    if self.pdf == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    if self.png == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                    if self.svg == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)          
 
-                        plt.xlabel('Temperature [K]')
-                        plt.ylabel(observable_ylabel_transformed + ' Mole Fraction [ppm]')
+                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)   
+                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)   
+                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
+                    
+                    # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)    
+
+                    observable_counter+=1    
+                    
+            if observable in exp['concentration_observables']:
+                #print(observable_counter,'THIS IS OBSERVABLE COUNTER')
+                if re.match('[Ss]hock [Tt]ube',exp['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp['experiment_type']):
+                    #print(observable_counter)
+                    data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
+                    
+                    if 'W' in list(data_df.columns):
+                        weighted_df = data_df[data_df['W'] > 1.00e-06]
+                        unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
+                    else:
+                        weighted_df = data_df
+                        unweighted_df = pd.DataFrame(columns=weighted_df.columns)
+                    
+                    if observable+'_ppm' in exp['experimental_data'][observable_counter].columns:
+                        # plt.plot(exp['simulation']['timeHistories'][0]['time']*1e3,exp['simulation']['timeHistories'][0][observable]*1e6,'b',label='MSI')
+                        # plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")
+                        # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_ppm'],'o',color='black',label='Experimental Data') 
+                        plt.xlabel('Time [ms]')
+                        plt.ylabel(observable_ylabel_transformed+ ' Mole Fraction [ppm]')
                         # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
                         
-                        temp_optimized_df_for_species['temperature [K]'] = exp['simulation'].timeHistories[0]['initial_temperature']
-                        temp_optimized_df_for_species[observable + ' [ppm]'] = exp['simulation'].timeHistories[0][observable]*1e6             
+                        temp_optimized_df_for_species['time'] = pd.Series(exp['simulation']['timeHistories'][0]['time']*1e3)
+                        temp_optimized_df_for_species[observable] = pd.Series(exp['simulation']['timeHistories'][0][observable]*1e6)
                         
-                        temp_original_df_for_species['temperature [K]'] = self.exp_dict_list_original[i]['simulation'].timeHistories[0]['initial_temperature']
-                        temp_original_df_for_species[observable + ' [ppm]'] =  self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6   
-    
+                        temp_original_df_for_species['time'] = pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3)
+                        temp_original_df_for_species[observable] = pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable]*1e6)                            
                         
-                        if bool(sigmas_optimized) == True:
-                            #stub
-                            high_error_original = np.exp(sigmas_original[i][observable_counter])
-                            high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable].dropna().values*1e6)
-                            # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
-                            low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                            low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable].dropna().values*1e6)
-                            # low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
+                        if bool(sigmas_optimized)==True:
                             
-                            temp_original_error_df_for_species['low_error_bar_temperature [K]'] = list(exp['experimental_data'][observable_counter]['Temperature'])
-                            temp_original_error_df_for_species['high_error_bar_temperature [K]'] = list(exp['experimental_data'][observable_counter]['Temperature'])
-                                                    
-                            temp_original_error_df_for_species['low_error_bar' + ' [ppm]'] = low_error_original
-                            temp_original_error_df_for_species['high_error_bar' + ' [ppm]'] = high_error_original   
-                            
-                                                        
                             high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                            high_error_optimized = np.multiply(high_error_optimized,exp['simulation'].timeHistories[0][observable].dropna().values*1e6)
-                            low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
-                            low_error_optimized = np.multiply(low_error_optimized,exp['simulation'].timeHistories[0][observable].dropna().values*1e6)
+                            high_error_optimized = np.multiply(high_error_optimized,exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
+                            low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)                                
+                            low_error_optimized = np.multiply(low_error_optimized,exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
                             
-                            if len(data_df) != len(unweighted_df):
+                            plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
+                            plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')       
                             
-                                if len(high_error_optimized)>1 and len(low_error_optimized) > 1:
-                                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'b--')
-                                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'b--')
-                                    
-                                else:
-                                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'bX')
-                                    plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'bX')                            
+                            temp_optimized_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
+                            temp_optimized_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
+                            
+                            temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
+                            temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)
+                            
+                            high_error_original = np.exp(sigmas_original[i][observable_counter])
+                            high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
+                            low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                            low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
+                                                        
+                            temp_original_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
+                            temp_original_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
+                            
+                            temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
+                            temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)  
 
-                            temp_optimized_error_df_for_species['low_error_bar_temperature [K]'] = list(exp['experimental_data'][observable_counter]['Temperature'])
-                            temp_optimized_error_df_for_species['high_error_bar_temperature [K]'] = list(exp['experimental_data'][observable_counter]['Temperature'])
-                            
-                            temp_optimized_error_df_for_species['low_error_bar' + ' [ppm]'] = low_error_optimized
-                            temp_optimized_error_df_for_species['high_error_bar' + ' [ppm]'] = high_error_optimized   
-                            
-                            # high_error_original = np.exp(sigmas_original[i][observable_counter])
-                            # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable].dropna().values)
-                            # low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                            # low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
+                            if len(data_df) != len(unweighted_df):
+                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
+                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')
+
+                            #high_error_original = np.exp(sigmas_original[i][observable_counter])
+                            #high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
+                            #low_error_original = np.exp(np.array(sigmas_original[i][observable_counter])*-1)
+                            #low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
                             
                             #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
                             #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
-                        
-                        #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=1000)        
-                        # 
-                        # 
-                        # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.pdf', bbox_inches='tight',dpi=1000) 
-                        # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.svg', bbox_inches='tight',dpi=1000,transparent=True)             
-                        # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.csv',index=False)                            
-                        #              
-                        
-                        # plt.scatter(weighted_df['Temperature'],weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
-                        # plt.scatter(unweighted_df['Temperature'],unweighted_df[observable+'_ppm'],marker='o',color='black', facecolors='none',label='Unweighted Data')         
-                        
                         if len(data_df) == len(weighted_df):
-                            plt.scatter(weighted_df['Temperature'],weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
+                            plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
                         else:
-                            plt.scatter(weighted_df['Temperature'],weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
-                            plt.scatter(unweighted_df['Temperature'],unweighted_df[observable+'_ppm'],marker='o',color='black', facecolors='none',label='Unweighted Data')                       
-                        
-                        plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['initial_temperature'],self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")
-                        plt.plot(exp['simulation'].timeHistories[0]['initial_temperature'],exp['simulation'].timeHistories[0][observable]*1e6,'b',label='MSI')
-                        
-                        # plt.plot(exp['experimental_data'][observable_counter]['Temperature'],exp['experimental_data'][observable_counter][observable+'_ppm'],'o',color='black',label='Experimental Data')                                        
-
-                        # plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation'].emperature))
-                        plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))
-                        key_list = []
-                        for key in self.exp_dict_list_original[i]['simulation'].conditions.keys():
-                            
-                            plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].conditions[key]))
-                            key_list.append(key)
-                       
-                        #plt.legend(handlelength=3)
-                        plt.legend(ncol=2)
-                        sp = '_'.join(key_list)
-
-                        if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                        if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
-                        if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
-                                   
-                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
-                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
-                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
-
-                        observable_counter+=1       
-
-
-                if observable in exp['ignition_delay_observables']:
-                    if re.match('[Ss]hock [Tt]ube',exp['simulation_type']):
-                        if len(exp['simulation'].temperatures)>1:
-                            nominal=self.run_ignition_delay(self.exp_dict_list_original[i], self.nominal_cti)
-                            MSI_model=self.run_ignition_delay(exp, self.new_cti)
-                            #plt.semilogy(1000/MSI_model['temperature'],MSI_model['delay'],'b',label='MSI')
-                            #changed to plotting at nominal temperature
-                            
-                            #plt.semilogy(1000/MSI_model['temperature'],MSI_model['delay'],'b',label='MSI')
-                        
-                            #a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['temperature'],exp['simulation'].timeHistories[0]['delay'].dropna().values)))
-                            
-                            a, b = zip(*sorted(zip(1000/np.array(exp['simulation'].temperatures),exp['simulation'].timeHistories[0]['delay'].dropna().values)))
-
-                            plt.semilogy(a,b,'b',label='MSI')
-
-                            plt.semilogy(1000/nominal['temperature'],nominal['delay'],'r',label= r"$\it{A}$ $\it{priori}$ model")
-                            
-                            #plt.semilogy(1000/exp['simulation'].timeHistories[0]['temperature'],exp['simulation'].timeHistories[0]['delay'],'b',label='MSI')
-                            #plt.semilogy(1000/self.exp_dict_list_original[i]['simulation'].timeHistories[0]['temperature'],self.exp_dict_list_original[i]['simulation'].timeHistories[0]['delay'],'r',label= "$\it{A priori}$ model")
-                            plt.semilogy(1000/exp['experimental_data'][observable_counter]['temperature'],exp['experimental_data'][observable_counter][observable+'_s'],'o',color='black',label='Experimental Data')
-                            plt.xlabel('1000/T [1000/K]')
-                            plt.ylabel('Time [s]')
-                            # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
-                            
-                            if bool(sigmas_optimized) == True:
-
-                                
-                                high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                                high_error_optimized = np.multiply(high_error_optimized,exp['simulation'].timeHistories[0]['delay'].dropna().values)
-                                
-                                low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
-                                low_error_optimized = np.multiply(low_error_optimized,exp['simulation'].timeHistories[0]['delay'].dropna().values)
-                                #plt.figure()
-                                #print(exp['simulation'].timeHistories[0]['delay'].dropna().values,'THIS IS IN THE PLOTTER')
-                                
-                                
-                                #a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['temperature'],high_error_optimized)))
-                                a, b = zip(*sorted(zip(1000/np.array(exp['simulation'].temperatures),high_error_optimized)))
-                                
-                                plt.semilogy(a,b,'b--')
-
-                                #a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['temperature'],low_error_optimized)))
-                                a, b = zip(*sorted(zip(1000/np.array(exp['simulation'].temperatures),low_error_optimized)))
-                                
-                                plt.semilogy(a,b,'b--')                           
-                                
-                                #plt.plot(1000/exp['experimental_data'][observable_counter]['temperature'],exp['simulation'].timeHistories[0]['delay'].dropna().values,'x')
-                                #plt.plot(1000/np.array(exp['simulation'].temperatures),exp['simulation'].timeHistories[0]['delay'].dropna().values,'o')
-                                
-                                
-                                #high_error_original = np.exp(sigmas_original[i][observable_counter])
-                               # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                                #low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                                #low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                                #plt.figure()
-                               # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
-                                #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
-
-                            plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressures))
-                            key_list = []
-                            for key in self.exp_dict_list_original[i]['simulation'].fullParsedYamlFile['conditions_to_run'][0].keys():
-                               # ['simulation'].fullParsedYamlFile['conditions_to_run']
-                                plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].fullParsedYamlFile['conditions_to_run'][0][key]))
-                                key_list.append(key)
-                       
-                            #plt.legend(handlelength=3)
-                            plt.legend(ncol=2)
-                            sp = '_'.join(key_list)
-                            
-                            # plt.savefig(os.path.join(self.out_path,'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.pdf'), bbox_inches='tight',dpi=1000)
-                            # plt.savefig(os.path.join(self.out_path,'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.svg'), bbox_inches='tight',dpi=1000,transparent=True)
-                            # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.csv',index=False) 
-
-                            if self.pdf == True:
-                                plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                            if self.png == True:
-                                plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
-                            if self.svg == True:
-                                plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
-                            
-                            temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False) 
-                            temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False) 
-                            temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
-                            temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False) 
-
-
-                            observable_counter+=1
-                    elif re.match('[Rr][Cc][Mm]',exp['simulation_type']):
-                        if len(exp['simulation'].temperatures)>1:
-                            
-                            plt.semilogy(1000/exp['simulation'].timeHistories[0]['ignition_temperature'],exp['simulation'].timeHistories[0]['delay']-exp['simulation'].timeHistories[0]['end_of_compression_time'],'b',label='MSI')
-                            plt.semilogy(1000/self.exp_dict_list_original[i]['simulation'].timeHistories[0]['ignition_temperature'],self.exp_dict_list_original[i]['simulation'].timeHistories[0]['delay']-self.exp_dict_list_original[i]['simulation'].timeHistories[0]['end_of_compression_time'],'r',label= r"$\it{A}$ $\it{priori}$ model")
-    
-                            #plt.semilogy(1000/exp['simulation'].timeHistories[0]['temperature'],exp['simulation'].timeHistories[0]['delay'],'b',label='MSI')
-                            #plt.semilogy(1000/self.exp_dict_list_original[i]['simulation'].timeHistories[0]['temperature'],self.exp_dict_list_original[i]['simulation'].timeHistories[0]['delay'],'r',label= "$\it{A priori}$ model")
-                            plt.semilogy(1000/exp['experimental_data'][observable_counter]['temperature'],exp['experimental_data'][observable_counter][observable+'_s'],'o',color='black',label='Experimental Data')
-                            plt.xlabel('1000/T [1000/K]')
-                            plt.ylabel('Time [ms]')
-                            # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
-                            
-                            if bool(sigmas_optimized) == True:
-                                
-                                high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                                high_error_optimized = np.multiply(high_error_optimized,(exp['simulation'].timeHistories[0]['delay']-exp['simulation'].timeHistories[0]['end_of_compression_time']).dropna().values)
-                                low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
-                                low_error_optimized = np.multiply(low_error_optimized,(exp['simulation'].timeHistories[0]['delay']-exp['simulation'].timeHistories[0]['end_of_compression_time']).dropna().values)
-                                #plt.figure()
-                                a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['ignition_temperature'],high_error_optimized)))
-                                plt.semilogy(a,b,'b--')
-                                #plt.plot(1000/exp['experimental_data'][observable_counter]['temperature'],low_error_optimized,'b--')
-                                a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['ignition_temperature'],low_error_optimized)))
-                                plt.semilogy(a,b,'b--')                           
-                                
-                                
-                                #high_error_original = np.exp(sigmas_original[i][observable_counter])
-                               # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                                #low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
-                                #low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)
-                                #plt.figure()
-                               # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
-                                #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
-                            
-                            if self.pdf == True:
-                                plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                            if self.png == True:
-                                plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
-                            if self.svg == True:
-                                plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
-
-                            temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False) 
-                            temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False) 
-                            temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
-                            temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False) 
-                            
-                            observable_counter+=1    
-                            
-                self.obs_loop.update()                  
-                        
-            if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
-                
-                temp_optimized_df_for_species = pd.DataFrame()
-                temp_optimized_error_df_for_species = pd.DataFrame()
-                temp_original_df_for_species = pd.DataFrame()
-                temp_original_error_df_for_species = pd.DataFrame()   
-                                
-                for k,wl in enumerate(wavelengths):
+                            plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')  
+                            plt.scatter(unweighted_df['Time']*1e3,unweighted_df[observable+'_ppm'],marker='o',color='black', facecolors='none',label='Unweighted Data')     
                     
-                    print(os.path.basename(self.files_to_include[0][i][0])[:-5] + ' ' + str(wl))
+                        plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")     
+                    
+                        plt.plot(exp['simulation']['timeHistories'][0]['time']*1e3,exp['simulation']['timeHistories'][0][observable]*1e6,'b',label='MSI')    
 
-                    data_df = pd.DataFrame(exp['absorbance_experimental_data'][k])
+                    elif observable+'_mol/cm^3' in exp['experimental_data'][observable_counter].columns:
+                        concentration_optimized = np.true_divide(1,exp['simulation']['timeHistories'][0]['temperature'].to_numpy())*exp['simulation']['timeHistories'][0]['pressure'].to_numpy()
+                        
+                        concentration_optimized *= (1/(8.314e6))*exp['simulation']['timeHistories'][0][observable].dropna().to_numpy()
+                        concentration_original = np.true_divide(1,self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['temperature'].to_numpy())*self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['pressure'].to_numpy()
+                        
+                        concentration_original *= (1/(8.314e6))*self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable].dropna().to_numpy()
+                        
+                        # plt.plot(exp['simulation']['timeHistories'][0]['time']*1e3,concentration_optimized,'b',label='MSI')
+                        # plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3,concentration_original,'r',label= r"$\it{A}$ $\it{priori}$ model")
+                        # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_mol/cm^3'],'o',color='black',label='Experimental Data') 
+                        plt.xlabel('Time [ms]')
+                        plt.ylabel(r'$\frac{mol}{cm^3}$'+''+observable_ylabel_transformed)
+                        # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
+                        
+                        temp_optimized_df_for_species['time'] = pd.Series(exp['simulation']['timeHistories'][0]['time']*1e3)
+                        temp_optimized_df_for_species[observable] = pd.Series(concentration_optimized)
+                        
+                        temp_original_df_for_species['time'] = pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3)
+                        temp_original_df_for_species[observable] = pd.Series(concentration_original)                                    
+                        
+                        if bool(sigmas_optimized)==True:
+                            concentration_sig = np.true_divide(1,exp['simulation']['pressureAndTemperatureToExperiment'][observable_counter]['temperature'].to_numpy())*exp['simulation']['pressureAndTemperatureToExperiment'][observable_counter]['pressure'].to_numpy()
+                    
+                            concentration_sig *= (1/(8.314e6))*exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().to_numpy()
+                            high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
+                            high_error_optimized = np.multiply(high_error_optimized,concentration_sig)
+                            low_error_optimized = np.exp(np.array(sigmas_optimized[i][observable_counter])*-1)
+                            low_error_optimized = np.multiply(low_error_optimized,concentration_sig)
+                            
+                            plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
+                            plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--') 
+                            
+                            temp_optimized_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
+                            temp_optimized_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
+                            
+                            temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
+                            temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)
+                            
+                            # concentration_sig_original = np.true_divide(1,high_error_original,self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']AndTemperatureToExperiment[observable_counter]['temperature'].to_numpy())*high_error_original,self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']AndTemperatureToExperiment[observable_counter]['pressure'].to_numpy()
+                            # concentration_sig_original *= (1/(8.314e6))*high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().to_numpy()                                
+                            
+                            # high_error_original = np.exp(sigmas_original[i][observable_counter])
+                            # high_error_original = np.multiply(high_error_original,concentration_sig_original)
+                            # low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                            # low_error_original = np.multiply(low_error_original,concentration_sig_original)
+                                                        
 
+                            temp_original_error_df_for_species['low_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
+                            temp_original_error_df_for_species['high_error_bar_time'] = pd.Series(exp['experimental_data'][observable_counter]['Time']*1e3)
+                            
+                            # temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
+                            # temp_original_error_df_for_species['high_error_bar'] =  pd.Series(high_error_original)  
+
+                            if len(data_df) != len(unweighted_df):
+                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, high_error_optimized,'b--')
+                                plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3, low_error_optimized,'b--')
+
+                        if len(data_df) == len(weighted_df):
+                            plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_mol/cm^3'],marker='o',color='black',label='Experimental Data')    
+                        else:
+                            plt.scatter(weighted_df['Time']*1e3,weighted_df[observable+'_mol/cm^3'],marker='o',color='black',label='Experimental Data')  
+                            plt.scatter(unweighted_df['Time']*1e3,unweighted_df[observable+'_mol/cm^3'],marker='o',color='black', facecolors='none',label='Unweighted Data')     
+                    
+                        plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3,concentration_original,'r',label= r"$\it{A}$ $\it{priori}$ model")     
+                    
+                        plt.plot(exp['simulation']['timeHistories'][0]['time']*1e3,concentration_optimized,'b',label='MSI')                                                                                
+                    
+                    plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']))
+                    plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']))
+                    key_list = []
+                    for key in self.exp_dict_list_original[i]['simulation']['conditions'].keys():
+                        
+                        plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['conditions'][key]))
+                        key_list.append(key)
+                    
+                    #plt.legend(handlelength=3)
+                    plt.legend(ncol=2)
+                    sp = '_'.join(key_list)
+                    
+                    #print(sp)
+                    #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
+                    
+                    #stub
+                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
+                
+                    if self.pdf == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    if self.png == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                    if self.svg == True:
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+
+                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
+                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
+                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)  
+
+                    observable_counter+=1
+                
+                elif re.match('[Ff]low [Rr]eactor',exp['simulation_type']) and re.match('[Ss]pecies[ -][Pp]rofile',exp['experiment_type']):
+
+                    data_df = pd.DataFrame(exp['experimental_data'][observable_counter])
+                    
                     if 'W' in list(data_df.columns):
                         weighted_df = data_df[data_df['W'] > 1.00e-06]
                         unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
@@ -1216,96 +969,366 @@ class Plotting(object):
                                                 
                     # weighted_df = data_df[data_df['W'] != 1.00e-09]
                     # unweighted_df = data_df[data_df['W'] == 1.00e-09]
-
-                    # weighted_df = data_df[data_df['W'] != 1.00e-06 or < 1.00e-06]
-                    # unweighted_df = data_df[data_df['W'] <= 1.00e-06]                          
                     
-                    #plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)],'o',color='black',label='Experimental Data')
-                    plt.title('Experiment_'+str(i+1) + ' (' + os.path.basename(self.files_to_include[0][i][0])[:-5] + ')')
-                    plt.xlabel('Time [ms]')
-                    plt.ylabel('Absorbance'+''+str(wl))
+                    # weighted_df = data_df[data_df['W'] != 1.00e-06 or < 1.00e-06]
+                    # unweighted_df = data_df[data_df['W'] <= 1.00e-06]                              
+
+                    plt.xlabel('Temperature [K]')
+                    plt.ylabel(observable_ylabel_transformed + ' Mole Fraction [ppm]')
                     # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
                     
-                    temp_optimized_df_for_species['time [s]'] = pd.Series(exp['simulation'].timeHistories[0]['time'])
-                    temp_optimized_df_for_species[observable] = pd.Series(exp['absorbance_calculated_from_model'][wl])
+                    temp_optimized_df_for_species['temperature [K]'] = exp['simulation']['timeHistories'][0]['initial_temperature']
+                    temp_optimized_df_for_species[observable + ' [ppm]'] = exp['simulation']['timeHistories'][0][observable]*1e6             
                     
-                    temp_original_df_for_species['time [s]'] = pd.Series(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time'])
-                    temp_original_df_for_species[observable] = pd.Series(self.exp_dict_list_original[i]['absorbance_calculated_from_model'][wl])                    
+                    temp_original_df_for_species['temperature [K]'] = self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['initial_temperature']
+                    temp_original_df_for_species[observable + ' [ppm]'] =  self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable]*1e6   
+
                     
-                    if bool(sigmas_optimized)==True:
-                        
+                    if bool(sigmas_optimized) == True:
+                        #stub
                         high_error_original = np.exp(sigmas_original[i][observable_counter])
-                        high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['absorbance_model_data'][wl])
-                        low_error_original =  np.exp(sigmas_original[i][observable_counter]*-1)
-                        low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['absorbance_model_data'][wl])
+                        high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable].dropna().values*1e6)
+                        # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
+                        low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                        low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable].dropna().values*1e6)
+                        # low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
                         
-                        temp_original_error_df_for_species['low_error_bar_time [s]'] = pd.Series(exp['absorbance_experimental_data'][k]['time'])
-                        temp_original_error_df_for_species['high_error_bar_time [s]'] = pd.Series(exp['absorbance_experimental_data'][k]['time'])
-                        
-                        temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
-                        temp_original_error_df_for_species['high_error_bar'] = pd.Series(high_error_original)    
-                        
+                        temp_original_error_df_for_species['low_error_bar_temperature [K]'] = list(exp['experimental_data'][observable_counter]['Temperature'])
+                        temp_original_error_df_for_species['high_error_bar_temperature [K]'] = list(exp['experimental_data'][observable_counter]['Temperature'])
                                                 
-                        high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])
-                        high_error_optimized = np.multiply(high_error_optimized,exp['absorbance_model_data'][wl])
+                        temp_original_error_df_for_species['low_error_bar' + ' [ppm]'] = low_error_original
+                        temp_original_error_df_for_species['high_error_bar' + ' [ppm]'] = high_error_original   
+                        
+                                                    
+                        high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
+                        high_error_optimized = np.multiply(high_error_optimized,exp['simulation']['timeHistories'][0][observable].dropna().values*1e6)
                         low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
-                        low_error_optimized = np.multiply(low_error_optimized,exp['absorbance_model_data'][wl])
+                        low_error_optimized = np.multiply(low_error_optimized,exp['simulation']['timeHistories'][0][observable].dropna().values*1e6)
                         
                         if len(data_df) != len(unweighted_df):
-                       
-                            plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,high_error_optimized,'b--')
-                            plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,low_error_optimized,'b--')
-            
-                        temp_optimized_error_df_for_species['low_error_bar_time [s]'] = pd.Series(exp['absorbance_experimental_data'][k]['time'])
-                        temp_optimized_error_df_for_species['high_error_bar_time [s]'] = pd.Series(exp['absorbance_experimental_data'][k]['time'])
                         
-                        temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
-                        temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)                                                                                            
+                            if len(high_error_optimized)>1 and len(low_error_optimized) > 1:
+                                plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'b--')
+                                plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'b--')
+                                
+                            else:
+                                plt.plot(exp['experimental_data'][observable_counter]['Temperature'], high_error_optimized,'bX')
+                                plt.plot(exp['experimental_data'][observable_counter]['Temperature'], low_error_optimized,'bX')                            
+
+                        temp_optimized_error_df_for_species['low_error_bar_temperature [K]'] = list(exp['experimental_data'][observable_counter]['Temperature'])
+                        temp_optimized_error_df_for_species['high_error_bar_temperature [K]'] = list(exp['experimental_data'][observable_counter]['Temperature'])
+                        
+                        temp_optimized_error_df_for_species['low_error_bar' + ' [ppm]'] = low_error_optimized
+                        temp_optimized_error_df_for_species['high_error_bar' + ' [ppm]'] = high_error_optimized   
+                        
+                        # high_error_original = np.exp(sigmas_original[i][observable_counter])
+                        # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable].dropna().values)
+                        # low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                        # low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                        
+                        #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
+                        #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
+                    
+                    #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=1000)        
+                    # 
+                    # 
+                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight',dpi=1000) 
+                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',dpi=1000,transparent=True)             
+                    # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)                            
+                    #              
+                    
+                    # plt.scatter(weighted_df['Temperature'],weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
+                    # plt.scatter(unweighted_df['Temperature'],unweighted_df[observable+'_ppm'],marker='o',color='black', facecolors='none',label='Unweighted Data')         
                     
                     if len(data_df) == len(weighted_df):
-                        plt.scatter(weighted_df['time']*1e3,weighted_df['Absorbance_'+str(wl)],marker='o',color='black',label='Experimental Data')     
+                        plt.scatter(weighted_df['Temperature'],weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
                     else:
-                        plt.scatter(weighted_df['time']*1e3,weighted_df['Absorbance_'+str(wl)],marker='o',color='black',label='Experimental Data')    
-                        plt.scatter(unweighted_df['time']*1e3,unweighted_df['Absorbance_'+str(wl)],marker='o',color='black', facecolors='none',label='Unweighted Data')                      
+                        plt.scatter(weighted_df['Temperature'],weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
+                        plt.scatter(unweighted_df['Temperature'],unweighted_df[observable+'_ppm'],marker='o',color='black', facecolors='none',label='Unweighted Data')                       
                     
-                    plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['absorbance_calculated_from_model'][wl],'r',label= r"$\it{A}$ $\it{priori}$ model")
-                    plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['absorbance_calculated_from_model'][wl],'b',label='MSI')
+                    plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['initial_temperature'],self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable]*1e6,'r',label= r"$\it{A}$ $\it{priori}$ model")
+                    plt.plot(exp['simulation']['timeHistories'][0]['initial_temperature'],exp['simulation']['timeHistories'][0][observable]*1e6,'b',label='MSI')
                     
-                    # plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)],'o',color='black',label='Experimental Data')                    
+                    # plt.plot(exp['experimental_data'][observable_counter]['Temperature'],exp['experimental_data'][observable_counter][observable+'_ppm'],'o',color='black',label='Experimental Data')                                        
 
-
-                    key_list=[]
-                    plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation'].temperature))
-                    plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))
-                    for key in self.exp_dict_list_original[i]['simulation'].conditions.keys():                        
-                        plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].conditions[key]))
+                    plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']))
+                    key_list = []
+                    for key in self.exp_dict_list_original[i]['simulation']['conditions'].keys():
+                        
+                        plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['conditions'][key]))
                         key_list.append(key)
-
+                    
                     #plt.legend(handlelength=3)
                     plt.legend(ncol=2)
-                    #plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.pdf', bbox_inches='tight')
                     sp = '_'.join(key_list)
-                    
-                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.pdf', bbox_inches='tight')
-                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
-
 
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
                                 
+                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
+                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
+                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
+
+                    observable_counter+=1       
 
 
-                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_optimized.csv',index=False) 
-                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_error_optimized.csv',index=False) 
-                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_original.csv',index=False)   
-                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_error_original.csv',index=False)                     
+            if observable in exp['ignition_delay_observables']:
+                if re.match('[Ss]hock [Tt]ube',exp['simulation_type']):
+                    if len(exp['simulation']['fullParsedYamlFile']['temperatures'])>1:
+                        nominal=self.run_ignition_delay(self.exp_dict_list_original[i], self.nominal_cti)
+                        MSI_model=self.run_ignition_delay(exp, self.new_cti)
+                        #plt.semilogy(1000/MSI_model['temperature'],MSI_model['delay'],'b',label='MSI')
+                        #changed to plotting at nominal temperature
+                        
+                        #plt.semilogy(1000/MSI_model['temperature'],MSI_model['delay'],'b',label='MSI')
                     
-                    observable_counter+=1 
-                    self.obs_loop.update()
+                        #a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['temperature'],exp['simulation']['timeHistories'][0]['delay'].dropna().values)))
+                        
+                        a, b = zip(*sorted(zip(1000/np.array(exp['simulation']['fullParsedYamlFile']['temperatures']),exp['simulation']['timeHistories'][0]['delay'].dropna().values)))
+
+                        plt.semilogy(a,b,'b',label='MSI')
+
+                        plt.semilogy(1000/nominal['temperature'],nominal['delay'],'r',label= r"$\it{A}$ $\it{priori}$ model")
+                        
+                        #plt.semilogy(1000/exp['simulation']['timeHistories'][0]['temperature'],exp['simulation']['timeHistories'][0]['delay'],'b',label='MSI')
+                        #plt.semilogy(1000/self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['temperature'],self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['delay'],'r',label= "$\it{A priori}$ model")
+                        plt.semilogy(1000/exp['experimental_data'][observable_counter]['temperature'],exp['experimental_data'][observable_counter][observable+'_s'],'o',color='black',label='Experimental Data')
+                        plt.xlabel('1000/T [1000/K]')
+                        plt.ylabel('Time [s]')
+                        # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
+                        
+                        if bool(sigmas_optimized) == True:
+
+                            
+                            high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
+                            high_error_optimized = np.multiply(high_error_optimized,exp['simulation']['timeHistories'][0]['delay'].dropna().values)
+                            
+                            low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
+                            low_error_optimized = np.multiply(low_error_optimized,exp['simulation']['timeHistories'][0]['delay'].dropna().values)
+                            #plt.figure()
+                            #print(exp['simulation']['timeHistories'][0]['delay'].dropna().values,'THIS IS IN THE PLOTTER')
+                            
+                            
+                            #a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['temperature'],high_error_optimized)))
+                            a, b = zip(*sorted(zip(1000/np.array(exp['simulation']['fullParsedYamlFile']['temperatures']),high_error_optimized)))
+                            
+                            plt.semilogy(a,b,'b--')
+
+                            #a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['temperature'],low_error_optimized)))
+                            a, b = zip(*sorted(zip(1000/np.array(exp['simulation']['fullParsedYamlFile']['temperatures']),low_error_optimized)))
+                            
+                            plt.semilogy(a,b,'b--')                           
+                            
+                            #plt.plot(1000/exp['experimental_data'][observable_counter]['temperature'],exp['simulation']['timeHistories'][0]['delay'].dropna().values,'x')
+                            #plt.plot(1000/np.array(exp['simulation']['fullParsedYamlFile']['temperatures']),exp['simulation']['timeHistories'][0]['delay'].dropna().values,'o')
+                            
+                            
+                            #high_error_original = np.exp(sigmas_original[i][observable_counter])
+                            # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                            #low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                            #low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                            #plt.figure()
+                            # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
+                            #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
+
+                        plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressures']))
+                        key_list = []
+                        for key in self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['conditions_to_run'][0].keys():
+                            # ['simulation']['fullParsedYamlFile']['conditions_to_run']
+                            plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['conditions_to_run'][0][key]))
+                            key_list.append(key)
+                    
+                        #plt.legend(handlelength=3)
+                        plt.legend(ncol=2)
+                        sp = '_'.join(key_list)
+                        
+                        # plt.savefig(os.path.join(self.out_path,'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf'), bbox_inches='tight',dpi=1000)
+                        # plt.savefig(os.path.join(self.out_path,'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg'), bbox_inches='tight',dpi=1000,transparent=True)
+                        # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False) 
+
+                        if self.pdf == True:
+                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        if self.png == True:
+                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        if self.svg == True:
+                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                        
+                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False) 
+                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False) 
+                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
+                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False) 
+
+
+                        observable_counter+=1
+                elif re.match('[Rr][Cc][Mm]',exp['simulation_type']):
+                    if len(exp['simulation']['fullParsedYamlFile']['temperatures'])>1:
+                        
+                        plt.semilogy(1000/exp['simulation']['timeHistories'][0]['ignition_temperature'],exp['simulation']['timeHistories'][0]['delay']-exp['simulation']['timeHistories'][0]['end_of_compression_time'],'b',label='MSI')
+                        plt.semilogy(1000/self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['ignition_temperature'],self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['delay']-self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['end_of_compression_time'],'r',label= r"$\it{A}$ $\it{priori}$ model")
+
+                        #plt.semilogy(1000/exp['simulation']['timeHistories'][0]['temperature'],exp['simulation']['timeHistories'][0]['delay'],'b',label='MSI')
+                        #plt.semilogy(1000/self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['temperature'],self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['delay'],'r',label= "$\it{A priori}$ model")
+                        plt.semilogy(1000/exp['experimental_data'][observable_counter]['temperature'],exp['experimental_data'][observable_counter][observable+'_s'],'o',color='black',label='Experimental Data')
+                        plt.xlabel('1000/T [1000/K]')
+                        plt.ylabel('Time [ms]')
+                        # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
+                        
+                        if bool(sigmas_optimized) == True:
+                            
+                            high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
+                            high_error_optimized = np.multiply(high_error_optimized,(exp['simulation']['timeHistories'][0]['delay']-exp['simulation']['timeHistories'][0]['end_of_compression_time']).dropna().values)
+                            low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
+                            low_error_optimized = np.multiply(low_error_optimized,(exp['simulation']['timeHistories'][0]['delay']-exp['simulation']['timeHistories'][0]['end_of_compression_time']).dropna().values)
+                            #plt.figure()
+                            a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['ignition_temperature'],high_error_optimized)))
+                            plt.semilogy(a,b,'b--')
+                            #plt.plot(1000/exp['experimental_data'][observable_counter]['temperature'],low_error_optimized,'b--')
+                            a, b = zip(*sorted(zip(1000/exp['experimental_data'][observable_counter]['ignition_temperature'],low_error_optimized)))
+                            plt.semilogy(a,b,'b--')                           
+                            
+                            
+                            #high_error_original = np.exp(sigmas_original[i][observable_counter])
+                            # high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                            #low_error_original = np.exp(sigmas_original[i][observable_counter]*-1)
+                            #low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)
+                            #plt.figure()
+                            # plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
+                            #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
+                        
+                        if self.pdf == True:
+                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        if self.png == True:
+                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        if self.svg == True:
+                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+
+                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False) 
+                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False) 
+                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
+                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False) 
+                        
+                        observable_counter+=1    
+                        
+            # self.obs_loop.update()                  
+                    
+        if 'perturbed_coef' in exp.keys():
+            wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
+            
+            temp_optimized_df_for_species = pd.DataFrame()
+            temp_optimized_error_df_for_species = pd.DataFrame()
+            temp_original_df_for_species = pd.DataFrame()
+            temp_original_error_df_for_species = pd.DataFrame()   
+                            
+            for k,wl in enumerate(wavelengths):
+                
+                print(os.path.basename(self.files_to_include[0][i][0])[:-5] + ' ' + str(wl))
+
+                data_df = pd.DataFrame(exp['absorbance_experimental_data'][k])
+
+                if 'W' in list(data_df.columns):
+                    weighted_df = data_df[data_df['W'] > 1.00e-06]
+                    unweighted_df = data_df[data_df['W'] <= 1.00e-06]   
+                else:
+                    weighted_df = data_df
+                    unweighted_df = pd.DataFrame(columns=weighted_df.columns)
+                                            
+                # weighted_df = data_df[data_df['W'] != 1.00e-09]
+                # unweighted_df = data_df[data_df['W'] == 1.00e-09]
+
+                # weighted_df = data_df[data_df['W'] != 1.00e-06 or < 1.00e-06]
+                # unweighted_df = data_df[data_df['W'] <= 1.00e-06]                          
+                
+                #plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)],'o',color='black',label='Experimental Data')
+                plt.title('Experiment_'+str(i+1) + ' (' + os.path.basename(self.files_to_include[0][i][0])[:-5] + ')')
+                plt.xlabel('Time [ms]')
+                plt.ylabel('Absorbance'+''+str(wl))
+                # plt.title('Experiment_'+str(i+1) + ' ' + self.files_to_include[0][i][0][:-5])
+                
+                temp_optimized_df_for_species['time [s]'] = pd.Series(exp['simulation']['timeHistories'][0]['time'])
+                temp_optimized_df_for_species[observable] = pd.Series(exp['absorbance_calculated_from_model'][wl])
+                
+                temp_original_df_for_species['time [s]'] = pd.Series(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time'])
+                temp_original_df_for_species[observable] = pd.Series(self.exp_dict_list_original[i]['absorbance_calculated_from_model'][wl])                    
+                
+                if bool(sigmas_optimized)==True:
+                    
+                    high_error_original = np.exp(sigmas_original[i][observable_counter])
+                    high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['absorbance_model_data'][wl])
+                    low_error_original =  np.exp(sigmas_original[i][observable_counter]*-1)
+                    low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['absorbance_model_data'][wl])
+                    
+                    temp_original_error_df_for_species['low_error_bar_time [s]'] = pd.Series(exp['absorbance_experimental_data'][k]['time'])
+                    temp_original_error_df_for_species['high_error_bar_time [s]'] = pd.Series(exp['absorbance_experimental_data'][k]['time'])
+                    
+                    temp_original_error_df_for_species['low_error_bar'] = pd.Series(low_error_original)
+                    temp_original_error_df_for_species['high_error_bar'] = pd.Series(high_error_original)    
+                    
+                                            
+                    high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])
+                    high_error_optimized = np.multiply(high_error_optimized,exp['absorbance_model_data'][wl])
+                    low_error_optimized = np.exp(sigmas_optimized[i][observable_counter]*-1)
+                    low_error_optimized = np.multiply(low_error_optimized,exp['absorbance_model_data'][wl])
+                    
+                    if len(data_df) != len(unweighted_df):
+                    
+                        plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,high_error_optimized,'b--')
+                        plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,low_error_optimized,'b--')
+        
+                    temp_optimized_error_df_for_species['low_error_bar_time [s]'] = pd.Series(exp['absorbance_experimental_data'][k]['time'])
+                    temp_optimized_error_df_for_species['high_error_bar_time [s]'] = pd.Series(exp['absorbance_experimental_data'][k]['time'])
+                    
+                    temp_optimized_error_df_for_species['low_error_bar'] = pd.Series(low_error_optimized)
+                    temp_optimized_error_df_for_species['high_error_bar'] = pd.Series(high_error_optimized)                                                                                            
+                
+                if len(data_df) == len(weighted_df):
+                    plt.scatter(weighted_df['time']*1e3,weighted_df['Absorbance_'+str(wl)],marker='o',color='black',label='Experimental Data')     
+                else:
+                    plt.scatter(weighted_df['time']*1e3,weighted_df['Absorbance_'+str(wl)],marker='o',color='black',label='Experimental Data')    
+                    plt.scatter(unweighted_df['time']*1e3,unweighted_df['Absorbance_'+str(wl)],marker='o',color='black', facecolors='none',label='Unweighted Data')                      
+                
+                plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3,self.exp_dict_list_original[i]['absorbance_calculated_from_model'][wl],'r',label= r"$\it{A}$ $\it{priori}$ model")
+                plt.plot(exp['simulation']['timeHistories'][0]['time']*1e3,exp['absorbance_calculated_from_model'][wl],'b',label='MSI')
+                
+                # plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)],'o',color='black',label='Experimental Data')                    
+
+
+                key_list=[]
+                plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']))
+                plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']))
+                for key in self.exp_dict_list_original[i]['simulation']['conditions'].keys():                        
+                    plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['conditions'][key]))
+                    key_list.append(key)
+
+                #plt.legend(handlelength=3)
+                plt.legend(ncol=2)
+                #plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                sp = '_'.join(key_list)
+                
+                # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
+
+
+                if self.pdf == True:
+                    plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                if self.png == True:
+                    plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.png', bbox_inches='tight',dpi=self.dpi)
+                if self.svg == True:
+                    plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                            
+
+
+                temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_optimized.csv',index=False) 
+                temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_error_optimized.csv',index=False) 
+                temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_original.csv',index=False)   
+                temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_error_original.csv',index=False)                     
+                
+                observable_counter+=1 
+                self.obs_loop.update()
             
 
                 
@@ -1337,7 +1360,8 @@ class Plotting(object):
                 y_values_to_plot = list(y_matrix[counter:self.simulation_lengths_of_experimental_data[x][y]+counter,:])  
                 sigmas_to_plot = list(sigma[counter:self.simulation_lengths_of_experimental_data[x][y]+counter,:])  
                 if 'perturbed_coef' in exp_dict_list_optimized[x].keys():
-                    wavelengths = self.parsed_yaml_list_optimized[x]['absorbanceCsvWavelengths'][0]
+                    # wavelengths = self.parsed_yaml_list_optimized[x]['absorbanceCsvWavelengths'][0]
+                    wavelengths = self.exp_dict_list_optimized[x]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths'][0]
                     time = exp_dict_list_optimized[x]['absorbance_experimental_data'][0]['time']                     
                     plt.subplot(4, 1, 1)    
                     plt.title('Experiment_'+str(x+1)+'_Wavelength_'+str(wavelengths))
@@ -1475,7 +1499,7 @@ class Plotting(object):
         observables_list = self.target_parameters[length:]
         # observables_list = self.sum_arrhenius_observables[length:]
 
-        reactions_in_cti_file = self.exp_dict_list_original[0]['simulation'].processor.solution.reaction_equations()
+        reactions_in_cti_file = self.exp_dict_list_original[0]['simulation']['reaction_equations']
         flatten = lambda *n: (e for a in n
             for e in (flatten(*a) if isinstance(a, (tuple, list)) else (a,)))        
         flattened_master_equation_reaction_list = list(flatten(self.master_equation_reactions))     
@@ -1583,7 +1607,7 @@ class Plotting(object):
                                             
                         
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     time_profiles[i].append(exp['absorbance_experimental_data'][k]['time']*1e3)       
                     observables[i].append('Absorbance_'+str(wl))                                 
@@ -1681,62 +1705,87 @@ class Plotting(object):
             sigma_list = list(self.short_sigma)
         time_profiles = self.getting_time_profiles_for_experiments(self.exp_dict_list_optimized)
         list_of_experiment_observables = self.observable_list
+        
+        systems = len(self.exp_dict_list_optimized)
+        WORKERS = systems
+        self.obs_UWSA_loop = self.manager.counter(total=len(self.exp_dict_list_optimized), desc='Observable UWSA Plots:', unit='experiments', color='blue')  
+        started = 0
+        active = {}
+        while systems > started or active:
+            if systems > started and len(active) < WORKERS:
+                queue = multiprocessing.Queue()
+                started += 1
+                x = started - 1
+                number_of_observables_in_simulation = len(sensitivities[x])
+                process = multiprocessing.Process(target=self.plotting_uncertainty_weighted_sens_parallel, name='System %d' % started, args=(number_of_observables_in_simulation,sigma_list,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x))
+                process.start()
+                active[started] = (process, queue)
+            for system in tuple(active.keys()):
+                process, queue = active[system]
+                alive = process.is_alive()
+                if not alive:
+                    del active[system]
+                    self.obs_UWSA_loop.update()
+        
+        
+                              
+        # for x in range(len(sensitivities)):            
+        #     number_of_observables_in_simulation = len(sensitivities[x])
+        #     subplot_function(number_of_observables_in_simulation,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x)
 
-        def subplot_function(number_of_observables_in_simulation,time_profiles,sensitivities,top_sensitivity_single_exp,observables_list_for_legend,list_of_experiment_observables,experiment_number):
-                             
-            for plot_number in range(number_of_observables_in_simulation):
-                
-                print(os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ' ' + list_of_experiment_observables[plot_number])
-                
-                plt.figure()
-                UWSA_df = pd.DataFrame()
-                UWSA_df['x'] = pd.Series(time_profiles[plot_number])
-                for c,top_columns in enumerate(top_sensitivity_single_exp[plot_number]):
-                    plt.title('Experiment_'+str(experiment_number+1) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
-                    if c < 10:
-                        plt.plot(time_profiles[plot_number],sensitivities[plot_number][:,c],label = observables_list_for_legend[top_columns] +' '+str(sigma_list[top_columns])) 
-                    observable_ylabel = list_of_experiment_observables[plot_number]
-                    observable_ylabel_string = list(observable_ylabel)
-                    for i, oys in enumerate(observable_ylabel_string):
-                        if oys.isdigit() == True:
-                            if i == 0:
-                                pass
-                            elif observable_ylabel_string[i-1] == ' ':
-                                pass
-                            else:
-                                observable_ylabel_string[i] = '_{' + str(oys) + '}'
-                    observable_ylabel_transformed = "".join(observable_ylabel_string)                             
-                    if 'Absorbance' in observable_ylabel:
-                        plt.ylabel(observable_ylabel)
-                    else:   
-                        plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \sigma_j$')
-                    plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
-                    UWSA_df[observables_list_for_legend[top_columns] +' '+str(sigma_list[top_columns])] = pd.Series(sensitivities[plot_number][:,c])   
-                UWSA_df.to_csv(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
-                if self.simulation_run==None:
-                    if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                    if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
-                    if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
-                else:
-                    plt.title('Experiment_'+str(self.simulation_run) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
-                    if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                    if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
-                    if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)    
-                
-                self.obs_UWSA_loop.update()     
-                
-                   
-        self.obs_UWSA_loop = self.manager.counter(total=len(self.obs_list), desc='Observable UWSA Plots:', unit='plots', color='blue')                        
-        for x in range(len(sensitivities)):            
-            number_of_observables_in_simulation = len(sensitivities[x])
-            subplot_function(number_of_observables_in_simulation,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x)
-        return 
+            
+
+
+    def plotting_uncertainty_weighted_sens_parallel(self,number_of_observables_in_simulation,sigma_list,time_profiles,sensitivities,top_sensitivity_single_exp,observables_list_for_legend,list_of_experiment_observables,experiment_number):
+                            
+        for plot_number in range(number_of_observables_in_simulation):
+            
+            print(os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ' ' + list_of_experiment_observables[plot_number])
+            
+            plt.figure()
+            UWSA_df = pd.DataFrame()
+            UWSA_df['x'] = pd.Series(time_profiles[plot_number])
+            for c,top_columns in enumerate(top_sensitivity_single_exp[plot_number]):
+                plt.title('Experiment_'+str(experiment_number+1) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
+                if c < 10:
+                    plt.plot(time_profiles[plot_number],sensitivities[plot_number][:,c],label = observables_list_for_legend[top_columns] +' '+str(sigma_list[top_columns])) 
+                observable_ylabel = list_of_experiment_observables[plot_number]
+                observable_ylabel_string = list(observable_ylabel)
+                for i, oys in enumerate(observable_ylabel_string):
+                    if oys.isdigit() == True:
+                        if i == 0:
+                            pass
+                        elif observable_ylabel_string[i-1] == ' ':
+                            pass
+                        else:
+                            observable_ylabel_string[i] = '_{' + str(oys) + '}'
+                observable_ylabel_transformed = "".join(observable_ylabel_string)                             
+                if 'Absorbance' in observable_ylabel:
+                    plt.ylabel(observable_ylabel)
+                else:   
+                    plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \sigma_j$')
+                plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
+                UWSA_df[observables_list_for_legend[top_columns] +' '+str(sigma_list[top_columns])] = pd.Series(sensitivities[plot_number][:,c])   
+            UWSA_df.to_csv(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
+            if self.simulation_run==None:
+                if self.pdf == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                if self.png == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
+                if self.svg == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
+            else:
+                plt.title('Experiment_'+str(self.simulation_run) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
+                if self.pdf == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                if self.png == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
+                if self.svg == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)    
+            
+            # self.obs_UWSA_loop.update()     
+            
+
             
     def plotting_Sdx(self):
          
@@ -1771,53 +1820,49 @@ class Plotting(object):
         time_profiles = self.getting_time_profiles_for_experiments(self.exp_dict_list_optimized)
         list_of_experiment_observables = self.observable_list
         X = self.X
+        
+        # self.obs_Sdx_loop = self.manager.counter(total=len(self.obs_list), desc='Observable Sdx Plots:', unit='plots', color='blue')                    
+        # for x in range(len(sensitivities)):            
+        #     number_of_observables_in_simulation = len(sensitivities[x])
+        #     subplot_function(number_of_observables_in_simulation,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x)
 
-        def subplot_function(number_of_observables_in_simulation,time_profiles,sensitivities,top_sensitivity_single_exp,observables_list_for_legend,list_of_experiment_observables,experiment_number):
-                        
-            for plot_number in range(number_of_observables_in_simulation):
-                print(os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ' ' + list_of_experiment_observables[plot_number])
-                plt.figure()
-                Sdx_df = pd.DataFrame()
-                Sdx_df['x'] = pd.Series(time_profiles[plot_number])
-                # num_rxn = top_sensitivity_single_exp[plot_number]
-                for c,top_columns in enumerate(top_sensitivity_single_exp[plot_number]):
+        systems = len(self.exp_dict_list_optimized)
+        WORKERS = systems
+        self.obs_Sdx_loop = self.manager.counter(total=len(self.exp_dict_list_optimized), desc='Observable Sdx Plots:', unit='experiments', color='blue')  
+        started = 0
+        active = {}
+        while systems > started or active:
+            if systems > started and len(active) < WORKERS:
+                queue = multiprocessing.Queue()
+                started += 1
+                x = started - 1
+                number_of_observables_in_simulation = len(sensitivities[x])
+                process = multiprocessing.Process(target=self.plotting_Sdx_parallel, name='System %d' % started, args=(number_of_observables_in_simulation,summed_observable_list,num_rxn,sigma_list,X,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x))
+                process.start()
+                active[started] = (process, queue)
+            for system in tuple(active.keys()):
+                process, queue = active[system]
+                alive = process.is_alive()
+                if not alive:
+                    del active[system]
+                    self.obs_Sdx_loop.update()
 
-                    top_columns_index = summed_observable_list.index(top_columns)
+    def plotting_Sdx_parallel(self,number_of_observables_in_simulation,summed_observable_list,num_rxn,sigma_list,X,time_profiles,sensitivities,top_sensitivity_single_exp,observables_list_for_legend,list_of_experiment_observables,experiment_number):
+                    
+        for plot_number in range(number_of_observables_in_simulation):
+            print(os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ' ' + list_of_experiment_observables[plot_number])
+            plt.figure()
+            Sdx_df = pd.DataFrame()
+            Sdx_df['x'] = pd.Series(time_profiles[plot_number])
+            # num_rxn = top_sensitivity_single_exp[plot_number]
+            for c,top_columns in enumerate(top_sensitivity_single_exp[plot_number]):
 
-                    plt.title('Experiment_'+str(experiment_number+1) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
-                    if c < 10:
-                        # if top_columns.split('_')[0] == 'k':
-                        if top_columns_index < num_rxn:
-                            X_A = X[top_columns_index][0]
-                            X_n = X[top_columns_index+num_rxn][0]
-                            X_Ea = X[top_columns_index+2*num_rxn][0]
-                            summed_X = X_A + X_n + X_Ea
-                            sigma_A = sigma_list[top_columns_index][0]
-                            sigma_n = sigma_list[top_columns_index+num_rxn][0]
-                            sigma_Ea = sigma_list[top_columns_index+2*num_rxn][0]
+                top_columns_index = summed_observable_list.index(top_columns)
 
-                            plt.plot(time_profiles[plot_number],sensitivities[plot_number][:,c],
-                            label = summed_observable_list[top_columns_index] +' [A:'+str(sigma_A)+', n:'+str(sigma_n)+', Ea:'+str(sigma_Ea)+', '+str(summed_X)+']') 
-                        else:
-                            plt.plot(time_profiles[plot_number],sensitivities[plot_number][:,c],
-                            label = summed_observable_list[top_columns_index] +' ['+str(sigma_list[top_columns_index+2*num_rxn][0])+', '+str(X[top_columns_index+2*num_rxn][0])+']') 
-                    observable_ylabel = list_of_experiment_observables[plot_number]
-                    observable_ylabel_string = list(observable_ylabel)
-                    for i, oys in enumerate(observable_ylabel_string):
-                        if oys.isdigit() == True:
-                            if i == 0:
-                                pass
-                            elif observable_ylabel_string[i-1] == ' ':
-                                pass
-                            else:
-                                observable_ylabel_string[i] = '_{' + str(oys) + '}'
-                    observable_ylabel_transformed = "".join(observable_ylabel_string)                             
-                    if 'Absorbance' in observable_ylabel:
-                        plt.ylabel(observable_ylabel)
-                    else:   
-                        plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \Delta x_j$')
-                    plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
-                    if top_columns.split('_')[0] == 'k':
+                plt.title('Experiment_'+str(experiment_number+1) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
+                if c < 10:
+                    # if top_columns.split('_')[0] == 'k':
+                    if top_columns_index < num_rxn:
                         X_A = X[top_columns_index][0]
                         X_n = X[top_columns_index+num_rxn][0]
                         X_Ea = X[top_columns_index+2*num_rxn][0]
@@ -1825,35 +1870,58 @@ class Plotting(object):
                         sigma_A = sigma_list[top_columns_index][0]
                         sigma_n = sigma_list[top_columns_index+num_rxn][0]
                         sigma_Ea = sigma_list[top_columns_index+2*num_rxn][0]
-                        Sdx_df[summed_observable_list[top_columns_index] +' [A:'+str(sigma_A)+', n:'+str(sigma_n)+', Ea:'+str(sigma_Ea)+', '+str(summed_X)+']'] = pd.Series(sensitivities[plot_number][:,c])  
+
+                        plt.plot(time_profiles[plot_number],sensitivities[plot_number][:,c],
+                        label = summed_observable_list[top_columns_index] +' [A:'+str(sigma_A)+', n:'+str(sigma_n)+', Ea:'+str(sigma_Ea)+', '+str(summed_X)+']') 
                     else:
-                        Sdx_df[summed_observable_list[top_columns_index] +' ['+str(sigma_list[top_columns_index+2*num_rxn][0])+', '+str(X[top_columns_index+2*num_rxn][0])+']'] = pd.Series(sensitivities[plot_number][:,c])                     
-                    # Sdx_df[sum_arrhenius_observables[top_columns_index] +' '+str(sigma_list[top_columns])] = pd.Series(sensitivities[plot_number][:,c])   
-                Sdx_df.to_csv(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
-                if self.simulation_run==None:
-                    if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                    if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
-                    if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
+                        plt.plot(time_profiles[plot_number],sensitivities[plot_number][:,c],
+                        label = summed_observable_list[top_columns_index] +' ['+str(sigma_list[top_columns_index+2*num_rxn][0])+', '+str(X[top_columns_index+2*num_rxn][0])+']') 
+                observable_ylabel = list_of_experiment_observables[plot_number]
+                observable_ylabel_string = list(observable_ylabel)
+                for i, oys in enumerate(observable_ylabel_string):
+                    if oys.isdigit() == True:
+                        if i == 0:
+                            pass
+                        elif observable_ylabel_string[i-1] == ' ':
+                            pass
+                        else:
+                            observable_ylabel_string[i] = '_{' + str(oys) + '}'
+                observable_ylabel_transformed = "".join(observable_ylabel_string)                             
+                if 'Absorbance' in observable_ylabel:
+                    plt.ylabel(observable_ylabel)
+                else:   
+                    plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \Delta x_j$')
+                plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
+                if top_columns.split('_')[0] == 'k':
+                    X_A = X[top_columns_index][0]
+                    X_n = X[top_columns_index+num_rxn][0]
+                    X_Ea = X[top_columns_index+2*num_rxn][0]
+                    summed_X = X_A + X_n + X_Ea
+                    sigma_A = sigma_list[top_columns_index][0]
+                    sigma_n = sigma_list[top_columns_index+num_rxn][0]
+                    sigma_Ea = sigma_list[top_columns_index+2*num_rxn][0]
+                    Sdx_df[summed_observable_list[top_columns_index] +' [A:'+str(sigma_A)+', n:'+str(sigma_n)+', Ea:'+str(sigma_Ea)+', '+str(summed_X)+']'] = pd.Series(sensitivities[plot_number][:,c])  
                 else:
-                    plt.title('Experiment_'+str(self.simulation_run) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
-                    if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
-                    if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
-                    if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)           
-                
-                self.obs_Sdx_loop.update() 
-                  
-        self.obs_Sdx_loop = self.manager.counter(total=len(self.obs_list), desc='Observable Sdx Plots:', unit='plots', color='blue')                    
-        for x in range(len(sensitivities)):            
-            number_of_observables_in_simulation = len(sensitivities[x])
-            subplot_function(number_of_observables_in_simulation,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x)
-                       
-        return 
+                    Sdx_df[summed_observable_list[top_columns_index] +' ['+str(sigma_list[top_columns_index+2*num_rxn][0])+', '+str(X[top_columns_index+2*num_rxn][0])+']'] = pd.Series(sensitivities[plot_number][:,c])                     
+                # Sdx_df[sum_arrhenius_observables[top_columns_index] +' '+str(sigma_list[top_columns])] = pd.Series(sensitivities[plot_number][:,c])   
+            Sdx_df.to_csv(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
+            if self.simulation_run==None:
+                if self.pdf == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                if self.png == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
+                if self.svg == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
+            else:
+                plt.title('Experiment_'+str(self.simulation_run) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
+                if self.pdf == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                if self.png == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
+                if self.svg == True:
+                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)           
+            
+            # self.obs_Sdx_loop.update() 
         
         
     def plotting_normal_distributions(self,
@@ -2561,7 +2629,7 @@ class Plotting(object):
     def plotting_T_and_time_full_simulation(self,experiments_want_to_plot_data_from=[],directory_to_save_images=''):
         init_temperature_list = []
         for exp in self.exp_dict_list_original:
-            init_temperature_list.append(exp['simulation'].temperature)
+            init_temperature_list.append(exp['simulation']['fullParsedYamlFile']['temperature'])
         total_times = []
         temperature_list_full_simulation = []
         for i,exp in enumerate(self.exp_dict_list_optimized):
@@ -2574,14 +2642,14 @@ class Plotting(object):
                 
                 if observable in exp['mole_fraction_observables']:
                     single_exp_dict.append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                    interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                    interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                     temp_list_single_experiment.append(interploated_temp)
 
                     observable_counter+=1
                     
                 if observable in exp['concentration_observables']:
                     single_exp_dict.append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                    interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                    interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                     temp_list_single_experiment.append(interploated_temp) 
                     #print(interploated_temp.shape ,exp['experimental_data'][observable_counter]['Time'].shape )
 
@@ -2589,10 +2657,10 @@ class Plotting(object):
                     observable_counter+=1
                     
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_exp_dict.append(exp['absorbance_experimental_data'][k]['time']*1e3)
-                    interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                    interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                     temp_list_single_experiment.append(interploated_temp)
                     #print(interploated_temp.shape, exp['absorbance_experimental_data'][k]['time'].shape )
   
@@ -2748,7 +2816,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
@@ -2922,7 +2990,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
@@ -3140,7 +3208,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
@@ -3268,7 +3336,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
@@ -3313,28 +3381,28 @@ class Plotting(object):
                 if i in experiments_want_to_plot_data_from:
                     if observable in exp['mole_fraction_observables']:
                         empty_nested_observable_list_time[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
                         observable_counter+=1
                         
                     if observable in exp['concentration_observables']:
                         empty_nested_observable_list_time[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
     
     
                         observable_counter+=1
             if i in experiments_want_to_plot_data_from:        
                 if 'perturbed_coef' in exp.keys():
-                    wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                    wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                     for k,wl in enumerate(wavelengths):
                         empty_nested_observable_list_time[observables_unique.index(wl)].append(exp['absorbance_experimental_data'][k]['time']*1e3)
     
-                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(wl)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
     
     
                         #print(interploated_temp.shape, exp['absorbance_experimental_data'][k]['time'].shape )
@@ -3439,7 +3507,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
@@ -3484,28 +3552,28 @@ class Plotting(object):
                 if i in experiments_want_to_plot_data_from:
                     if observable in exp['mole_fraction_observables']:
                         empty_nested_observable_list_time[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
                         observable_counter+=1
                         
                     if observable in exp['concentration_observables']:
                         empty_nested_observable_list_time[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
     
     
                         observable_counter+=1
             if i in experiments_want_to_plot_data_from:        
                 if 'perturbed_coef' in exp.keys():
-                    wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                    wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                     for k,wl in enumerate(wavelengths):
                         empty_nested_observable_list_time[observables_unique.index(wl)].append(exp['absorbance_experimental_data'][k]['time']*1e3)
     
-                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(wl)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
 ####################################################################################################################################################################################################################    
         empty_nested_observable_list_Y_2 = [[] for x in range(len(observables_unique))]
         empty_nested_observable_list_y_2 = [[] for x in range(len(observables_unique))]
@@ -3542,28 +3610,28 @@ class Plotting(object):
                 if i in experiments_want_to_plot_data_from_2:
                     if observable in exp['mole_fraction_observables']:
                         empty_nested_observable_list_time_2[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
                         observable_counter+=1
                         
                     if observable in exp['concentration_observables']:
                         empty_nested_observable_list_time_2[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
     
     
                         observable_counter+=1
             if i in experiments_want_to_plot_data_from_2:        
                 if 'perturbed_coef' in exp.keys():
-                    wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                    wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                     for k,wl in enumerate(wavelengths):
                         empty_nested_observable_list_time_2[observables_unique.index(wl)].append(exp['absorbance_experimental_data'][k]['time']*1e3)
     
-                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(wl)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])    
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])    
 ###################################################################################################################################################################################################################  
         
         x = np.arange(10)
@@ -3680,7 +3748,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
@@ -3728,28 +3796,28 @@ class Plotting(object):
                 if i in experiments_want_to_plot_data_from:
                     if observable in exp['mole_fraction_observables']:
                         empty_nested_observable_list_time[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
                         observable_counter+=1
                         
                     if observable in exp['concentration_observables']:
                         empty_nested_observable_list_time[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
     
     
                         observable_counter+=1
             if i in experiments_want_to_plot_data_from:        
                 if 'perturbed_coef' in exp.keys():
-                    wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                    wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                     for k,wl in enumerate(wavelengths):
                         empty_nested_observable_list_time[observables_unique.index(wl)].append(exp['absorbance_experimental_data'][k]['time']*1e3)
     
-                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(wl)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
 ####################################################################################################################################################################################################################    
         empty_nested_observable_list_Y_2 = [[] for x in range(len(observables_unique))]
         empty_nested_observable_list_y_2 = [[] for x in range(len(observables_unique))]
@@ -3790,28 +3858,28 @@ class Plotting(object):
                 if i in experiments_want_to_plot_data_from_2:
                     if observable in exp['mole_fraction_observables']:
                         empty_nested_observable_list_time_2[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
                         observable_counter+=1
                         
                     if observable in exp['concentration_observables']:
                         empty_nested_observable_list_time_2[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
     
     
                         observable_counter+=1
             if i in experiments_want_to_plot_data_from_2:        
                 if 'perturbed_coef' in exp.keys():
-                    wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                    wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                     for k,wl in enumerate(wavelengths):
                         empty_nested_observable_list_time_2[observables_unique.index(wl)].append(exp['absorbance_experimental_data'][k]['time']*1e3)
     
-                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(wl)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])    
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])    
 ###################################################################################################################################################################################################################  
         
         x = np.arange(10)
@@ -4083,14 +4151,14 @@ class Plotting(object):
                     continue
                 
                 if observable in exp['mole_fraction_observables']:
-                    difference = exp['experimental_data'][observable_counter][observable].values - (exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6
+                    difference = exp['experimental_data'][observable_counter][observable].values - (exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6
                     square_of_differences = np.square(difference)
                     sum_of_squares = sum(square_of_differences)
                     single_exp_dict.append(sum_of_squares)
                     observable_counter+=1
                     
                 if observable in exp['concentration_observables']:
-                    difference = exp['experimental_data'][observable_counter][observable+'_ppm'].values - (exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6
+                    difference = exp['experimental_data'][observable_counter][observable+'_ppm'].values - (exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6
                     square_of_differences = np.square(difference)
                     sum_of_squares = sum(square_of_differences)
                     single_exp_dict.append(sum_of_squares)
@@ -4099,7 +4167,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     difference = exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)].values- exp['absorbance_model_data'][wl]
                     square_of_differences = np.square(difference)
@@ -4123,7 +4191,7 @@ class Plotting(object):
                 
                 if observable in exp['mole_fraction_observables']:
                     mean_calculated_experimental = np.mean(exp['experimental_data'][observable_counter][observable].values)
-                    #mean_calculated_predicted = (exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6
+                    #mean_calculated_predicted = (exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6
                     
                     difference = exp['experimental_data'][observable_counter][observable].values - mean_calculated_experimental
                     square_of_differences = np.square(difference)
@@ -4143,7 +4211,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     mean_calculated_experimental = np.mean(exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)].values)
                     difference = exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)].values- mean_calculated_experimental
@@ -4241,7 +4309,7 @@ class Plotting(object):
                     continue
                 
                 if observable in exp['mole_fraction_observables']:
-                    difference = exp['experimental_data'][observable_counter][observable].values - (exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6
+                    difference = exp['experimental_data'][observable_counter][observable].values - (exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['mole_fraction_relative_uncertainty'][observable_counter],
                         exp['uncertainty']['mole_fraction_absolute_uncertainty'][observable_counter],
                         exp['experimental_data'][observable_counter][observable].values,exp['experimental_data'][observable_counter])
@@ -4278,7 +4346,7 @@ class Plotting(object):
                     observable_counter+=1
                     
                 if observable in exp['concentration_observables']:
-                    difference = exp['experimental_data'][observable_counter][observable+'_ppm'].values - (exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6
+                    difference = exp['experimental_data'][observable_counter][observable+'_ppm'].values - (exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['concentration_relative_uncertainty'][observable_counter],
                          exp['uncertainty']['concentration_absolute_uncertainty'][observable_counter],
                          exp['experimental_data'][observable_counter][observable+'_ppm'].values,exp['experimental_data'][observable_counter])    
@@ -4314,7 +4382,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     difference = exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)].values- exp['absorbance_model_data'][wl]
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['absorbance_relative_uncertainty'][k],
@@ -4417,7 +4485,7 @@ class Plotting(object):
                 
                 if observable in exp['mole_fraction_observables']:
                     mean_calculated_experimental = np.mean(exp['experimental_data'][observable_counter][observable].values)
-                    #mean_calculated_predicted = (exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6
+                    #mean_calculated_predicted = (exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['mole_fraction_relative_uncertainty'][observable_counter],
                         exp['uncertainty']['mole_fraction_absolute_uncertainty'][observable_counter],
                         exp['experimental_data'][observable_counter][observable].values,exp['experimental_data'][observable_counter])                    
@@ -4457,7 +4525,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     mean_calculated_experimental = np.mean(exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)].values)
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['absorbance_relative_uncertainty'][k],
@@ -4480,7 +4548,7 @@ class Plotting(object):
         return overall_list    
 
 
-    def plotting_individual_histograms(self,experimental_dict_list,parsed_yaml_list_optimized,directory_to_save_images=''):
+    def plotting_individual_histograms(self,experimental_dict_list,directory_to_save_images=''):
         
         def uncertainty_calc(relative_uncertainty,absolute_uncertainty,data,experimental_data):
 
@@ -4542,8 +4610,8 @@ class Plotting(object):
                 if observable == None:
                     continue
                 if observable in exp['mole_fraction_observables']:
-                    difference = exp['experimental_data'][observable_counter][observable].values - (exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6
-                    log_difference = np.log(exp['experimental_data'][observable_counter][observable].values)-np.log((exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6)
+                    difference = exp['experimental_data'][observable_counter][observable].values - (exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6
+                    log_difference = np.log(exp['experimental_data'][observable_counter][observable].values)-np.log((exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6)
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['mole_fraction_relative_uncertainty'][observable_counter],
                         exp['uncertainty']['mole_fraction_absolute_uncertainty'][observable_counter],
                         exp['experimental_data'][observable_counter][observable].values,exp['experimental_data'][observable_counter])
@@ -4589,11 +4657,11 @@ class Plotting(object):
                     
                     
                     plt.subplot(2,1,1)
-                    plt.figure(exp['simulation'].timeHistoryInterpToExperiment['temperature'].dropna().values, difference)
+                    plt.figure(exp['simulation']['timeHistoryInterpToExperiment']['temperature'].dropna().values, difference)
                     plt.ylabel('Y')
                     plt.xlabel('Temperature')                    
                     plt.subplot(2,1,2)
-                    plt.figure(exp['simulation'].timeHistoryInterpToExperiment['temperature'].dropna().values, weighted_log_difference)
+                    plt.figure(exp['simulation']['timeHistoryInterpToExperiment']['temperature'].dropna().values, weighted_log_difference)
                     plt.ylabel('y')
                     plt.xlabel('Temperature')                         
                     
@@ -4602,8 +4670,8 @@ class Plotting(object):
                     observable_counter+=1
                     
                 if observable in exp['concentration_observables']:
-                    difference = exp['experimental_data'][observable_counter][observable+'_ppm'].values - (exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6
-                    log_difference = np.log(exp['experimental_data'][observable_counter][observable+'_ppm'].values) - np.log((exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6)
+                    difference = exp['experimental_data'][observable_counter][observable+'_ppm'].values - (exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6
+                    log_difference = np.log(exp['experimental_data'][observable_counter][observable+'_ppm'].values) - np.log((exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6)
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['concentration_relative_uncertainty'][observable_counter],
                          exp['uncertainty']['concentration_absolute_uncertainty'][observable_counter],
                          exp['experimental_data'][observable_counter][observable+'_ppm'].values,exp['experimental_data'][observable_counter])    
@@ -4657,7 +4725,7 @@ class Plotting(object):
                     
                     plt.figure()
                     plt.subplot(2,1,1)
-                    interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                    interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                     plt.plot(interploated_temp, difference)
                     plt.ylabel('Y')
                     plt.title(observable+ ' ' + 'Experiment Number' + ' '+str(i))
@@ -4673,7 +4741,8 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                # wavelengths = parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = experimental_dict_list[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths'][0]
                 plt.figure()
                 for k,wl in enumerate(wavelengths):
                     difference = exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)].values- exp['absorbance_model_data'][wl]
@@ -4729,7 +4798,7 @@ class Plotting(object):
                     
                     plt.figure()                    
                     plt.subplot(2,1,1)
-                    interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                    interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                     plt.plot(interploated_temp,difference)
                     plt.title('Absorbance'+' '+str(wl)+ ' ' + 'Experiment Number' + ' '+str(i))
                     plt.ylabel('Y')
@@ -4814,7 +4883,7 @@ class Plotting(object):
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['mole_fraction_relative_uncertainty'][observable_counter],
                         exp['uncertainty']['mole_fraction_absolute_uncertainty'][observable_counter],
                         exp['experimental_data'][observable_counter][observable].values,exp['experimental_data'][observable_counter])                    
-                    difference = np.log(exp['experimental_data'][observable_counter][observable].values) - np.log((exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6)
+                    difference = np.log(exp['experimental_data'][observable_counter][observable].values) - np.log((exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6)
                     difference = difference.reshape((difference.shape[0],
                                                                                1))
                                         
@@ -4836,7 +4905,7 @@ class Plotting(object):
                          exp['uncertainty']['concentration_absolute_uncertainty'][observable_counter],
                          exp['experimental_data'][observable_counter][observable+'_ppm'].values,exp['experimental_data'][observable_counter])    
                     
-                    difference = np.log(exp['experimental_data'][observable_counter][observable+'_ppm'].values) - np.log((exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values)*1e6)
+                    difference = np.log(exp['experimental_data'][observable_counter][observable+'_ppm'].values) - np.log((exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values)*1e6)
                     
                     difference = difference.reshape((difference.shape[0],
                                                                                1))
@@ -4856,7 +4925,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     total_uncertainty,un_weighted_uncertainty = uncertainty_calc(exp['uncertainty']['absorbance_relative_uncertainty'][k],
                                                              exp['uncertainty']['absorbance_absolute_uncertainty'][k],
@@ -4948,7 +5017,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
@@ -5195,7 +5264,7 @@ class Plotting(object):
                     
 
             if 'perturbed_coef' in exp.keys():
-                wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                 for k,wl in enumerate(wavelengths):
                     single_experiment.append(wl)
                     
@@ -5243,28 +5312,28 @@ class Plotting(object):
                 if i in experiments_want_to_plot_data_from:
                     if observable in exp['mole_fraction_observables']:
                         empty_nested_observable_list_time[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
                         observable_counter+=1
                         
                     if observable in exp['concentration_observables']:
                         empty_nested_observable_list_time[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
     
     
                         observable_counter+=1
             if i in experiments_want_to_plot_data_from:        
                 if 'perturbed_coef' in exp.keys():
-                    wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                    wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                     for k,wl in enumerate(wavelengths):
                         empty_nested_observable_list_time[observables_unique.index(wl)].append(exp['absorbance_experimental_data'][k]['time']*1e3)
     
-                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature[observables_unique.index(wl)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
 ####################################################################################################################################################################################################################    
         empty_nested_observable_list_Y_2 = [[] for x in range(len(observables_unique))]
         empty_nested_observable_list_y_2 = [[] for x in range(len(observables_unique))]
@@ -5305,28 +5374,28 @@ class Plotting(object):
                 if i in experiments_want_to_plot_data_from_2:
                     if observable in exp['mole_fraction_observables']:
                         empty_nested_observable_list_time_2[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
                         observable_counter+=1
                         
                     if observable in exp['concentration_observables']:
                         empty_nested_observable_list_time_2[observables_unique.index(observable)].append(exp['experimental_data'][observable_counter]['Time']*1e3)
-                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['experimental_data'][observable_counter]['Time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(observable)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(observable)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])
     
     
                         observable_counter+=1
             if i in experiments_want_to_plot_data_from_2:        
                 if 'perturbed_coef' in exp.keys():
-                    wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                    wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                     for k,wl in enumerate(wavelengths):
                         empty_nested_observable_list_time_2[observables_unique.index(wl)].append(exp['absorbance_experimental_data'][k]['time']*1e3)
     
-                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation'].timeHistories[0]['time'],exp['simulation'].timeHistories[0]['temperature'])
+                        interploated_temp = np.interp(exp['absorbance_experimental_data'][k]['time'],exp['simulation']['timeHistories'][0]['time'],exp['simulation']['timeHistories'][0]['temperature'])
                         empty_nested_observable_list_temperature_2[observables_unique.index(wl)].append(interploated_temp)
-                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation'].temperature]*np.shape(interploated_temp)[0])    
+                        empty_nested_observable_list_initial_temperature_2[observables_unique.index(wl)].append([self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']]*np.shape(interploated_temp)[0])    
 ###################################################################################################################################################################################################################  
         
         x = np.arange(10)
@@ -5627,8 +5696,8 @@ class Plotting(object):
                             plt.subplot(3,1,1)
                             plt.xlim(-.005,.8)
 
-                        plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['simulation'].timeHistories[0][observable]*1e6,'b',label='MSI')
-                        plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['simulation'].timeHistories[0][observable]*1e6,'r',label= "$\it{a}$ $\it{priori}$ model")
+                        plt.plot(exp['simulation']['timeHistories'][0]['time']*1e3,exp['simulation']['timeHistories'][0][observable]*1e6,'b',label='MSI')
+                        plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3,self.exp_dict_list_original[i]['simulation']['timeHistories'][0][observable]*1e6,'r',label= "$\it{a}$ $\it{priori}$ model")
                         plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,exp['experimental_data'][observable_counter][observable+'_ppm'],'o',color='black',label='Hong et al. experiment') 
                        # plt.xlabel('Time (ms)')
                         if observable == 'H2O':
@@ -5645,9 +5714,9 @@ class Plotting(object):
                         
                         if bool(sigmas_optimized)==True:
                             high_error_optimized = np.exp(sigmas_optimized[i][observable_counter])                   
-                            high_error_optimized = np.multiply(high_error_optimized,exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
+                            high_error_optimized = np.multiply(high_error_optimized,exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
                             low_error_optimized = np.exp(np.array(sigmas_optimized[i][observable_counter])*-1)
-                            low_error_optimized = np.multiply(low_error_optimized,exp['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
+                            low_error_optimized = np.multiply(low_error_optimized,exp['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
                             
                             plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_optimized,'b--')
                             plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_optimized,'b--')                    
@@ -5655,29 +5724,29 @@ class Plotting(object):
         
         
                             high_error_original = np.exp(sigmas_original[i][observable_counter])
-                            high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
+                            high_error_original = np.multiply(high_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
                             low_error_original = np.exp(np.array(sigmas_original[i][observable_counter])*-1)
-                            low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation'].timeHistoryInterpToExperiment[observable].dropna().values*1e6)
+                            low_error_original = np.multiply(low_error_original,self.exp_dict_list_original[i]['simulation']['timeHistoryInterpToExperiment'][observable].dropna().values*1e6)
                             
 
                         key_list = []
-                        for key in self.exp_dict_list_original[i]['simulation'].conditions.keys():
+                        for key in self.exp_dict_list_original[i]['simulation']['conditions'].keys():
                             
-                            #plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].conditions[key]))
+                            #plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['conditions'][key]))
                             key_list.append(key)
                        
                         #plt.legend(handlelength=3)
                         #plt.legend(ncol=1)
                         sp = '_'.join(key_list)
                         #print(sp)
-                        #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K'+'_'+str(self.exp_dict_list_original[i]['simulation'].pressure)+'_'+sp+'_'+'.pdf', bbox_inches='tight')
+                        #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
                         
                         #stub
                         plt.tick_params(direction='in')
                         
                         
-                        #plt.savefig('Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.pdf', bbox_inches='tight')
-                        #plt.savefig('Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
+                        #plt.savefig('Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                        #plt.savefig('Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
                         #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=1000)
     
     
@@ -5686,7 +5755,7 @@ class Plotting(object):
                         
     
                 if 'perturbed_coef' in exp.keys():
-                    wavelengths = self.parsed_yaml_list_optimized[i]['absorbanceCsvWavelengths']
+                    wavelengths = self.exp_dict_list_optimized[i]['simulation']['fullParsedYamlFile']['absorbanceCsvWavelengths']
                     plt.subplot(3,1,3)
                     #plt.xlim(-.005,3)
                     
@@ -5704,8 +5773,8 @@ class Plotting(object):
                         if wl == 215:
                             plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)],'o',color='black',label='Kappel et al. experiment')
     
-                        plt.plot(exp['simulation'].timeHistories[0]['time']*1e3,exp['absorbance_calculated_from_model'][wl],'b',label='MSI')
-                        plt.plot(self.exp_dict_list_original[i]['simulation'].timeHistories[0]['time']*1e3,self.exp_dict_list_original[i]['absorbance_calculated_from_model'][wl],'r',label= "$\it{a}$ $\it{priori}$ model")
+                        plt.plot(exp['simulation']['timeHistories'][0]['time']*1e3,exp['absorbance_calculated_from_model'][wl],'b',label='MSI')
+                        plt.plot(self.exp_dict_list_original[i]['simulation']['timeHistories'][0]['time']*1e3,self.exp_dict_list_original[i]['absorbance_calculated_from_model'][wl],'r',label= "$\it{a}$ $\it{priori}$ model")
                         #plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,exp['absorbance_experimental_data'][k]['Absorbance_'+str(wl)],'o',color='black',label='Experimental Data')
                         plt.xlabel('Time [ms]',fontsize=18)
                         #plt.ylabel('Absorbance'+' '+str(wl)+' nm')
@@ -5735,10 +5804,10 @@ class Plotting(object):
                         
                         #start here
                         
-                        #plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation'].temperature))
-                        #plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation'].pressure))
-                        #for key in self.exp_dict_list_original[i]['simulation'].conditions.keys():                        
-                            #plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation'].conditions[key]))
+                        #plt.plot([],'w' ,label= 'T:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature']))
+                        #plt.plot([],'w', label= 'P:'+ str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure']))
+                        #for key in self.exp_dict_list_original[i]['simulation']['conditions'].keys():                        
+                            #plt.plot([],'w',label= key+': '+str(self.exp_dict_list_original[i]['simulation']['conditions'][key]))
                             
     
                         #plt.legend(handlelength=3)
@@ -5749,8 +5818,8 @@ class Plotting(object):
                         plt.tick_params(direction='in')
    
 
-                        #plt.savefig('Exp_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.pdf', bbox_inches='tight')
-                        #plt.savefig('Exp_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation'].temperature)+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
+                        #plt.savefig('Exp_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                        #plt.savefig('Exp_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
                         
                         
                         
@@ -5834,9 +5903,9 @@ class Plotting(object):
                 target_press = rate_constant_plots_df['pressure']
                 # target_k = rate_constant_plots_df['k']
                 bath_gas = rate_constant_plots_df['M']
-                reactions_in_cti_file = exp_dict_list[0]['simulation'].processor.solution.reaction_equations()
+                reactions_in_cti_file = exp_dict_list[0]['simulation']['reaction_equations']
                 number_of_reactions_in_cti = len(reactions_in_cti_file)
-                gas = ct.Solution(exp_dict_list[0]['simulation'].processor.cti_path)
+                gas = ct.Solution(exp_dict_list[0]['simulation']['cti_path'])
                 As = []
                 Ns =  []
                 Eas = []
@@ -6909,7 +6978,7 @@ class Plotting(object):
                         idx = tuple(sorted(reaction_number_in_cti_file_with_these_reactants))
                     else:
                         idx = reaction_list_from_mechanism.index(reaction)
-#Obama
+
                 target_value_ks[unique_reactions.index(idx)].append(parsed_csv['k'][i])
                 target_value_temps[unique_reactions.index(idx)].append(parsed_csv['temperature'][i])
                         
@@ -7323,7 +7392,7 @@ class Plotting(object):
                         sigma_list_for_target_ks[unique_reactions.index(indx)].append(sigma_k)
                 
             return sigma_list_for_target_ks
-#Trump         
+       
         def calculating_target_value_ks_from_cantera_for_sigmas(k_target_values_parsed_csv,gas,unique_reactions):
             target_value_ks = [[] for reaction in range(len(unique_reactions))]
             
@@ -7628,7 +7697,7 @@ class Plotting(object):
 
 
             return target_value_ks
-#Pence     
+   
     
         if bool(self.rate_constant_plots_csv):
 
@@ -7902,7 +7971,7 @@ class Plotting(object):
                     else:
                         unique_reactions_optimized.append(reaction_list_from_mechanism.index(self.rate_constant_plots_df['Reaction'][row]))
                         unique_reactions_original.append(reaction_list_from_mechanism_original.index(self.rate_constant_plots_df['Reaction'][row]))
-#Biden          
+        
             unique_reactions_optimized = unique_list(unique_reactions_optimized)
             unique_reactions_original = unique_list(unique_reactions_original)
             
@@ -8833,7 +8902,7 @@ class Plotting(object):
         observables_list = self.target_parameters[length:]
         # observables_list = self.sum_arrhenius_observables[length:]
         
-        reactions_in_cti_file = self.exp_dict_list_original[0]['simulation'].processor.solution.reaction_equations()
+        reactions_in_cti_file = self.exp_dict_list_original[0]['simulation']['reaction_equations']
         flatten = lambda *n: (e for a in n
             for e in (flatten(*a) if isinstance(a, (tuple, list)) else (a,)))        
         flattened_master_equation_reaction_list = list(flatten(self.master_equation_reactions))     
@@ -9090,16 +9159,19 @@ class Plotting(object):
         print('Merging pdfs for obervables')
         print('--------------------------------------------------------------------------')
 
-        
         Experiment_pdfs = set(glob.glob(os.path.join(self.out_path, "Experiment_[0-9]_[!US]*.pdf")) 
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9]_[!US]*.pdf")) 
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9][0-9]_[!US]*.pdf")))
         Experiment_pdfs = natsort.natsorted(Experiment_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Experiment_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Experiment.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Experiment_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Experiment_pdfs:
             os.remove(pdf)
 
@@ -9107,11 +9179,15 @@ class Plotting(object):
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9]_[U]*.pdf")) 
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9][0-9]_[U]*.pdf")))
         Experiment_UWSA_pdfs = natsort.natsorted(Experiment_UWSA_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Experiment_UWSA_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Experiment_UWSA.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Experiment_UWSA_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Experiment_UWSA_pdfs:
             os.remove(pdf)
 
@@ -9119,13 +9195,17 @@ class Plotting(object):
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9]_[Sdx]*.pdf")) 
                             + glob.glob(os.path.join(self.out_path, "Experiment_[0-9][0-9][0-9]_[Sdx]*.pdf")))
         Experiment_Sdx_pdfs = natsort.natsorted(Experiment_Sdx_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Experiment_Sdx_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Experiment_Sdx.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Experiment_Sdx_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Experiment_Sdx_pdfs:
-            os.remove(pdf)        
+            os.remove(pdf)     
             
     def merge_rate_constant_pdfs(self):
         
@@ -9134,37 +9214,48 @@ class Plotting(object):
         print('Merging pdfs for rate constants')
         print('--------------------------------------------------------------------------')
 
-        
         Rate_Constant_pdfs = set(glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9].pdf"))
                                 + glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9][0-9].pdf")))
         Rate_Constant_pdfs = natsort.natsorted(Rate_Constant_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Rate_Constant_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Rate_Constant.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Rate_Constant_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Rate_Constant_pdfs:
             os.remove(pdf)
             
         Rate_Constant_UWSA_pdfs = set(glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9]_[U]*.pdf"))
                                     + glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9][0-9]_[U]*.pdf")) )
         Rate_Constant_UWSA_pdfs = natsort.natsorted(Rate_Constant_UWSA_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Rate_Constant_UWSA_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Rate_Constant_UWSA.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Rate_Constant_UWSA_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Rate_Constant_UWSA_pdfs:
             os.remove(pdf)
             
         Rate_Constant_Sdx_pdfs = set(glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9]_[Sdx]*.pdf"))
                                     + glob.glob(os.path.join(self.out_path, "Rate_Constant_[0-9][0-9]_[Sdx]*.pdf")) )
         Rate_Constant_Sdx_pdfs = natsort.natsorted(Rate_Constant_Sdx_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in Rate_Constant_Sdx_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.out_path, "Rate_Constant_Sdx.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.out_path, "Rate_Constant_Sdx_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for pdf in Rate_Constant_Sdx_pdfs:
             os.remove(pdf)
             
@@ -9191,14 +9282,17 @@ class Plotting(object):
                 plt.ylabel(r'ln($X$)')
                 plt.title(convergence_sorted.index[i])
                 plt.savefig(os.path.join(self.matrix_path,'convergence_plot_' + str(i) + '.pdf'), bbox_inches='tight', dpi=1)
-            
         convergece_plots_pdfs = set(glob.glob(os.path.join(self.matrix_path, "convergence_plot*.pdf")))
         convergece_plots_pdfs = natsort.natsorted(convergece_plots_pdfs)
-        merger = PdfMerger()
+
+        writer = PdfWriter()
         for pdf in convergece_plots_pdfs:
-            merger.append(pdf)
-        merger.write(os.path.join(self.matrix_path, "convergence_plots.pdf"))
-        merger.close()
+            reader = PdfReader(pdf)
+            for page in reader.pages:
+                writer.add_page(page)
+        with open(os.path.join(self.matrix_path, "convergence_plots_" + os.path.basename(self.working_directory) + ".pdf"), "wb") as output_pdf:
+            writer.write(output_pdf)
+
         for i, convergence_plot_file in enumerate(list(set(glob.glob(os.path.join(self.matrix_path, "convergence_plot_*.pdf"))))):
             os.remove(convergence_plot_file)
             

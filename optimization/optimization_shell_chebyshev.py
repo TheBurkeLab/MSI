@@ -223,7 +223,14 @@ class MSI_optimization_chebyshev(object):
         mapped_to_alpha_full_simulation,nested_list = master_equation_cheby_instance.map_to_alpha(self.chebyshev_sensitivities,
                                                                                                   self.experiment_dictonaries,
                                                                                                   self.list_of_parsed_yamls,
-                                                                                                  self.master_equation_reactions)   
+                                                                                                  self.master_equation_reactions,
+                                                                                                  self.manager)   
+        
+        # mapped_to_alpha_full_simulation,nested_list = master_equation_cheby_instance.map_to_alpha(self.chebyshev_sensitivities,
+        #                                                                                           self.experiment_dictonaries,
+        #                                                                                           self.list_of_parsed_yamls,
+        #                                                                                           self.master_equation_reactions)   
+        
         self.mapped_to_alpha_full_simulation = mapped_to_alpha_full_simulation
         MP_for_S_matrix,new_sens_dict,broken_up_by_reaction,tottal_dict,tester = master_equation_cheby_instance.map_parameters_to_s_matrix(self.mapped_to_alpha_full_simulation,
                                                                                     self.chebyshev_sensitivities,
@@ -249,7 +256,7 @@ class MSI_optimization_chebyshev(object):
         matrix_builder_instance = ml.OptMatrix()
         self.matrix_builder_instance = matrix_builder_instance
         S_matrix = matrix_builder_instance.load_S(self.experiment_dictonaries,
-                                                  self.list_of_parsed_yamls,
+                                                #   self.list_of_parsed_yamls,
                                                   dk=self.perturbment,
                                                   master_equation_reactions = self.master_equation_reactions,
                                                   mapped_master_equation_sensitivites=self.MP_for_S_matrix,
@@ -260,7 +267,7 @@ class MSI_optimization_chebyshev(object):
         
         if loop_counter == 0:
             Y_matrix,Ydf,active_parameters = matrix_builder_instance.load_Y(self.experiment_dictonaries,
-                                                                   self.list_of_parsed_yamls,
+                                                                #    self.list_of_parsed_yamls,
                                                                    loop_counter=loop_counter,
                                                                    master_equation_flag = self.master_equation_flag,
                                                                    master_equation_uncertainty_df = self.master_equation_uncertainty_df,
@@ -273,10 +280,10 @@ class MSI_optimization_chebyshev(object):
             #                                                                                                     master_equation_flag = self.master_equation_flag,
             #                                                                                                     master_equation_uncertainty_df = self.master_equation_uncertainty_df,
             #                                                                                                     master_equation_reactions = self.master_equation_reactions)            
-                        
+                       
         else:
             Y_matrix,Ydf,active_parameters = matrix_builder_instance.load_Y(self.experiment_dictonaries,
-                                                                   self.list_of_parsed_yamls,
+                                                                #    self.list_of_parsed_yamls,
                                                                    loop_counter=loop_counter,
                                                                    X=self.X_to_subtract_from_Y,
                                                                    master_equation_flag = self.master_equation_flag,
@@ -296,7 +303,7 @@ class MSI_optimization_chebyshev(object):
         self.Ydf = Ydf
         
         Z_matrix,zdf,sigma = matrix_builder_instance.build_Z(self.experiment_dictonaries,
-                                                                      self.list_of_parsed_yamls,
+                                                                    #   self.list_of_parsed_yamls,
                                                                        loop_counter=loop_counter,
                                                                        reaction_uncertainty = os.path.join(self.working_directory, self.reaction_uncertainty_csv),
                                                                        master_equation_uncertainty_df=self.master_equation_uncertainty_df,
@@ -328,7 +335,7 @@ class MSI_optimization_chebyshev(object):
         
         ### This needs to be editied to accomidate chebychev 
         
-        adding_target_values_instance = ml.Adding_Target_Values(self.S_matrix,self.Y_matrix,self.Z_matrix,self.sigma,
+        adding_target_values_instance = ml.Adding_Target_Values(self.manager,self.S_matrix,self.Y_matrix,self.Z_matrix,self.sigma,
                                                                 self.Ydf,self.zdf,T_P_min_max_dict = self.T_P_min_max_dict)
         
         self.adding_target_values_instance = adding_target_values_instance
@@ -453,8 +460,9 @@ class MSI_optimization_chebyshev(object):
         return
     
     
-    def saving_first_itteration_matrices(self,loop_counter=0):
-  
+    def saving_first_iteration_matrices(self,loop_counter=0):
+ 
+        self.ydf_prior = copy.deepcopy(self.ydf)
         self.Ydf_prior = copy.deepcopy(self.Ydf)
         self.Sdf_prior = copy.deepcopy(self.Sdf)
         self.covdf_prior = copy.deepcopy(self.covdf)
@@ -462,6 +470,7 @@ class MSI_optimization_chebyshev(object):
         self.experiment_dictonaries_original = self.experiment_dictonaries     
         
         self.Xdf_prior.to_csv(os.path.join(self.matrix_path,'Xdf_prior.csv'))
+        self.ydf_prior.to_csv(os.path.join(self.matrix_path,'zw_Ydf_prior.csv'))
         self.Ydf_prior.to_csv(os.path.join(self.matrix_path,'Ydf_prior.csv'))
         self.Sdf_prior.to_csv(os.path.join(self.matrix_path,'Sdf_prior.csv'))
         self.covdf_prior.to_csv(os.path.join(self.matrix_path,'covdf_prior.csv'))
@@ -473,7 +482,8 @@ class MSI_optimization_chebyshev(object):
     def updating_files(self,loop_counter=0):
         if loop_counter==0:
             updated_file_name_list = self.yaml_instance.yaml_file_updates(self.yaml_file_list_with_working_directory,
-                                                 self.list_of_parsed_yamls,self.experiment_dictonaries,
+                                                #  self.list_of_parsed_yamls,
+                                                 self.experiment_dictonaries,
                                                  self.physical_obervable_updates_list,
                                                  loop_counter = loop_counter)
             self.updated_file_name_list = updated_file_name_list
@@ -491,7 +501,8 @@ class MSI_optimization_chebyshev(object):
         else:
             
             updated_file_name_list = self.yaml_instance.yaml_file_updates(self.updated_yaml_file_name_list,
-                                                 self.list_of_parsed_yamls,self.experiment_dictonaries,
+                                                #  self.list_of_parsed_yamls,
+                                                 self.experiment_dictonaries,
                                                  self.physical_obervable_updates_list,
                                                  loop_counter = loop_counter)
             
@@ -563,55 +574,90 @@ class MSI_optimization_chebyshev(object):
         print('Iteration ' + str(loop_counter+1))    
         print('--------------------------------------------------------------------------')    
         
+        steps = 5
+        if self.master_equation_flag == True:
+            steps += 1
+        if bool(self.k_target_values_csv):
+            steps += 1
+        self.subloop=self.manager.counter(total=steps,desc='   Iteration '+str(loop_counter+1)+':',unit='steps',color='gray')   
+            
         self.append_working_directory()
         #every loop run this, probably not?
         self.establish_processor(loop_counter=loop_counter)
         self.parsing_yaml_files(loop_counter = loop_counter)
 
-        
         if loop_counter == 0:
             original_experimental_conditions_local = copy.deepcopy(self.yaml_instance.original_experimental_conditions)
             self.original_experimental_conditions_local = original_experimental_conditions_local
         
-        
+        print('\nRunning Experimental Simuations')
         self.running_simulations(loop_counter=loop_counter)
+        self.subloop.update()
         
         if self.master_equation_flag == True:
+            print('\nBuilding Master Equation s-Matrix')
             self.master_equation_s_matrix_building(loop_counter=loop_counter)
+            self.subloop.update()
             #need to add functionality to update with the surgate model or drop out of loop
+            
+        print('\nBuilding Rest of the Matrices')
         self.building_matrices(loop_counter=loop_counter)
+        self.subloop.update()
+        
         if bool(self.k_target_values_csv):
-        # if not self.k_target_values_csv.empty:
+            print('\nAdding k Target Values')
             self.adding_k_target_values(loop_counter=loop_counter)
+            self.subloop.update()
         else:
             self.k_target_values_for_S = np.array([])
         
+        print('\nPerforming Matrix Math')
         self.matrix_math(loop_counter=loop_counter)
+        self.subloop.update()
         
+        print('\nSaving DataFrames')
+        self.df_loop=self.manager.counter(total=8,desc='      Saving DataFrames to CSVs:        ',unit='dataframes',color='gray')   
+        print('Xdf')
         self.Xdf = pd.DataFrame({'value': self.X.T[0]}, index=self.active_parameters)   
-        self.Ydf = pd.DataFrame({'value': self.Y_matrix.T[0]}, index=self.target_parameters)          
-        self.ydf = pd.DataFrame({'value': self.y_matrix.T[0]}, index=self.target_parameters)          
-        self.Zdf = pd.DataFrame({'value': self.Z_matrix.T[0]}, index=self.target_parameters)          
-        self.Sdf = pd.DataFrame(self.S_matrix, columns=self.active_parameters, index=self.target_parameters)
-        self.sdf = pd.DataFrame(self.s_matrix, columns=self.active_parameters, index=self.target_parameters)
-        self.covdf = pd.DataFrame(self.covariance, columns=self.active_parameters, index=self.active_parameters)
-        self.sigdf = pd.DataFrame({'value': list(np.sqrt(np.diag(self.covariance)))}, index=self.active_parameters)   
-        
         self.Xdf.to_csv(os.path.join(self.matrix_path,'Xdf.csv'))
         self.Xdf.to_csv(os.path.join(self.matrix_path,'Xdf_'+str(loop_counter+1)+'.csv'))
+        self.df_loop.update()
+        print('Ydf')
+        self.Ydf = pd.DataFrame({'value': self.Y_matrix.T[0]}, index=self.target_parameters)     
         self.Ydf.to_csv(os.path.join(self.matrix_path,'Ydf.csv'))
-        self.ydf.to_csv(os.path.join(self.matrix_path,'ydf.csv'))
+        self.df_loop.update()
+        print('ydf')
+        self.ydf = pd.DataFrame({'value': self.y_matrix.T[0]}, index=self.target_parameters)      
+        self.ydf.to_csv(os.path.join(self.matrix_path,'zw_Ydf.csv'))
+        self.df_loop.update()    
+        print('Zdf')
+        self.Zdf = pd.DataFrame({'value': self.Z_matrix.T[0]}, index=self.target_parameters)          
         self.Zdf.to_csv(os.path.join(self.matrix_path,'Zdf.csv'))
+        self.df_loop.update()
+        print('Sdf')
+        self.Sdf = pd.DataFrame(self.S_matrix, columns=self.active_parameters, index=self.target_parameters)
         self.Sdf.to_csv(os.path.join(self.matrix_path,'Sdf.csv'))
-        self.sdf.to_csv(os.path.join(self.matrix_path,'sdf.csv'))
+        self.df_loop.update()
+        print('sdf')
+        self.sdf = pd.DataFrame(self.s_matrix, columns=self.active_parameters, index=self.target_parameters)
+        self.sdf.to_csv(os.path.join(self.matrix_path,'zw_Sdf.csv'))
+        self.df_loop.update()
+        print('covdf')
+        self.covdf = pd.DataFrame(self.covariance, columns=self.active_parameters, index=self.active_parameters)
         self.covdf.to_csv(os.path.join(self.matrix_path,'covdf.csv'))
+        self.df_loop.update()
+        print('sigdf')
+        self.sigdf = pd.DataFrame({'value': list(np.sqrt(np.diag(self.covariance)))}, index=self.active_parameters)   
         self.sigdf.to_csv(os.path.join(self.matrix_path,'sigdf.csv'))
-                
+        self.df_loop.update()
+        self.subloop.update()
+               
         if loop_counter==0:
-            self.saving_first_itteration_matrices(loop_counter=loop_counter)
+            self.saving_first_iteration_matrices(loop_counter=loop_counter)
             
+        print('\nUpdating Files')
         self.updating_files(loop_counter=loop_counter)
-        
+        self.subloop.update()
         
     def multiple_runs(self,loops):
         
@@ -629,7 +675,7 @@ class MSI_optimization_chebyshev(object):
             #     Xdf_list.append(np.zeros(np.shape(active_parameters)))
             # else:
             #     Xdf_list.append(self.X_prior)
-                            
+                           
             self.one_run_optimization(loop_counter=loop)
             
             # delta_Xdf = pd.DataFrame({'X':list(self.Xdf['value']), 'dX':list(self.delta_X.T[0])}, index=self.Xdf.index.values.tolist())
@@ -654,7 +700,7 @@ class MSI_optimization_chebyshev(object):
             # self.delta_x_df = delta_x_df
             
             Xdf_list.append(self.Xdf)
-            
+
             if loop != 0:
                 X_over_sig = pd.DataFrame({'X':list(self.Xdf.value),'sigma_prior':list(self.sigdf_prior.value),'sigma_posterior':list(self.sigdf.value),'X/sigma_prior':np.divide(list(self.Xdf.value),list(self.sigdf_prior.value))},index=self.active_parameters)
                 self.X_over_sig_sorted = X_over_sig.loc[X_over_sig['X/sigma_prior'].abs().sort_values(ascending=False).index]
@@ -678,6 +724,45 @@ class MSI_optimization_chebyshev(object):
         # for i,Xdf_iteration in enumerate(self.Xdf_list):
         #     Xdf_iteration.to_csv(os.path.join(self.matrix_path,'Xdf_'+str(i)+'.csv'))     
         self.manager.stop()         
+        
+        #creation of X_pert and X_pert_over_sigma
+
+        self.manager = enlighten.get_manager()
+        self.mainloop=self.manager.counter(total=len(self.yaml_file_list),desc='Perturbed X Matrix Generation:',unit='experiments',color='red')   
+
+        X_pert = pd.DataFrame({'X':list(self.Xdf.value)},index=self.active_parameters)
+        X_pert_over_sig = pd.DataFrame({'sigma_prior':list(self.sigdf_prior.value),'X/sigma_prior':np.divide(list(self.Xdf.value),list(self.sigdf_prior.value))},index=self.active_parameters)
+        X_prev=pd.read_csv(os.path.join(self.matrix_path,'Xdf_'+str(loops-1)+'.csv'))["value"]
+        for i,M in enumerate(self.yaml_file_list):
+            Zdf_pert = copy.deepcopy(self.Zdf)
+            yam_nam = os.path.splitext(os.path.basename(M[0]))[0]
+            rows = Zdf_pert.loc[Zdf_pert.index.str.contains(yam_nam)]
+            rows = rows.loc[rows.index.str.contains("datapoint")]
+            for j,row in Zdf_pert.iterrows(): 
+                if row.name in rows.index:
+                    Zdf_pert.loc[j] = row["value"]/1.05 #1.05 hard coded in; want to be able to modify
+            Zdf_pert = np.array([[z] for z in np.array(Zdf_pert["value"])])
+            one_over_z = np.array(np.true_divide(1,Zdf_pert))
+            y_mat_pert = self.Y_matrix * one_over_z
+            s_mat_pert = self.S_matrix * (one_over_z.flatten()[:,np.newaxis])
+            try:
+                pseudoInverse = np.linalg.pinv(s_mat_pert)
+                delta_X_pert = np.dot(pseudoInverse,y_mat_pert)
+                delta_X_pert = np.multiply(self.step_size,delta_X_pert)
+                delta_X_pert = [x[0] for x in delta_X_pert]
+                Xdf_pert = np.add(X_prev,delta_X_pert)
+                X_pert.insert(len(X_pert.columns), 'X-Xp: ' + yam_nam, np.subtract(list(self.Xdf.value),list(Xdf_pert)), True)
+                X_pert_over_sig.insert(len(X_pert.columns), '(X-Xp)/sigma: ' + yam_nam, np.divide(np.subtract(list(self.Xdf.value),list(Xdf_pert)),list(self.sigdf_prior.value)), True)
+            except:
+                X_pert.insert(len(X_pert.columns), 'X-Xp: ' + yam_nam, np.zeros(len(list(self.Xdf.value))), True)
+                X_pert_over_sig.insert(len(X_pert.columns), '(X-Xp)/sigma: ' + yam_nam, np.zeros(len(list(self.Xdf.value))), True)
+            self.mainloop.update()
+        self.X_pert = X_pert
+        self.X_pert_over_sig = X_pert_over_sig
+        self.X_pert.to_csv(os.path.join(self.matrix_path,'X_pert.csv'))
+        self.X_pert_over_sig.to_csv(os.path.join(self.matrix_path,'X_pert_over_sig.csv'))
+        self.manager.stop() 
+        
         return
     
                                                                   

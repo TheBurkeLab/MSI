@@ -730,38 +730,39 @@ class MSI_optimization_chebyshev(object):
         self.manager = enlighten.get_manager()
         self.mainloop=self.manager.counter(total=len(self.yaml_file_list),desc='Perturbed X Matrix Generation:',unit='experiments',color='red')   
 
-        X_pert = pd.DataFrame({'X':list(self.Xdf.value)},index=self.active_parameters)
-        X_pert_over_sig = pd.DataFrame({'sigma_prior':list(self.sigdf_prior.value),'X/sigma_prior':np.divide(list(self.Xdf.value),list(self.sigdf_prior.value))},index=self.active_parameters)
-        X_prev=pd.read_csv(os.path.join(self.matrix_path,'Xdf_'+str(loops-1)+'.csv'))["value"]
-        for i,M in enumerate(self.yaml_file_list):
-            Zdf_pert = copy.deepcopy(self.Zdf)
-            yam_nam = os.path.splitext(os.path.basename(M[0]))[0]
-            rows = Zdf_pert.loc[Zdf_pert.index.str.contains(yam_nam)]
-            rows = rows.loc[rows.index.str.contains("datapoint")]
-            for j,row in Zdf_pert.iterrows(): 
-                if row.name in rows.index:
-                    Zdf_pert.loc[j] = row["value"]/1.05 #1.05 hard coded in; want to be able to modify
-            Zdf_pert = np.array([[z] for z in np.array(Zdf_pert["value"])])
-            one_over_z = np.array(np.true_divide(1,Zdf_pert))
-            y_mat_pert = self.Y_matrix * one_over_z
-            s_mat_pert = self.S_matrix * (one_over_z.flatten()[:,np.newaxis])
-            try:
-                pseudoInverse = np.linalg.pinv(s_mat_pert)
-                delta_X_pert = np.dot(pseudoInverse,y_mat_pert)
-                delta_X_pert = np.multiply(self.step_size,delta_X_pert)
-                delta_X_pert = [x[0] for x in delta_X_pert]
-                Xdf_pert = np.add(X_prev,delta_X_pert)
-                X_pert.insert(len(X_pert.columns), 'X-Xp: ' + yam_nam, np.subtract(list(self.Xdf.value),list(Xdf_pert)), True)
-                X_pert_over_sig.insert(len(X_pert.columns), '(X-Xp)/sigma: ' + yam_nam, np.divide(np.subtract(list(self.Xdf.value),list(Xdf_pert)),list(self.sigdf_prior.value)), True)
-            except:
-                X_pert.insert(len(X_pert.columns), 'X-Xp: ' + yam_nam, np.zeros(len(list(self.Xdf.value))), True)
-                X_pert_over_sig.insert(len(X_pert.columns), '(X-Xp)/sigma: ' + yam_nam, np.zeros(len(list(self.Xdf.value))), True)
-            self.mainloop.update()
-        self.X_pert = X_pert
-        self.X_pert_over_sig = X_pert_over_sig
-        self.X_pert.to_csv(os.path.join(self.matrix_path,'X_pert.csv'))
-        self.X_pert_over_sig.to_csv(os.path.join(self.matrix_path,'X_pert_over_sig.csv'))
-        self.manager.stop() 
+        if loops != 1:
+            X_pert = pd.DataFrame({'X':list(self.Xdf.value)},index=self.active_parameters)
+            X_pert_over_sig = pd.DataFrame({'sigma_prior':list(self.sigdf_prior.value),'X/sigma_prior':np.divide(list(self.Xdf.value),list(self.sigdf_prior.value))},index=self.active_parameters)
+            X_prev=pd.read_csv(os.path.join(self.matrix_path,'Xdf_'+str(loops-1)+'.csv'))["value"]
+            for i,M in enumerate(self.yaml_file_list):
+                Zdf_pert = copy.deepcopy(self.Zdf)
+                yam_nam = os.path.splitext(os.path.basename(M[0]))[0]
+                rows = Zdf_pert.loc[Zdf_pert.index.str.contains(yam_nam)]
+                rows = rows.loc[rows.index.str.contains("datapoint")]
+                for j,row in Zdf_pert.iterrows(): 
+                    if row.name in rows.index:
+                        Zdf_pert.loc[j] = row["value"]/1.05 #1.05 hard coded in; want to be able to modify
+                Zdf_pert = np.array([[z] for z in np.array(Zdf_pert["value"])])
+                one_over_z = np.array(np.true_divide(1,Zdf_pert))
+                y_mat_pert = self.Y_matrix * one_over_z
+                s_mat_pert = self.S_matrix * (one_over_z.flatten()[:,np.newaxis])
+                try:
+                    pseudoInverse = np.linalg.pinv(s_mat_pert)
+                    delta_X_pert = np.dot(pseudoInverse,y_mat_pert)
+                    delta_X_pert = np.multiply(self.step_size,delta_X_pert)
+                    delta_X_pert = [x[0] for x in delta_X_pert]
+                    Xdf_pert = np.add(X_prev,delta_X_pert)
+                    X_pert.insert(len(X_pert.columns), 'X-Xp: ' + yam_nam, np.subtract(list(self.Xdf.value),list(Xdf_pert)), True)
+                    X_pert_over_sig.insert(len(X_pert.columns), '(X-Xp)/sigma: ' + yam_nam, np.divide(np.subtract(list(self.Xdf.value),list(Xdf_pert)),list(self.sigdf_prior.value)), True)
+                except:
+                    X_pert.insert(len(X_pert.columns), 'X-Xp: ' + yam_nam, np.zeros(len(list(self.Xdf.value))), True)
+                    X_pert_over_sig.insert(len(X_pert.columns), '(X-Xp)/sigma: ' + yam_nam, np.zeros(len(list(self.Xdf.value))), True)
+                self.mainloop.update()
+            self.X_pert = X_pert
+            self.X_pert_over_sig = X_pert_over_sig
+            self.X_pert.to_csv(os.path.join(self.matrix_path,'X_pert.csv'))
+            self.X_pert_over_sig.to_csv(os.path.join(self.matrix_path,'X_pert_over_sig.csv'))
+        self.manager.stop()
         
         return
     

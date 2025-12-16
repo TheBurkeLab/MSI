@@ -462,7 +462,7 @@ class MSI_optimization_chebyshev(object):
     
     
     def saving_first_itteration_matrices(self,loop_counter=0):
-  
+        self.ydf_prior = copy.deepcopy(self.ydf)
         self.Ydf_prior = copy.deepcopy(self.Ydf)
         self.Sdf_prior = copy.deepcopy(self.Sdf)
         self.covdf_prior = copy.deepcopy(self.covdf)

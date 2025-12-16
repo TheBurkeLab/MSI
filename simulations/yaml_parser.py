@@ -1480,7 +1480,7 @@ class Parser(object):
                         if specie in dilluant:
                             continue
                         updated = np.exp(physical_observables_updates_list[yaml_file]['X_'+str(count)+'_experiment_'+str(yaml_file)])*conditions[specie]
-                        updated = round(updated,9)
+                        updated = round(updated,11)
                         updated_mole_fractions[specie] = updated
                         self.optimized_physical_parameters.append(updated_mole_fractions[specie])
                         count+=1
@@ -1516,7 +1516,7 @@ class Parser(object):
                         if specie in dilluant:
                             continue
                         updated = np.exp(physical_observables_updates_list[yaml_file]['X_'+str(count)+'_experiment_'+str(yaml_file)])*conditions[specie]
-                        updated = round(updated,9)
+                        updated = round(updated,11)
                         updated_mole_fractions[specie] = updated
                         self.optimized_physical_parameters.append(updated_mole_fractions[specie])
                         count+=1
@@ -1551,7 +1551,7 @@ class Parser(object):
                         if specie in dilluant:
                             continue
                         updated = np.exp(physical_observables_updates_list[yaml_file]['X_'+str(count)+'_experiment_'+str(yaml_file)])*conditions[specie]
-                        updated = round(updated,9)
+                        updated = round(updated,11)
                         updated_mole_fractions[specie] = updated
                         self.optimized_physical_parameters.append(updated_mole_fractions[specie])                            
                         count+=1
@@ -1594,7 +1594,7 @@ class Parser(object):
                         else:   
                             for j,value in enumerate(self.original_experimental_conditions[yaml_file]['conditions'][species]):
                                 temp_spec_list.append(np.exp(physical_observables_updates_list[yaml_file]['X'+str(counter+1)+'_cond'+str(j)+'_'+species+'_experiment_'+str(yaml_file)])*self.original_experimental_conditions[yaml_file]['conditions'][species][j])
-                                temp_spec_list[-1]=float(round(temp_spec_list[-1],9))
+                                temp_spec_list[-1]=float(round(temp_spec_list[-1],11))
                             counter=counter+1
                         updated_mole_fractions[species]=copy.deepcopy(temp_spec_list)
                     updatedTimeShift = physical_observables_updates_list[yaml_file]['Time_shift_experiment_'+str(yaml_file)] + time_shift
@@ -1620,7 +1620,7 @@ class Parser(object):
                         else:   
                             for j,value in enumerate(self.original_experimental_conditions[yaml_file]['conditions'][species]):
                                 temp_spec_list.append(np.exp(physical_observables_updates_list[yaml_file]['X'+str(counter+1)+'_cond'+str(j)+'_'+species+'_experiment_'+str(yaml_file)])*self.original_experimental_conditions[yaml_file]['conditions'][species][j])
-                                temp_spec_list[-1]=float(round(temp_spec_list[-1],9))
+                                temp_spec_list[-1]=float(round(temp_spec_list[-1],11))
                             counter=counter+1
                         updated_mole_fractions[species]=copy.deepcopy(temp_spec_list)
                     updatedTimeShift = physical_observables_updates_list[yaml_file]['Time_shift_experiment_'+str(yaml_file)] + time_shift

@@ -3029,12 +3029,12 @@ class OptMatrix(object):
     
         self.s_matrix = s_matrix
     
-        try:
-            psudoInverse = np.linalg.pinv(s_matrix)
-        except:
-            print('np.linalg.pinv(s_matrix) resulted in SVD convergence error')
-            print('removing nan values')
-            psudoInverse = np.linalg.pinv(~np.isnan(s_matrix))
+        # try:
+        psudoInverse = np.linalg.pinv(s_matrix)
+        # except:
+        #     print('np.linalg.pinv(s_matrix) resulted in SVD convergence error')
+        #     print('removing nan values')
+        #     psudoInverse = np.linalg.pinv(~np.isnan(s_matrix))
             
         delta_X = np.dot(psudoInverse,y_matrix)
         delta_X = np.multiply(step_size,delta_X)

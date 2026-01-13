@@ -188,6 +188,7 @@ class MSI_optimization_chebyshev(object):
                                               physicalSens=self.physicalSens,
                                               dk=self.perturbment,loop_counter=loop_counter)
             
+            # looping_over_parsed_yaml_files_parallel
             # print(experiment_dictonaries[0]['simulation'].timeHistories)
             
             experiment_dict_uncertainty_original = optimization_instance.saving_experimental_dict(experiment_dictonaries)
@@ -206,7 +207,7 @@ class MSI_optimization_chebyshev(object):
                                               kineticSens=self.kineticSens,
                                               physicalSens=self.physicalSens,
                                               dk=self.perturbment,loop_counter=loop_counter)
-    
+            # looping_over_parsed_yaml_files_parallel
         
            
         self.experiment_dictonaries = experiment_dictonaries
@@ -280,7 +281,7 @@ class MSI_optimization_chebyshev(object):
             #                                                                                                     master_equation_flag = self.master_equation_flag,
             #                                                                                                     master_equation_uncertainty_df = self.master_equation_uncertainty_df,
             #                                                                                                     master_equation_reactions = self.master_equation_reactions)            
-                       
+                        
         else:
             Y_matrix,Ydf,active_parameters = matrix_builder_instance.load_Y(self.experiment_dictonaries,
                                                                 #    self.list_of_parsed_yamls,
@@ -460,8 +461,7 @@ class MSI_optimization_chebyshev(object):
         return
     
     
-    def saving_first_iteration_matrices(self,loop_counter=0):
- 
+    def saving_first_itteration_matrices(self,loop_counter=0):
         self.ydf_prior = copy.deepcopy(self.ydf)
         self.Ydf_prior = copy.deepcopy(self.Ydf)
         self.Sdf_prior = copy.deepcopy(self.Sdf)
@@ -653,7 +653,7 @@ class MSI_optimization_chebyshev(object):
         self.subloop.update()
                
         if loop_counter==0:
-            self.saving_first_iteration_matrices(loop_counter=loop_counter)
+            self.saving_first_itteration_matrices(loop_counter=loop_counter)
             
         print('\nUpdating Files')
         self.updating_files(loop_counter=loop_counter)
@@ -675,7 +675,7 @@ class MSI_optimization_chebyshev(object):
             #     Xdf_list.append(np.zeros(np.shape(active_parameters)))
             # else:
             #     Xdf_list.append(self.X_prior)
-                           
+                            
             self.one_run_optimization(loop_counter=loop)
             
             # delta_Xdf = pd.DataFrame({'X':list(self.Xdf['value']), 'dX':list(self.delta_X.T[0])}, index=self.Xdf.index.values.tolist())
@@ -700,7 +700,7 @@ class MSI_optimization_chebyshev(object):
             # self.delta_x_df = delta_x_df
             
             Xdf_list.append(self.Xdf)
-
+            
             if loop != 0:
                 X_over_sig = pd.DataFrame({'X':list(self.Xdf.value),'sigma_prior':list(self.sigdf_prior.value),'sigma_posterior':list(self.sigdf.value),'X/sigma_prior':np.divide(list(self.Xdf.value),list(self.sigdf_prior.value))},index=self.active_parameters)
                 self.X_over_sig_sorted = X_over_sig.loc[X_over_sig['X/sigma_prior'].abs().sort_values(ascending=False).index]

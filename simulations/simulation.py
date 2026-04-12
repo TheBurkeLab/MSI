@@ -169,10 +169,10 @@ class Simulation(object):
 
         # gets the mole fraction and the species which are going to be 
         #perturbed in order to run a sensitivity calculation 
-        data = ''
+        data = []
         for x in self.conditions.keys():
             if x not in inert_species:
-                data =  self.sensitivity_adjustment(spec_pair=(x,spec_del))
+                data.append(self.sensitivity_adjustment(spec_pair=(x,spec_del)))
 
         return data
 

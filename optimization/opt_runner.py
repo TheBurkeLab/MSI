@@ -1121,48 +1121,50 @@ class Optimization_Utility(object):
         
         with multiprocessing.Pool(processes=WORKERS,maxtasksperchild=1) as pool:
             temp_mat=pool.map(self.parallel_pool_function,args)
-            pool.close()
-            pool.join()
             self.matrices=temp_mat
 
 
         self.manager = manager
-        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')   
+        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')
         started = 0
         active = {}
-        # experiment_list = multiprocessing.Manager().list()
-        experiment_dict = multiprocessing.Manager().dict()
         jobs = []
-        while systems > started or active:
-            print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-            
-            if systems > started and len(active) < WORKERS:
+        with multiprocessing.Manager() as mp_manager:
+            experiment_dict = mp_manager.dict()
+            while systems > started or active:
                 print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-                
-                queue = multiprocessing.Queue()
-                started += 1
-                process = multiprocessing.Process(target=self.parallel_pool_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict))
-                jobs.append(process)
-                process.start()
-                active[started] = (process, queue)
-            for system in tuple(active.keys()):
-                process, queue = active[system]
-                alive = process.is_alive()
-                if not alive:
-                    del active[system]
-                    # process.join()  # Wait for the process to terminate
-                    # process.close()  # Close the process
-                    # del process
-                    self.sim_loop.update()
-            time.sleep(0.1)
-        for proc in jobs:
-            proc.join()
-        process.close()
 
-        return [experiment_dict[i] for i in range(len(experiment_dict))]
-    
+                if systems > started and len(active) < WORKERS:
+                    print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
+
+                    started += 1
+                    process = multiprocessing.Process(target=self.parallel_pool_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict))
+                    jobs.append(process)
+                    process.start()
+                    active[started] = process
+                for system in tuple(active.keys()):
+                    process = active[system]
+                    alive = process.is_alive()
+                    if not alive:
+                        del active[system]
+                        self.sim_loop.update()
+                time.sleep(0.1)
+            for proc in jobs:
+                proc.join()
+                proc.close()
+
+            result = [experiment_dict[i] for i in range(len(experiment_dict))]
+        return result
+
     def parallel_pool_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
-                
+        try:
+            return self._parallel_pool_function_inner(exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict)
+        except Exception as e:
+            print(f'ERROR in parallel_pool_function for experiment {exp_number}: {type(e).__name__}: {e}')
+            raise
+
+    def _parallel_pool_function_inner(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
+
         yamlDict = list_of_parsed_yamls[exp_number]
         yamlPath = list_of_yaml_paths[exp_number]
                 
@@ -1268,58 +1270,54 @@ class Optimization_Utility(object):
         systems = len(list_of_parsed_yamls)
         WORKERS = systems
         self.manager = manager
-        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')   
+        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')
         started = 0
         active = {}
-        # experiment_list = multiprocessing.Manager().list()
-        experiment_dict = multiprocessing.Manager().dict()
         jobs = []
-        while systems > started or active:
-            print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-            
-            if systems > started and len(active) < WORKERS:
+        with multiprocessing.Manager() as mp_manager:
+            experiment_dict = mp_manager.dict()
+            while systems > started or active:
                 print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-                
-                queue = multiprocessing.Queue()
-                started += 1
-                process = multiprocessing.Process(target=self.parallel_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict))
-                jobs.append(process)
-                process.start()
-                active[started] = (process, queue)
-            for system in tuple(active.keys()):
-                process, queue = active[system]
-                alive = process.is_alive()
-                if not alive:
-                    del active[system]
-                    # process.join()  # Wait for the process to terminate
-                    # process.close()  # Close the process
-                    # del process
-                    self.sim_loop.update()
-            time.sleep(0.1)
-        for proc in jobs:
-            proc.join()
-        process.close()
-        
-        # self.manager = manager
-        # self.sim_loop=self.manager.counter(total=len(list_of_parsed_yamls),desc='Iteration '+str(loop_counter+1)+':',unit='experiments',color='gray')   
-        # experiment_list = []
-        # for i, parsed_yaml in enumerate(list_of_parsed_yamls):
-        #     experiment_list.append(self.parallel_function(i,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk))
-        #     self.sim_loop.update()
-        # self.sim_loop.close()   
-        # gc.collect()
-        return [experiment_dict[i] for i in range(len(experiment_dict))]
+
+                if systems > started and len(active) < WORKERS:
+                    print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
+
+                    started += 1
+                    process = multiprocessing.Process(target=self.parallel_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict))
+                    jobs.append(process)
+                    process.start()
+                    active[started] = process
+                for system in tuple(active.keys()):
+                    process = active[system]
+                    alive = process.is_alive()
+                    if not alive:
+                        del active[system]
+                        self.sim_loop.update()
+                time.sleep(0.1)
+            for proc in jobs:
+                proc.join()
+                proc.close()
+
+            result = [experiment_dict[i] for i in range(len(experiment_dict))]
+        return result
     
     def parallel_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
-                
+        try:
+            self._parallel_function_inner(exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict)
+        except Exception as e:
+            print(f'ERROR in parallel_function for experiment {exp_number}: {type(e).__name__}: {e}')
+            raise
+
+    def _parallel_function_inner(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
+
         yamlDict = list_of_parsed_yamls[exp_number]
         yamlPath = list_of_yaml_paths[exp_number]
-                
+
         simulation_type = yamlDict['simulationType']
         experiment_type = yamlDict['experimentType']
-        
+
         # experiment_list = []
-        
+
         if re.match('[Ss]hock [Tt]ube',simulation_type) and re.match('[Ss]pecies[- ][Pp]rofile',experiment_type):
                 if 'absorbanceObservables' not in yamlDict.keys():
                     experiment = self.running_full_shock_tube(processor=processor,

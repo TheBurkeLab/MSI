@@ -61,7 +61,7 @@ class MSI_optimization_chebyshev(object):
         self.reaction_uncertainty_csv = reaction_uncertainty_csv
         self.k_target_values_csv = k_target_values_csv
         self.MP_for_S_matrix = np.array(())
-        self.step_size = step_size,
+        self.step_size = step_size
         
         # self.list_of_csv_names = None
         self.X_prior_csv = X_prior_csv

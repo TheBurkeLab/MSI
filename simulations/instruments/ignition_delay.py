@@ -923,14 +923,9 @@ class ignition_delay(sim.Simulation):
                      
                      
                      
-         pool = ThreadPool(n_procs) 
-         #uncomment above
-         
+         with multiprocessing.Pool(processes=n_procs) as pool:
+             sens=pool.map(solver,info)
 
-         #results = results+pool.map(solver,conditionsTups)
-         sens=pool.map(solver,info)
-         #sens=np.zeros(self.processor.solution.n_reactions)
-         
          return sens
         
 class ignition_delay_wrapper(sim.Simulation):

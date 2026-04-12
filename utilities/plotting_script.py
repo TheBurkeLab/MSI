@@ -575,26 +575,26 @@ class Plotting(object):
                     sp = '_'.join(key_list)
                     #print(sp)
 
-                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
-                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.svg', bbox_inches='tight',transparent=True)
-                    # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'.csv',index=False)  
+                    # plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
+                    # plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.svg', bbox_inches='tight',transparent=True)
+                    # temp_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'.csv',index=False)  
 
                     
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)
                             
-                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
-                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
-                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)  
+                    temp_optimized_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
+                    temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
+                    temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)  
                     
                     #stub
-                    # plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
-                    # plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)                      
+                    # plt.savefig(self.out_path+os.sep+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                    # plt.savefig(self.out_path+os.sep+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)                      
                         
 
 
@@ -687,20 +687,20 @@ class Plotting(object):
                     sp = '_'.join(key_list)
                     
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                        
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                        
                     
                                 
 
-                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)   
-                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
-                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
+                    temp_optimized_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)   
+                    temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
+                    temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
                     
-                    # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)    
+                    # temp_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)    
 
                     observable_counter+=1    
 
@@ -765,18 +765,18 @@ class Plotting(object):
                     sp = '_'.join(key_list)
                     
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)          
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)          
 
-                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)   
-                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)   
-                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
+                    temp_optimized_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)   
+                    temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)   
+                    temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
                     
-                    # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)    
+                    # temp_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)    
 
                     observable_counter+=1    
                     
@@ -936,23 +936,23 @@ class Plotting(object):
                     sp = '_'.join(key_list)
                     
                     #print(sp)
-                    #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
+                    #plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
                     
                     #stub
-                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
-                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
+                    # plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                    # plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
                 
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
 
-                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
-                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
-                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)  
+                    temp_optimized_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
+                    temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False)  
+                    temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)  
 
                     observable_counter+=1
                 
@@ -1029,12 +1029,12 @@ class Plotting(object):
                         #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,  high_error_original,'r--')
                         #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
                     
-                    #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=1000)        
+                    #plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=1000)        
                     # 
                     # 
-                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight',dpi=1000) 
-                    # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',dpi=1000,transparent=True)             
-                    # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)                            
+                    # plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight',dpi=1000) 
+                    # plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',dpi=1000,transparent=True)             
+                    # temp_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False)                            
                     #              
                     
                     # plt.scatter(weighted_df['Temperature'],weighted_df[observable+'_ppm'],marker='o',color='black',label='Experimental Data')    
@@ -1063,16 +1063,16 @@ class Plotting(object):
                     sp = '_'.join(key_list)
 
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
                                 
-                    temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
-                    temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
-                    temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
-                    temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
+                    temp_optimized_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False)  
+                    temp_optimized_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False)  
+                    temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
+                    temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False)   
 
                     observable_counter+=1       
 
@@ -1149,19 +1149,19 @@ class Plotting(object):
                         
                         # plt.savefig(os.path.join(self.out_path,'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf'), bbox_inches='tight',dpi=1000)
                         # plt.savefig(os.path.join(self.out_path,'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg'), bbox_inches='tight',dpi=1000,transparent=True)
-                        # temp_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False) 
+                        # temp_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.csv',index=False) 
 
                         if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                            plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                         if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                            plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
                         if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                            plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
                         
-                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False) 
-                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False) 
-                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
-                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False) 
+                        temp_optimized_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False) 
+                        temp_optimized_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False) 
+                        temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
+                        temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False) 
 
 
                         observable_counter+=1
@@ -1201,16 +1201,16 @@ class Plotting(object):
                             #plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,low_error_original,'r--')
                         
                         if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                            plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                         if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
+                            plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.png', bbox_inches='tight',dpi=self.dpi)
                         if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                            plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
 
-                        temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False) 
-                        temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False) 
-                        temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
-                        temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False) 
+                        temp_optimized_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_optimized.csv',index=False) 
+                        temp_optimized_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_optimized.csv',index=False) 
+                        temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_original.csv',index=False) 
+                        temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_error_original.csv',index=False) 
                         
                         observable_counter+=1    
                         
@@ -1306,26 +1306,26 @@ class Plotting(object):
 
                 #plt.legend(handlelength=3)
                 plt.legend(ncol=2)
-                #plt.savefig(self.out_path+'/'+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                #plt.savefig(self.out_path+os.sep+'Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
                 sp = '_'.join(key_list)
                 
-                # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
-                # plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
+                # plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
+                # plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+' '+'Absorb at'+'_'+str(wl)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
 
 
                 if self.pdf == True:
-                    plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                 if self.png == True:
-                    plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.png', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.png', bbox_inches='tight',dpi=self.dpi)
                 if self.svg == True:
-                    plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                    plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_at'+'_'+str(wl)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
                             
 
 
-                temp_optimized_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_optimized.csv',index=False) 
-                temp_optimized_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_error_optimized.csv',index=False) 
-                temp_original_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_original.csv',index=False)   
-                temp_original_error_df_for_species.to_csv(self.out_path+'/'+'Experiment_'+str(i+1)+'_Absorb_error_original.csv',index=False)                     
+                temp_optimized_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_optimized.csv',index=False) 
+                temp_optimized_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_error_optimized.csv',index=False) 
+                temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_original.csv',index=False)   
+                temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_error_original.csv',index=False)                     
                 
                 observable_counter+=1 
                 self.obs_loop.update()
@@ -1383,11 +1383,11 @@ class Plotting(object):
                     
                     
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(x+1)+' '+'Absorbance at'+'_'+str(wavelengths)+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(x+1)+' '+'Absorbance at'+'_'+str(wavelengths)+'.pdf', bbox_inches='tight',dpi=self.dpi)
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(x+1)+' '+'Absorbance at'+'_'+str(wavelengths)+'.png', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(x+1)+' '+'Absorbance at'+'_'+str(wavelengths)+'.png', bbox_inches='tight',dpi=self.dpi)
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(x+1)+' '+'Absorbance at'+'_'+str(wavelengths)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                          
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(x+1)+' '+'Absorbance at'+'_'+str(wavelengths)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                          
                     
                 else:
                       
@@ -1411,11 +1411,11 @@ class Plotting(object):
                     plt.xlabel('time')
                     
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(x+1)+'_observable_'+exp_dict_list_optimized[0]['observables'][observable_counter]+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(x+1)+'_observable_'+exp_dict_list_optimized[0]['observables'][observable_counter]+'.pdf', bbox_inches='tight',dpi=self.dpi)
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(x+1)+'_observable_'+exp_dict_list_optimized[0]['observables'][observable_counter]+'.png', bbox_inches='tight',dpi=self.dpi)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(x+1)+'_observable_'+exp_dict_list_optimized[0]['observables'][observable_counter]+'.png', bbox_inches='tight',dpi=self.dpi)
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(x+1)+'_observable_'+exp_dict_list_optimized[0]['observables'][observable_counter]+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                       
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(x+1)+'_observable_'+exp_dict_list_optimized[0]['observables'][observable_counter]+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                       
                     
                 observable_counter+=1
         
@@ -1766,22 +1766,22 @@ class Plotting(object):
                     plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \sigma_j$')
                 plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
                 UWSA_df[observables_list_for_legend[top_columns] +' '+str(sigma_list[top_columns])] = pd.Series(sensitivities[plot_number][:,c])   
-            UWSA_df.to_csv(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
+            UWSA_df.to_csv(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
             if self.simulation_run==None:
                 if self.pdf == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
                 if self.png == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
                 if self.svg == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
             else:
                 plt.title('Experiment_'+str(self.simulation_run) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
                 if self.pdf == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
                 if self.png == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
                 if self.svg == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)    
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(self.simulation_run)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)    
             
             # self.obs_UWSA_loop.update()     
             
@@ -1904,22 +1904,22 @@ class Plotting(object):
                 else:
                     Sdx_df[summed_observable_list[top_columns_index] +' ['+str(sigma_list[top_columns_index+2*num_rxn][0])+', '+str(X[top_columns_index+2*num_rxn][0])+']'] = pd.Series(sensitivities[plot_number][:,c])                     
                 # Sdx_df[sum_arrhenius_observables[top_columns_index] +' '+str(sigma_list[top_columns])] = pd.Series(sensitivities[plot_number][:,c])   
-            Sdx_df.to_csv(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
+            Sdx_df.to_csv(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
             if self.simulation_run==None:
                 if self.pdf == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
                 if self.png == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
                 if self.svg == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
             else:
                 plt.title('Experiment_'+str(self.simulation_run) + ' (' + os.path.basename(self.files_to_include[0][experiment_number][0])[:-5] + ')')
                 if self.pdf == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.pdf', bbox_inches='tight',dpi=self.dpi)
                 if self.png == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.png', bbox_inches='tight',dpi=self.dpi)
                 if self.svg == True:
-                    plt.savefig(self.out_path+'/'+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)           
+                    plt.savefig(self.out_path+os.sep+'Experiment'+ '_' +str(self.simulation_run)+'_Sdx'+'_'+str(list_of_experiment_observables[plot_number])+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)           
             
             # self.obs_Sdx_loop.update() 
         
@@ -1982,18 +1982,18 @@ class Plotting(object):
             plt.xlabel(parameter)
             plt.ylabel('pdf')
             
-            plt.savefig(self.out_path+'/'+parameter+'_distribution'+'.pdf',bbox_inches='tight',dpi=1000)
-            plt.savefig(self.out_path+'/'+parameter+'_distribution'+'.png',bbox_inches='tight',dpi=1000)
-            plt.savefig(self.out_path+'/'+parameter+'_distribution'+'.svg',bbox_inches='tight',dpi=1000,transparent=True)
+            plt.savefig(self.out_path+os.sep+parameter+'_distribution'+'.pdf',bbox_inches='tight',dpi=1000)
+            plt.savefig(self.out_path+os.sep+parameter+'_distribution'+'.png',bbox_inches='tight',dpi=1000)
+            plt.savefig(self.out_path+os.sep+parameter+'_distribution'+'.svg',bbox_inches='tight',dpi=1000,transparent=True)
 
             if bool(pdf_distribution_file):
                 df2 = pd.read_csv(pdf_distribution_file)
                 #temp = np.log(np.exp(df2[parameter].values)/9.33e13)
                 #plt.plot(temp,df2['pdf_'+parameter])
                 plt.plot(df2[parameter],df2['pdf_'+parameter])
-                plt.savefig(self.out_path+'/'+parameter+'_distribution'+'.pdf',bbox_inches='tight',dpi=1000)
-                plt.savefig(self.out_path+'/'+parameter+'_distribution'+'.png',bbox_inches='tight',dpi=1000)
-                plt.savefig(self.out_path+'/'+parameter+'_distribution'+'.svg',bbox_inches='tight',dpi=1000,transparent=True)
+                plt.savefig(self.out_path+os.sep+parameter+'_distribution'+'.pdf',bbox_inches='tight',dpi=1000)
+                plt.savefig(self.out_path+os.sep+parameter+'_distribution'+'.png',bbox_inches='tight',dpi=1000)
+                plt.savefig(self.out_path+os.sep+parameter+'_distribution'+'.svg',bbox_inches='tight',dpi=1000,transparent=True)
 
     
 
@@ -2249,9 +2249,9 @@ class Plotting(object):
                 #plt.figure()
                 plt.scatter(df2[couple[0]], df2[couple[1]])
                 
-                plt.savefig(self.out_path+'/'+couple[0]+'_'+couple[1]+'_distribution'+'.pdf',bbox_inches='tight',dpi=1000)
-                plt.savefig(self.out_path+'/'+couple[0]+'_'+couple[1]+'_distribution'+'.png',bbox_inches='tight',dpi=1000)
-                plt.savefig(self.out_path+'/'+couple[0]+'_'+couple[1]+'_distribution'+'.svg',bbox_inches='tight',dpi=1000,transparent=True)
+                plt.savefig(self.out_path+os.sep+couple[0]+'_'+couple[1]+'_distribution'+'.pdf',bbox_inches='tight',dpi=1000)
+                plt.savefig(self.out_path+os.sep+couple[0]+'_'+couple[1]+'_distribution'+'.png',bbox_inches='tight',dpi=1000)
+                plt.savefig(self.out_path+os.sep+couple[0]+'_'+couple[1]+'_distribution'+'.svg',bbox_inches='tight',dpi=1000,transparent=True)
     def plotting_physical_model_parameter_distributions(self,
                            paramter_list,
                            shock_tube_instance,
@@ -2379,7 +2379,7 @@ class Plotting(object):
             #plt.ylabel('Probability')
             plt.title(r'$\mathrm{Histogram\ of\ physical\ model\ parameter:}\ \mu=%.3f,\ \sigma=%.3f$' %(mu, sigma))
             plt.grid(True)
-            #plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+parameter+'_.pdf',dpi=1000,bbox_inches='tight')
+            #plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+parameter+'_.pdf',dpi=1000,bbox_inches='tight')
 
 
     def difference_plotter(self,
@@ -2423,7 +2423,7 @@ class Plotting(object):
             #plt.plot(x, stats.norm.pdf(x, mu, sigma))
            # plt.xlabel(parameter)
            # plt.ylabel('pdf')
-           # plt.savefig(self.out_path+'/'+parameter+'_distribution'+'_.pdf',bbox_inches='tight')
+           # plt.savefig(self.out_path+os.sep+parameter+'_distribution'+'_.pdf',bbox_inches='tight')
 
             if bool(pdf_distribution_file):
                 df2 = pd.read_csv(pdf_distribution_file)
@@ -2509,9 +2509,9 @@ class Plotting(object):
             
             
             plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_4.pdf',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_4.png',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_4.svg',dpi=1000,bbox_inches='tight',transparent=True)
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_4.pdf',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_4.png',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_4.svg',dpi=1000,bbox_inches='tight',transparent=True)
             
             
             
@@ -2528,9 +2528,9 @@ class Plotting(object):
             plt.hist(y_values,bins=bins,align='mid')
             plt.xlabel('y')
             plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.pdf',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.png',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.svg',dpi=1000,bbox_inches='tight',transparent=True)
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.pdf',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.png',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
 #plotting normalized values
             plt.figure()            
@@ -2545,9 +2545,9 @@ class Plotting(object):
             plt.xlabel('y')
             plt.ylabel('normalized')
             plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.png',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.svg',dpi=1000,bbox_inches='tight',transparent=True)
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.png',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
             
 
@@ -2582,9 +2582,9 @@ class Plotting(object):
             
             
             plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_4.pdf',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_4.png',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_4.svg',dpi=1000,bbox_inches='tight',transparent=True)
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_4.pdf',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_4.png',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_4.svg',dpi=1000,bbox_inches='tight',transparent=True)
             
             
             
@@ -2603,9 +2603,9 @@ class Plotting(object):
             plt.hist(y_values,bins=bins,align='mid')
             plt.xlabel('y')
             plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_2.pdf',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_2.png',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_2.svg',dpi=1000,bbox_inches='tight',transparent=True)
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_2.pdf',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_2.png',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_2.svg',dpi=1000,bbox_inches='tight',transparent=True)
             
 #plotting normalized values
             plt.figure()            
@@ -2622,9 +2622,9 @@ class Plotting(object):
             plt.xlabel('y')
             plt.ylabel('normalized')
             plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_2_normalized.png',dpi=1000,bbox_inches='tight')
-            plt.savefig(directory_to_save_images+'/'+'Including all Experiments'+'_Yy_hist_2_normalized.svg',dpi=1000,bbox_inches='tight',transparent=True)
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_2_normalized.png',dpi=1000,bbox_inches='tight')
+            plt.savefig(directory_to_save_images+os.sep+'Including all Experiments'+'_Yy_hist_2_normalized.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
     def plotting_T_and_time_full_simulation(self,experiments_want_to_plot_data_from=[],directory_to_save_images=''):
         init_temperature_list = []
@@ -2735,9 +2735,9 @@ class Plotting(object):
                 plt.xlabel('y')
                 plt.ylabel('Time')
                 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_time.png',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_time.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_time.png',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_time.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
     
                 
@@ -2756,9 +2756,9 @@ class Plotting(object):
                 plt.xlabel('y')
                 plt.ylabel('Initial Simulation Temp')
                 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_init_temp.pdf',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_init_temp.png',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_init_temp.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_init_temp.pdf',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_init_temp.png',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_init_temp.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
         plt.figure() 
         for x,simulation_list in enumerate(Y_values):
@@ -2774,9 +2774,9 @@ class Plotting(object):
                 plt.xlabel('y')
                 plt.ylabel('Temperature')
                 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.pdf',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.png',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.pdf',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.png',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+'Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
         return 
 
@@ -2889,7 +2889,7 @@ class Plotting(object):
             
                     
                     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                    #plt.savefig(directory_to_save_images+'/'+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_4.pdf',dpi=1000,bbox_inches='tight')
+                    #plt.savefig(directory_to_save_images+os.sep+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_4.pdf',dpi=1000,bbox_inches='tight')
                     
                     
                     
@@ -2906,7 +2906,7 @@ class Plotting(object):
                     plt.hist(y_values,bins=bins,align='mid')
                     plt.xlabel('y')
                     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                    #plt.savefig(directory_to_save_images+'/'+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.pdf',dpi=1000,bbox_inches='tight')
+                    #plt.savefig(directory_to_save_images+os.sep+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.pdf',dpi=1000,bbox_inches='tight')
         
         #plotting normalized values
                     plt.figure()            
@@ -2936,7 +2936,7 @@ class Plotting(object):
                     plt.hist(y_values,bins=bins,align='mid')
                     plt.xlabel('y')
                     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                    #plt.savefig(directory_to_save_images+'/'+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.pdf',dpi=1000,bbox_inches='tight')
+                    #plt.savefig(directory_to_save_images+os.sep+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2.pdf',dpi=1000,bbox_inches='tight')
         
         #plotting normalized values
                     plt.figure()            
@@ -2951,7 +2951,7 @@ class Plotting(object):
                     plt.xlabel('y')
                     plt.ylabel('normalized')
                     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                   # plt.savefig(directory_to_save_images+'/'+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')
+                   # plt.savefig(directory_to_save_images+os.sep+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')
 
     def plotting_histograms_of_individual_observables_for_paper_2(self,experiments_want_to_plot_data_from,experiments_want_to_plot_data_from_2=[],bins='auto',directory_to_save_images='',csv=''):
         s_shape = self.S_matrix.shape[1]
@@ -3167,9 +3167,9 @@ class Plotting(object):
                 
                 
 
-                    plt.savefig(directory_to_save_images+'/'+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')   
-                    plt.savefig(directory_to_save_images+'/'+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.png',dpi=1000,bbox_inches='tight')   
-                    plt.savefig(directory_to_save_images+'/'+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.svg',dpi=1000,bbox_inches='tight',transparent=True)    
+                    plt.savefig(directory_to_save_images+os.sep+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')   
+                    plt.savefig(directory_to_save_images+os.sep+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.png',dpi=1000,bbox_inches='tight')   
+                    plt.savefig(directory_to_save_images+os.sep+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.svg',dpi=1000,bbox_inches='tight',transparent=True)    
     
     
     
@@ -3432,9 +3432,9 @@ class Plotting(object):
                         plt.ylabel('Time')
                         plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
 
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.png',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.png',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
         for x,observable in enumerate(empty_nested_observable_list_Y):
             if bool(observable):
@@ -3453,9 +3453,9 @@ class Plotting(object):
                     plt.xlabel('y')
                     plt.ylabel('Temperature')
                     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.pdf',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.png',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.pdf',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.png',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.svg',dpi=1000,bbox_inches='tight',transparent=True)
         for x,observable in enumerate(empty_nested_observable_list_Y):
             if bool(observable):
                 plt.figure()
@@ -3473,9 +3473,9 @@ class Plotting(object):
                     plt.xlabel('y')
                     plt.ylabel('Initial Temperature')
                     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)    
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.pdf',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.png',dpi=1000,bbox_inches='tight')
-                plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.pdf',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.png',dpi=1000,bbox_inches='tight')
+                plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
 
 
@@ -3668,7 +3668,7 @@ class Plotting(object):
 #                        plt.ylabel('Time')
 #                        plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
 
-                #plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
+                #plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
 
         for x,observable in enumerate(empty_nested_observable_list_Y):
             length_of_2nd_list = len(empty_nested_observable_list_Y_2[x])
@@ -3696,7 +3696,7 @@ class Plotting(object):
 #                    plt.xlabel('y')
 #                    plt.ylabel('Temperature')
 #                    plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)
-                #plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.pdf',dpi=1000,bbox_inches='tight')
+                #plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_temperature.pdf',dpi=1000,bbox_inches='tight')
         for x,observable in enumerate(empty_nested_observable_list_Y):
             length_of_2nd_list = len(empty_nested_observable_list_Y_2[x])
             
@@ -3720,7 +3720,7 @@ class Plotting(object):
 #                    plt.xlabel('y')
 #                    plt.ylabel('Initial Temperature')
 #                    plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=.5, hspace=.5)    
-                #plt.savefig(directory_to_save_images+'/'+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.pdf',dpi=1000,bbox_inches='tight')
+                #plt.savefig(directory_to_save_images+os.sep+str(observables_unique[x])+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.pdf',dpi=1000,bbox_inches='tight')
 
     def plotting_T_and_time_full_simulation_individual_observables_for_paper_2(self,experiments_want_to_plot_data_from,
                                                                              bins='auto',
@@ -4024,9 +4024,9 @@ class Plotting(object):
                             #ax3.set_title(observables_unique[x])
                             ax3.set_title('Absorbance '+ str(observables_unique[x])+str(' nm'))
 
-                fig.savefig(directory_to_save_images+'/'+'Three_pannel_plot_'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
-                fig.savefig(directory_to_save_images+'/'+'Three_pannel_plot_'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.png',dpi=1000,bbox_inches='tight')
-                fig.savefig(directory_to_save_images+'/'+'Three_pannel_plot_'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                fig.savefig(directory_to_save_images+os.sep+'Three_pannel_plot_'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
+                fig.savefig(directory_to_save_images+os.sep+'Three_pannel_plot_'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.png',dpi=1000,bbox_inches='tight')
+                fig.savefig(directory_to_save_images+os.sep+'Three_pannel_plot_'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
         for x,observable in enumerate(empty_nested_observable_list_Y):
             length_of_2nd_list = len(empty_nested_observable_list_Y_2[x])
@@ -4137,9 +4137,9 @@ class Plotting(object):
                             new_temperature_test_2  = np.delete(new_temperature_test_2,indecies_2)                              
                             ax6.scatter(new_y_test_2,new_temperature_test_2,color='orange',zorder=3,alpha=.5)
   
-                fig2.savefig(directory_to_save_images+'/'+'Three_pannel_plot'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.pdf',dpi=1000,bbox_inches='tight')
-                fig2.savefig(directory_to_save_images+'/'+'Three_pannel_plot'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.png',dpi=1000,bbox_inches='tight')
-                fig2.savefig(directory_to_save_images+'/'+'Three_pannel_plot'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                fig2.savefig(directory_to_save_images+os.sep+'Three_pannel_plot'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.pdf',dpi=1000,bbox_inches='tight')
+                fig2.savefig(directory_to_save_images+os.sep+'Three_pannel_plot'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.png',dpi=1000,bbox_inches='tight')
+                fig2.savefig(directory_to_save_images+os.sep+'Three_pannel_plot'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.svg',dpi=1000,bbox_inches='tight',transparent=True)
 
     def residual_sum_of_squares(self):
         overall_list = []
@@ -4703,9 +4703,9 @@ class Plotting(object):
                     plt.hist(weighted_log_difference)
                     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=.5)
 
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_' +str(i)+'_hist.pdf',dpi=1000,bbox_inches='tight')
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_' +str(i)+'_hist.svg',dpi=1000,bbox_inches='tight',transparent=True)
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_' +str(i)+'_hist.png',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_' +str(i)+'_hist.pdf',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_' +str(i)+'_hist.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_' +str(i)+'_hist.png',dpi=1000,bbox_inches='tight')
                     
                     #plt.subplots_adjust( hspace=.2)
 
@@ -4718,9 +4718,9 @@ class Plotting(object):
                     plt.plot(exp['experimental_data'][observable_counter]['Time']*1e3,weighted_log_difference)
                     plt.xlabel('Time (ms)')
                     plt.ylabel('y')
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_'+str(i)+'_timeVSy.pdf',dpi=1000,bbox_inches='tight')
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_'+str(i)+'_timeVSy.svg',dpi=1000,bbox_inches='tight',transparent=True)
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_'+str(i)+'_timeVSy.png',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_'+str(i)+'_timeVSy.pdf',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_'+str(i)+'_timeVSy.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_'+str(i)+'_timeVSy.png',dpi=1000,bbox_inches='tight')
                     
                     
                     plt.figure()
@@ -4733,9 +4733,9 @@ class Plotting(object):
                     plt.plot(interploated_temp, weighted_log_difference)
                     plt.ylabel('y')
                     plt.xlabel('Temperature') 
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_'+str(i)+'_tempVSy.pdf',dpi=1000,bbox_inches='tight')
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_'+str(i)+'_tempVSy.svg',dpi=1000,bbox_inches='tight',transparent=True)
-                    plt.savefig(directory_to_save_images+'/'+observable+'_'+'Experiment Number_'+str(i)+'_tempVSy.png',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_'+str(i)+'_tempVSy.pdf',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_'+str(i)+'_tempVSy.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                    plt.savefig(directory_to_save_images+os.sep+observable+'_'+'Experiment Number_'+str(i)+'_tempVSy.png',dpi=1000,bbox_inches='tight')
 
                     observable_counter+=1
                     
@@ -4778,9 +4778,9 @@ class Plotting(object):
                     plt.hist(weighted_log_difference)
                     plt.xlabel('y')
                     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=.5)
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_hist.pdf',dpi=1000,bbox_inches='tight')
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_hist.svg',dpi=1000,bbox_inches='tight',transparent=True)
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_hist.png',dpi=1000,bbox_inches='tight')                     
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_hist.pdf',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_hist.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_hist.png',dpi=1000,bbox_inches='tight')                     
 
                     plt.figure()
                     plt.subplot(2,1,1)
@@ -4791,9 +4791,9 @@ class Plotting(object):
                     plt.plot(exp['absorbance_experimental_data'][k]['time']*1e3,weighted_log_difference)
                     plt.xlabel('Time (ms)')
                     plt.ylabel('y')
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ ' ' + 'Experiment Number' + '_'+str(i)+'_timeVSy.pdf',dpi=1000,bbox_inches='tight')
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ ' ' + 'Experiment Number' + '_'+str(i)+'_timeVSy.svg',dpi=1000,bbox_inches='tight',transparent=True)
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ ' ' + 'Experiment Number' + '_'+str(i)+'_timeVSy.png',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ ' ' + 'Experiment Number' + '_'+str(i)+'_timeVSy.pdf',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ ' ' + 'Experiment Number' + '_'+str(i)+'_timeVSy.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ ' ' + 'Experiment Number' + '_'+str(i)+'_timeVSy.png',dpi=1000,bbox_inches='tight')
  
                     
                     plt.figure()                    
@@ -4806,9 +4806,9 @@ class Plotting(object):
                     plt.plot(interploated_temp,weighted_log_difference)
                     plt.xlabel('Temperature') 
                     plt.ylabel('y')
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_tempVSy.pdf',dpi=1000,bbox_inches='tight')
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_tempVSy.svg',dpi=1000,bbox_inches='tight',transparent=True)
-                    plt.savefig(directory_to_save_images+'/'+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_tempVSy.png',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_tempVSy.pdf',dpi=1000,bbox_inches='tight')
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_tempVSy.svg',dpi=1000,bbox_inches='tight',transparent=True)
+                    plt.savefig(directory_to_save_images+os.sep+'Absorbance'+ '_' +str(wl)+ '_' + 'Experiment Number' + '_'+str(i)+'_tempVSy.png',dpi=1000,bbox_inches='tight')
 
         return 
     
@@ -5233,7 +5233,7 @@ class Plotting(object):
                 
                 
 
-                    #plt.savefig(directory_to_save_images+'/'+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')    
+                    #plt.savefig(directory_to_save_images+os.sep+str(observables_unique[i])+'_Including Experiments_'+ str(experiments_want_to_plot_data_from)+'_Yy_hist_2_normalized.pdf',dpi=1000,bbox_inches='tight')    
         
     
     
@@ -5543,7 +5543,7 @@ class Plotting(object):
                             #ax3.set_title(observables_unique[x])
                             ax3.set_title('Absorbance '+ str(observables_unique[x])+str(' nm'))
 
-                #fig.savefig(directory_to_save_images+'/'+'Three_pannel_plot_'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
+                #fig.savefig(directory_to_save_images+os.sep+'Three_pannel_plot_'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_time.pdf',dpi=1000,bbox_inches='tight')
 
         for x,observable in enumerate(empty_nested_observable_list_Y):
             length_of_2nd_list = len(empty_nested_observable_list_Y_2[x])
@@ -5657,7 +5657,7 @@ class Plotting(object):
                             #commented
                             ax6.scatter(new_y_test_2,new_temperature_test_2,color='orange',zorder=3,alpha=.25)
   
-                #fig2.savefig(directory_to_save_images+'/'+'Three_pannel_plot'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.pdf',dpi=1000,bbox_inches='tight')
+                #fig2.savefig(directory_to_save_images+os.sep+'Three_pannel_plot'+'_Including Experiments_'+str(experiments_want_to_plot_data_from)+'_Yy_vs_initial_temperature.pdf',dpi=1000,bbox_inches='tight')
 
     def plotting_3_figre_observables(self,experiment_number_want_to_plot,sigmas_original=[],sigmas_optimized=[]):
         
@@ -5739,7 +5739,7 @@ class Plotting(object):
                         #plt.legend(ncol=1)
                         sp = '_'.join(key_list)
                         #print(sp)
-                        #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
+                        #plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K'+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['pressure'])+'_'+sp+'_'+'.pdf', bbox_inches='tight')
                         
                         #stub
                         plt.tick_params(direction='in')
@@ -5747,7 +5747,7 @@ class Plotting(object):
                         
                         #plt.savefig('Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.pdf', bbox_inches='tight')
                         #plt.savefig('Exp_'+str(i+1)+'_'+str(observable)+'_'+str(self.exp_dict_list_original[i]['simulation']['fullParsedYamlFile']['temperature'])+'K_'+sp+'.svg', bbox_inches='tight',transparent=True)
-                        #plt.savefig(self.out_path+'/'+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=1000)
+                        #plt.savefig(self.out_path+os.sep+'Experiment_'+str(i+1)+'_'+str(observable)+'.pdf', bbox_inches='tight',dpi=1000)
     
     
 
@@ -5812,9 +5812,9 @@ class Plotting(object):
     
                         #plt.legend(handlelength=3)
                         plt.legend(ncol=2, prop={'size': 12})
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(experiment_number_want_to_plot)+'_three_figure_obervables.pdf', bbox_inches='tight',dpi=1000)
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(experiment_number_want_to_plot)+'_three_figure_obervables.png', bbox_inches='tight',dpi=1000)
-                        plt.savefig(self.out_path+'/'+'Experiment_'+str(experiment_number_want_to_plot)+'_three_figure_obervables.svg', bbox_inches='tight',dpi=1000,transparent=True)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(experiment_number_want_to_plot)+'_three_figure_obervables.pdf', bbox_inches='tight',dpi=1000)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(experiment_number_want_to_plot)+'_three_figure_obervables.png', bbox_inches='tight',dpi=1000)
+                        plt.savefig(self.out_path+os.sep+'Experiment_'+str(experiment_number_want_to_plot)+'_three_figure_obervables.svg', bbox_inches='tight',dpi=1000,transparent=True)
                         plt.tick_params(direction='in')
    
 
@@ -8450,7 +8450,7 @@ class Plotting(object):
                 optimized_rate_constant_df['low optimized rate'] = pd.Series(bb)  
                 optimized_rate_constant_df['Temperature [K]'] = pd.Series(Temp_optimized)
                 optimized_rate_constant_df['optimized rate'] = pd.Series(k_optimized)                    
-                optimized_rate_constant_df.to_csv(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_optimized.csv',index=False)                                             
+                optimized_rate_constant_df.to_csv(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_optimized.csv',index=False)                                             
 
                 original_rate_constant_df['high original temp'] = pd.Series(c) 
                 original_rate_constant_df['high original rate'] = pd.Series(d) 
@@ -8458,7 +8458,7 @@ class Plotting(object):
                 original_rate_constant_df['low original rate'] = pd.Series(dd)    
                 original_rate_constant_df['Temperature [K]'] = pd.Series(Temp_original)
                 original_rate_constant_df['original rate'] = pd.Series(k_original)
-                original_rate_constant_df.to_csv(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_original.csv',index=False) 
+                original_rate_constant_df.to_csv(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_original.csv',index=False) 
 
                 
                                        
@@ -8579,11 +8579,11 @@ class Plotting(object):
                             plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
                             plt.ylim(low_value_axis,high_value_axis)
                         if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                          
+                            plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                          
                         if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                                 
+                            plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                                 
                         if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)
+                            plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)
                     else: #Ratio of rates
                         numerator = reaction[0]
                         denominator = reaction[1]
@@ -8623,11 +8623,11 @@ class Plotting(object):
                             plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
                             plt.ylim(low_value_axis,high_value_axis)
                         if self.pdf == True:
-                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                          
+                            plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                          
                         if self.png == True:
-                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                                 
+                            plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                                 
                         if self.svg == True:
-                            plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)            
+                            plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)            
                 elif type(reaction)==tuple: #Partial sum of rates w/ old total rate functionality
                     if len(reaction) == 2:
                         reactants = reaction_list_from_mechanism[reaction[0]].rstrip().lstrip() + ' [+] ' + reaction_list_from_mechanism[reaction[1]].rstrip().lstrip()
@@ -8643,11 +8643,11 @@ class Plotting(object):
                         plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
                         plt.ylim(low_value_axis,high_value_axis)
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)       
+                        plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)       
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)            
+                        plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)            
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                                                              
+                        plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)                                                              
                 else: #Single Rates
                     if temperature_range_to_plot_over is not None:
                         plt.xlim(temperature_range_to_plot_over[0],temperature_range_to_plot_over[1])
@@ -8657,11 +8657,11 @@ class Plotting(object):
                     plt.legend(ncol=2)
 
                     if self.pdf == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                             
+                        plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.pdf', bbox_inches='tight',dpi=self.dpi)                             
                     if self.png == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                              
+                        plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.png', bbox_inches='tight',dpi=self.dpi)                              
                     if self.svg == True:
-                        plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
+                        plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True)   
                         
                 self.rate_loop.update()                         
 
@@ -8831,7 +8831,7 @@ class Plotting(object):
                
                 UWSA_Rate_Constant_df[observables_list_for_legend[top_columns] +' '+str(Sig[top_columns])] = pd.Series(sensitivitys[i][0][:,ccc])   
                 
-            UWSA_Rate_Constant_df.to_csv(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_UWSA.csv',index=False)   
+            UWSA_Rate_Constant_df.to_csv(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_UWSA.csv',index=False)   
             
             if bool(reactions_for_legend):
                 print(str(reactions_for_legend[i]))
@@ -8848,16 +8848,16 @@ class Plotting(object):
             # plt.legend(fontsize= 8)
             plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
 
-            # plt.savefig(self.out_path+'/'+'UWSA_'+str(list_of_reaction_strings[i])+'.pdf', bbox_inches='tight')
-            # plt.savefig(self.out_path+'/'+'UWSA_'+str(list_of_reaction_strings[i])+'.png', bbox_inches='tight')
-            # plt.savefig(self.out_path+'/'+'UWSA_'+str(list_of_reaction_strings[i])+'.svg', bbox_inches='tight',transparent=True)
+            # plt.savefig(self.out_path+os.sep+'UWSA_'+str(list_of_reaction_strings[i])+'.pdf', bbox_inches='tight')
+            # plt.savefig(self.out_path+os.sep+'UWSA_'+str(list_of_reaction_strings[i])+'.png', bbox_inches='tight')
+            # plt.savefig(self.out_path+os.sep+'UWSA_'+str(list_of_reaction_strings[i])+'.svg', bbox_inches='tight',transparent=True)
             
             if self.pdf == True:
-                plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_UWSA'+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_UWSA'+'.pdf', bbox_inches='tight',dpi=self.dpi)
             if self.png == True:
-                plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_UWSA'+'.png', bbox_inches='tight',dpi=self.dpi)
+                plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_UWSA'+'.png', bbox_inches='tight',dpi=self.dpi)
             if self.svg == True:
-                plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_UWSA'+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_UWSA'+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
             
             self.rate_UWSA_loop.update()                            
 
@@ -9110,7 +9110,7 @@ class Plotting(object):
                 else:           
                     Sdx_Rate_Constant_df[summed_observable_list[i][top_columns_index] +' ['+str(Sig[top_columns_index+2*num_rxn][0])+', '+str(X[top_columns_index+2*num_rxn][0])+']'] = pd.Series(sensitivitys[i][0][:,ccc])   
                 
-            Sdx_Rate_Constant_df.to_csv(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_Sdx.csv',index=False)   
+            Sdx_Rate_Constant_df.to_csv(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_Sdx.csv',index=False)   
             
             if bool(reactions_for_legend):
                 print(str(reactions_for_legend[i]))
@@ -9127,16 +9127,16 @@ class Plotting(object):
             # plt.legend(fontsize= 8)
             plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
 
-            # plt.savefig(self.out_path+'/'+'Sdx_'+str(list_of_reaction_strings[i])+'.pdf', bbox_inches='tight')
-            # plt.savefig(self.out_path+'/'+'Sdx_'+str(list_of_reaction_strings[i])+'.png', bbox_inches='tight')
-            # plt.savefig(self.out_path+'/'+'Sdx_'+str(list_of_reaction_strings[i])+'.svg', bbox_inches='tight',transparent=True)
+            # plt.savefig(self.out_path+os.sep+'Sdx_'+str(list_of_reaction_strings[i])+'.pdf', bbox_inches='tight')
+            # plt.savefig(self.out_path+os.sep+'Sdx_'+str(list_of_reaction_strings[i])+'.png', bbox_inches='tight')
+            # plt.savefig(self.out_path+os.sep+'Sdx_'+str(list_of_reaction_strings[i])+'.svg', bbox_inches='tight',transparent=True)
             
             if self.pdf == True:
-                plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_Sdx'+'.pdf', bbox_inches='tight',dpi=self.dpi)
+                plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_Sdx'+'.pdf', bbox_inches='tight',dpi=self.dpi)
             if self.png == True:
-                plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_Sdx'+'.png', bbox_inches='tight',dpi=self.dpi)
+                plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_Sdx'+'.png', bbox_inches='tight',dpi=self.dpi)
             if self.svg == True:
-                plt.savefig(self.out_path+'/'+'Rate_Constant_'+str(i+1)+'_Sdx'+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
+                plt.savefig(self.out_path+os.sep+'Rate_Constant_'+str(i+1)+'_Sdx'+'.svg', bbox_inches='tight',dpi=self.dpi,transparent=True) 
                                         
             self.rate_Sdx_loop.update()
             

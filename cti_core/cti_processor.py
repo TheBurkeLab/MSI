@@ -1,4 +1,5 @@
 import re
+import os
 import cantera as ct
 from ..utilities import soln2cti_py3
 #class holding different methods of processing cti files
@@ -158,7 +159,7 @@ class Processor(object): #handles one optimization but may add support for multi
     #also note that _processed.cti will repeatably be rewritten if no new path is specified
     def write_soln_to_file(self,new_path=''):
         if new_path == '':
-            new_path=self.cti_path.split(".cti")[0]+"_processed.cti"
+            new_path=os.path.splitext(self.cti_path)[0]+"_processed.cti"
             soln2cti_py3.write(self.solution, new_path)
         else:
             soln2cti_py3.write(self.solution,new_path)
@@ -169,7 +170,7 @@ class Processor(object): #handles one optimization but may add support for multi
     #naming scheme behaves in same way as write_to_file, may add option to do spefiic reactions later, not only all
     def write_active_parameters(self,new_path=''):
         if new_path == '':
-            new_path=self.cti_path.split(".cti")[0]+"_processed.param"
+            new_path=os.path.splitext(self.cti_path)[0]+"_processed.param"
         f = open(new_path,'w')
         for r_index in self.active_parameter_dictionary.keys():
             data = ''

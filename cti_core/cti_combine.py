@@ -10,6 +10,7 @@ and adds those reactions to create a complete internal mechanism
 """
 
 import numpy as np
+import os
 import cantera as ct
 from .. import simulations
 from ..utilities import soln2cti_py3 as ctiw
@@ -53,12 +54,13 @@ def cti_write2(x={},original_cti='',master_rxns='',master_index=[],MP={},working
         else:count+=1
     
 
-    with open('tempcti.cti','w') as p:
+    _tempcti_path = os.path.join(working_directory, 'tempcti.cti') if working_directory else os.path.join(os.path.dirname(os.path.abspath(original_cti)), 'tempcti.cti')
+    with open(_tempcti_path,'w') as p:
         p.writelines(lineList)
-    
-    NewModel=ct.Solution('tempcti.cti')
-    
-    
+
+    NewModel=ct.Solution(_tempcti_path)
+
+
     original_mechanism=ct.Solution(original_cti)
     original_rxn_count=0
     master_rxn_eqs=[]
@@ -66,9 +68,10 @@ def cti_write2(x={},original_cti='',master_rxns='',master_index=[],MP={},working
         with open(master_rxns) as f:
             reactionsList=f.readlines()
         lineList=lineList+reactionsList
-        with open('masterTemp.cti','w') as f:
+        _mastertemp_path = os.path.join(working_directory, 'masterTemp.cti') if working_directory else os.path.join(os.path.dirname(os.path.abspath(original_cti)), 'masterTemp.cti')
+        with open(_mastertemp_path,'w') as f:
             f.writelines(lineList)
-        master_reactions=ct.Solution('masterTemp.cti')
+        master_reactions=ct.Solution(_mastertemp_path)
         master_rxn_eqs=master_reactions.reaction_equations()
         
     original_rxn_eqs=[]

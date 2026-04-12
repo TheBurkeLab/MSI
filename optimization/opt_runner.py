@@ -16,6 +16,86 @@ import multiprocessing
 import gc
 import time
 
+def _run_single_experiment(args):
+    """Module-level worker for multiprocessing.Pool.
+
+    Receives only picklable data and reconstructs the Cantera Processor
+    inside the child process. Returns the completed experiment dict.
+
+    Args tuple: (exp_number, cti_path, yaml_dict, yaml_path, kineticSens, physicalSens, dk, n_processors)
+    """
+    exp_number, cti_path, yaml_dict, yaml_path, kineticSens, physicalSens, dk, n_processors = args
+    try:
+        processor = pr.Processor(cti_path)
+        utility = Optimization_Utility()
+        simulation_type = yaml_dict['simulationType']
+        experiment_type = yaml_dict['experimentType']
+
+        if re.match('[Ss]hock [Tt]ube', simulation_type) and re.match('[Ss]pecies[- ][Pp]rofile', experiment_type):
+            if 'absorbanceObservables' not in yaml_dict:
+                return utility.running_full_shock_tube(processor=processor, experiment_dictonary=yaml_dict,
+                                                       kineticSens=kineticSens, physicalSens=physicalSens,
+                                                       dk=dk, exp_number=exp_number)
+            elif yaml_dict['moleFractionObservables'][0] is None and yaml_dict['concentrationObservables'][0] is None:
+                return utility.running_shock_tube_absorption_only(processor=processor, experiment_dictonary=yaml_dict,
+                                                                   absorbance_yaml_file_path=yaml_path[1],
+                                                                   kineticSens=kineticSens, physicalSens=physicalSens,
+                                                                   dk=dk, exp_number=exp_number)
+            else:
+                return utility.running_full_shock_tube_absorption(processor=processor, experiment_dictonary=yaml_dict,
+                                                                   absorbance_yaml_file_path=yaml_path[1],
+                                                                   kineticSens=kineticSens, physicalSens=physicalSens,
+                                                                   dk=dk, exp_number=exp_number)
+
+        elif re.match('[Ss]hock [Tt]ube', simulation_type) and re.match('[Ii]gnition[- ][Dd]elay', experiment_type):
+            if 'absorbanceObservables' not in yaml_dict:
+                return utility.running_ignition_delay(processor=processor, experiment_dictionary=yaml_dict,
+                                                      kineticSens=kineticSens, physicalSens=physicalSens,
+                                                      dk=dk, exp_number=exp_number,
+                                                      n_processors=n_processors)
+            else:
+                print('Absorbance currently not enabled for ignition delay')
+
+        elif re.match('[Rr][Cc][Mm]', simulation_type) and re.match('[Ii]gnition[- ][Dd]elay', experiment_type):
+            if 'absorbanceObservables' not in yaml_dict:
+                return utility.running_ignition_delay(processor=processor, experiment_dictionary=yaml_dict,
+                                                      kineticSens=kineticSens, physicalSens=physicalSens,
+                                                      dk=dk, exp_number=exp_number,
+                                                      n_processors=n_processors)
+            else:
+                print('Absorbance currently not enabled for ignition delay')
+
+        elif re.match('[Jj][Ss][Rr]', simulation_type) or re.match('[Jj]et[- ][Ss]tirred[- ][Rr]eactor', simulation_type):
+            if 'absorbanceObservables' not in yaml_dict:
+                return utility.running_full_jsr(processor=processor, experiment_dictionary=yaml_dict,
+                                                kineticSens=kineticSens, physicalSens=physicalSens,
+                                                dk=dk, exp_number=exp_number)
+            else:
+                print('Absorbance currently not enabled for jsr')
+
+        elif re.match('[Ff]lame[ -][Ss]peed', simulation_type) and re.match('[Oo][Nn][Ee]|[1][ -][dD][ -][Ff]lame', experiment_type):
+            print('ADD FLAME SPEED DICT HERE')
+
+        elif re.match('[Ff]low[ -][Rr]eactor', simulation_type) and re.match('[Ss]pecies[- ][Pp]rofile', experiment_type):
+            if 'absorbanceObservables' not in yaml_dict:
+                return utility.running_flow_reactor(processor=processor, experiment_dictonary=yaml_dict,
+                                                    kineticSens=kineticSens, physicalSens=physicalSens,
+                                                    dk=dk, exp_number=exp_number)
+            else:
+                print('Absorbance currently not enabled for flow reactor')
+
+        else:
+            print('We do not have this simulation installed yet: {} / {}'.format(simulation_type, experiment_type))
+
+        return None
+
+    except Exception as e:
+        print('ERROR in experiment {} ({} / {}): {}: {}'.format(
+            exp_number, yaml_dict.get('simulationType', '?'),
+            yaml_dict.get('experimentType', '?'), type(e).__name__, e))
+        raise
+
+
 #acts as front end to the rest of the system
 
 
@@ -294,11 +374,11 @@ class Optimization_Utility(object):
                                kineticSens=1,
                                physicalSens=1,
                                dk=0.01,
-                               exp_number=1):
-        
-        
+                               exp_number=1,
+                               n_processors=1):
+
         if 'volumeTraceCsvList' in experiment_dictionary.keys():
-            
+
             ig_delay=ig.ignition_delay_wrapper(pressures=experiment_dictionary['pressures'],
                                                temperatures=experiment_dictionary['temperatures'],
                                                observables=experiment_dictionary['observables'],
@@ -308,9 +388,9 @@ class Optimization_Utility(object):
                                                thermalBoundary=experiment_dictionary['thermalBoundary'],
                                                mechanicalBoundary=experiment_dictionary['mechanicalBoundary'],
                                                processor=processor,
-                                               cti_path="", 
+                                               cti_path="",
                                                save_physSensHistories=1,
-                                               fullParsedYamlFile=experiment_dictionary, 
+                                               fullParsedYamlFile=experiment_dictionary,
                                                save_timeHistories=1,
                                                log_file=False,
                                                log_name='log.txt',
@@ -319,7 +399,7 @@ class Optimization_Utility(object):
                                                finalTime=experiment_dictionary['finalTime'],
                                                target=experiment_dictionary['target'],
                                                target_type=experiment_dictionary['target_type'],
-                                               n_processors=2,
+                                               n_processors=n_processors,
                                                volumeTraceList = experiment_dictionary['volumeTraceCsvList'])
         else:
             ig_delay=ig.ignition_delay_wrapper(pressures=experiment_dictionary['pressures'],
@@ -331,9 +411,9 @@ class Optimization_Utility(object):
                                                thermalBoundary=experiment_dictionary['thermalBoundary'],
                                                mechanicalBoundary=experiment_dictionary['mechanicalBoundary'],
                                                processor=processor,
-                                               cti_path="", 
+                                               cti_path="",
                                                save_physSensHistories=1,
-                                               fullParsedYamlFile=experiment_dictionary, 
+                                               fullParsedYamlFile=experiment_dictionary,
                                                save_timeHistories=1,
                                                log_file=False,
                                                log_name='log.txt',
@@ -342,7 +422,7 @@ class Optimization_Utility(object):
                                                finalTime=experiment_dictionary['finalTime'],
                                                target=experiment_dictionary['target'],
                                                target_type=experiment_dictionary['target_type'],
-                                               n_processors=2)
+                                               n_processors=n_processors)
         
         
         soln,ksen=ig_delay.run()
@@ -926,7 +1006,7 @@ class Optimization_Utility(object):
         return experiment    
     
     
-    def looping_over_parsed_yaml_files(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
+    def looping_over_parsed_yaml_files(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0, n_processors=1):
         
         self.manager = manager
         self.sim_loop=self.manager.counter(total=len(list_of_parsed_yamls),desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')    
@@ -982,7 +1062,8 @@ class Optimization_Utility(object):
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
                                            dk = dk,
-                                           exp_number=i)
+                                           exp_number=i,
+                                           n_processors=n_processors)
                         experiment_list.append(experiment)
                 
                  elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
@@ -1011,14 +1092,15 @@ class Optimization_Utility(object):
 
 
             elif re.match('[Rr][Cc][Mm]',simulation_type) and re.match('[Ii]gnition[- ][Dd]elay',experiment_type):
-                 
+
                  if 'absorbanceObservables' not in yamlDict.keys():
                         experiment = self.running_ignition_delay(processor=processor,
                                            experiment_dictionary=yamlDict,
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
                                            dk = dk,
-                                           exp_number=i)
+                                           exp_number=i,
+                                           n_processors=n_processors)
                         experiment_list.append(experiment)
                 
                  elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
@@ -1112,49 +1194,11 @@ class Optimization_Utility(object):
         
         return experiment_list
     
-    def looping_over_parsed_yaml_files_parallel_pool(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
-        
-        systems = len(list_of_parsed_yamls)
-        WORKERS = systems
-        
-        args = [[i,list_of_parsed_yamls[i],list_of_yaml_paths[i],kineticSens,physicalSens,dk] for i in range(len(list_of_parsed_yamls))]
-        
-        with multiprocessing.Pool(processes=WORKERS,maxtasksperchild=1) as pool:
-            temp_mat=pool.map(self.parallel_pool_function,args)
-            self.matrices=temp_mat
-
-
-        self.manager = manager
-        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')
-        started = 0
-        active = {}
-        jobs = []
-        with multiprocessing.Manager() as mp_manager:
-            experiment_dict = mp_manager.dict()
-            while systems > started or active:
-                print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-
-                if systems > started and len(active) < WORKERS:
-                    print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
-
-                    started += 1
-                    process = multiprocessing.Process(target=self.parallel_pool_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict))
-                    jobs.append(process)
-                    process.start()
-                    active[started] = process
-                for system in tuple(active.keys()):
-                    process = active[system]
-                    alive = process.is_alive()
-                    if not alive:
-                        del active[system]
-                        self.sim_loop.update()
-                time.sleep(0.1)
-            for proc in jobs:
-                proc.join()
-                proc.close()
-
-            result = [experiment_dict[i] for i in range(len(experiment_dict))]
-        return result
+    def looping_over_parsed_yaml_files_parallel_pool(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0, n_processors=1):
+        return self.looping_over_parsed_yaml_files_parallel(list_of_parsed_yamls,list_of_yaml_paths,manager,
+                                                             processor=processor,kineticSens=kineticSens,
+                                                             physicalSens=physicalSens,dk=dk,loop_counter=loop_counter,
+                                                             n_processors=n_processors)
 
     def parallel_pool_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
         try:
@@ -1265,41 +1309,38 @@ class Optimization_Utility(object):
         
         
     
-    def looping_over_parsed_yaml_files_parallel(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
-        
-        systems = len(list_of_parsed_yamls)
-        WORKERS = systems
+    def looping_over_parsed_yaml_files_parallel(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0, n_processors=1):
+        """Run all experiments in parallel using multiprocessing.Pool.
+
+        Passes only picklable data to workers; each worker reconstructs its
+        own Cantera Processor from the cti file path.  Results are returned
+        in experiment-index order, matching the serial version.
+
+        n_processors controls per-experiment internal parallelism (e.g. ignition
+        delay sensitivity solves). Should be 1 when experiment-level parallelism
+        is active to avoid spawning n_experiments * n_processors processes.
+        """
+        cti_path = processor.cti_path
+        n_workers = min(len(list_of_parsed_yamls), os.cpu_count())
+
+        args = [
+            (i, cti_path, list_of_parsed_yamls[i], list_of_yaml_paths[i], kineticSens, physicalSens, dk, n_processors)
+            for i in range(len(list_of_parsed_yamls))
+        ]
+
         self.manager = manager
-        self.sim_loop=self.manager.counter(total=systems,desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')
-        started = 0
-        active = {}
-        jobs = []
-        with multiprocessing.Manager() as mp_manager:
-            experiment_dict = mp_manager.dict()
-            while systems > started or active:
-                print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
+        self.sim_loop = self.manager.counter(total=len(list_of_parsed_yamls),
+                                             desc='      Running Experimental Simuations:  ',
+                                             unit='experiments', color='gray')
 
-                if systems > started and len(active) < WORKERS:
-                    print('systems: '+str(systems)+', started: '+str(started)+', active: '+str(active))
+        with multiprocessing.Pool(processes=n_workers) as pool:
+            experiment_list = []
+            for experiment in pool.imap(_run_single_experiment, args):
+                experiment_list.append(experiment)
+                self.sim_loop.update()
 
-                    started += 1
-                    process = multiprocessing.Process(target=self.parallel_function, name='System %d' % started, args=(started-1,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict))
-                    jobs.append(process)
-                    process.start()
-                    active[started] = process
-                for system in tuple(active.keys()):
-                    process = active[system]
-                    alive = process.is_alive()
-                    if not alive:
-                        del active[system]
-                        self.sim_loop.update()
-                time.sleep(0.1)
-            for proc in jobs:
-                proc.join()
-                proc.close()
-
-            result = [experiment_dict[i] for i in range(len(experiment_dict))]
-        return result
+        self.sim_loop.close()
+        return [exp for exp in experiment_list if exp is not None]
     
     def parallel_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
         try:

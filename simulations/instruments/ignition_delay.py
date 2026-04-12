@@ -43,8 +43,7 @@ class ignition_delay(sim.Simulation):
             self.processor = processor 
         elif cti_path!="":
             self.processor = ctp.Processor(cti_path)
-        #self.n_processors=n_processors
-        self.n_processors=20 #figure out where this is set
+        self.n_processors=n_processors
         self.pressure=pressure
         self.temperature=temperature
         self.observables=observables

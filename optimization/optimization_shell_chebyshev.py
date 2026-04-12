@@ -22,14 +22,14 @@ from pathlib import Path
 
 class MSI_optimization_chebyshev(object):
         
-    def __init__(self, 
+    def __init__(self,
                  working_directory:str,
                  cti_file:str,
                  yaml_file_list:list,
                  reaction_uncertainty_csv:str,
                  perturbment:int=0.01,
                  kineticSens:int=1,
-                 physicalSens:int=1,                 
+                 physicalSens:int=1,
                  k_target_values_csv:str='',
                  master_equation_flag:bool=False,
                  master_equation_reactions:list=[],
@@ -41,7 +41,9 @@ class MSI_optimization_chebyshev(object):
                  chebyshev_fit_nominal_parameters_dict = None,
                  step_size:int = 1,
                  T_P_min_max_dict={},
-                 X_prior_csv:str=''):
+                 X_prior_csv:str='',
+                 parallel:bool=True,
+                 n_processors:int=1):
         
         
         
@@ -62,7 +64,9 @@ class MSI_optimization_chebyshev(object):
         self.k_target_values_csv = k_target_values_csv
         self.MP_for_S_matrix = np.array(())
         self.step_size = step_size
-        
+        self.parallel = parallel
+        self.n_processors = n_processors
+
         # self.list_of_csv_names = None
         self.X_prior_csv = X_prior_csv
         if self.X_prior_csv == '':
@@ -179,35 +183,37 @@ class MSI_optimization_chebyshev(object):
     
     def running_simulations(self,loop_counter=0):
         optimization_instance = opt.Optimization_Utility()
+        loop_fn = (optimization_instance.looping_over_parsed_yaml_files_parallel
+                   if self.parallel
+                   else optimization_instance.looping_over_parsed_yaml_files)
         if loop_counter == 0:
-            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files(self.list_of_parsed_yamls,
-                                              self.yaml_file_list_with_working_directory ,
-                                              self.manager,
-                                              processor=self.processor, 
-                                              kineticSens=self.kineticSens,
-                                              physicalSens=self.physicalSens,
-                                              dk=self.perturbment,loop_counter=loop_counter)
-            
-            # looping_over_parsed_yaml_files_parallel
-            # print(experiment_dictonaries[0]['simulation'].timeHistories)
-            
+            experiment_dictonaries = loop_fn(self.list_of_parsed_yamls,
+                                             self.yaml_file_list_with_working_directory,
+                                             self.manager,
+                                             processor=self.processor,
+                                             kineticSens=self.kineticSens,
+                                             physicalSens=self.physicalSens,
+                                             dk=self.perturbment,
+                                             loop_counter=loop_counter,
+                                             n_processors=self.n_processors)
+
             experiment_dict_uncertainty_original = optimization_instance.saving_experimental_dict(experiment_dictonaries)
-            
-            
+
             self.experiment_dict_uncertainty_original = copy.deepcopy(experiment_dict_uncertainty_original)
-            
+
             #call function taht loops opver experient dicts og and saves them
-            
+
         else:
-            
-            experiment_dictonaries = optimization_instance.looping_over_parsed_yaml_files(self.list_of_parsed_yamls,
-                                              self.updated_yaml_file_name_list ,
-                                              self.manager,
-                                              processor=self.processor, 
-                                              kineticSens=self.kineticSens,
-                                              physicalSens=self.physicalSens,
-                                              dk=self.perturbment,loop_counter=loop_counter)
-            # looping_over_parsed_yaml_files_parallel
+
+            experiment_dictonaries = loop_fn(self.list_of_parsed_yamls,
+                                             self.updated_yaml_file_name_list,
+                                             self.manager,
+                                             processor=self.processor,
+                                             kineticSens=self.kineticSens,
+                                             physicalSens=self.physicalSens,
+                                             dk=self.perturbment,
+                                             loop_counter=loop_counter,
+                                             n_processors=self.n_processors)
         
            
         self.experiment_dictonaries = experiment_dictonaries

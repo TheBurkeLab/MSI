@@ -257,7 +257,7 @@ class JSR_steadystate(sim.Simulation):
             #print(test)
             for k in range(len(self.observables)):
                 index=gas.species_names.index(self.observables[k])
-                dfs[k] = dfs[k].append(((pd.DataFrame(sens[index+3,:])).transpose()),ignore_index=True)
+                dfs[k] = pd.concat([dfs[k], (pd.DataFrame(sens[index+3,:])).transpose()], ignore_index=True)
                 #dfs[k]=pd.concat([dfs[k],pd.DataFrame(sens[k,:]).transpose()])
                 #dfs[k]=pd.DataFrame(sens[k,:]).transpose()
             #print(dfs)  

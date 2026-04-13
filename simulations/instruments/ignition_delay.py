@@ -31,7 +31,7 @@ class ignition_delay(sim.Simulation):
                  absorbanceObservables:list=[],concentrationObservables:list=[],
                  fullParsedYamlFile:dict={}, save_timeHistories:int=0,
                  log_file=True,log_name='log.txt',timeshift:float=0.0,initialTime:float=0.0,
-                 finalTime:float=1.0,target:str='temperature',target_type:str='max derivative',n_processors:int=5,
+                 finalTime:float=1.0,target:str='temperature',target_type:str='max derivative',
                  volumeTrace=''):
         
         
@@ -43,7 +43,6 @@ class ignition_delay(sim.Simulation):
             self.processor = processor 
         elif cti_path!="":
             self.processor = ctp.Processor(cti_path)
-        self.n_processors=n_processors
         self.pressure=pressure
         self.temperature=temperature
         self.observables=observables
@@ -938,7 +937,7 @@ class ignition_delay_wrapper(sim.Simulation):
                  fullParsedYamlFile:dict={}, save_timeHistories:int=0,
                  log_file=True,log_name='log.txt',timeshift:float=0.0,initialTime:float=0.0,
                  finalTime:float=1.0,target:str='temperature',
-                 target_type:str='max derivative',n_processors:int=2, 
+                 target_type:str='max derivative',
                  volumeTraceList=[]):
         
         
@@ -952,7 +951,6 @@ class ignition_delay_wrapper(sim.Simulation):
             self.processor = processor 
         elif cti_path!="":
             self.processor = ctp.Processor(cti_path)
-        self.n_processors=n_processors
         self.pressures=pressures
         self.temperatures=temperatures
         self.observables=observables
@@ -1028,7 +1026,6 @@ class ignition_delay_wrapper(sim.Simulation):
                                                    finalTime=self.finalTime,
                                                    target=self.target,
                                                    target_type=self.target_type,
-                                                   n_processors=self.n_processors,
                                                    volumeTrace = self.volumeTraceList[i])
                         
                     a,b=temp_ig.run_single()
@@ -1074,8 +1071,7 @@ class ignition_delay_wrapper(sim.Simulation):
                                                    initialTime=self.initialTime,
                                                    finalTime=self.finalTime,
                                                    target=self.target,
-                                                   target_type=self.target_type,
-                                                   n_processors=self.n_processors)
+                                                   target_type=self.target_type)
                         
                     a,b=temp_ig.run_single()
                         
@@ -1121,7 +1117,6 @@ class ignition_delay_wrapper(sim.Simulation):
                                                finalTime=self.finalTime,
                                                target=self.target,
                                                target_type=self.target_type,
-                                               n_processors=self.n_processors,
                                                volumeTrace = '')                            
                            
             

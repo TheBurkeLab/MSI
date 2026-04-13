@@ -16,15 +16,31 @@ import multiprocessing
 import gc
 import time
 
+def _worker_stdout_init():
+    """Redirect worker stdout to devnull to prevent Windows console deadlock.
+
+    Enlighten's background refresh thread holds the Windows console lock while
+    updating the display.  Worker processes inherit the same console handle and
+    block indefinitely in print() waiting for that lock.  Redirecting stdout at
+    both the Python and OS-fd level eliminates workers' access to the console,
+    breaking the deadlock.  Errors still propagate via raised exceptions.
+    """
+    import sys, os
+    devnull_fd = os.open(os.devnull, os.O_WRONLY)
+    os.dup2(devnull_fd, 1)   # redirect OS-level fd 1 (catches C-extension output)
+    os.close(devnull_fd)
+    sys.stdout = open(os.devnull, 'w')  # redirect Python-level stdout
+
+
 def _run_single_experiment(args):
     """Module-level worker for multiprocessing.Pool.
 
     Receives only picklable data and reconstructs the Cantera Processor
     inside the child process. Returns the completed experiment dict.
 
-    Args tuple: (exp_number, cti_path, yaml_dict, yaml_path, kineticSens, physicalSens, dk, n_processors)
+    Args tuple: (exp_number, cti_path, yaml_dict, yaml_path, kineticSens, physicalSens, dk)
     """
-    exp_number, cti_path, yaml_dict, yaml_path, kineticSens, physicalSens, dk, n_processors = args
+    exp_number, cti_path, yaml_dict, yaml_path, kineticSens, physicalSens, dk = args
     try:
         processor = pr.Processor(cti_path)
         utility = Optimization_Utility()
@@ -51,48 +67,33 @@ def _run_single_experiment(args):
             if 'absorbanceObservables' not in yaml_dict:
                 return utility.running_ignition_delay(processor=processor, experiment_dictionary=yaml_dict,
                                                       kineticSens=kineticSens, physicalSens=physicalSens,
-                                                      dk=dk, exp_number=exp_number,
-                                                      n_processors=n_processors)
-            else:
-                print('Absorbance currently not enabled for ignition delay')
+                                                      dk=dk, exp_number=exp_number)
 
         elif re.match('[Rr][Cc][Mm]', simulation_type) and re.match('[Ii]gnition[- ][Dd]elay', experiment_type):
             if 'absorbanceObservables' not in yaml_dict:
                 return utility.running_ignition_delay(processor=processor, experiment_dictionary=yaml_dict,
                                                       kineticSens=kineticSens, physicalSens=physicalSens,
-                                                      dk=dk, exp_number=exp_number,
-                                                      n_processors=n_processors)
-            else:
-                print('Absorbance currently not enabled for ignition delay')
+                                                      dk=dk, exp_number=exp_number)
 
         elif re.match('[Jj][Ss][Rr]', simulation_type) or re.match('[Jj]et[- ][Ss]tirred[- ][Rr]eactor', simulation_type):
             if 'absorbanceObservables' not in yaml_dict:
                 return utility.running_full_jsr(processor=processor, experiment_dictionary=yaml_dict,
                                                 kineticSens=kineticSens, physicalSens=physicalSens,
                                                 dk=dk, exp_number=exp_number)
-            else:
-                print('Absorbance currently not enabled for jsr')
-
-        elif re.match('[Ff]lame[ -][Ss]peed', simulation_type) and re.match('[Oo][Nn][Ee]|[1][ -][dD][ -][Ff]lame', experiment_type):
-            print('ADD FLAME SPEED DICT HERE')
 
         elif re.match('[Ff]low[ -][Rr]eactor', simulation_type) and re.match('[Ss]pecies[- ][Pp]rofile', experiment_type):
             if 'absorbanceObservables' not in yaml_dict:
                 return utility.running_flow_reactor(processor=processor, experiment_dictonary=yaml_dict,
                                                     kineticSens=kineticSens, physicalSens=physicalSens,
                                                     dk=dk, exp_number=exp_number)
-            else:
-                print('Absorbance currently not enabled for flow reactor')
-
-        else:
-            print('We do not have this simulation installed yet: {} / {}'.format(simulation_type, experiment_type))
 
         return None
 
     except Exception as e:
         print('ERROR in experiment {} ({} / {}): {}: {}'.format(
             exp_number, yaml_dict.get('simulationType', '?'),
-            yaml_dict.get('experimentType', '?'), type(e).__name__, e))
+            yaml_dict.get('experimentType', '?'), type(e).__name__, e),
+            file=sys.stderr)
         raise
 
 
@@ -374,8 +375,7 @@ class Optimization_Utility(object):
                                kineticSens=1,
                                physicalSens=1,
                                dk=0.01,
-                               exp_number=1,
-                               n_processors=1):
+                               exp_number=1):
 
         if 'volumeTraceCsvList' in experiment_dictionary.keys():
 
@@ -399,7 +399,6 @@ class Optimization_Utility(object):
                                                finalTime=experiment_dictionary['finalTime'],
                                                target=experiment_dictionary['target'],
                                                target_type=experiment_dictionary['target_type'],
-                                               n_processors=n_processors,
                                                volumeTraceList = experiment_dictionary['volumeTraceCsvList'])
         else:
             ig_delay=ig.ignition_delay_wrapper(pressures=experiment_dictionary['pressures'],
@@ -421,8 +420,7 @@ class Optimization_Utility(object):
                                                initialTime=experiment_dictionary['initialTime'],
                                                finalTime=experiment_dictionary['finalTime'],
                                                target=experiment_dictionary['target'],
-                                               target_type=experiment_dictionary['target_type'],
-                                               n_processors=n_processors)
+                                               target_type=experiment_dictionary['target_type'])
         
         
         soln,ksen=ig_delay.run()
@@ -1006,7 +1004,7 @@ class Optimization_Utility(object):
         return experiment    
     
     
-    def looping_over_parsed_yaml_files(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0, n_processors=1):
+    def looping_over_parsed_yaml_files(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
         
         self.manager = manager
         self.sim_loop=self.manager.counter(total=len(list_of_parsed_yamls),desc='      Running Experimental Simuations:  ',unit='experiments',color='gray')    
@@ -1062,8 +1060,7 @@ class Optimization_Utility(object):
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
                                            dk = dk,
-                                           exp_number=i,
-                                           n_processors=n_processors)
+                                           exp_number=i)
                         experiment_list.append(experiment)
                 
                  elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
@@ -1099,8 +1096,7 @@ class Optimization_Utility(object):
                                            kineticSens = kineticSens,
                                            physicalSens = physicalSens,
                                            dk = dk,
-                                           exp_number=i,
-                                           n_processors=n_processors)
+                                           exp_number=i)
                         experiment_list.append(experiment)
                 
                  elif 'absorbanceObservables' in yamlDict.keys() and yamlDict['moleFractionObservables'][0] == None and yamlDict['concentrationObservables'][0]==None:
@@ -1194,11 +1190,10 @@ class Optimization_Utility(object):
         
         return experiment_list
     
-    def looping_over_parsed_yaml_files_parallel_pool(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0, n_processors=1):
+    def looping_over_parsed_yaml_files_parallel_pool(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
         return self.looping_over_parsed_yaml_files_parallel(list_of_parsed_yamls,list_of_yaml_paths,manager,
                                                              processor=processor,kineticSens=kineticSens,
-                                                             physicalSens=physicalSens,dk=dk,loop_counter=loop_counter,
-                                                             n_processors=n_processors)
+                                                             physicalSens=physicalSens,dk=dk,loop_counter=loop_counter)
 
     def parallel_pool_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
         try:
@@ -1309,38 +1304,52 @@ class Optimization_Utility(object):
         
         
     
-    def looping_over_parsed_yaml_files_parallel(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0, n_processors=1):
+    def looping_over_parsed_yaml_files_parallel(self,list_of_parsed_yamls,list_of_yaml_paths,manager,processor=None,kineticSens=1,physicalSens=1,dk=.01, loop_counter=0):
         """Run all experiments in parallel using multiprocessing.Pool.
 
         Passes only picklable data to workers; each worker reconstructs its
         own Cantera Processor from the cti file path.  Results are returned
         in experiment-index order, matching the serial version.
-
-        n_processors controls per-experiment internal parallelism (e.g. ignition
-        delay sensitivity solves). Should be 1 when experiment-level parallelism
-        is active to avoid spawning n_experiments * n_processors processes.
         """
         cti_path = processor.cti_path
         n_workers = min(len(list_of_parsed_yamls), os.cpu_count())
 
         args = [
-            (i, cti_path, list_of_parsed_yamls[i], list_of_yaml_paths[i], kineticSens, physicalSens, dk, n_processors)
+            (i, cti_path, list_of_parsed_yamls[i], list_of_yaml_paths[i], kineticSens, physicalSens, dk)
             for i in range(len(list_of_parsed_yamls))
         ]
 
         self.manager = manager
-        self.sim_loop = self.manager.counter(total=len(list_of_parsed_yamls),
-                                             desc='      Running Experimental Simuations:  ',
-                                             unit='experiments', color='gray')
 
-        with multiprocessing.Pool(processes=n_workers) as pool:
+        # Use apply_async with per-task timeout so a single non-converging
+        # simulation cannot block the entire pool indefinitely.  120 s is ~10x
+        # the typical single-experiment wall time; any task still running after
+        # that is genuinely stuck and returned as None.
+        task_timeout = 120
+
+        pool = multiprocessing.Pool(processes=n_workers, initializer=_worker_stdout_init)
+        try:
+            async_results = [pool.apply_async(_run_single_experiment, (arg,)) for arg in args]
             experiment_list = []
-            for experiment in pool.imap(_run_single_experiment, args):
-                experiment_list.append(experiment)
-                self.sim_loop.update()
+            n_total = len(async_results)
+            for i, r in enumerate(async_results):
+                try:
+                    experiment_list.append(r.get(timeout=task_timeout))
+                    print(f'  Simulations: {i+1}/{n_total}', end='\r', flush=True)
+                except multiprocessing.TimeoutError:
+                    print(f'\n[WARNING] experiment {i} timed out after {task_timeout}s — reusing previous result',
+                          flush=True)
+                    experiment_list.append(None)
+                except Exception as e:
+                    print(f'\n[WARNING] experiment {i} raised {type(e).__name__}: {e}',
+                          flush=True)
+                    experiment_list.append(None)
+            print()
+        finally:
+            pool.terminate()
+            pool.join()
 
-        self.sim_loop.close()
-        return [exp for exp in experiment_list if exp is not None]
+        return experiment_list
     
     def parallel_function(self,exp_number,list_of_parsed_yamls,list_of_yaml_paths,processor,kineticSens,physicalSens,dk,experiment_dict):
         try:

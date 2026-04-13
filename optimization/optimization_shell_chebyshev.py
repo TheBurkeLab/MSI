@@ -42,8 +42,7 @@ class MSI_optimization_chebyshev(object):
                  step_size:int = 1,
                  T_P_min_max_dict={},
                  X_prior_csv:str='',
-                 parallel:bool=True,
-                 n_processors:int=1):
+                 parallel:bool=True):
         
         
         
@@ -65,7 +64,6 @@ class MSI_optimization_chebyshev(object):
         self.MP_for_S_matrix = np.array(())
         self.step_size = step_size
         self.parallel = parallel
-        self.n_processors = n_processors
 
         # self.list_of_csv_names = None
         self.X_prior_csv = X_prior_csv
@@ -87,9 +85,10 @@ class MSI_optimization_chebyshev(object):
             self.T_P_min_max_dict=T_P_min_max_dict
             
             Art=text2art("MSI",font='varsity')
+            platform_label = 'Windows Version' if sys.platform == 'win32' else 'Linux Version'
             print('\n')
             print(Art)
-            print('\n')
+            print(platform_label)
             print('--------------------------------------------------------------------------')
             print('Initializing Optimization Shell with Theory')
             print('--------------------------------------------------------------------------')
@@ -105,9 +104,10 @@ class MSI_optimization_chebyshev(object):
             self.T_P_min_max_dict={}
             
             Art=text2art("MSI",font='varsity')
+            platform_label = 'Windows Version' if sys.platform == 'win32' else 'Linux Version'
             print('\n')
             print(Art)
-            print('\n')
+            print(platform_label)
             print('--------------------------------------------------------------------------')
             print('Initializing Optimization Shell')
             print('--------------------------------------------------------------------------')            
@@ -194,8 +194,7 @@ class MSI_optimization_chebyshev(object):
                                              kineticSens=self.kineticSens,
                                              physicalSens=self.physicalSens,
                                              dk=self.perturbment,
-                                             loop_counter=loop_counter,
-                                             n_processors=self.n_processors)
+                                             loop_counter=loop_counter)
 
             experiment_dict_uncertainty_original = optimization_instance.saving_experimental_dict(experiment_dictonaries)
 
@@ -212,10 +211,21 @@ class MSI_optimization_chebyshev(object):
                                              kineticSens=self.kineticSens,
                                              physicalSens=self.physicalSens,
                                              dk=self.perturbment,
-                                             loop_counter=loop_counter,
-                                             n_processors=self.n_processors)
-        
-           
+                                             loop_counter=loop_counter)
+
+            # If any experiment timed out (returned None), substitute the
+            # previous iteration's result so matrix dimensions stay consistent.
+            prev = self.experiment_dictonaries
+            for i, exp in enumerate(experiment_dictonaries):
+                if exp is None:
+                    if prev is not None and i < len(prev) and prev[i] is not None:
+                        print(f'[WARNING] experiment {i} timed out — reusing previous iteration result',
+                              file=sys.stderr)
+                        experiment_dictonaries[i] = prev[i]
+                    else:
+                        print(f'[WARNING] experiment {i} timed out and no previous result available',
+                              file=sys.stderr)
+
         self.experiment_dictonaries = experiment_dictonaries
        
 
@@ -664,7 +674,9 @@ class MSI_optimization_chebyshev(object):
         print('\nUpdating Files')
         self.updating_files(loop_counter=loop_counter)
         self.subloop.update()
-        
+        self.df_loop.close()
+        self.subloop.close()
+
     def multiple_runs(self,loops):
         
         self.manager = enlighten.get_manager()

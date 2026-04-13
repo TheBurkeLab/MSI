@@ -165,6 +165,27 @@ class Plotting(object):
         
         self.manager = enlighten.get_manager()
 
+    def __getstate__(self):
+        # On Windows, multiprocessing.Process pickles 'self' for every worker.
+        # Return only the attributes that the parallel plotting worker methods
+        # actually use, to avoid serialising large DataFrames and matrices.
+        # (On Linux fork this path is never taken — fork shares memory.)
+        return {
+            'files_to_include': self.files_to_include,
+            'exp_dict_list_original': self.exp_dict_list_original,
+            'exp_dict_list_optimized': self.exp_dict_list_optimized,
+            'new_cti': self.new_cti,
+            'nominal_cti': self.nominal_cti,
+            'out_path': self.out_path,
+            'pdf': self.pdf,
+            'png': self.png,
+            'svg': self.svg,
+            'dpi': self.dpi,
+            'simulation_run': self.simulation_run,
+        }
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
 
     def lengths_of_experimental_data(self):
         simulation_lengths_of_experimental_data = []
@@ -313,8 +334,7 @@ class Plotting(object):
                                                initialTime=exp['simulation']['fullParsedYamlFile']['initialTime'],
                                                finalTime=exp['simulation']['fullParsedYamlFile']['finalTime'],
                                                target=exp['simulation']['fullParsedYamlFile']['target'],
-                                               target_type=exp['simulation']['fullParsedYamlFile']['target_type'],
-                                               n_processors=2)
+                                               target_type=exp['simulation']['fullParsedYamlFile']['target_type'])
             soln,temp=ig_delay.run()
         elif 'volumeTraceCsv' in exp['simulation']['fullParsedYamlFile'].keys():
             if len(exp['simulation']['fullParsedYamlFile']['temperatures'])>1:
@@ -365,7 +385,6 @@ class Plotting(object):
                                                finalTime=exp['simulation']['fullParsedYamlFile']['finalTime'],
                                                target=exp['simulation']['fullParsedYamlFile']['target'],
                                                target_type=exp['simulation']['fullParsedYamlFile']['target_type'],
-                                               n_processors=2,
                                                volumeTrace=volumeTrace)
             soln,temp=ig_delay.run()        
         
@@ -442,23 +461,22 @@ class Plotting(object):
         
         
         systems = len(self.exp_dict_list_optimized)
-        WORKERS = systems
-        self.obs_loop = self.manager.counter(total=len(self.exp_dict_list_optimized), desc='Observable Plots:', unit='experiments', color='blue')  
-        started = 0
-        active = {}
-        while systems > started or active:
-            if systems > started and len(active) < WORKERS:
-                queue = multiprocessing.Queue()
-                started += 1
-                process = multiprocessing.Process(target=self.plotting_observables_parallel, name='System %d' % started, args=(started-1,self.exp_dict_list_optimized[started-1],sigmas_original,sigmas_optimized))
-                process.start()
-                active[started] = (process, queue)
-            for system in tuple(active.keys()):
-                process, queue = active[system]
-                alive = process.is_alive()
-                if not alive:
-                    del active[system]
-                    self.obs_loop.update()
+
+        processes = []
+        for i in range(systems):
+            process = multiprocessing.Process(
+                target=self.plotting_observables_parallel,
+                name='System %d' % (i + 1),
+                args=(i, self.exp_dict_list_optimized[i], sigmas_original, sigmas_optimized)
+            )
+            process.start()
+            processes.append(process)
+
+        self.obs_loop = self.manager.counter(total=systems, desc='Observable Plots:', unit='experiments', color='blue')
+
+        for process in processes:
+            process.join()
+            self.obs_loop.update()
         
     def plotting_observables_parallel(self,i,exp,sigmas_original,sigmas_optimized):
         # return
@@ -1327,8 +1345,9 @@ class Plotting(object):
                 temp_original_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_original.csv',index=False)   
                 temp_original_error_df_for_species.to_csv(self.out_path+os.sep+'Experiment_'+str(i+1)+'_Absorb_error_original.csv',index=False)                     
                 
-                observable_counter+=1 
-                self.obs_loop.update()
+                observable_counter+=1
+                if hasattr(self, 'obs_loop'):
+                    self.obs_loop.update()
             
 
                 
@@ -1707,25 +1726,23 @@ class Plotting(object):
         list_of_experiment_observables = self.observable_list
         
         systems = len(self.exp_dict_list_optimized)
-        WORKERS = systems
-        self.obs_UWSA_loop = self.manager.counter(total=len(self.exp_dict_list_optimized), desc='Observable UWSA Plots:', unit='experiments', color='blue')  
-        started = 0
-        active = {}
-        while systems > started or active:
-            if systems > started and len(active) < WORKERS:
-                queue = multiprocessing.Queue()
-                started += 1
-                x = started - 1
-                number_of_observables_in_simulation = len(sensitivities[x])
-                process = multiprocessing.Process(target=self.plotting_uncertainty_weighted_sens_parallel, name='System %d' % started, args=(number_of_observables_in_simulation,sigma_list,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x))
-                process.start()
-                active[started] = (process, queue)
-            for system in tuple(active.keys()):
-                process, queue = active[system]
-                alive = process.is_alive()
-                if not alive:
-                    del active[system]
-                    self.obs_UWSA_loop.update()
+
+        processes = []
+        for x in range(systems):
+            number_of_observables_in_simulation = len(sensitivities[x])
+            process = multiprocessing.Process(
+                target=self.plotting_uncertainty_weighted_sens_parallel,
+                name='System %d' % (x + 1),
+                args=(number_of_observables_in_simulation, sigma_list, time_profiles[x], sensitivities[x], top_sensitivities[x], observables_list_for_legend, list_of_experiment_observables[x], x)
+            )
+            process.start()
+            processes.append(process)
+
+        self.obs_UWSA_loop = self.manager.counter(total=systems, desc='Observable UWSA Plots:', unit='experiments', color='blue')
+
+        for process in processes:
+            process.join()
+            self.obs_UWSA_loop.update()
         
         
                               
@@ -1763,7 +1780,7 @@ class Plotting(object):
                 if 'Absorbance' in observable_ylabel:
                     plt.ylabel(observable_ylabel)
                 else:   
-                    plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \sigma_j$')
+                    plt.ylabel(r'$\frac{\partial( \rm '+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \sigma_j$')
                 plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
                 UWSA_df[observables_list_for_legend[top_columns] +' '+str(sigma_list[top_columns])] = pd.Series(sensitivities[plot_number][:,c])   
             UWSA_df.to_csv(self.out_path+os.sep+'Experiment'+ '_' +str(experiment_number+1)+'_UWSA'+'_'+str(list_of_experiment_observables[plot_number])+'.csv',index=False)   
@@ -1827,25 +1844,23 @@ class Plotting(object):
         #     subplot_function(number_of_observables_in_simulation,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x)
 
         systems = len(self.exp_dict_list_optimized)
-        WORKERS = systems
-        self.obs_Sdx_loop = self.manager.counter(total=len(self.exp_dict_list_optimized), desc='Observable Sdx Plots:', unit='experiments', color='blue')  
-        started = 0
-        active = {}
-        while systems > started or active:
-            if systems > started and len(active) < WORKERS:
-                queue = multiprocessing.Queue()
-                started += 1
-                x = started - 1
-                number_of_observables_in_simulation = len(sensitivities[x])
-                process = multiprocessing.Process(target=self.plotting_Sdx_parallel, name='System %d' % started, args=(number_of_observables_in_simulation,summed_observable_list,num_rxn,sigma_list,X,time_profiles[x],sensitivities[x],top_sensitivities[x],observables_list_for_legend,list_of_experiment_observables[x],x))
-                process.start()
-                active[started] = (process, queue)
-            for system in tuple(active.keys()):
-                process, queue = active[system]
-                alive = process.is_alive()
-                if not alive:
-                    del active[system]
-                    self.obs_Sdx_loop.update()
+
+        processes = []
+        for x in range(systems):
+            number_of_observables_in_simulation = len(sensitivities[x])
+            process = multiprocessing.Process(
+                target=self.plotting_Sdx_parallel,
+                name='System %d' % (x + 1),
+                args=(number_of_observables_in_simulation, summed_observable_list, num_rxn, sigma_list, X, time_profiles[x], sensitivities[x], top_sensitivities[x], observables_list_for_legend, list_of_experiment_observables[x], x)
+            )
+            process.start()
+            processes.append(process)
+
+        self.obs_Sdx_loop = self.manager.counter(total=systems, desc='Observable Sdx Plots:', unit='experiments', color='blue')
+
+        for process in processes:
+            process.join()
+            self.obs_Sdx_loop.update()
 
     def plotting_Sdx_parallel(self,number_of_observables_in_simulation,summed_observable_list,num_rxn,sigma_list,X,time_profiles,sensitivities,top_sensitivity_single_exp,observables_list_for_legend,list_of_experiment_observables,experiment_number):
                     
@@ -1890,7 +1905,7 @@ class Plotting(object):
                 if 'Absorbance' in observable_ylabel:
                     plt.ylabel(observable_ylabel)
                 else:   
-                    plt.ylabel(r'$\frac{\partial( \rm'+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \Delta x_j$')
+                    plt.ylabel(r'$\frac{\partial( \rm '+observable_ylabel_transformed+r')}{\partial(\rm x_j)} \rm \Delta x_j$')
                 plt.legend(ncol=1, loc='upper left',bbox_to_anchor=(1,1))
                 if top_columns.split('_')[0] == 'k':
                     X_A = X[top_columns_index][0]

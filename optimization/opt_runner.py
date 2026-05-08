@@ -1321,11 +1321,11 @@ class Optimization_Utility(object):
 
         self.manager = manager
 
-        # Use apply_async with per-task timeout so a single non-converging
-        # simulation cannot block the entire pool indefinitely.  120 s is ~10x
-        # the typical single-experiment wall time; any task still running after
-        # that is genuinely stuck and returned as None.
-        task_timeout = 120
+        # On Windows use a per-task timeout so a single non-converging simulation
+        # cannot block the entire pool indefinitely.  On Linux use a plain get()
+        # (no timeout) to preserve the original behaviour.
+        is_windows = sys.platform.startswith('win')
+        task_timeout = 600  # 10 minutes (Windows only)
 
         pool = multiprocessing.Pool(processes=n_workers, initializer=_worker_stdout_init)
         try:
@@ -1334,7 +1334,10 @@ class Optimization_Utility(object):
             n_total = len(async_results)
             for i, r in enumerate(async_results):
                 try:
-                    experiment_list.append(r.get(timeout=task_timeout))
+                    if is_windows:
+                        experiment_list.append(r.get(timeout=task_timeout))
+                    else:
+                        experiment_list.append(r.get())
                     print(f'  Simulations: {i+1}/{n_total}', end='\r', flush=True)
                 except multiprocessing.TimeoutError:
                     print(f'\n[WARNING] experiment {i} timed out after {task_timeout}s — reusing previous result',
